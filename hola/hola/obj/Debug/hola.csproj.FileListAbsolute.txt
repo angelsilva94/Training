@@ -1,6 +1,0 @@
-c:\users\angel.silva\documents\visual studio 2015\Projects\hola\hola\bin\Debug\hola.exe.config
-c:\users\angel.silva\documents\visual studio 2015\Projects\hola\hola\bin\Debug\hola.exe
-c:\users\angel.silva\documents\visual studio 2015\Projects\hola\hola\bin\Debug\hola.pdb
-c:\users\angel.silva\documents\visual studio 2015\Projects\hola\hola\obj\Debug\hola.csprojResolveAssemblyReference.cache
-c:\users\angel.silva\documents\visual studio 2015\Projects\hola\hola\obj\Debug\hola.exe
-c:\users\angel.silva\documents\visual studio 2015\Projects\hola\hola\obj\Debug\hola.pdb
