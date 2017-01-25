@@ -18,6 +18,7 @@ namespace _3n_1{
                     } else {
                         numb /= 2;
                     }
+                    //cont++;
                     Console.WriteLine("The number is: " + numb);
                 }
 
