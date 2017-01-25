@@ -22,6 +22,7 @@ namespace _3n_1{
                 }
 
             } while (numb != 1);
+            Console.WriteLine("Pres any key to exit");
             Console.ReadKey();
         }
     }
