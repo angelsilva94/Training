@@ -12,12 +12,12 @@ namespace threeN.Validator{
             Val();
         }
         public Boolean Val() {
-            if(i >10000 || j > 10000 || i<0 || j<0) {
+            if (i < 1 || i>10000 || j<1  || j>10000) {
                 return false;
             }
             return true;
         }
-        public void Ask(int x,int y) {
+        public void Ask() {
             Console.WriteLine("Give me the first number and second number :");
             i = int.Parse(Console.ReadLine());
             j =  int.Parse(Console.ReadLine());
