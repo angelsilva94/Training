@@ -16,6 +16,7 @@ namespace _3n_1{
                 Console.WriteLine(val.i + " " + val.j +" "+ res);
                 foreach(var l in PI.result) {
                     Console.WriteLine(l);
+
                 }
             }
             Console.ReadKey();
