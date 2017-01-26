@@ -8,7 +8,9 @@ namespace threeN.Validator{
     public class Validator{
         public int i { set; get; }
         public int j { set; get; }
-        public Validator() {
+        public Validator(int x, int y) {
+            this.i = x;
+            this.j = y;
             Val();
         }
         public Boolean Val() {
@@ -17,11 +19,6 @@ namespace threeN.Validator{
             }
             return true;
         }
-        public void Ask() {
-            Console.WriteLine("Give me the first number and second number :");
-            i = int.Parse(Console.ReadLine());
-            j =  int.Parse(Console.ReadLine());
-        }
-
+        
     }
 }
