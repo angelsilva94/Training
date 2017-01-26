@@ -4,15 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bin_Packing {
-    class Rec {
-        int [] brown;
-        int [] green;
-        int [] clear;
-        
-        private int  sum = 0,min=0;
-        private char []bottles = new char[3];
-        public Rec(int []b, int [] c, int [] g) {
+namespace BinPacking {
+    public class Rec {
+        int[] brown, green, clear;
+        int sum = 0, min = 0;
+        public char[] bottles = new char[3];
+        public Rec(int[] b, int[] c, int[] g) {
             this.brown = b;
             this.clear = c;
             this.green = g;
@@ -35,16 +32,8 @@ namespace Bin_Packing {
                 }
             }
         }
-        public int getMost() {
+        public int getM() {
             return sum - min;
         }
-        public void getSol() {
-            foreach(var c in bottles) {
-                Console.Write(c);
-            }
-        }
     }
-    
-
-
 }

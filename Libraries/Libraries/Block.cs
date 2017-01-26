@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Blocks_Problem {
-    class Block {
+namespace BlocksProblem {
+    public class Block {
         int a { set; get; }
         int b { set; get; }
-        Stack<int>[] Blocks;
+        public Stack<int>[] Blocks;
         int[] pos;
         public int length { set; get; }
+
         public Block(int n) {
             this.length = n;
             Blocks = new Stack<int>[length];
@@ -24,12 +25,8 @@ namespace Blocks_Problem {
                 pos[i] = i;
             }
         }
-        public void Ask() {
-            Console.WriteLine("Give me A and B:");
-            a = int.Parse(Console.ReadLine());
-            b = int.Parse(Console.ReadLine());
-        }
-        public void MoveOnto() {
+        
+        public void MoveOnto(int a,int b) {
             Clear(b);
             Clear(a);
             Blocks[pos[b]].Push(Blocks[pos[a]].Pop());
@@ -47,16 +44,16 @@ namespace Blocks_Problem {
             Blocks[Block].Push(Block);
             pos[Block] = Block;
         }
-        public void MoveOver() {
+        public void MoveOver(int a, int b) {
             Clear(a);
             Blocks[pos[b]].Push(Blocks[pos[a]].Pop());
             pos[a] = pos[b];
         }
-        public void PileOnto() {
+        public void PileOnto(int a, int b) {
             Clear(b);
-            PileOver();
+            PileOver(a , b);
         }
-        public void PileOver() {
+        public void PileOver(int a, int b) {
             Stack<int> Pile = new Stack<int>();
             while (Blocks[pos[a]].Peek() != a) {
                 Pile.Push(Blocks[pos[a]].Pop());
@@ -68,7 +65,7 @@ namespace Blocks_Problem {
                 pos[aux] = pos[b];
             }
         }
-        public String Sol(int index) {
+        public String Print(int index) {
             String res = "";
             while (Blocks[index].Count > 0)
                 res = " " + Blocks[index].Pop() + res;
@@ -76,5 +73,4 @@ namespace Blocks_Problem {
             return res;
         }
     }
-
 }

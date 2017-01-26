@@ -3,39 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using BlocksProblem;
 namespace Blocks_Problem {
+    
     class Program {
+        static int a, b;
         static void Main(string[] args) {
-            int op;
             Console.WriteLine("Welcome");
-            Console.WriteLine("Give me the lenght of the block:");
-            //numb = int.Parse(Console.ReadLine());
+            Console.WriteLine("Give me the lenght of the block ");
             Block obj = new Block(int.Parse(Console.ReadLine()));
+            Menu(obj);
+            for (int i = 0; i < obj.length; i++) {
+                Console.WriteLine(obj.Print(i));
+            }
+            Console.ReadKey();
+        }
+
+
+        public static void Ask() {
+            Console.WriteLine("Give me A and B:");
+            a = int.Parse(Console.ReadLine());
+            b = int.Parse(Console.ReadLine());
+        }
+
+
+        public static void Menu(Block obj) {
+            int op;
             do {
                 Console.WriteLine("What do you wanna do?");
-                Console.WriteLine("Move a onto b....press 1");
-                Console.WriteLine("Move a over b....press 2");
-                Console.WriteLine("Pile a onto b....press 3");
-                Console.WriteLine("Pile a over b....press 4");
-                Console.WriteLine("Quit.............press 5");
+                Console.WriteLine("Move A onto B....press 1");
+                Console.WriteLine("Move A over B....press 2");
+                Console.WriteLine("Pile A onto B....press 3");
+                Console.WriteLine("Pile A over B....press 4");
+                Console.WriteLine("QUIT.............press 5");
                 op = int.Parse(Console.ReadLine());
                 switch (op) {
                     case 1:
-                        obj.Ask();
-                        obj.MoveOnto();
+                        Ask();
+                        obj.MoveOnto(a, b);
                         break;
                     case 2:
-                        obj.Ask();
-                        obj.MoveOver();
+                        Ask();
+                        obj.MoveOver(a,b);
                         break;
                     case 3:
-                        obj.Ask();
-                        obj.PileOnto();
+                        Ask();
+                        obj.PileOnto(a, b);
                         break;
                     case 4:
-                        obj.Ask();
-                        obj.PileOver();
+                        Ask();
+                        obj.PileOver(a, b);
                         break;
                     case 5:
                         break;
@@ -44,11 +61,8 @@ namespace Blocks_Problem {
                         break;
                 }
             } while (op != 5);
-            for (int i = 0; i < obj.length; i++) {
-                Console.WriteLine(obj.Sol(i));
-            }
-            Console.ReadKey();
         }
+
     }
 }
 
