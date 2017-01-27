@@ -32,5 +32,10 @@ namespace threeN.Process {
             result.Add(j);
             return cont;
         }
+        public override string ToString() {
+            return "test";
+        }
+
+
     }
 }
