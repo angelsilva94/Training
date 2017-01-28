@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D8A46D7-55B4-4BFA-8D5A-00C9687BF208}</ProjectGuid>
+    <ProjectGuid>{954E4FCD-EA0A-4831-ACD6-1744F4E12601}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>_3n_1</RootNamespace>
@@ -32,6 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Libraries">
+      <HintPath>..\..\Libraries\Libraries\obj\Debug\Libraries.dll</HintPath>
+    </Reference>
+    <Reference Include="Models">
+      <HintPath>..\..\Models\Models\bin\Debug\Models.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
