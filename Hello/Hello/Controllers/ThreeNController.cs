@@ -4,9 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Models;
-using threeN.Process;
-using threeN.Validator;
+
 using Hello.Models;
 
 namespace Hello.Controllers
@@ -38,58 +36,31 @@ namespace Hello.Controllers
         }*/
 
 
-        //actionresult
-        /* public /*ResponseModel List<string> Get(int x,int y) {
-            List<string> l = new List<string>();
+        
+
+    
+        public HttpResponseMessage Get(int x, int y) {
             ResponseModel responseModel = new ResponseModel {
-                i = x,
-                j = y };
-            Validator val = new Validator(x, y);
-            ErrorDispose e;
-            if (val.Val(out e)) {
-                ProcessInput ps = new ProcessInput(val.i, val.j);
-                int count = ps.ProcessNumber();
-                l.Add(val.i + " " + val.j + " " + count);
-                foreach (var m in ps.result) {
-                   l.Add(ps.result.ToString());
-
-                }
-
-
-                //return rs;
-                return l;
-            } else {
-                l.Add("There was an error please check your parameters, the error code is : " + e.ErrorCode + " " + e.ErrorDesc);
-                return l;
-            }
-
-        }*/
-        public ResponseModel Get(int x, int y) {
-            List<string> l = new List<string>();
-            ResponseModel responseModel = new ResponseModel {
-                i = x,
-                j = y
+                i = x, j = y
             };
             Validator val = new Validator(x, y);
             ErrorDispose e;
             if (val.Val(out e)) {
-                ProcessInput ps = new ProcessInput(val.i, val.j);
-                int count = ps.ProcessNumber();
-                l.Add(val.i + " " + val.j + " " + count);
-                foreach (var m in ps.result) {
-                    l.Add(ps.result.ToString());
-
+                ProcessInput processInput = new ProcessInput(val.i, val.j);
+                int count = processInput.ProcessNumber();
+                responseModel.iterationNumber = count;
+                responseModel.results = new List<int>();
+                foreach (var m in processInput.result) {
+                    responseModel.results.Add(m);
                 }
-
-
-                return responseModel;
+                return  Request.CreateResponse(HttpStatusCode.OK, responseModel);
             } else {
-                l.Add("There was an error please check your parameters, the error code is : " + e.ErrorCode + " " + e.ErrorDesc);
-                return responseModel;
+                //l.Add("There was an error please check your parameters, the error code is : " + e.ErrorCode + " " + e.ErrorDesc);
+                return Request.CreateResponse(HttpStatusCode.NotFound, "tus parametros estan mal");
             }
-
-
         }
+
+        
 
 
         // POST: api/ThreeN

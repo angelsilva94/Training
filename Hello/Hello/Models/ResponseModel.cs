@@ -8,7 +8,7 @@ namespace Hello.Models {
         public int i { get; set; }
         public int j { get; set; }
         public int iterationNumber { get; set; }
-        public List<int> results;
+        public List<int> results { set; get; }
 
     }
 }
