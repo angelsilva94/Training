@@ -26,12 +26,10 @@ namespace threeN.Validator{
                 e.ErrorCode = 3;
                 e.ErrorDesc = "Error en la J";
                 return false;
-                e.ErrorCode = 2;
             } else if (j > 10000) {
                 e.ErrorCode = 4;
                 e.ErrorDesc = "Error en la J>";
                 return false;
-                e.ErrorCode = 2;
             } 
             else {
                 e = null;

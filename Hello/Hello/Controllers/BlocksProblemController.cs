@@ -9,6 +9,7 @@ using BlocksProblem;
 using Newtonsoft.Json;
 using System.IO;
 using System.Runtime.Serialization.Json;
+using Models;
 
 namespace Hello.Controllers
 {
@@ -28,50 +29,36 @@ namespace Hello.Controllers
         }
 
         // POST: api/BlocksProblem
-        public string Post( [FromBody]BlockModel blockModel)
+        public HttpResponseMessage Post(BlockModel blockModel)
         {
-            //blockModel.instructions = new List<Instructions>();
+            if(blockModel != null) {
 
+                Block block = new Block(blockModel.length);
+                int longt=blockModel.length;
+                int i = 0;
 
-            MemoryStream stream1 = new MemoryStream();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(BlockModel));
+                do {
+                    if (blockModel.instructions[i].move.ToUpper() == "MOVEONTO") {
+                        block.MoveOnto(blockModel.instructions[i].A, blockModel.instructions[i].B);
 
-
-
-            Block block = new Block(blockModel.length);
-            string res = null;
-            int i = 0;// blockModel.instructions.Count;
-            
-
-
-            do {
-                //Instructions ins = new Instructions();
-                //ins.move = ""
-                //String movement = 
-                if (blockModel.instructions[i].move.ToUpper() == "MOVEONTO") {
-                    block.MoveOnto(blockModel.instructions[i].A, blockModel.instructions[i].B);
-
+                    } else if (blockModel.instructions[i].move.ToUpper() == "MOVEOVER") {
+                        block.MoveOver(blockModel.instructions[i].A, blockModel.instructions[i].B);
+                    } else if (blockModel.instructions[i].move.ToUpper() == "PILEONTO") {
+                        block.PileOnto(blockModel.instructions[i].A, blockModel.instructions[i].B);
+                    } else if (blockModel.instructions[i].move.ToUpper() == "PILEOVER") {
+                        block.PileOver(blockModel.instructions[i].A, blockModel.instructions[i].B);
+                    }
+                    i++;
+                } while (i < blockModel.instructions.Count);
+                for (int j = 0; j < blockModel.length; j++) {
+                    blockModel.res += block.Print(j);
                 }
-                else if (blockModel.instructions[i].move.ToUpper() == "MOVEOVER") {
-                    block.MoveOver(blockModel.instructions[i].A, blockModel.instructions[i].B);
-                }
-                else if (blockModel.instructions[i].move.ToUpper() == "PILEONTO") {
-                    block.PileOnto(blockModel.instructions[i].A, blockModel.instructions[i].B);
-                }
-                else if (blockModel.instructions[i].move.ToUpper() == "PILEOVER") {
-                    block.PileOver(blockModel.instructions[i].A, blockModel.instructions[i].B);
-                }
-                i++;
+                return Request.CreateResponse(HttpStatusCode.OK, blockModel);
 
-            } while(i< blockModel.instructions.Count);
-            for (int j = 0; j < blockModel.length; j++) {
-                res += block.Print(j);
-                //Console.WriteLine(obj.Print(i));
+            } else {
+                return Request.CreateResponse(HttpStatusCode.NotFound, new ErrorDispose { ErrorCode=10,ErrorDesc="tienes mal tus parametros"});
             }
-            //blockModel.instructions[blockModel.instructions.Count - 1].move == "END"
-
-            return res;
-
+                
         }
 
         // PUT: api/BlocksProblem/5
