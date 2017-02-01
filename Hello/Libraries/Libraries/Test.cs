@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace Libraries {
     [TestFixture]
-    class UnitTesting {
+    class Test {
         [Test]
         public void testValidator() {
             var mock = new Mock<Validator>();

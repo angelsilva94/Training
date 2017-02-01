@@ -81,7 +81,7 @@
     <Compile Include="Block.cs" />
     <Compile Include="ProcessInput.cs" />
     <Compile Include="Rec.cs" />
-    <Compile Include="UnitTesting.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="Validator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

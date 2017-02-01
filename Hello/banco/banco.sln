@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 14 for Windows Desktop
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTests", "NUnitTests\NUnitTests.csproj", "{096668D7-A4DA-422B-8966-8FEE458FAFB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "banco", "banco\banco.csproj", "{63E5EE75-B212-4749-B22C-3E7D0E756A13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{096668D7-A4DA-422B-8966-8FEE458FAFB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{096668D7-A4DA-422B-8966-8FEE458FAFB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{096668D7-A4DA-422B-8966-8FEE458FAFB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{096668D7-A4DA-422B-8966-8FEE458FAFB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63E5EE75-B212-4749-B22C-3E7D0E756A13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63E5EE75-B212-4749-B22C-3E7D0E756A13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63E5EE75-B212-4749-B22C-3E7D0E756A13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63E5EE75-B212-4749-B22C-3E7D0E756A13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -66,3 +66,9 @@ namespace Blocks_Problem {
     }
 }
 
+
+10, move A over B,move A into B
+
+
+[a,b,moveinto],[a,b,pileover]
+
