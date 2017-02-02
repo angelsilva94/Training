@@ -35,7 +35,8 @@
     <Reference Include="Libraries">
       <HintPath>..\..\Libraries\Libraries\obj\Debug\Libraries.dll</HintPath>
     </Reference>
-    <Reference Include="Models">
+    <Reference Include="Models, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Models\Models\bin\Debug\Models.dll</HintPath>
     </Reference>
     <Reference Include="System" />
