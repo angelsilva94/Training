@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 14 for Web
+# Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello", "Hello\Hello.csproj", "{D081913B-2063-48E8-A796-320F9C326533}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestPrograms", "UnitTestPrograms\UnitTestPrograms.csproj", "{D5C9CD93-A7DB-4697-A954-D0F1E2FEF7A5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libraries", "Libraries\Libraries\Libraries.csproj", "{AD808D96-EBA7-4FD3-8939-93E21B73232C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D5C9CD93-A7DB-4697-A954-D0F1E2FEF7A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5C9CD93-A7DB-4697-A954-D0F1E2FEF7A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5C9CD93-A7DB-4697-A954-D0F1E2FEF7A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD808D96-EBA7-4FD3-8939-93E21B73232C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD808D96-EBA7-4FD3-8939-93E21B73232C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD808D96-EBA7-4FD3-8939-93E21B73232C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD808D96-EBA7-4FD3-8939-93E21B73232C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
