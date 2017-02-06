@@ -54,7 +54,7 @@ namespace Hello.Controllers
             };
             if (container.Resolve<Validator>().Val(out errorDispose)) {
                 ProcessInput processInput = new ProcessInput(x, y);
-                int count = processInput.ProcessNumber();
+                int count = processInput.Process();
                 responseModel.iterationNumber = count;
                 responseModel.results = new List<int>();
                 foreach (var m in processInput.result) {

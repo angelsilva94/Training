@@ -49,10 +49,13 @@
   <ItemGroup>
     <Compile Include="Block.cs" />
     <Compile Include="IProblem.cs" />
+    <Compile Include="IProcessInput.cs" />
     <Compile Include="ProcessInput.cs" />
     <Compile Include="Rec.cs" />
     <Compile Include="Validator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidatorBin.cs" />
+    <Compile Include="ValidatorBlocks.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

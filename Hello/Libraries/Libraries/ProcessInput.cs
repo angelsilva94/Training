@@ -1,11 +1,12 @@
-﻿using System;
+﻿using Libraries;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace threeN.Process {
-    public class ProcessInput {
+    public class ProcessInput : IProcessInput {
         public List<int> result = new List<int>();
         int i { set; get; }
         int j { set; get; }
@@ -14,7 +15,7 @@ namespace threeN.Process {
             this.j = y;
         }
 
-        public int ProcessNumber() {
+        public int Process() {
             int cont = 0;
             do {
                 if (j != 1) {

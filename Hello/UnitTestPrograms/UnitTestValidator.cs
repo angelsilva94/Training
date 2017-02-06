@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using threeN.Validator;
 using Models;
+using BlocksProblem;
+using threeN.Process;
+using Moq;
 
 namespace UnitTestPrograms {
     [TestClass]
@@ -38,6 +41,28 @@ namespace UnitTestPrograms {
             Validator val = new Validator(fisrtP, secondP);
             ErrorDispose er = new ErrorDispose();
             Assert.IsFalse(val.Val(out er), "se comprueba la condicion de j < 10k");
+        }
+        [TestMethod]
+        public void TestValidatorMock() {
+            ErrorDispose er = new ErrorDispose();
+            Mock<Validator> validator = new Mock<Validator>();
+            validator.Setup(x => x.Val(out er)).Returns(true);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestExcepcionArray() {
+            Block block = new Block(-2);
+        }
+        [TestMethod]
+        public void TestProcessInput() {
+            ProcessInput processInput = new ProcessInput(10, 20);
+            Assert.IsNotNull(processInput);
+        }
+        [TestMethod]
+        public void TestProcessInputMock() {
+            Mock<ProcessInput> processInput = new Mock<ProcessInput>();
+            processInput.SetupProperty(x => 2).SetupProperty(y => 21);
         }
     }
 }
