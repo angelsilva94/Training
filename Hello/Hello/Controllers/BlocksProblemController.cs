@@ -11,6 +11,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using Models;
 using Libraries;
+using NUnit;
 
 namespace Hello.Controllers
 {
@@ -43,7 +44,6 @@ namespace Hello.Controllers
                     do {
                         if (blockModel.instructions[i].move.ToUpper() == "MOVEONTO") {
                             block.MoveOnto(blockModel.instructions[i].A, blockModel.instructions[i].B);
-
                         } else if (blockModel.instructions[i].move.ToUpper() == "MOVEOVER") {
                             block.MoveOver(blockModel.instructions[i].A, blockModel.instructions[i].B);
                         } else if (blockModel.instructions[i].move.ToUpper() == "PILEONTO") {
