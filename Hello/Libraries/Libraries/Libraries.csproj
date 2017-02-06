@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Block.cs" />
+    <Compile Include="IProblem.cs" />
     <Compile Include="ProcessInput.cs" />
     <Compile Include="Rec.cs" />
     <Compile Include="Validator.cs" />

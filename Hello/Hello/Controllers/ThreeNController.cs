@@ -8,6 +8,8 @@ using Hello.Models;
 using threeN.Validator;
 using Models;
 using threeN.Process;
+using Autofac;
+using Libraries;
 
 namespace Hello.Controllers
 {
@@ -38,17 +40,20 @@ namespace Hello.Controllers
         }*/
 
 
-        
 
-    
+
+
         public HttpResponseMessage Get(int x, int y) {
+            ErrorDispose errorDispose;
+            var builder = new ContainerBuilder();
+            builder.RegisterType<Validator>().WithParameter(new NamedParameter("x",x)).WithParameter(new NamedParameter("y",y));
+            var container = builder.Build();
+            
             ResponseModel responseModel = new ResponseModel {
                 i = x, j = y
             };
-            Validator val = new Validator(x, y);
-            ErrorDispose e;
-            if (val.Val(out e)) {
-                ProcessInput processInput = new ProcessInput(val.i, val.j);
+            if (container.Resolve<Validator>().Val(out errorDispose)) {
+                ProcessInput processInput = new ProcessInput(x, y);
                 int count = processInput.ProcessNumber();
                 responseModel.iterationNumber = count;
                 responseModel.results = new List<int>();
@@ -57,12 +62,30 @@ namespace Hello.Controllers
                 }
                 return  Request.CreateResponse(HttpStatusCode.OK, responseModel);
             } else {
-                //l.Add("There was an error please check your parameters, the error code is : " + e.ErrorCode + " " + e.ErrorDesc);
+
                 return Request.CreateResponse(HttpStatusCode.NotFound, "tus parametros estan mal");
             }
+
+
+
+            //WE LEAVE THE METHOD BEFORE DEPENDENCY INJECTION JUST FOR REFERENCE
+            //Validator val = new Validator(x, y);
+            //if (val.Val(out errorDispose)) {
+            //ProcessInput processInput = new ProcessInput(val.i, val.j);
+            //int count = processInput.ProcessNumber();
+            //responseModel.iterationNumber = count;
+            //responseModel.results = new List<int>();
+            //foreach (var m in processInput.result) {
+            //    responseModel.results.Add(m);
+            //}
+            //    return  Request.CreateResponse(HttpStatusCode.OK, responseModel);
+            //} else {
+            //    //l.Add("There was an error please check your parameters, the error code is : " + e.ErrorCode + " " + e.ErrorDesc);
+            //    return Request.CreateResponse(HttpStatusCode.NotFound, "tus parametros estan mal");
+            //}
         }
 
-        
+
 
 
         // POST: api/ThreeN

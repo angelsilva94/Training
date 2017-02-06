@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
+using Libraries;
+
 namespace threeN.Validator{
-    public class Validator{
+    public class Validator : IProblem{
         public int i { set; get; }
         public int j { set; get; }
         public Validator(int x, int y) {
