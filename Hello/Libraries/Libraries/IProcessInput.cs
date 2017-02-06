@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Libraries
 {
-    interface IProcessInput
+    public interface IProcessInput
     {
         int Process();
     }

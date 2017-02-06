@@ -5,10 +5,10 @@ using BlocksProblem;
 using threeN.Process;
 using Moq;
 using NUnit.Framework;
+using Libraries;
 
 namespace UnitTestPrograms {
     [TestFixture]
-
     public class UnitTestValidator {
         [Test]
         public void TestMethodValidatorITrue() {
@@ -46,12 +46,23 @@ namespace UnitTestPrograms {
         [Test]
         public void TestValidatorMock() {
             ErrorDispose er = new ErrorDispose();
-            Mock<Validator> validator = new Mock<Validator>();
-            validator.Setup(x => x.Val(out er)).Returns(true);
-        }
+            //Mock<Validator> validator = new Mock<Validator>(null,null);
+            ////validator.SetupProperty(i => i.i, 10);
+            ////validator.SetupProperty(j => j.j, 20);
+            //validator.Setup(x => x.Val(out er)).Returns(true);
+            var mock = new Mock<IProblem>();
+            mock.Setup(foo => foo.Val(out er)).Returns(true);
 
+        }
         [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void TestProcessInputMock() {
+            //Mock<ProcessInput> processInput = new Mock<ProcessInput>();
+            //processInput.SetupProperty(x => 2).SetupProperty(y => 21);
+            var mock = new Mock<IProcessInput>();
+            mock.Setup(var => var.Process());
+        }
+        [Test]
+        [ExpectedException(typeof(OverflowException))]
         public void TestExcepcionArray() {
             Block block = new Block(-2);
         }
@@ -59,11 +70,6 @@ namespace UnitTestPrograms {
         public void TestProcessInput() {
             ProcessInput processInput = new ProcessInput(10, 20);
             Assert.IsNotNull(processInput);
-        }
-        [Test]
-        public void TestProcessInputMock() {
-            Mock<ProcessInput> processInput = new Mock<ProcessInput>();
-            processInput.SetupProperty(x => 2).SetupProperty(y => 21);
         }
     }
 }
