@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="namesController.js"></script>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="Content/bootstrap.min.css">
+    <script src="scripts.js"></script>
+</head>
+
+<body ng-app="test" ng-controller="controller">
+    <div class="container">
+        <h1>ESTO NO ES UN TITULO</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut laoreet, nibh quis dapibus eleifend, mi libero sodales lacus,
+            et pulvinar neque turpis ut justo. In euismod justo quis arcu efficitur, ac tempus erat ullamcorper. Quisque
+            ac nulla est. Praesent tincidunt arcu eget erat blandit convallis. Phasellus malesuada iaculis magna, nec pretium
+            ligula feugiat id. Aenean eget dolor congue, vulputate risus vel, iaculis odio. Phasellus lorem purus, luctus
+            commodo porta ac, sodales vitae turpis. Nam in bibendum nibh. Nulla vel fermentum nulla. Nulla mollis tellus
+            id maximus tempor. Praesent vitae dolor ut nibh porta sodales. Sed at ante a mauris ultrices molestie. Maecenas
+            lacus lectus, molestie ut sodales a, interdum sit amet ipsum.
+        </p>
+        <p class="test">
+            Donec eu porttitor metus, eleifend finibus turpis. Mauris sit amet laoreet turpis, eu sodales massa. Donec cursus vitae velit
+            ac sagittis. Ut diam nisl, lacinia at erat non, luctus suscipit lacus. Vestibulum condimentum orci ullamcorper
+            luctus finibus. Vestibulum placerat tellus id mi vehicula, in euismod lectus aliquet. Ut non ullamcorper augue,
+            nec iaculis augue. Phasellus a risus vulputate, cursus dui sed, bibendum ante. Aenean feugiat, neque non sodales
+            sodales, quam purus venenatis arcu, eu consectetur sem mauris at magna. Suspendisse rutrum arcu risus, molestie
+            pharetra nisi sollicitudin ut. Sed placerat rhoncus enim, eu congue velit commodo vel. Integer faucibus aliquet
+            posuere. Donec feugiat fermentum tortor non auctor.
+        </p>
+        <h2 class="test">Este titulo esta oculto</h2>
+        <a href="http://www.w3schools.com/html/">HTML Tutorial</a>
+        <a href="http://www.w3schools.com/css/">CSS Tutorial</a>
+    </div>
+    <div class="container">
+        <table border="1">
+            <tr>
+                <th> Nombre</th>
+                <th> Apellido Materno</th>
+                <th>Apellido Paterno</th>
+            </tr>
+            <tr>
+                <td>Angel</td>
+                <td>Silva</td>
+                <td>Borja</td>
+            </tr>
+            <tr>
+                <td>Lorenzo</td>
+                <td>Chacon</td>
+                <td>xD</td>
+            </tr>
+            <tr>
+                <td>Otman</td>
+                <td>Ledezma</td>
+                <td>Licona</td>
+            </tr>
+        </table>
+        <span>Si pasas el mouse me desaparesco</span><br>
+        <span>Aqui tambien</span>
+    </div>
+    <button class="aceptar">Mostrar</button>
+    <div>
+        <form action="" role="form">
+            <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" id="form-name" placeholder="Input field" value="angel">
+            </div>
+            <button id="btn-ok" class="btn btn-primary">OK</button>
+        </form>
+    </div>
+    Nombre: <input ng-model="nombre">
+    <h1>{{nombre}}</h1>
+</body>
+
+</html>

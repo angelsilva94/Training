@@ -25,7 +25,7 @@ namespace Hello.Controllers
         // GET: api/ThreeN
         public IEnumerable<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "esto es el valor 1", "esto es el valor 2" };
         }
 
         // GET: api/ThreeN/5

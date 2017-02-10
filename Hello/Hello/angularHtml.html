@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="Content/bootstrap.min.css">
+    <script src="namesController.js"></script>
+</head>
+
+<body class="container">
+    <div ng-app="test" ng-controller="controller">
+        <form role="form">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" placeholder="Type your name" ng-model="nombre">
+            </div>
+            <button class="btn btn-primary">Submit</button>
+        </form>
+        <p ng-bind="nombre"></p>
+        <p ng-bind="apellido"></p>
+        <h1 ng-bind="textoLargo()"></h1>
+    </div>
+</body>
+
+</html>
