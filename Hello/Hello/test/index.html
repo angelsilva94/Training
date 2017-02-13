@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div class="container" ng-app="app" ng-controller="mainController">
+        <div class="text-center">
+            <p>Example of Angular and the normal Bootstrap JavaScript components</p>
+            <p class="text-success">This will work</p>
+        </div>
+        <h2>Buttons</h2>
+        <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary" ng-model="bigData.breakfast" btn-checkbox>
+      Breakfast
+    </label>
+            <label class="btn btn-primary" ng-model="bigData.lunch" btn-checkbox>
+      Lunch
+    </label>
+            <label class="btn btn-primary" ng-model="bigData.dinner" btn-checkbox>
+      Dinner
+    </label>
+        </div>
+        <pre><code>{{ bigData | json }}</code></pre>
+        <h2>Collapse</h2>
+        <a href="#" class="btn btn-primary" ng-click="isCollapsed = !isCollapsed">
+    Toggle Panel
+  </a>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a href="#" ng-click="isCollapsed = !isCollapsed">
+          Collapsible Group Item #1
+        </a>
+                </h4>
+            </div>
+            <div collapse="isCollapsed">
+                <div class="panel-body">Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
+                    nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                </div>
+            </div>
+        </div>
+        <pre><code>{{ isCollapsed }}</code></pre>
+    </div>
+</body>
+
+</html>
