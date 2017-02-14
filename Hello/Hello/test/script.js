@@ -1,4 +1,4 @@
-angular.module('app', ['ui.bootstrap'])
+angular.module('threeN', ['ui.bootstrap'])
 
 .controller('mainController', function($scope) {
   

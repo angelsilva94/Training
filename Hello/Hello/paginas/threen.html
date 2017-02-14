@@ -5,37 +5,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link href="mystyle.css" rel="stylesheet">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-animate.js"></script>
-  <script src="moveBS.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+  <script src="scripts.js"></script>
 </head>
 
 <body>
-  <div class="container-fluid" ng-app="threeN" ng-controller="mainController">
+  <div class="container-fluid">
 
     <body>
       <div class="jumbotron">
-        <div class="container">
+        <div class="container" ng-app="threeN" ng-controller="mainController">
           <h1>Welcome to 3N+1 Problem</h1>
           <a class="btn btn-info" ng-click="isCollapsed =  !isCollapsed">Show problem explanation</a>
           <div class="panel panel-default">
             <div collapse="isCollapsed">
-              <div class="panel-body">Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth
-                nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+              <div class="panel-body">
+                <pre>
+                  <blockquote>
+                    <br>Consider the following algorithm:
+                    <br>  1.  input n 
+                    <br>  2.  print n 
+                    <br>  3.  if n = 1 then STOP 
+                    <br>  4.      if n is odd then n ←− 3n + 1 
+                    <br>  5.      else n ←− n/2 
+                    <br>  6.  GOTO 2 
+                    <br>  Given the input 22, the following sequence of numbers will be printed:
+                    <br>                22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1
+                    </blockquote>
+                </pre>  
+                  
+                  
               </div>
             </div>
           </div>
           <pre><code>{{ isCollapsed }}</code></pre>
-        </div>
-      </div>
-  </div>
-  <div>
-  </div>
-  </body>
-  </div>
+              </div>
+            </div>
+          </div>
+          <div>
+          </div>
+    </body>
+    </div>
 </body>
 
 </html>

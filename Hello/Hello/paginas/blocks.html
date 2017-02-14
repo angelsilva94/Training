@@ -1,4 +1,80 @@
-<div class="jumbotron text-center">  
-  <h1>Blocks Problem</h1> 
-  <p>{{ message }}</p> 
-</div>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+  <script src="scripts.js"></script>
+</head>
+
+<body>
+  <div class="container-fluid">
+
+    <body>
+      <div class="jumbotron">
+        <div class="container" ng-app="threeN" ng-controller="mainController">
+          <h1>Welcome to Blocks Problem</h1>
+          <a class="btn btn-info" ng-click="isCollapsed =  !isCollapsed">Show problem explanation</a>
+          <div class="panel panel-default">
+            <div collapse="isCollapsed">
+              <div class="panel-body">
+                <blockquote>
+                  <br>The problem is to parse a series of commands that instruct a robot arm in how to manipulate blocks
+                  that lie on a flat table.
+                  <br> The valid commands for the robot arm that manipulates blocks are:
+                  <table class="table table-responsive">
+                    <thead class="thead-inverse">
+                      <tr>
+                        <th>Movement</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th scope="row">1. Move a onto b </th>
+                        <td class="text-justify">Where a and b are block numbers, puts block a onto block b after returning any blocks that are stacked
+                          on top of blocks a and b to their initial positions.</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">2. Move a over b </th>
+                        <td class="text-justify">Where a and b are block numbers, puts block a onto the top of the stack containing block b, after
+                          returning any blocks that are stacked on top of block a to their initial positions.</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3. Pile a onto b</th>
+                        <td class="text-justify">Where a and b are block numbers, moves the pile of blocks consisting of block a, and any blocks that
+                          are stacked above block a, onto block b. All blocks on top of block b are moved to their initial
+                          positions prior to the pile taking place. The blocks stacked above block a retain their order when
+                          moved.
+                        </td>
+                      </tr>
+                      <tr>
+                        <th scope="row">4. Pile a over b</th>
+                        <td class="text-justify">Where a and b are block numbers, puts the pile of blocks consisting of block a, and any blocks that
+                          are stacked above block a, onto the top of the stack containing block b. The blocks stacked above
+                          block a retain their original order when moved.</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">5. Quit</th>
+                        <td class="text-justify">Terminates manipulations in the block world.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </blockquote>
+              </div>
+            </div>
+          </div>
+          <pre><code>{{ isCollapsed }}</code></pre>
+        </div>
+      </div>
+  </div>
+  <div>
+  </div>
+  </body>
+  </div>
+</body>
+
+</html>
