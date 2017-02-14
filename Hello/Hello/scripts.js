@@ -3,6 +3,23 @@
    [href]
  */
 
+
+$(document).ready(function () {
+    var numClick=0;
+    $("#btnExp").click(function () { 
+        numClick++;
+        if(numClick%2==1){
+             $(this).text("Hide Explanation");
+
+        }else{
+            $(this).text("Show Explanation");
+        }
+        
+    });
+});
+$(document).ready(function () {
+    
+});
 /*$(document).ready(function () {
     $(".test").click(function () { 
         $(this).hide();
@@ -27,7 +44,7 @@
         });*/
        // $.getJSON("http://localhost:56493/api/ThreeN", {
            //     x: 10,
-                y: 20
+                //y: 20
            // },
            // function (data, textStatus) {
            //     console.log(data);
@@ -39,8 +56,8 @@
 
 
 //});
-
+/*
 var app = angular.module('threeN', ['ui.bootstrap']);
 app.controller('mainController', function ($scope) {
   $scope.isCollapsed = false;
-});
+});*/

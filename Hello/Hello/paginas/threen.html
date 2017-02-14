@@ -5,23 +5,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
   <script src="scripts.js"></script>
 </head>
 
-<body>
+<body ng-app="threeN" ng-controller="mainController">
+  <div class="jumbotron ">
+    <h1 class="text-center">Welcome to Threen Problem</h1>
+  </div>
   <div class="container-fluid">
-
-    <body>
-      <div class="jumbotron">
-        <div class="container" ng-app="threeN" ng-controller="mainController">
-          <h1>Welcome to 3N+1 Problem</h1>
-          <a class="btn btn-info" ng-click="isCollapsed =  !isCollapsed">Show problem explanation</a>
-          <div class="panel panel-default">
-            <div collapse="isCollapsed">
-              <div class="panel-body">
-                <pre>
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Welcome to 3N+1 Problem</h3>
+        </div>
+        <div class="panel-body panel-collapse collapse" id="panel">
+          <pre>
                   <blockquote>
                     <br>Consider the following algorithm:
                     <br>  1.  input n 
@@ -33,20 +34,55 @@
                     <br>  Given the input 22, the following sequence of numbers will be printed:
                     <br>                22 11 34 17 52 26 13 40 20 10 5 16 8 4 2 1
                     </blockquote>
-                </pre>  
-                  
-                  
+                </pre>
+        </div>
+        <div class="panel-foot"><a id="btnExp" class="btn btn-info" data-toggle="collapse" data-target="#panel">Show problem explanation</a></div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <form ng-submit="numbSubmit()">
+            <div class="form-group">
+              <label for="validate-number">Input First Number:</label>
+              <div class="input-group" data-validate="number">
+                <input type="text" ng-model="numberx" class="form-control" name="validate-number" id="validate-number" placeholder="First Number"
+                  required>
+                  <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+              </div>
+              <label for="validate-number">Input Second Number:</label>
+              <div class="input-group" data-validate="number">
+                <input type="text" ng-model="numbery" class="form-control" name="validate-number" id="validate-number" placeholder="Second Number"
+                  required>
+                  <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
               </div>
             </div>
-          </div>
-          <pre><code>{{ isCollapsed }}</code></pre>
-              </div>
-            </div>
-          </div>
-          <div>
-          </div>
-    </body>
+            <button type="submit" class="btn btn-primary col-xs-12">Submit</button>
+          </form>
+          
+          <!--ng-hide o ng-show para ocultar mostrar elementos, usando valores booleanos en una funcion -->
+          <table class="table table-striped " ng-show="tableR">
+            <thead>
+              <tr>
+                <th>i Value</th>
+                <th>j Value</th>
+                <th>iternation Number Value</th>
+                <th>results</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="x in data">
+                <td>{{x.i}}</td>
+                <td>{{x.j}}</td>
+                <td>{{x.iterationNumber}}</td>
+                <td>{{x.results}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+      </div>
     </div>
+  </div>
 </body>
 
 </html>
