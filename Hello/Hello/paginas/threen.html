@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="scripts.js"></script>
 </head>
@@ -46,18 +46,17 @@
               <div class="input-group" data-validate="number">
                 <input type="text" ng-model="numberx" class="form-control" name="validate-number" id="validate-number" placeholder="First Number"
                   required>
-                  <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
               </div>
               <label for="validate-number">Input Second Number:</label>
               <div class="input-group" data-validate="number">
                 <input type="text" ng-model="numbery" class="form-control" name="validate-number" id="validate-number" placeholder="Second Number"
                   required>
-                  <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+                <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
               </div>
             </div>
             <button type="submit" class="btn btn-primary col-xs-12">Submit</button>
           </form>
-          
           <!--ng-hide o ng-show para ocultar mostrar elementos, usando valores booleanos en una funcion -->
           <table class="table table-striped " ng-show="tableR">
             <thead>
@@ -73,7 +72,11 @@
                 <td>{{x.i}}</td>
                 <td>{{x.j}}</td>
                 <td>{{x.iterationNumber}}</td>
-                <td>{{x.results}}</td>
+                <td>
+                  <ul class="list-unstyled">
+                    <li ng-repeat="r in x.results">{{r}}</li>
+                  </ul>
+                </td>
               </tr>
             </tbody>
           </table>
