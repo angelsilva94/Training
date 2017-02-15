@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="scriptsBlocks.js"></script>
+  <link rel="stylesheet" href="/css/alerts.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body ng-app="blocks" ng-controller="mainController">
+  <div class="jumbotron ">
+    <h1 class="text-center">Welcome to Blocks Problem</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Welcome to Blocks Problem</h3>
+        </div>
+        <div class="panel-body panel-collapse collapse" id="panel">
+          <blockquote>
+            <br>The problem is to parse a series of commands that instruct a robot arm in how to manipulate blocks that lie
+            on a flat table. Remeber the Length must be >0 and less than 25
+            <br> The valid commands for the robot arm that manipulates blocks are:
+            <table class="table table-responsive">
+              <thead class="thead-inverse">
+                <tr>
+                  <th>Movement</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1. Move a onto b </th>
+                  <td class="text-justify">Where a and b are block numbers, puts block a onto block b after returning any blocks that are stacked
+                    on top of blocks a and b to their initial positions.</td>
+                </tr>
+                <tr>
+                  <th scope="row">2. Move a over b </th>
+                  <td class="text-justify">Where a and b are block numbers, puts block a onto the top of the stack containing block b, after returning
+                    any blocks that are stacked on top of block a to their initial positions.</td>
+                </tr>
+                <tr>
+                  <th scope="row">3. Pile a onto b</th>
+                  <td class="text-justify">Where a and b are block numbers, moves the pile of blocks consisting of block a, and any blocks that are
+                    stacked above block a, onto block b. All blocks on top of block b are moved to their initial positions
+                    prior to the pile taking place. The blocks stacked above block a retain their order when moved.
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">4. Pile a over b</th>
+                  <td class="text-justify">Where a and b are block numbers, puts the pile of blocks consisting of block a, and any blocks that are
+                    stacked above block a, onto the top of the stack containing block b. The blocks stacked above block a
+                    retain their original order when moved.</td>
+                </tr>
+                <tr>
+                  <th scope="row">5. Quit</th>
+                  <td class="text-justify">Terminates manipulations in the block world.</td>
+                </tr>
+              </tbody>
+            </table>
+          </blockquote>
+        </div>
+        <div class="panel-foot"><a id="btnExp" class="btn btn-info" data-toggle="collapse" data-target="#panel">Show problem explanation</a></div>
+      </div>
+      <div class="panel panel-default" ng-hide="lenghtPanel">
+        <div class="panel-body">
+          <form ng-submit="lenghtSubmit()">
+            <div class="form-group">
+              <label for="validate-number">Give me the length of the block:</label>
+              <div class="input-group">
+                <input type="number" ng-model="blockLength" class="form-control" placeholder="Remember! Length >0 <25" required>
+                <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary col-xs-12 ">Submit</button>
+            </div>
+          </form>
+          <!--ng-hide o ng-show para ocultar mostrar elementos, usando valores booleanos en una funcion -->
+          {{details}}
+          <div class="alert alert-danger alert-white rounded" ng-show="alertM">
+            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+            <div class="icon">
+              <i class="fa fa-times-circle"></i>
+            </div>
+            <strong>{{error}}</strong>
+          </div>
+          <div class="alert alert-success alert-white rounded" ng-show="alertSuccess">
+            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+            <div class="icon">
+              <i class="fa fa-check"></i>
+            </div>
+            <strong>Success!{{saludo}}</strong> Data submitted to the server
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Instructions</h3>
+        </div>
+        <div class="panel-body">
+          <form>
+            <div class="form-group">
+              <label for="name">Select movement</label>
+              <select class="form-control" ng-model="addMe">
+                <option>Move A onto B</option>
+                <option>Move A over B</option>
+                <option>Pile A onto B</option>
+                <option>Pile A over B</option>
+                <option>exit</option>                
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="valA">Give me A</label>
+              <input id="valA" type="number" class="form-control">
+              <label for="valB">Give me B</label>
+              <input id="valB" type="number" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="addMove()">Add Movement</button>
+          </form>
+          <!-- DYNAMIC LIST-->
+          <ul>
+            <li ng-repeat="x in moves">{{x}}<span ng-click="removeMove($index)">×</span></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

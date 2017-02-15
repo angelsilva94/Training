@@ -10,18 +10,29 @@ app.controller('mainController', function ($scope, $http) {
         }
       })
       .then(function (data) {
-        $scope.details = data;
-        $scope.data=data;
-        $scope.tableR= true;
+
+        $scope.details = data.status;
+        $scope.data = data;
+        $scope.tableR = true;
+        $scope.alertSuccess = true;
+        $scope.saludo = data;
+
+
       }, function (response) {
         //$scope.myWelcome = response.statusText;
-        $scope.details = response;
+        //$scope.details = response;
+        $scope.tableR = false;
+        $scope.error = response.data;
+        $scope.alertM = true;
+
       });
+
 
   }
   $scope.myTxt = "You have not yet clicked submit";
   $scope.myFunc = function () {
     $scope.myTxt = "You clicked submit!";
   }
+
 
 });

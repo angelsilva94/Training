@@ -9,6 +9,8 @@
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="scripts.js"></script>
+  <link rel="stylesheet" href="/css/alerts.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body ng-app="threeN" ng-controller="mainController">
@@ -44,14 +46,12 @@
             <div class="form-group">
               <label for="validate-number">Input First Number:</label>
               <div class="input-group" data-validate="number">
-                <input type="text" ng-model="numberx" class="form-control" name="validate-number" id="validate-number" placeholder="First Number"
-                  required>
+                <input type="number" ng-model="numberx" class="form-control" placeholder="First Number" required>
                 <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
               </div>
               <label for="validate-number">Input Second Number:</label>
               <div class="input-group" data-validate="number">
-                <input type="text" ng-model="numbery" class="form-control" name="validate-number" id="validate-number" placeholder="Second Number"
-                  required>
+                <input type="number" ng-model="numbery" class="form-control" placeholder="Second Number" required>
                 <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove"></span></span>
               </div>
             </div>
@@ -80,6 +80,21 @@
               </tr>
             </tbody>
           </table>
+          {{details}}
+          <div class="alert alert-danger alert-white rounded" ng-show="alertM">
+            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+            <div class="icon">
+              <i class="fa fa-times-circle"></i>
+            </div>
+            <strong>{{error}}</strong>
+          </div>
+          <div class="alert alert-success alert-white rounded" ng-show="alertSuccess">
+            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+            <div class="icon">
+              <i class="fa fa-check"></i>
+            </div>
+            <strong>Success!{{saludo}}</strong> Data submitted to the server
+          </div>
         </div>
       </div>
       <div>
