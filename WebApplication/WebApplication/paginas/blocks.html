@@ -11,6 +11,7 @@
   <script src="scriptsBlocks.js"></script>
   <link rel="stylesheet" href="/css/alerts.css">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
 </head>
 
 <body ng-app="blocks" ng-controller="mainController">
@@ -19,7 +20,7 @@
   </div>
   <div class="container-fluid">
     <div class="container">
-      <div class="panel panel-default">
+      <div class="panel panel-default" ng-hide="panelIns">
         <div class="panel-heading">
           <h3 class="panel-title">Welcome to Blocks Problem</h3>
         </div>
@@ -67,7 +68,7 @@
             </table>
           </blockquote>
         </div>
-        <div class="panel-foot"><a id="btnExp" class="btn btn-info" data-toggle="collapse" data-target="#panel">Show problem explanation</a></div>
+        <div class="panel-foot"><a id="btnExp" class="btn btn-info" data-toggle="collapse" data-target="#panel" ng-hide="panelIns">Show problem explanation</a></div>
       </div>
       <div class="panel panel-default" ng-hide="lenghtPanel">
         <div class="panel-body">
@@ -85,53 +86,67 @@
           </form>
           <!--ng-hide o ng-show para ocultar mostrar elementos, usando valores booleanos en una funcion -->
           {{details}}
-          <div class="alert alert-danger alert-white rounded" ng-show="alertM">
-            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
-            <div class="icon">
-              <i class="fa fa-times-circle"></i>
-            </div>
-            <strong>{{error}}</strong>
-          </div>
-          <div class="alert alert-success alert-white rounded" ng-show="alertSuccess">
-            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
-            <div class="icon">
-              <i class="fa fa-check"></i>
-            </div>
-            <strong>Success!{{saludo}}</strong> Data submitted to the server
-          </div>
         </div>
       </div>
-      <div class="panel panel-default">
+      <div class="panel panel-default" ng-show="panelAsk">
         <div class="panel-heading">
           <h3 class="panel-title">Instructions</h3>
         </div>
+        <!-- SECOND PANEL-->
         <div class="panel-body">
           <form>
             <div class="form-group">
               <label for="name">Select movement</label>
-              <select class="form-control" ng-model="addMe">
-                <option>Move A onto B</option>
-                <option>Move A over B</option>
-                <option>Pile A onto B</option>
-                <option>Pile A over B</option>
-                <option>exit</option>                
+              <select class="form-control" ng-model="addMov">
+                <option value="moveonto">Move A onto B</option>
+                <option value="moveover">Move A over B</option>
+                <option value="pileonto">Pile A onto B</option>
+                <option value="pileover">Pile A over B</option>
               </select>
             </div>
             <div class="form-group">
               <label for="valA">Give me A</label>
-              <input id="valA" type="number" class="form-control">
+              <input id="valA" type="number" class="form-control" ng-model="addA">
               <label for="valB">Give me B</label>
-              <input id="valB" type="number" class="form-control">
+              <input id="valB" type="number" class="form-control" ng-model="addB">
             </div>
-            <button type="submit" class="btn btn-default" ng-click="addMove()">Add Movement</button>
+            <button type="submit" class="btn btn-primary" ng-click="addMove()">Add Movement</button>
           </form>
-          <!-- DYNAMIC LIST-->
-          <ul>
-            <li ng-repeat="x in moves">{{x}}<span ng-click="removeMove($index)">×</span></li>
-          </ul>
+          <table class="table table-striped " ng-show="tableMove">
+            <thead>
+              <tr>
+                <th>Move</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <!-- DYNAMIC LIST-->
+                  <ul>
+                    <li ng-repeat="x in userMoves">{{x}}<span ng-click="removeMove($index)" style="cursor:pointer;" class=" glyphicon glyphicon-remove"></span>
+                    </li>
+                  </ul>
+                  <!-- DYNAMIC LIST END-->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="panel-footer">
+          <button type="submit" class="btn btn-primary" ng-click="sendServer()" ng-show="tableMove">Send to the server</button>
         </div>
       </div>
-      <div>
+      <!-- SECOND PANEL END-->
+      <div class="panel panel-default" ng-show="panelResults">
+        <div class="panel-heading">
+          <h1>Results</h1>
+        </div>
+        <div class="panel-body">
+          {{result}}
+        </div>
+        <div class="panel-footer">
+          Panel footer
+        </div>
       </div>
     </div>
   </div>
