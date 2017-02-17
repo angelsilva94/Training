@@ -32,7 +32,7 @@ namespace Hello.Controllers
                     int[] brown = new int[int.Parse(a)];
                     int[] clear = new int[int.Parse(b)];
                     int[] green = new int[int.Parse(a)];
-                    ValidatorBin val = new ValidatorBin { number = random.Next(-99999, 99999) };
+                    ValidatorBin val = new ValidatorBin { number = random.Next(-9999, 99999) };
                     ErrorDispose errorDispose = new ErrorDispose();
                     if (val.Val(out errorDispose)) {
                         for (int i = 0; i < int.Parse(a); i++) {

@@ -10,16 +10,16 @@ namespace BlocksProblem {
         int b { set; get; }
         public Stack<int>[] Blocks;
         int[] pos;
-        public int length { set; get; }
+        public int leng { set; get; }
 
         public Block(int n) {
-            this.length = n;
-            Blocks = new Stack<int>[length];
+            this.leng = n;
+            Blocks = new Stack<int>[leng];
             pos = new int[n];
             fillBlocks();
         }
         public void fillBlocks() {
-            for (int i = 0; i < length; i++) {
+            for (int i = 0; i < leng; i++) {
                 Blocks[i] = new Stack<int>();
                 Blocks[i].Push(i);
                 pos[i] = i;

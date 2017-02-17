@@ -41,7 +41,7 @@ app.controller('mainController', function ($scope, $window, $http) {
 
     var jsonS = {
       instructions: [],
-      "length": $scope.blockLength,
+      "leng": $scope.blockLength,
       "res": ""
     };
     for (var i = 0; i < serverA.length; i++) {
@@ -52,13 +52,19 @@ app.controller('mainController', function ($scope, $window, $http) {
       })
     }
 
-    $scope.enviar = jsonS;
+    //$scope.enviar = jsonS;
     $http.post("http://localhost:56493/api/BlocksProblem", jsonS)
       .then(function (data) {
         $scope.result = data;
+        $scope.data = data;
+        $scope.tableR = true;
+        $scope.alertSuccess = true;
       }, function (response) {
         $scope.result = response;
+        $scope.alertM = true;
       });
+
+
 
 
 

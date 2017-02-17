@@ -34,11 +34,11 @@ namespace Hello.Controllers
         public HttpResponseMessage Post(BlockModel blockModel)
         {
             if(blockModel != null) {
-                ValidatorBlocks validatorBlocks = new ValidatorBlocks { number = blockModel.length };
+                ValidatorBlocks validatorBlocks = new ValidatorBlocks { number = blockModel.leng };
                 ErrorDispose errorDispose;
                 if (validatorBlocks.Val(out errorDispose)){
-                    Block block = new Block(blockModel.length);
-                    int longt = blockModel.length;
+                    Block block = new Block(blockModel.leng);
+                    int longt = blockModel.leng;
                     int i = 0;
 
                     do {
@@ -53,7 +53,7 @@ namespace Hello.Controllers
                         }
                         i++;
                     } while (i < blockModel.instructions.Count);
-                    for (int j = 0; j < blockModel.length; j++) {
+                    for (int j = 0; j < blockModel.leng; j++) {
                         blockModel.res += block.Print(j);
                     }
                     return Request.CreateResponse(HttpStatusCode.OK, blockModel);

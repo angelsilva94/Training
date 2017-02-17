@@ -2,39 +2,125 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-  <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
-  <script src="scripts.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <link rel="stylesheet" href="/css/alerts.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3.css">
+    <script src="scriptsBin.js"></script>
 </head>
 
-<body>
-  <div class="container-fluid">
-
-    <body>
-      <div class="jumbotron">
-        <div class="container" ng-app="threeN" ng-controller="mainController">
-          <h1>Welcome to Bin Problem Problem</h1>
-          <a class="btn btn-info" ng-click="isCollapsed =  !isCollapsed">Show problem explanation</a>
-          <div class="panel panel-default">
-            <div collapse="isCollapsed">
-              <div class="panel-body">
-                <pre>
-                 
-                </pre>
-              </div>
+<body ng-app="bin" ng-controller="mainController">
+    <div class="jumbotron ">
+        <h1 class="text-center">Welcome to Ecological Bin Problem</h1>
+    </div>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="panel panel-default" ng-hide="panelIns">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Welcome to Blocks Problem</h3>
+                </div>
+                <div class="panel-body panel-collapse collapse" id="panel">
+                    <blockquote>
+                        <br>Recycling glass requires that the glass be separated by color into one of three categories: brown
+                        glass, green glass, and clear glass. In this problem you will be given three recycling bins, each
+                        containing a specified number of brown, green and clear bottles. In order to be recycled, the bottles
+                        will need to be moved so that each bin contains bottles of only one color.
+                        <br> The input will be the following:
+                        <table class="table table-responsive">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>Bin</th>
+                                    <th>Max Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">BIN A </th>
+                                    <td class="text-justify">Enter the max amount of bottles in the bin.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">BIN B </th>
+                                    <td class="text-justify">Enter the max amount of bottles in the bin.</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">BIN C </th>
+                                    <td class="text-justify">Enter the max amount of bottles in the bin.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </blockquote>
+                    <div class="panel-footer">
+                        Note the bottles are random generated, thats why you specify the max amount of bottles in each bin
+                    </div>
+                </div>
+                <div class="panel-foot"><a id="btnExp" class="btn btn-info" data-toggle="collapse" data-target="#panel" ng-hide="panelIns">Show problem explanation</a></div>
             </div>
-          </div>
-          <pre><code>{{ isCollapsed }}</code></pre>
+            <div class="panel panel-default" ng-hide="askBin">
+                <div class="panel-body">
+                    <form ng-submit="binSubmit()">
+                        <div class="form-group">
+                            <label for="validate-number">Give me max amount of bottles in Bin A:</label>
+                            <div class="input-group">
+                                <input id="A" type="number" ng-model="binA" class="form-control" placeholder="Number >0 and Max amount 2^31" required>
+                                <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove " style="cursor:pointer" ng-click="removeA()"></span></span>
+                            </div>
+                            <label for="validate-number">Give me max amount of bottles in Bin B:</label>
+                            <div class="input-group">
+                                <input id="B" type="number" ng-model="binB" class="form-control" placeholder="Number >0 and Max amount 2^31" required>
+                                <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove " style="cursor:pointer" ng-click="removeB()"></span></span>
+                            </div>
+                            <label for="validate-number">Give me max amount of bottles in Bin C:</label>
+                            <div class="input-group">
+                                <input id="C" type="number" ng-model="binC" class="form-control" placeholder="Number >0 and Max amount 2^31" required>
+                                <span class="input-group-addon danger"><span class="glyphicon glyphicon-remove " style="cursor:pointer" ng-click="removeC()"></span></span>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary col-xs-12 ">Submit</button>
+                        </div>
+                    </form>
+                    <!--ng-hide o ng-show para ocultar mostrar elementos, usando valores booleanos en una funcion ng-show es false por default ng-hide es true por default-->
+                    {{details}}
+                </div>
+            </div>
+            <div class="panel panel-default" ng-show="panelResults">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Results</h3>
+                </div>
+                <!-- SECOND PANEL-->
+                <div class="panel-body">
+                    <h1>AQUI VAN LOS RESULTADOS</h1>
+                    {{results}}
+                </div>
+                <div class="panel-footer">
+                    <!-- ALERT IF SUCCES-->
+                    <h1>alerts here</h1>
+                    <div class="alert alert-success alert-white rounded" ng-show="alertSuccess">
+                        <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+                        <div class="icon">
+                            <i class="fa fa-check"></i>
+                        </div>
+                        <strong>Success!</strong> Data submitted to the server
+                        <!--END ALERT IF SUCCES-->
+                    </div>
+                    <div class="alert alert-danger alert-white rounded" ng-show="alertM">
+                        <!-- ALERT IF WRONG-->
+                        <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+                        <div class="icon">
+                            <i class="fa fa-times-circle"></i>
+                        </div>
+                        <strong>{{error}}</strong>
+                        <!-- END ALERT IF WRONG-->
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
-  <div>
-  </div>
-  </body>
-  </div>
+    </div>
 </body>
 
 </html>

@@ -137,15 +137,92 @@
         </div>
       </div>
       <!-- SECOND PANEL END-->
+      <!--Begins the last panel-->
       <div class="panel panel-default" ng-show="panelResults">
         <div class="panel-heading">
           <h1>Results</h1>
         </div>
         <div class="panel-body">
-          {{result }} {{enviar | json}}
+          <!--{{result }} {{enviar | json}}-->
+          <!--here we put the reults from the server-->
+          <!-- json output for reference
+{
+	"instructions": [
+		{
+			"A": 1,
+			"B": 3,
+			"move": "moveonto"
+		},
+		{
+			"A": 3,
+			"B": 1,
+			"move": "moveover"
+		}
+	],
+	"length": 22,
+	"res": "Position [0] :  0Position [1] :  1 3Position [2] :  2Position [3] : Position [4] :  4Position [5] :  5Position [6] :  6Position [7] :  7Position [8] :  8Position [9] :  9Position [10] :  10Position [11] :  11Position [12] :  12Position [13] :  13Position [14] :  14Position [15] :  15Position [16] :  16Position [17] :  17Position [18] :  18Position [19] :  19Position [20] :  20Position [21] :  21"
+}
+          -->
+          <div class="table-responsive">
+            <table class="table table-striped " ng-show="tableR">
+              <thead>
+                <tr>
+                  <th>Block length</th>
+                  <th>A</th>
+                  <th>Move</th>
+                  <th>B</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody ng-repeat="x in data">
+                <tr ng-repeat="r in x.instructions">
+                  <td>{{x.leng}}</td>
+                  <td>
+                    <!--A VALUE-->
+                    <ul class="list-unstyled">
+                      <li>{{r.A}}</li>
+                    </ul>
+                    <!--END A VALUE-->
+                  </td>
+                  <td>
+                    <!--INS VALUE-->
+                    <ul class="list-unstyled">
+                      <li>{{r.move}}</li>
+                    </ul>
+                    <!--END INS VALUE-->
+                  </td>
+                  <td>
+                    <!--B VALUE-->
+                    <ul class="list-unstyled">
+                      <li>{{r.B}}</li>
+                    </ul>
+                    <!--END B VALUE-->
+                  </td>
+                  <td>{{x.res}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="panel-footer">
-          Panel footer
+          <!-- ALERT IF SUCCES-->
+          <div class="alert alert-success alert-white rounded" ng-show="alertSuccess">
+            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+            <div class="icon">
+              <i class="fa fa-check"></i>
+            </div>
+            <strong>Success!</strong> Data submitted to the server
+            <!--END ALERT IF SUCCES-->
+          </div>
+          <div class="alert alert-danger alert-white rounded" ng-show="alertM">
+            <!-- ALERT IF WRONG-->
+            <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+            <div class="icon">
+              <i class="fa fa-times-circle"></i>
+            </div>
+            <strong>{{error}}</strong>
+            <!-- END ALERT IF WRONG-->
+          </div>
         </div>
       </div>
     </div>
