@@ -16,12 +16,12 @@ namespace LoginRegister.Controllers
 {
     public class UserController : ApiController
     {
-        private UserDBContext db = new UserDBContext();
+        private ShopDBContext db = new ShopDBContext();
 
         // GET: api/User
         [Authentication]
         public IQueryable<UserModel> GetUserModels() {
-            return db.UserModels;
+            return db.UsersModel;
         }
 
         //// GET: api/User/5
@@ -58,7 +58,7 @@ namespace LoginRegister.Controllers
             //{
             //    return BadRequest();
             //}
-            var user = db.UserModels.Find(modifyUserModel.username);
+            var user = db.UsersModel.Find(modifyUserModel.username);
             if (user.password == modifyUserModel.curPassword) {
                 user.password = modifyUserModel.newPassword;
             } else {
@@ -96,7 +96,7 @@ namespace LoginRegister.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.UserModels.Add(userModel);
+            db.UsersModel.Add(userModel);
 
             try
             {
@@ -144,7 +144,7 @@ namespace LoginRegister.Controllers
 
         private bool UserModelExists(string usr)
         {
-            return db.UserModels.Count(e => e.username == usr) > 0;
+            return db.UsersModel.Count(e => e.username == usr) > 0;
         }
     }
 }

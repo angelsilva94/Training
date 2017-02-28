@@ -25,5 +25,12 @@ namespace LoginRegister.Models {
         public DateTime regDate { set; get; }
         [Required]
         public bool userType { set; get; }
+
+        //we define our relationships
+        //1-1 UserModel-UserInfo
+        public virtual UserInfoModel UserInfoModel { set; get; }
+        //1-N UserModel-ReviewModel
+        public virtual ICollection<ReviewProductModel> ReviewProductModel { get; set; }
+
     }
 }

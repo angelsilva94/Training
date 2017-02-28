@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 14 for Web
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoginRegister", "LoginRegister\LoginRegister.csproj", "{1C7957C7-9948-4379-943D-8DC25C211E51}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop", "LoginRegister\Shop.csproj", "{1C7957C7-9948-4379-943D-8DC25C211E51}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

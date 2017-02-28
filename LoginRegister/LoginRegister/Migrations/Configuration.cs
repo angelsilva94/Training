@@ -5,7 +5,7 @@ namespace LoginRegister.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<LoginRegister.Models.UserDBContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<LoginRegister.Models.ShopDBContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace LoginRegister.Migrations
             ContextKey = "LoginRegister.Models.UserDBContext";
         }
 
-        protected override void Seed(LoginRegister.Models.UserDBContext context)
+        protected override void Seed(LoginRegister.Models.ShopDBContext context)
         {
             //  This method will be called after migrating to the latest version.
 
