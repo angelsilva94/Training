@@ -7,6 +7,7 @@ using System.Web;
 namespace LoginRegister.Models {
     public class BrandModel {
         [Required]
+        [Key]
         public int brandId { set; get; }
         [Required]
         public string brandName { set; get; }
@@ -16,6 +17,6 @@ namespace LoginRegister.Models {
         public string brandDesc { set; get; }
 
         //N-1 ProductModel-BrandModel
-        public virtual ICollection<ProductModel> ProductModel { set; get; }
+        public virtual ICollection<ProductModel> ProductModels { set; get; }
     }
 }

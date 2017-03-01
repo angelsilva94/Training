@@ -10,5 +10,9 @@ namespace LoginRegister.Models {
         [Key]
         public int orderStatusCod{ set; get; }
         public string orderStatusDesc { set; get; }
+
+        //N-1 OrderModel-OrderProductModel
+
+        public virtual ICollection<OrderModel> OrderModels { set; get; }
     }
 }

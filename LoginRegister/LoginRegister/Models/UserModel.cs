@@ -6,8 +6,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LoginRegister.Models {
     public class UserModel {
-        [Key]
         [Required]
+        [Key]
         public string username { set; get; }
         [Required]
         public string password { set; get; }
@@ -30,7 +30,8 @@ namespace LoginRegister.Models {
         //1-1 UserModel-UserInfo
         public virtual UserInfoModel UserInfoModel { set; get; }
         //1-N UserModel-ReviewModel
-        public virtual ICollection<ReviewProductModel> ReviewProductModel { get; set; }
-
+        public virtual ICollection<ReviewProductModel> ReviewProductModels { get; set; }
+        //1-N UserModel-OrderModel
+        public virtual ICollection<OrderModel> OrderModels { get; set; }
     }
 }

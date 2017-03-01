@@ -234,6 +234,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Migrations\201703011750065_initial.cs" />
+    <Compile Include="Migrations\201703011750065_initial.Designer.cs">
+      <DependentUpon>201703011750065_initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Authentication.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -242,15 +247,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201702271528464_InitialCreate.cs" />
-    <Compile Include="Migrations\201702271528464_InitialCreate.Designer.cs">
-      <DependentUpon>201702271528464_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201702271640111_db.cs" />
-    <Compile Include="Migrations\201702271640111_db.Designer.cs">
-      <DependentUpon>201702271640111_db.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CategoryModel.cs" />
@@ -260,7 +256,6 @@
     <Compile Include="Models\ModifyUserModel.cs" />
     <Compile Include="Models\OrderModel.cs" />
     <Compile Include="Models\OrderStatusModel.cs" />
-    <Compile Include="Models\OrderUserModel.cs" />
     <Compile Include="Models\ProductCategoryModel.cs" />
     <Compile Include="Models\ProductModel.cs" />
     <Compile Include="Models\OrderProductModel.cs" />
@@ -347,11 +342,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201702271528464_InitialCreate.resx">
-      <DependentUpon>201702271528464_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201702271640111_db.resx">
-      <DependentUpon>201702271640111_db.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703011750065_initial.resx">
+      <DependentUpon>201703011750065_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

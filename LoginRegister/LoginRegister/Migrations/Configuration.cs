@@ -10,7 +10,6 @@ namespace LoginRegister.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "LoginRegister.Models.UserDBContext";
         }
 
         protected override void Seed(LoginRegister.Models.ShopDBContext context)
