@@ -7,6 +7,7 @@ using System.Web;
 namespace LoginRegister.Models {
     public class ShopDBContext : DbContext {
         public ShopDBContext() : base("name=UserDBContext") {
+            this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
         public DbSet<UserModel> UsersModel { get; set; }
         public DbSet<ProductModel> ProductModel { set; get; }

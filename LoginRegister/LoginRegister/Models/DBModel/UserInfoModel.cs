@@ -23,7 +23,7 @@ namespace LoginRegister.Models {
 
         //we define our relationships 
         //1-1 UserModel-UserInfo
-        [Required]
+        
         public virtual UserModel UserModel { set; get; }
     }
 }
