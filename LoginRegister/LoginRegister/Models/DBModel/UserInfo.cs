@@ -6,8 +6,12 @@ using System.Linq;
 using System.Web;
 
 namespace LoginRegister.Models {
-    public class UserInfoModel {
-        [Key,ForeignKey("UserModel")]
+    public class UserInfo {
+        
+        public int UserInfoId { set; get; }
+        //[ForeignKey("User")]
+        [Key, ForeignKey("User")]
+        public int UserId { set; get; }
         [Required]
         public string username { set; get; }
         [Required]
@@ -24,6 +28,6 @@ namespace LoginRegister.Models {
         //we define our relationships 
         //1-1 UserModel-UserInfo
         
-        public virtual UserModel UserModel { set; get; }
+        public virtual User User { set; get; }
     }
 }

@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 
 namespace LoginRegister.Models {
-    public class CategoryModel {
+    public class Category {
         [Required]
-        [Key]
-        public int categoryId { set; get; }
+        //[Key]
+        public int CategoryId { set; get; }
         [Required]
         public string categoryName { set; get; }
         [Required]
@@ -17,11 +17,11 @@ namespace LoginRegister.Models {
         [Required]
         public string categoryImage { set; get; }
         [Required]
-        [ForeignKey("categoryModel")]
+        //[ForeignKey("categoryParent")]
         public int categoryParentId { set; get; }
         //1..N ProductCategoryModel-CategoryModel
-        public virtual ICollection<ProductCategoryModel> ProductCategoryModels { set; get; }
+        public virtual ICollection<ProductCategory> ProductCategories { set; get; }
         //1-1 Category-Category
-        public virtual CategoryModel categoryModel { set; get; }
+        public virtual Category categoryParent { set; get; }
     }
 }

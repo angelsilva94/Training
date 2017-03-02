@@ -9,16 +9,16 @@ namespace LoginRegister.Models {
         public ShopDBContext() : base("name=UserDBContext") {
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
         }
-        public DbSet<UserModel> UsersModel { get; set; }
-        public DbSet<ProductModel> ProductModel { set; get; }
-        public DbSet<BrandModel> BrandModel { set; get; }
-        public DbSet<CategoryModel> CategoryModel { set; get; }
-        public DbSet<OrderModel> OrderModel { set; get; }
-        public DbSet<OrderProductModel> OrderProductModel { set; get; }
-        public DbSet<OrderStatusModel> OrderStatusModel { set; get; }
-        public DbSet<ProductCategoryModel> ProductCategoryModel { set; get; }
-        public DbSet<ReviewProductModel> ReviewProductModel { set; get; }
-        public DbSet<UserInfoModel> UserInfoModel { set; get; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Product> Product { set; get; }
+        public DbSet<Brand> Brand { set; get; }
+        public DbSet<Category> Category { set; get; }
+        public DbSet<Order> Order { set; get; }
+        public DbSet<OrderProduct> OrderProduct { set; get; }
+        public DbSet<OrderStatus> OrderStatus { set; get; }
+        public DbSet<ProductCategory> ProductCategory { set; get; }
+        public DbSet<ReviewProduct> ReviewProduct { set; get; }
+        public DbSet<UserInfo> UserInfo { set; get; }
 
     }
 }

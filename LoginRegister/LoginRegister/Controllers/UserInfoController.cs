@@ -18,16 +18,16 @@ namespace LoginRegister.Controllers
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/UserInfo
-        public IQueryable<UserInfoModel> GetUserInfoModel()
+        public IQueryable<UserInfo> GetUserInfoModel()
         {
-            return db.UserInfoModel;
+            return db.UserInfo;
         }
 
         // GET: api/UserInfo/5
-        [ResponseType(typeof(UserInfoModel))]
+        [ResponseType(typeof(UserInfo))]
         public async Task<IHttpActionResult> GetUserInfoModel(string id)
         {
-            UserInfoModel userInfoModel = await db.UserInfoModel.FindAsync(id);
+            UserInfo userInfoModel = await db.UserInfo.FindAsync(id);
             if (userInfoModel == null)
             {
                 return NotFound();
@@ -38,7 +38,7 @@ namespace LoginRegister.Controllers
 
         // PUT: api/UserInfo/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutUserInfoModel(string id, UserInfoModel userInfoModel)
+        public async Task<IHttpActionResult> PutUserInfoModel(string id, UserInfo userInfoModel)
         {
             if (!ModelState.IsValid)
             {
@@ -72,15 +72,15 @@ namespace LoginRegister.Controllers
         }
 
         // POST: api/UserInfo
-        [ResponseType(typeof(UserInfoModel))]
-        public async Task<IHttpActionResult> PostUserInfoModel(UserInfoModel userInfoModel)
+        [ResponseType(typeof(UserInfo))]
+        public async Task<IHttpActionResult> PostUserInfoModel(UserInfo userInfoModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.UserInfoModel.Add(userInfoModel);
+            db.UserInfo.Add(userInfoModel);
 
             try
             {
@@ -102,16 +102,16 @@ namespace LoginRegister.Controllers
         }
 
         // DELETE: api/UserInfo/5
-        [ResponseType(typeof(UserInfoModel))]
+        [ResponseType(typeof(UserInfo))]
         public async Task<IHttpActionResult> DeleteUserInfoModel(string id)
         {
-            UserInfoModel userInfoModel = await db.UserInfoModel.FindAsync(id);
+            UserInfo userInfoModel = await db.UserInfo.FindAsync(id);
             if (userInfoModel == null)
             {
                 return NotFound();
             }
 
-            db.UserInfoModel.Remove(userInfoModel);
+            db.UserInfo.Remove(userInfoModel);
             await db.SaveChangesAsync();
 
             return Ok(userInfoModel);
@@ -128,7 +128,7 @@ namespace LoginRegister.Controllers
 
         private bool UserInfoModelExists(string id)
         {
-            return db.UserInfoModel.Count(e => e.username == id) > 0;
+            return db.UserInfo.Count(e => e.username == id) > 0;
         }
     }
 }

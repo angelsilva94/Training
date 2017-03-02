@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 namespace LoginRegister.Models {
-    public class AddUserInfoModel {
+    public class AddUserInfo {
        
         public string username { set; get; }
         

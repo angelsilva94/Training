@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 
 namespace LoginRegister.Models {
-    public class ProductModel {
+    public class Product {
         [Required]
-        [Key]
-        public int productId { set; get; }
+        //[Key]
+        public int ProductId { set; get; }
         [Required]
         public string productName { set; get; }
         [Required]
@@ -27,19 +27,19 @@ namespace LoginRegister.Models {
         [Required]
         public int productStock { set; get; }
         [Required]
-        [ForeignKey("BrandModel")]
-        public int productBrandId { set; get; }
+        //[ForeignKey("Brand")]
+        public int BrandId { set; get; }
 
         //N-1 ReviewModel-ProductModel
-        public virtual ICollection<ReviewProductModel> ReviewProductModels { set; get; }
+        public virtual ICollection<ReviewProduct> ReviewProducts { set; get; }
 
         //N-1 ProductModel-BrandModel
         //[ForeignKey("productBrandId")]
-        public virtual BrandModel BrandModel { set; get; }
+        public virtual Brand Brand { set; get; }
         //1..N ProductModel-ProductCategoryModel
-        public virtual ICollection<ProductCategoryModel> ProductCategoryModels { set; get; }
+        public virtual ICollection<ProductCategory> ProductCategories { set; get; }
         //1-N ProductModel-OrderProductModel
-        public virtual ICollection<OrderProductModel> OrderProductModels { set; get; }
+        public virtual ICollection<OrderProduct> OrderProducts { set; get; }
 
     }
 }

@@ -6,23 +6,23 @@ using System.Linq;
 using System.Web;
 
 namespace LoginRegister.Models {
-    public class ProductCategoryModel {
+    public class ProductCategory {
         [Required]
         [Key]
-        [ForeignKey("CategoryModel")]
+        [ForeignKey("Category")]
         [Column(Order = 1)]
-        public int categoryId { set; get; }
+        public int CategoryId { set; get; }
         [Required]
         [Key]
-        [ForeignKey("ProductModel")]
+        [ForeignKey("Product")]
         [Column(Order = 2)]
-        public int productId { set; get; }
+        public int ProductId { set; get; }
         //1..N ProductModel-ProductCategoryModel
         
-        public virtual ProductModel ProductModel { set; get; }
+        public virtual Product Product { set; get; }
         //1..N ProductCategoryModel-CategoryModel
         
-        public virtual CategoryModel CategoryModel { set; get; }
+        public virtual Category Category { set; get; }
 
     }
 }

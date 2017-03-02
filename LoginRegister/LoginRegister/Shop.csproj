@@ -239,8 +239,12 @@
     <Compile Include="Migrations\201703011750065_initial.Designer.cs">
       <DependentUpon>201703011750065_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703021536274_modelChange.cs" />
+    <Compile Include="Migrations\201703021536274_modelChange.Designer.cs">
+      <DependentUpon>201703021536274_modelChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\DBModel\AddUserInfoModel.cs" />
+    <Compile Include="Models\DBModel\AddUserInfo.cs" />
     <Compile Include="Models\Authentication.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -251,20 +255,20 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\DBModel\CategoryModel.cs" />
+    <Compile Include="Models\DBModel\Category.cs" />
     <Compile Include="Models\DBModel\CheckUser.cs" />
-    <Compile Include="Models\DBModel\BrandModel.cs" />
+    <Compile Include="Models\DBModel\Brand.cs" />
     <Compile Include="Models\DBModel\IdentityModels.cs" />
     <Compile Include="Models\DBModel\ModifyUserModel.cs" />
-    <Compile Include="Models\DBModel\OrderModel.cs" />
-    <Compile Include="Models\DBModel\OrderStatusModel.cs" />
-    <Compile Include="Models\DBModel\ProductCategoryModel.cs" />
-    <Compile Include="Models\DBModel\ProductModel.cs" />
-    <Compile Include="Models\DBModel\OrderProductModel.cs" />
-    <Compile Include="Models\DBModel\ReviewProductModel.cs" />
+    <Compile Include="Models\DBModel\Order.cs" />
+    <Compile Include="Models\DBModel\OrderStatus.cs" />
+    <Compile Include="Models\DBModel\ProductCategory.cs" />
+    <Compile Include="Models\DBModel\Product.cs" />
+    <Compile Include="Models\DBModel\OrderProduct.cs" />
+    <Compile Include="Models\DBModel\ReviewProduct.cs" />
     <Compile Include="Models\DBModel\ShopDBContext.cs" />
-    <Compile Include="Models\DBModel\UserInfoModel.cs" />
-    <Compile Include="Models\DBModel\UserModel.cs" />
+    <Compile Include="Models\DBModel\UserInfo.cs" />
+    <Compile Include="Models\DBModel\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -346,6 +350,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703011750065_initial.resx">
       <DependentUpon>201703011750065_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703021536274_modelChange.resx">
+      <DependentUpon>201703021536274_modelChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

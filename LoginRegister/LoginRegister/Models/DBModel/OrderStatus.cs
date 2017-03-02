@@ -5,14 +5,17 @@ using System.Linq;
 using System.Web;
 
 namespace LoginRegister.Models {
-    public class OrderStatusModel {
+    public class OrderStatus {
         [Required]
-        [Key]
+        //[Key]
+        public int OrderStatusId { set; get; }
+        [Required]
         public int orderStatusCod{ set; get; }
+        [Required]
         public string orderStatusDesc { set; get; }
 
         //N-1 OrderModel-OrderProductModel
 
-        public virtual ICollection<OrderModel> OrderModels { set; get; }
+        public virtual ICollection<Order> Orders { set; get; }
     }
 }

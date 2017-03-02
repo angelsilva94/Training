@@ -5,9 +5,10 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 
 namespace LoginRegister.Models {
-    public class UserModel {
+    public class User {
+        
+        public int UserId { set; get; }
         [Required]
-        [Key]
         public string username { set; get; }
         [Required]
         public string password { set; get; }
@@ -28,10 +29,10 @@ namespace LoginRegister.Models {
 
         //we define our relationships
         //1-1 UserModel-UserInfo
-        public virtual UserInfoModel UserInfoModel { set; get; }
+        public virtual UserInfo UserInfo { set; get; }
         //1-N UserModel-ReviewModel
-        public virtual ICollection<ReviewProductModel> ReviewProductModels { get; set; }
+        public virtual ICollection<ReviewProduct> ReviewProducts { get; set; }
         //1-N UserModel-OrderModel
-        public virtual ICollection<OrderModel> OrderModels { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

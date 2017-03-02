@@ -20,8 +20,8 @@ namespace LoginRegister.Controllers
 
         // GET: api/User
         [Authentication]
-        public IQueryable<UserModel> GetUserModels() {
-            return db.UsersModel;
+        public IQueryable<User> GetUserModels() {
+            return db.User;
         }
 
         //// GET: api/User/5
@@ -47,7 +47,7 @@ namespace LoginRegister.Controllers
         // PUT: api/User/5
         [Authentication]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutUserModel(ModifyUserModel modifyUserModel)
+        public async Task<IHttpActionResult> PutUserModel([FromBody]ModifyUserModel modifyUserModel,[FromUri]int id)
         {
             if (!ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace LoginRegister.Controllers
             //{
             //    return BadRequest();
             //}
-            var user = db.UsersModel.Find(modifyUserModel.username);
+            var user = db.User.Find(modifyUserModel.username);
             if (user.password == modifyUserModel.curPassword) {
                 user.password = modifyUserModel.newPassword;
             } else {
@@ -88,15 +88,15 @@ namespace LoginRegister.Controllers
         }
 
         // POST: api/User
-        [ResponseType(typeof(UserModel))]
-        public async Task<IHttpActionResult> PostUserModel(UserModel userModel)
+        [ResponseType(typeof(User))]
+        public async Task<IHttpActionResult> PostUserModel(User userModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.UsersModel.Add(userModel);
+            db.User.Add(userModel);
 
             try
             {
@@ -144,7 +144,7 @@ namespace LoginRegister.Controllers
 
         private bool UserModelExists(string usr)
         {
-            return db.UsersModel.Count(e => e.username == usr) > 0;
+            return db.User.Count(e => e.username == usr) > 0;
         }
     }
 }

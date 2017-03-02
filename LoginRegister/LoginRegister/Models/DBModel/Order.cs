@@ -6,10 +6,10 @@ using System.Linq;
 using System.Web;
 
 namespace LoginRegister.Models {
-    public class OrderModel {
+    public class Order {
         [Required]
-        [Key]
-        public int orderId { set; get; }
+        //[Key]
+        public int OrderId { set; get; }
         [Required]
         public DateTime purchaseDate { set; get; }
         [Required]
@@ -19,12 +19,14 @@ namespace LoginRegister.Models {
         [Required]
         public int totalOrderPrice { set; get; }
         [Required]
-        [ForeignKey("UserModel")]
+        //[ForeignKey("User")]
+        public int UserId { set; get; }
+        [Required]
         public string orderUsername{ set; get; }
         //N-1 OrderModel-OrderProductModel
-        public virtual ICollection<OrderProductModel> OrderProductModels { set; get; }
+        public virtual ICollection<OrderProduct> OrderProducts { set; get; }
         //1-N UserModel-OrderModel
         //[ForeignKey("orderUsername")]
-        public virtual UserModel UserModel { set; get; }
+        public virtual User User { set; get; }
     }
 }
