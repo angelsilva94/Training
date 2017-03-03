@@ -25,4 +25,5 @@ namespace _3n_1 {
             Console.ReadKey();
         }
     }
+
 }

@@ -21,8 +21,8 @@ namespace LoginRegister.Models {
         [ForeignKey("User")]
         [Column(Order = 2)]
         public int UserId { set; get; }
-        [Required]
-        public string reviewUsername { set; get; }
+        //[Required]
+        //public string reviewUsername { set; get; }
         [Required]
         public string reviewDesc { set; get; }
         //1-N UserModel-ReviewModel

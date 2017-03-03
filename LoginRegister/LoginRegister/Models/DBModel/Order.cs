@@ -17,12 +17,12 @@ namespace LoginRegister.Models {
         [Required]
         public int quantityOrder { set; get; }
         [Required]
-        public int totalOrderPrice { set; get; }
+        public double totalOrderPrice { set; get; }
         [Required]
         //[ForeignKey("User")]
         public int UserId { set; get; }
-        [Required]
-        public string orderUsername{ set; get; }
+        //[Required]
+        //public string orderUsername{ set; get; }
         //N-1 OrderModel-OrderProductModel
         public virtual ICollection<OrderProduct> OrderProducts { set; get; }
         //1-N UserModel-OrderModel

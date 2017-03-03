@@ -8,6 +8,7 @@ namespace LoginRegister.Models {
     public class ShopDBContext : DbContext {
         public ShopDBContext() : base("name=UserDBContext") {
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+
         }
         public DbSet<User> User { get; set; }
         public DbSet<Product> Product { set; get; }
@@ -19,6 +20,6 @@ namespace LoginRegister.Models {
         public DbSet<ProductCategory> ProductCategory { set; get; }
         public DbSet<ReviewProduct> ReviewProduct { set; get; }
         public DbSet<UserInfo> UserInfo { set; get; }
-
+        
     }
 }
