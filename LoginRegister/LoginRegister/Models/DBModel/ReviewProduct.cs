@@ -8,7 +8,7 @@ using System.Web;
 namespace LoginRegister.Models {
     public class ReviewProduct {
         [Required]
-        public int reviewId { set; get; }
+        public int ReviewProductId { set; get; }
         [Required]
         [Key]
         [ForeignKey("Product")]

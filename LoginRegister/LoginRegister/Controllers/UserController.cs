@@ -11,7 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using LoginRegister.Models;
 using System.Threading;
-
+using LoginRegister.Models.DTO;
 namespace LoginRegister.Controllers
 {
     public class UserController : ApiController
@@ -20,23 +20,63 @@ namespace LoginRegister.Controllers
 
         // GET: api/User
         [Authentication]
+        [Route("normal")]
         public IQueryable<User> GetUserModels() {
             return db.User;
         }
+        // GET: api/User
+        [Authentication]
+        [Route("new")]
+        public IQueryable<UserDTO> GetUser() {
 
-        //// GET: api/User/5
-        //[ResponseType(typeof(UserModel))]
-        //[Authentication]
-        //public async Task<IHttpActionResult> GetUserModel(string id)
-        //{
-        //    UserModel userModel = await db.UserModels.FindAsync(id);
-        //    if (userModel == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var user = from x in db.User
+                       select new UserDTO() {
+                           UserId = x.UserId,
+                           username = x.username,
+                           password = x.password,
+                           name = x.name,
+                           lastName = x.lastName,
+                           surname = x.surname,
+                           age = x.age,
+                           email = x.email,
+                           regDate = x.regDate,
+                           userType = x.userType,
+                           userInfo = 
+                               new UserInfoDTO {
+                                   adress =x.UserInfo.adress,
+                                   city = x.UserInfo.city,
+                                   zip = x.UserInfo.zip,
+                                   country = x.UserInfo.country,
+                                   phone = x.UserInfo.phone,
+                               }
+                               //x.UserInfo.adress,
+                               //x.UserInfo.city,
+                               //x.UserInfo.zip,
+                               //x.UserInfo.country,
+                               //x.UserInfo.phone,
+                            
 
-        //    return Ok(userModel);
-        //}
+                        };
+
+            return user;
+        }
+
+
+
+
+
+        // GET: api/User/5
+        [ResponseType(typeof(User))]
+        [Authentication]
+        public async Task<IHttpActionResult> GetUserModel(int id) {
+            User userModel = await db.User.FindAsync(id);
+            if (userModel == null) {
+                return NotFound();
+            }
+
+            return Ok(userModel);
+        }
+
         [Authentication]
         public HttpResponseMessage Get(string usr) {
             return Request.CreateResponse(HttpStatusCode.OK, Thread.CurrentPrincipal.Identity.Name);
@@ -58,7 +98,7 @@ namespace LoginRegister.Controllers
             //{
             //    return BadRequest();
             //}
-            var user = db.User.Find(modifyUserModel.username);
+            var user = db.User.Find(id);
             if (user.password == modifyUserModel.curPassword) {
                 user.password = modifyUserModel.newPassword;
             } else {

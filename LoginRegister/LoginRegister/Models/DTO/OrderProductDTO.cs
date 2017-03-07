@@ -8,6 +8,6 @@ namespace LoginRegister.Models.DTO {
         public int OrderProductId { set; get; }
         public int ProductId { set; get; }
         public int OrderId { set; get; }
-        public ICollection<ProductDTO> Product { set; get; }
+        public /*ICollection<ProductDTO>*/ ProductDTO Product { set; get; }
     }
 }

@@ -6,10 +6,10 @@ using System.Web;
 
 namespace LoginRegister.Models {
     public class OrderStatus {
-        [Required]
-        //[Key]
-        public int OrderStatusId { set; get; }
-        [Required]
+        //[Required]
+        ////[Key]
+        //public int OrderStatusId { set; get; }
+        [Required,Key]
         public int orderStatusCod{ set; get; }
         [Required]
         public string orderStatusDesc { set; get; }

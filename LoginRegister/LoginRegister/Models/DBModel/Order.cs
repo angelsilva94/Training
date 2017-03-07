@@ -12,7 +12,7 @@ namespace LoginRegister.Models {
         public int OrderId { set; get; }
         [Required]
         public DateTime purchaseDate { set; get; }
-        [Required]
+        [Required,ForeignKey("OrderStatus")]
         public int orderStatusCode{ set; get; }
         [Required]
         public int quantityOrder { set; get; }
@@ -28,5 +28,7 @@ namespace LoginRegister.Models {
         //1-N UserModel-OrderModel
         //[ForeignKey("orderUsername")]
         public virtual User User { set; get; }
+        public virtual OrderStatus OrderStatus { set; get; }
+
     }
 }

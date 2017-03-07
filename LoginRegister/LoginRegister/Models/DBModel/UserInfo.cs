@@ -8,12 +8,12 @@ using System.Web;
 namespace LoginRegister.Models {
     public class UserInfo {
         
-        public int UserInfoId { set; get; }
+        //public int UserInfoId { set; get; }
         //[ForeignKey("User")]
         [Key, ForeignKey("User")]
         public int UserId { set; get; }
-        [Required]
-        public string username { set; get; }
+        //[Required]
+        //public string username { set; get; }
         [Required]
         public string phone{ set; get; }
         [Required]

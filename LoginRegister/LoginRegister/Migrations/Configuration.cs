@@ -3,6 +3,7 @@ namespace LoginRegister.Migrations
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.IO;
     using System.Linq;
 
     internal sealed class Configuration : DbMigrationsConfiguration<LoginRegister.Models.ShopDBContext>
@@ -26,6 +27,13 @@ namespace LoginRegister.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            var sql = Directory.GetFiles("C:\\Users\\Angel.silva\\Source\\Repos\\SterlingMomentum\\LoginRegister\\LoginRegister\\DBMockData").OrderBy(x=>x);
+            foreach (string item in sql) {
+                context.Database.ExecuteSqlCommand(File.ReadAllText(item));
+            }
+            //context.Database.ExecuteSqlCommand(File.ReadAllText("C:\\Users\\Angel.silva\\Source\\Repos\\SterlingMomentum\\LoginRegister\\LoginRegister\\DBMockData\\" + "01Brands.sql"));
+
+
         }
     }
 }

@@ -43,24 +43,11 @@ namespace LoginRegister.Controllers
                         select new OrderDTO {
                             OrderId = x.OrderId,
                             UserId = x.UserId,
-                            orderStatusCode = x.orderStatusCode,
-                            OrderProducts = new List<OrderProductDTO> {
-                                new OrderProductDTO {
-                                   OrderId = x.OrderProducts.Select(y => y.OrderId).FirstOrDefault(),
-                                   OrderProductId = x.OrderProducts.Select(y => y.OrderProductId).FirstOrDefault(),
-                                   ProductId = x.OrderProducts.Select(y => y.ProductId).FirstOrDefault(),
-                                   Product = new List<ProductDTO> {
-                                       new ProductDTO {
-                                           productDesc = x.OrderProducts.Select(y=>y.Product.productDesc).FirstOrDefault(),
-                                           ProductId = x.OrderProducts.Select(y=>y.Product.ProductId).FirstOrDefault(),
-                                           productName = x.OrderProducts.Select(y=>y.Product.productName).FirstOrDefault(),
-                                           productPrice = x.OrderProducts.Select(y=>y.Product.productPrice).FirstOrDefault()
-                                       }
-                                   }
-                                }
-
-                            },
-
+                            orderStatusCode = x.orderStatusCode
+                            //OrderProducts = x.OrderProducts.Select(x=>
+                            //new OrderProductDTO { }
+                            //)
+                            ,
                             purchaseDate = x.purchaseDate,
                             quantityOrder = x.quantityOrder,
                             totalOrderPrice = x.totalOrderPrice,
@@ -74,7 +61,6 @@ namespace LoginRegister.Controllers
                                     zip  = x.User.UserInfo.zip
                                 }
                             }
-
                         };
             return Ok(order);
         }
