@@ -7,7 +7,7 @@ namespace LoginRegister.Models {
 
     public class Order {
 
-        [Required]
+        //[Required]
         //[Key]
         public int OrderId { set; get; }
 

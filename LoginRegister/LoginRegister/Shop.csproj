@@ -241,9 +241,17 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReviewProductsController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
-    <Compile Include="Migrations\201703072222049_Initial.cs" />
-    <Compile Include="Migrations\201703072222049_Initial.Designer.cs">
-      <DependentUpon>201703072222049_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201703081414313_1.0.cs" />
+    <Compile Include="Migrations\201703081414313_1.0.Designer.cs">
+      <DependentUpon>201703081414313_1.0.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703081551321_1.1.cs" />
+    <Compile Include="Migrations\201703081551321_1.1.Designer.cs">
+      <DependentUpon>201703081551321_1.1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703081600413_1.2.cs" />
+    <Compile Include="Migrations\201703081600413_1.2.Designer.cs">
+      <DependentUpon>201703081600413_1.2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DBModel\AddUserInfo.cs" />
@@ -363,8 +371,14 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703072222049_Initial.resx">
-      <DependentUpon>201703072222049_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703081414313_1.0.resx">
+      <DependentUpon>201703081414313_1.0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703081551321_1.1.resx">
+      <DependentUpon>201703081551321_1.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703081600413_1.2.resx">
+      <DependentUpon>201703081600413_1.2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

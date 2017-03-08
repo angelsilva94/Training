@@ -35,6 +35,7 @@ namespace LoginRegister.Controllers {
 
         //    return Ok(order);
         //
+        [ResponseType(typeof(OrderDTO))]
         public async Task<IHttpActionResult> GetOrder() {
             var order = from x in db.Order
                         select new OrderDTO {
@@ -44,19 +45,30 @@ namespace LoginRegister.Controllers {
                             //OrderProducts = x.OrderProducts.Select(x=>
                             //new OrderProductDTO { }
                             //)
-                            OrderProducts = new List<OrderProductDTO> {
-                                new OrderProductDTO {
-                                    OrderId = x.OrderProducts.Select(y =>y.OrderId).FirstOrDefault(),
-                                    OrderProductId = x.OrderProducts.Select(y =>y.OrderProductId).FirstOrDefault(),
-                                    ProductId = x.OrderProducts.Select(y =>y.ProductId).FirstOrDefault(),
-                                    Product = new ProductDTO() {
-                                        productDesc = x.OrderProducts.Select(y =>y.Product.productDesc).FirstOrDefault(),
-                                        ProductId = x.OrderProducts.Select(y =>y.Product.ProductId).FirstOrDefault(),
-                                        productName = x.OrderProducts.Select(y =>y.Product.productName).FirstOrDefault(),
-                                        productPrice = x.OrderProducts.Select(y =>y.Product.productPrice).FirstOrDefault(),
-                                    }
+                            //OrderProducts = new List<OrderProductDTO> {
+                            //    new OrderProductDTO {
+                            //        OrderId = x.OrderProducts.Select(y =>y.OrderId).FirstOrDefault(),
+                            //        OrderProductId = x.OrderProducts.Select(y =>y.OrderProductId).FirstOrDefault(),
+                            //        ProductId = x.OrderProducts.Select(y =>y.ProductId).FirstOrDefault(),
+                            //        Product = new ProductDTO() {
+                            //            productDesc = x.OrderProducts.Select(y =>y.Product.productDesc).FirstOrDefault(),
+                            //            ProductId = x.OrderProducts.Select(y =>y.Product.ProductId).FirstOrDefault(),
+                            //            productName = x.OrderProducts.Select(y =>y.Product.productName).FirstOrDefault(),
+                            //            productPrice = x.OrderProducts.Select(y =>y.Product.productPrice).FirstOrDefault(),
+                            //        }
+                            //    }
+                            //}
+                            OrderProducts = x.OrderProducts.Select(op => new OrderProductDTO {
+                                OrderId = op.OrderId,
+                                OrderProductId = op.OrderProductId,
+                                Product =  new ProductDTO {
+                                    productDesc = op.Product.productDesc,
+                                    ProductId = op.Product.ProductId,
+                                    productName = op.Product.productName,
+                                    productPrice = op.Product.productPrice
                                 }
-                            },
+                                //etc
+                            }).ToList(),
                             purchaseDate = x.purchaseDate,
                             quantityOrder = x.quantityOrder,
                             totalOrderPrice = x.totalOrderPrice,
@@ -72,6 +84,49 @@ namespace LoginRegister.Controllers {
                             }
                         };
             return Ok(order);
+        }
+
+        [Authentication]
+        [Route("api/getOrder/search")]
+        [ResponseType(typeof(OrderDTO))]
+        public async Task<IHttpActionResult> GetOrder(int id) {
+            var order = await db.Order.Include(x => x.OrderId).Select(x =>
+              new OrderDTO {
+                  OrderId = x.OrderId,
+                  OrderProducts = x.OrderProducts.Select(op => new OrderProductDTO {
+                      OrderId = op.OrderId,
+                      OrderProductId = op.OrderProductId,
+                      Product = new ProductDTO {
+                          productDesc = op.Product.productDesc,
+                          ProductId = op.Product.ProductId,
+                          productName = op.Product.productName,
+                          productPrice = op.Product.productPrice
+                      }
+                      //etc
+                  }).ToList(),
+                  orderStatusCode = x.orderStatusCode,
+                  purchaseDate = x.purchaseDate,
+                  quantityOrder = x.quantityOrder,
+                  totalOrderPrice = x.totalOrderPrice,
+                  User = new UserDTO {
+                      UserId = x.UserId,
+                      username = x.User.username,
+                      userInfo = new UserInfoDTO {
+                          adress = x.User.UserInfo.adress,
+                          city = x.User.UserInfo.city,
+                          country = x.User.UserInfo.country,
+                          zip = x.User.UserInfo.zip
+                      }
+                  }
+              }).SingleOrDefaultAsync(x => x.OrderId == id);
+
+            if (order == null) {
+                return NotFound();
+            } else {
+                return Ok(order);
+            }
+
+            
         }
 
         // PUT: api/Orders/5
@@ -102,6 +157,7 @@ namespace LoginRegister.Controllers {
 
         // POST: api/Orders
         [ResponseType(typeof(Order))]
+        [Authentication]
         public async Task<IHttpActionResult> PostOrder(Order order) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

@@ -4,7 +4,7 @@ namespace LoginRegister.Models {
 
     public class OrderProduct {
 
-        [Required]
+        //[Required]
         //[Key]
         public int OrderProductId { set; get; }
 
