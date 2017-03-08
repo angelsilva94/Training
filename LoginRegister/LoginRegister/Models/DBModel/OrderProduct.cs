@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LoginRegister.Models {
+
     public class OrderProduct {
+
         [Required]
         //[Key]
         public int OrderProductId { set; get; }
+
         //fk key
         [Required]
         //[ForeignKey("Product")]
         public int ProductId { set; get; }
+
         [Required]
         //[ForeignKey("Order")]
         //fk
@@ -26,6 +25,5 @@ namespace LoginRegister.Models {
         //1-N OrderModel-OrderProductModel
         //[ForeignKey("orderId")]
         public virtual Order Order { set; get; }
-
     }
 }

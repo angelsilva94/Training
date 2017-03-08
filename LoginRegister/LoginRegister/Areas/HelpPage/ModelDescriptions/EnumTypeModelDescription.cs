@@ -1,12 +1,10 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace LoginRegister.Areas.HelpPage.ModelDescriptions
-{
-    public class EnumTypeModelDescription : ModelDescription
-    {
-        public EnumTypeModelDescription()
-        {
+namespace LoginRegister.Areas.HelpPage.ModelDescriptions {
+
+    public class EnumTypeModelDescription : ModelDescription {
+
+        public EnumTypeModelDescription() {
             Values = new Collection<EnumValueDescription>();
         }
 

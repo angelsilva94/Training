@@ -1,6 +1,5 @@
-namespace LoginRegister.Areas.HelpPage.ModelDescriptions
-{
-    public class DictionaryModelDescription : KeyValuePairModelDescription
-    {
+namespace LoginRegister.Areas.HelpPage.ModelDescriptions {
+
+    public class DictionaryModelDescription : KeyValuePairModelDescription {
     }
 }

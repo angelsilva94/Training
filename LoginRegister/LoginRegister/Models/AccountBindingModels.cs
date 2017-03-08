@@ -1,20 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 
-namespace LoginRegister.Models
-{
+namespace LoginRegister.Models {
     // Models used as parameters to AccountController actions.
 
-    public class AddExternalLoginBindingModel
-    {
+    public class AddExternalLoginBindingModel {
+
         [Required]
         [Display(Name = "External access token")]
         public string ExternalAccessToken { get; set; }
     }
 
-    public class ChangePasswordBindingModel
-    {
+    public class ChangePasswordBindingModel {
+
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Current password")]
@@ -32,8 +30,8 @@ namespace LoginRegister.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class RegisterBindingModel
-    {
+    public class RegisterBindingModel {
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -50,15 +48,15 @@ namespace LoginRegister.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class RegisterExternalBindingModel
-    {
+    public class RegisterExternalBindingModel {
+
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
-    public class RemoveLoginBindingModel
-    {
+    public class RemoveLoginBindingModel {
+
         [Required]
         [Display(Name = "Login provider")]
         public string LoginProvider { get; set; }
@@ -68,8 +66,8 @@ namespace LoginRegister.Models
         public string ProviderKey { get; set; }
     }
 
-    public class SetPasswordBindingModel
-    {
+    public class SetPasswordBindingModel {
+
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]

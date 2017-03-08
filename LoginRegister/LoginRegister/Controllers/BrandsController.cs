@@ -1,35 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using LoginRegister.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using LoginRegister.Models;
 
-namespace LoginRegister.Controllers
-{
-    public class BrandsController : ApiController
-    {
+namespace LoginRegister.Controllers {
+
+    public class BrandsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/Brands
-        public IQueryable<Brand> GetBrand()
-        {
+        public IQueryable<Brand> GetBrand() {
             return db.Brand;
         }
 
         // GET: api/Brands/5
         [ResponseType(typeof(Brand))]
-        public async Task<IHttpActionResult> GetBrand(int id)
-        {
+        public async Task<IHttpActionResult> GetBrand(int id) {
             Brand brand = await db.Brand.FindAsync(id);
-            if (brand == null)
-            {
+            if (brand == null) {
                 return NotFound();
             }
 
@@ -38,32 +30,23 @@ namespace LoginRegister.Controllers
 
         // PUT: api/Brands/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutBrand(int id, Brand brand)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PutBrand(int id, Brand brand) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            if (id != brand.BrandId)
-            {
+            if (id != brand.BrandId) {
                 return BadRequest();
             }
 
             db.Entry(brand).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!BrandExists(id))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!BrandExists(id)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -73,10 +56,8 @@ namespace LoginRegister.Controllers
 
         // POST: api/Brands
         [ResponseType(typeof(Brand))]
-        public async Task<IHttpActionResult> PostBrand(Brand brand)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PostBrand(Brand brand) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
@@ -88,11 +69,9 @@ namespace LoginRegister.Controllers
 
         // DELETE: api/Brands/5
         [ResponseType(typeof(Brand))]
-        public async Task<IHttpActionResult> DeleteBrand(int id)
-        {
+        public async Task<IHttpActionResult> DeleteBrand(int id) {
             Brand brand = await db.Brand.FindAsync(id);
-            if (brand == null)
-            {
+            if (brand == null) {
                 return NotFound();
             }
 
@@ -102,17 +81,14 @@ namespace LoginRegister.Controllers
             return Ok(brand);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool BrandExists(int id)
-        {
+        private bool BrandExists(int id) {
             return db.Brand.Count(e => e.BrandId == id) > 0;
         }
     }

@@ -1,9 +1,8 @@
 using System;
 
-namespace LoginRegister.Areas.HelpPage.ModelDescriptions
-{
-    public class ParameterAnnotation
-    {
+namespace LoginRegister.Areas.HelpPage.ModelDescriptions {
+
+    public class ParameterAnnotation {
         public Attribute AnnotationAttribute { get; set; }
 
         public string Documentation { get; set; }

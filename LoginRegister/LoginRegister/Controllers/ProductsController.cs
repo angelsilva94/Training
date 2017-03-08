@@ -1,35 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using LoginRegister.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using LoginRegister.Models;
 
-namespace LoginRegister.Controllers
-{
-    public class ProductsController : ApiController
-    {
+namespace LoginRegister.Controllers {
+
+    public class ProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/Products
-        public IQueryable<Product> GetProduct()
-        {
+        public IQueryable<Product> GetProduct() {
             return db.Product;
         }
 
         // GET: api/Products/5
         [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> GetProduct(int id)
-        {
+        public async Task<IHttpActionResult> GetProduct(int id) {
             Product product = await db.Product.FindAsync(id);
-            if (product == null)
-            {
+            if (product == null) {
                 return NotFound();
             }
 
@@ -38,32 +30,23 @@ namespace LoginRegister.Controllers
 
         // PUT: api/Products/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutProduct(int id, Product product)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PutProduct(int id, Product product) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            if (id != product.ProductId)
-            {
+            if (id != product.ProductId) {
                 return BadRequest();
             }
 
             db.Entry(product).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(id))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!ProductExists(id)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -73,10 +56,8 @@ namespace LoginRegister.Controllers
 
         // POST: api/Products
         [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> PostProduct(Product product)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PostProduct(Product product) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
@@ -88,11 +69,9 @@ namespace LoginRegister.Controllers
 
         // DELETE: api/Products/5
         [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> DeleteProduct(int id)
-        {
+        public async Task<IHttpActionResult> DeleteProduct(int id) {
             Product product = await db.Product.FindAsync(id);
-            if (product == null)
-            {
+            if (product == null) {
                 return NotFound();
             }
 
@@ -102,17 +81,14 @@ namespace LoginRegister.Controllers
             return Ok(product);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool ProductExists(int id)
-        {
+        private bool ProductExists(int id) {
             return db.Product.Count(e => e.ProductId == id) > 0;
         }
     }

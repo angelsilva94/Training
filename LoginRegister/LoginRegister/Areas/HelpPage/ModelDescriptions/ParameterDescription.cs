@@ -1,12 +1,10 @@
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace LoginRegister.Areas.HelpPage.ModelDescriptions
-{
-    public class ParameterDescription
-    {
-        public ParameterDescription()
-        {
+namespace LoginRegister.Areas.HelpPage.ModelDescriptions {
+
+    public class ParameterDescription {
+
+        public ParameterDescription() {
             Annotations = new Collection<ParameterAnnotation>();
         }
 

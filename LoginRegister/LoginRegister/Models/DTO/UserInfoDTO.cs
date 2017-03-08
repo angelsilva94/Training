@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿namespace LoginRegister.Models.DTO {
 
-namespace LoginRegister.Models.DTO {
     public class UserInfoDTO {
         public string phone { set; get; }
         public string adress { set; get; }

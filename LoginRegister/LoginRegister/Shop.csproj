@@ -241,41 +241,9 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\ReviewProductsController.cs" />
     <Compile Include="Controllers\UserInfoController.cs" />
-    <Compile Include="Migrations\201703011750065_initial.cs" />
-    <Compile Include="Migrations\201703011750065_initial.Designer.cs">
-      <DependentUpon>201703011750065_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703021536274_modelChange.cs" />
-    <Compile Include="Migrations\201703021536274_modelChange.Designer.cs">
-      <DependentUpon>201703021536274_modelChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703021725111_test.cs" />
-    <Compile Include="Migrations\201703021725111_test.Designer.cs">
-      <DependentUpon>201703021725111_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703021752503_1.1.cs" />
-    <Compile Include="Migrations\201703021752503_1.1.Designer.cs">
-      <DependentUpon>201703021752503_1.1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703031634377_fix.cs" />
-    <Compile Include="Migrations\201703031634377_fix.Designer.cs">
-      <DependentUpon>201703031634377_fix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703031740590_1.2.cs" />
-    <Compile Include="Migrations\201703031740590_1.2.Designer.cs">
-      <DependentUpon>201703031740590_1.2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703031744257_1.2.1.cs" />
-    <Compile Include="Migrations\201703031744257_1.2.1.Designer.cs">
-      <DependentUpon>201703031744257_1.2.1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703071447095_1.3.cs" />
-    <Compile Include="Migrations\201703071447095_1.3.Designer.cs">
-      <DependentUpon>201703071447095_1.3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703071458300_1.3.1.cs" />
-    <Compile Include="Migrations\201703071458300_1.3.1.Designer.cs">
-      <DependentUpon>201703071458300_1.3.1.cs</DependentUpon>
+    <Compile Include="Migrations\201703072222049_Initial.cs" />
+    <Compile Include="Migrations\201703072222049_Initial.Designer.cs">
+      <DependentUpon>201703072222049_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DBModel\AddUserInfo.cs" />
@@ -323,8 +291,8 @@
     <Content Include="DBMockData\01Brands.sql" />
     <Content Include="DBMockData\04UserInfoes.sql" />
     <Content Include="DBMockData\03Users.sql" />
-    <Content Include="DBMockData\07OrderProducts.sql" />
     <Content Include="DBMockData\00sql.sql" />
+    <Content Include="DBMockData\07OrderProducts.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -395,32 +363,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703011750065_initial.resx">
-      <DependentUpon>201703011750065_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703021536274_modelChange.resx">
-      <DependentUpon>201703021536274_modelChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703021725111_test.resx">
-      <DependentUpon>201703021725111_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703021752503_1.1.resx">
-      <DependentUpon>201703021752503_1.1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703031634377_fix.resx">
-      <DependentUpon>201703031634377_fix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703031740590_1.2.resx">
-      <DependentUpon>201703031740590_1.2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703031744257_1.2.1.resx">
-      <DependentUpon>201703031744257_1.2.1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703071447095_1.3.resx">
-      <DependentUpon>201703071447095_1.3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703071458300_1.3.1.resx">
-      <DependentUpon>201703071458300_1.3.1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703072222049_Initial.resx">
+      <DependentUpon>201703072222049_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

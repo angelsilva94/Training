@@ -1,21 +1,18 @@
-﻿using System;
+﻿using LoginRegister.Models;
+using LoginRegister.Models.DTO;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using LoginRegister.Models;
-using LoginRegister.Models.DTO;
 
-namespace LoginRegister.Controllers
-{
-    public class OrdersController : ApiController
-    {
+namespace LoginRegister.Controllers {
+
+    public class OrdersController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         //// GET: api/Orders
@@ -43,11 +40,23 @@ namespace LoginRegister.Controllers
                         select new OrderDTO {
                             OrderId = x.OrderId,
                             UserId = x.UserId,
-                            orderStatusCode = x.orderStatusCode
+                            orderStatusCode = x.orderStatusCode,
                             //OrderProducts = x.OrderProducts.Select(x=>
                             //new OrderProductDTO { }
                             //)
-                            ,
+                            OrderProducts = new List<OrderProductDTO> {
+                                new OrderProductDTO {
+                                    OrderId = x.OrderProducts.Select(y =>y.OrderId).FirstOrDefault(),
+                                    OrderProductId = x.OrderProducts.Select(y =>y.OrderProductId).FirstOrDefault(),
+                                    ProductId = x.OrderProducts.Select(y =>y.ProductId).FirstOrDefault(),
+                                    Product = new ProductDTO() {
+                                        productDesc = x.OrderProducts.Select(y =>y.Product.productDesc).FirstOrDefault(),
+                                        ProductId = x.OrderProducts.Select(y =>y.Product.ProductId).FirstOrDefault(),
+                                        productName = x.OrderProducts.Select(y =>y.Product.productName).FirstOrDefault(),
+                                        productPrice = x.OrderProducts.Select(y =>y.Product.productPrice).FirstOrDefault(),
+                                    }
+                                }
+                            },
                             purchaseDate = x.purchaseDate,
                             quantityOrder = x.quantityOrder,
                             totalOrderPrice = x.totalOrderPrice,
@@ -57,43 +66,33 @@ namespace LoginRegister.Controllers
                                 userInfo = new UserInfoDTO {
                                     adress = x.User.UserInfo.adress,
                                     city = x.User.UserInfo.city,
-                                    country= x.User.UserInfo.country,
-                                    zip  = x.User.UserInfo.zip
+                                    country = x.User.UserInfo.country,
+                                    zip = x.User.UserInfo.zip
                                 }
                             }
                         };
             return Ok(order);
         }
 
-
         // PUT: api/Orders/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutOrder(int id, Order order)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PutOrder(int id, Order order) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            if (id != order.OrderId)
-            {
+            if (id != order.OrderId) {
                 return BadRequest();
             }
 
             db.Entry(order).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrderExists(id))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!OrderExists(id)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -103,10 +102,8 @@ namespace LoginRegister.Controllers
 
         // POST: api/Orders
         [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> PostOrder(Order order)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PostOrder(Order order) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
@@ -118,11 +115,9 @@ namespace LoginRegister.Controllers
 
         // DELETE: api/Orders/5
         [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> DeleteOrder(int id)
-        {
+        public async Task<IHttpActionResult> DeleteOrder(int id) {
             Order order = await db.Order.FindAsync(id);
-            if (order == null)
-            {
+            if (order == null) {
                 return NotFound();
             }
 
@@ -132,17 +127,14 @@ namespace LoginRegister.Controllers
             return Ok(order);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool OrderExists(int id)
-        {
+        private bool OrderExists(int id) {
             return db.Order.Count(e => e.OrderId == id) > 0;
         }
     }

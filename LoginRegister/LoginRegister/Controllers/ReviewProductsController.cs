@@ -1,35 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using LoginRegister.Models;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using LoginRegister.Models;
 
-namespace LoginRegister.Controllers
-{
-    public class ReviewProductsController : ApiController
-    {
+namespace LoginRegister.Controllers {
+
+    public class ReviewProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/ReviewProducts
-        public IQueryable<ReviewProduct> GetReviewProduct()
-        {
+        public IQueryable<ReviewProduct> GetReviewProduct() {
             return db.ReviewProduct;
         }
 
         // GET: api/ReviewProducts/5
         [ResponseType(typeof(ReviewProduct))]
-        public async Task<IHttpActionResult> GetReviewProduct(int id)
-        {
+        public async Task<IHttpActionResult> GetReviewProduct(int id) {
             ReviewProduct reviewProduct = await db.ReviewProduct.FindAsync(id);
-            if (reviewProduct == null)
-            {
+            if (reviewProduct == null) {
                 return NotFound();
             }
 
@@ -38,32 +30,23 @@ namespace LoginRegister.Controllers
 
         // PUT: api/ReviewProducts/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutReviewProduct(int id, ReviewProduct reviewProduct)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PutReviewProduct(int id, ReviewProduct reviewProduct) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            if (id != reviewProduct.ProductId)
-            {
+            if (id != reviewProduct.ProductId) {
                 return BadRequest();
             }
 
             db.Entry(reviewProduct).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ReviewProductExists(id))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!ReviewProductExists(id)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -73,27 +56,19 @@ namespace LoginRegister.Controllers
 
         // POST: api/ReviewProducts
         [ResponseType(typeof(ReviewProduct))]
-        public async Task<IHttpActionResult> PostReviewProduct(ReviewProduct reviewProduct)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PostReviewProduct(ReviewProduct reviewProduct) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
             db.ReviewProduct.Add(reviewProduct);
 
-            try
-            {
+            try {
                 await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (ReviewProductExists(reviewProduct.ProductId))
-                {
+            } catch (DbUpdateException) {
+                if (ReviewProductExists(reviewProduct.ProductId)) {
                     return Conflict();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -103,11 +78,9 @@ namespace LoginRegister.Controllers
 
         // DELETE: api/ReviewProducts/5
         [ResponseType(typeof(ReviewProduct))]
-        public async Task<IHttpActionResult> DeleteReviewProduct(int id)
-        {
+        public async Task<IHttpActionResult> DeleteReviewProduct(int id) {
             ReviewProduct reviewProduct = await db.ReviewProduct.FindAsync(id);
-            if (reviewProduct == null)
-            {
+            if (reviewProduct == null) {
                 return NotFound();
             }
 
@@ -117,17 +90,14 @@ namespace LoginRegister.Controllers
             return Ok(reviewProduct);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool ReviewProductExists(int id)
-        {
+        private bool ReviewProductExists(int id) {
             return db.ReviewProduct.Count(e => e.ProductId == id) > 0;
         }
     }

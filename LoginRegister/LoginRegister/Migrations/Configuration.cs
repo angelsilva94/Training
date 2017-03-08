@@ -1,23 +1,19 @@
-namespace LoginRegister.Migrations
-{
-    using System;
-    using System.Data.Entity;
+namespace LoginRegister.Migrations {
+
     using System.Data.Entity.Migrations;
     using System.IO;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<LoginRegister.Models.ShopDBContext>
-    {
-        public Configuration()
-        {
+    internal sealed class Configuration : DbMigrationsConfiguration<LoginRegister.Models.ShopDBContext> {
+
+        public Configuration() {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(LoginRegister.Models.ShopDBContext context)
-        {
+        protected override void Seed(LoginRegister.Models.ShopDBContext context) {
             //  This method will be called after migrating to the latest version.
 
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data. E.g.
             //
             //    context.People.AddOrUpdate(
@@ -27,13 +23,13 @@ namespace LoginRegister.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            var sql = Directory.GetFiles("C:\\Users\\Angel.silva\\Source\\Repos\\SterlingMomentum\\LoginRegister\\LoginRegister\\DBMockData").OrderBy(x=>x);
+            //var route = "C:\\Users\\Angel.silva\\Source\\Repos\\SterlingMomentum\\LoginRegister\\LoginRegister\\DBMockData";
+            var route = "C:\\Users\\Angel Silva\\Source\\Repos\\SterlingMomentum\\LoginRegister\\LoginRegister\\DBMockData";
+            var sql = Directory.GetFiles("C:\\Users\\Angel Silva\\Source\\Repos\\SterlingMomentum\\LoginRegister\\LoginRegister\\DBMockData").OrderBy(x => x);
             foreach (string item in sql) {
                 context.Database.ExecuteSqlCommand(File.ReadAllText(item));
             }
             //context.Database.ExecuteSqlCommand(File.ReadAllText("C:\\Users\\Angel.silva\\Source\\Repos\\SterlingMomentum\\LoginRegister\\LoginRegister\\DBMockData\\" + "01Brands.sql"));
-
-
         }
     }
 }

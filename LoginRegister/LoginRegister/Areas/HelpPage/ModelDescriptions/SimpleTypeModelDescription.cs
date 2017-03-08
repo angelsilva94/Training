@@ -1,6 +1,5 @@
-namespace LoginRegister.Areas.HelpPage.ModelDescriptions
-{
-    public class SimpleTypeModelDescription : ModelDescription
-    {
+namespace LoginRegister.Areas.HelpPage.ModelDescriptions {
+
+    public class SimpleTypeModelDescription : ModelDescription {
     }
 }

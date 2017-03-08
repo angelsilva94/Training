@@ -998,3 +998,4 @@ insert into Users (username, password, name, email, surname, lastName, age, regD
 insert into Users (username, password, name, email, surname, lastName, age, regDate, userType) values ('mmorganrp', 'kS8FcdqU2fb', 'Michael', 'mmorganrp@imdb.com', 'King', 'Morgan', 57, '2017-01-22 00:58:24', 0);
 insert into Users (username, password, name, email, surname, lastName, age, regDate, userType) values ('clarsonrq', 'JqTYRmM8V3', 'Carol', 'clarsonrq@purevolume.com', 'Meyer', 'Larson', 51, '2016-12-21 22:02:35', 0);
 insert into Users (username, password, name, email, surname, lastName, age, regDate, userType) values ('jowensrr', 'H4Rq7Mv', 'Jacqueline', 'jowensrr@netvibes.com', 'Harvey', 'Owens', 54, '2016-07-28 06:22:51', 0);
+insert into Users (username, password, name, email, surname, lastName, age, regDate, userType) values ('angelsilva94', 'pwd1234', 'Angel', 'angelsilva@correo.com', 'Silva', 'Borja', 22, '2016-07-28 06:22:51', 1);

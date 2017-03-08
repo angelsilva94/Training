@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LoginRegister.Models;
+using LoginRegister.Models.DTO;
 using System.Data;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using LoginRegister.Models;
-using System.Threading;
-using LoginRegister.Models.DTO;
-namespace LoginRegister.Controllers
-{
-    public class UserController : ApiController
-    {
+
+namespace LoginRegister.Controllers {
+
+    public class UserController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/User
@@ -24,11 +21,11 @@ namespace LoginRegister.Controllers
         public IQueryable<User> GetUserModels() {
             return db.User;
         }
+
         // GET: api/User
         [Authentication]
         [Route("new")]
         public IQueryable<UserDTO> GetUser() {
-
             var user = from x in db.User
                        select new UserDTO() {
                            UserId = x.UserId,
@@ -41,9 +38,9 @@ namespace LoginRegister.Controllers
                            email = x.email,
                            regDate = x.regDate,
                            userType = x.userType,
-                           userInfo = 
+                           userInfo =
                                new UserInfoDTO {
-                                   adress =x.UserInfo.adress,
+                                   adress = x.UserInfo.adress,
                                    city = x.UserInfo.city,
                                    zip = x.UserInfo.zip,
                                    country = x.UserInfo.country,
@@ -54,16 +51,10 @@ namespace LoginRegister.Controllers
                                //x.UserInfo.zip,
                                //x.UserInfo.country,
                                //x.UserInfo.phone,
-                            
-
-                        };
+                       };
 
             return user;
         }
-
-
-
-
 
         // GET: api/User/5
         [ResponseType(typeof(User))]
@@ -82,15 +73,11 @@ namespace LoginRegister.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, Thread.CurrentPrincipal.Identity.Name);
         }
 
-
-
         // PUT: api/User/5
         [Authentication]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutUserModel([FromBody]ModifyUserModel modifyUserModel,[FromUri]int id)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PutUserModel([FromBody]ModifyUserModel modifyUserModel, [FromUri]int id) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
@@ -104,22 +91,15 @@ namespace LoginRegister.Controllers
             } else {
                 return StatusCode(HttpStatusCode.NotAcceptable);
             }
-            
 
             //db.Entry(modifyUserModel).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserModelExists(modifyUserModel.username))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!UserModelExists(modifyUserModel.username)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -129,27 +109,19 @@ namespace LoginRegister.Controllers
 
         // POST: api/User
         [ResponseType(typeof(User))]
-        public async Task<IHttpActionResult> PostUserModel(User userModel)
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IHttpActionResult> PostUserModel(User userModel) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
             db.User.Add(userModel);
 
-            try
-            {
+            try {
                 await db.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserModelExists(userModel.username))
-                {
+            } catch (DbUpdateException) {
+                if (UserModelExists(userModel.username)) {
                     return Conflict();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -173,17 +145,14 @@ namespace LoginRegister.Controllers
         //    return Ok(userModel);
         //}
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool UserModelExists(string usr)
-        {
+        private bool UserModelExists(string usr) {
             return db.User.Count(e => e.username == usr) > 0;
         }
     }
