@@ -17,7 +17,7 @@ namespace Shop.Models.DBModel.DTO {
 
         //public int UserId { set; get; }
 
-        public ICollection<OrderProductDTO> OrderProducts { set; get; }
+        public ICollection<OrderDetailDTO> OrderDetails { set; get; }
 
         public UserDTO User { set; get; }
     }

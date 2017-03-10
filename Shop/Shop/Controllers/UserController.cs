@@ -110,6 +110,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/User
+        [Route("submit")]
         [ResponseType(typeof(User))]
         public async Task<IHttpActionResult> PostUserModel(User userModel) {
             if (!ModelState.IsValid) {

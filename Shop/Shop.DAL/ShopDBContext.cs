@@ -14,7 +14,7 @@ namespace LoginRegister.Models {
         public DbSet<Brand> Brand { set; get; }
         public DbSet<Category> Category { set; get; }
         public DbSet<Order> Order { set; get; }
-        public DbSet<OrderProduct> OrderProduct { set; get; }
+        public DbSet<OrderDetail> OrderDetails { set; get; }
         public DbSet<OrderStatus> OrderStatus { set; get; }
         public DbSet<ProductCategory> ProductCategory { set; get; }
         public DbSet<ReviewProduct> ReviewProduct { set; get; }

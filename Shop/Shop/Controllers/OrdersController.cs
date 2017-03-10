@@ -11,7 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
-
+    [RoutePrefix("Orders")]
     public class OrdersController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
@@ -42,25 +42,26 @@ namespace LoginRegister.Controllers {
                             OrderId = x.OrderId,
                             UserId = x.UserId,
                             orderStatusCode = x.orderStatusCode,
-                            //OrderProducts = x.OrderProducts.Select(x=>
+                            //OrderDetails = x.OrderDetails.Select(x=>
                             //new OrderProductDTO { }
                             //)
-                            //OrderProducts = new List<OrderProductDTO> {
+                            //OrderDetails = new List<OrderProductDTO> {
                             //    new OrderProductDTO {
-                            //        OrderId = x.OrderProducts.Select(y =>y.OrderId).FirstOrDefault(),
-                            //        OrderProductId = x.OrderProducts.Select(y =>y.OrderProductId).FirstOrDefault(),
-                            //        ProductId = x.OrderProducts.Select(y =>y.ProductId).FirstOrDefault(),
+                            //        OrderId = x.OrderDetails.Select(y =>y.OrderId).FirstOrDefault(),
+                            //        OrderDetailId = x.OrderDetails.Select(y =>y.OrderDetailId).FirstOrDefault(),
+                            //        ProductId = x.OrderDetails.Select(y =>y.ProductId).FirstOrDefault(),
                             //        Product = new ProductDTO() {
-                            //            productDesc = x.OrderProducts.Select(y =>y.Product.productDesc).FirstOrDefault(),
-                            //            ProductId = x.OrderProducts.Select(y =>y.Product.ProductId).FirstOrDefault(),
-                            //            productName = x.OrderProducts.Select(y =>y.Product.productName).FirstOrDefault(),
-                            //            productPrice = x.OrderProducts.Select(y =>y.Product.productPrice).FirstOrDefault(),
+                            //            productDesc = x.OrderDetails.Select(y =>y.Product.productDesc).FirstOrDefault(),
+                            //            ProductId = x.OrderDetails.Select(y =>y.Product.ProductId).FirstOrDefault(),
+                            //            productName = x.OrderDetails.Select(y =>y.Product.productName).FirstOrDefault(),
+                            //            productPrice = x.OrderDetails.Select(y =>y.Product.productPrice).FirstOrDefault(),
                             //        }
                             //    }
                             //}
-                            OrderProducts = x.OrderProducts.Select(op => new OrderProductDTO {
+                            OrderDetails = x.OrderDetails.Select(op => new OrderDetailDTO {
                                 OrderId = op.OrderId,
-                                OrderProductId = op.OrderProductId,
+                                OrderDetailId = op.OrderDetailId,
+                                ProductId = op.ProductId,
                                 Product = new ProductDTO {
                                     productDesc = op.Product.productDesc,
                                     ProductId = op.Product.ProductId,
@@ -96,9 +97,9 @@ namespace LoginRegister.Controllers {
             var order = await db.Order.Include(x => x.OrderId).Select(x =>
               new OrderDTO {
                   OrderId = x.OrderId,
-                  OrderProducts = x.OrderProducts.Select(op => new OrderProductDTO {
+                  OrderDetails = x.OrderDetails.Select(op => new OrderDetailDTO {
                       OrderId = op.OrderId,
-                      OrderProductId = op.OrderProductId,
+                      OrderDetailId = op.OrderDetailId,
                       Product = new ProductDTO {
                           productDesc = op.Product.productDesc,
                           ProductId = op.Product.ProductId,
@@ -159,7 +160,8 @@ namespace LoginRegister.Controllers {
 
         // POST: api/Orders
         [ResponseType(typeof(Order))]
-        [Authentication]
+        //[Authentication]
+        [Route("api/submit")]
         public async Task<IHttpActionResult> PostOrder(Order order) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

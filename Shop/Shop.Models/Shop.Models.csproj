@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBModel\Address.cs" />
     <Compile Include="DBModel\AddUserInfo.cs" />
     <Compile Include="DBModel\Brand.cs" />
     <Compile Include="DBModel\Category.cs" />
+    <Compile Include="DBModel\Interfaces\IAddress.cs" />
     <Compile Include="DBModel\Interfaces\IModifyUserModel.cs" />
     <Compile Include="DBModel\Interfaces\ICategory.cs" />
     <Compile Include="DBModel\Interfaces\IAddUserInfo.cs" />
@@ -56,18 +58,19 @@
     <Compile Include="DBModel\Interfaces\IProduct.cs" />
     <Compile Include="DBModel\Interfaces\IProductCategory.cs" />
     <Compile Include="DBModel\Interfaces\IReviewProduct.cs" />
+    <Compile Include="DBModel\Interfaces\IUserType.cs" />
     <Compile Include="DBModel\ModifyUserModel.cs" />
     <Compile Include="DBModel\Order.cs" />
-    <Compile Include="DBModel\OrderProduct.cs" />
+    <Compile Include="DBModel\OrderDetail.cs" />
     <Compile Include="DBModel\OrderStatus.cs" />
     <Compile Include="DBModel\Product.cs" />
     <Compile Include="DBModel\ProductCategory.cs" />
     <Compile Include="DBModel\ReviewProduct.cs" />
     <Compile Include="DBModel\User.cs" />
-    <Compile Include="DBModel\UserCredentials.cs" />
     <Compile Include="DBModel\UserInfo.cs" />
+    <Compile Include="DBModel\UserType.cs" />
     <Compile Include="DTO\OrderDTO.cs" />
-    <Compile Include="DTO\OrderProductDTO.cs" />
+    <Compile Include="DTO\OrderDetailDTO.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\UserInfoDTO.cs" />
