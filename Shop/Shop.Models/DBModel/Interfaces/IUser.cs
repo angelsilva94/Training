@@ -1,8 +1,8 @@
-﻿using LoginRegister.Models;
+﻿using Shop.Models.DBModel;
 using System;
 using System.Collections.Generic;
 
-namespace Shop.Models.DBModel {
+namespace Shop.Models.Interfaces {
 
     public interface IUser {
         int UserId { set; get; }

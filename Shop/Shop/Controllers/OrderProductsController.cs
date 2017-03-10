@@ -1,4 +1,5 @@
 ﻿using LoginRegister.Models;
+using Shop.Models.DBModel;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;

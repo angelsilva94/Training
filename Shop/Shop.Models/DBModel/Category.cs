@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Shop.Models.Interfaces;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LoginRegister.Models {
+namespace Shop.Models.DBModel {
 
     public class Category : ICategory {
 

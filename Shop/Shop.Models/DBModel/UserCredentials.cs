@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LoginRegister.Models.DBModel {
+namespace Shop.Models.DBModel {
 
     public class UserCredentials {
         public int UserCredentialsId { set; get; }

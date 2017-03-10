@@ -1,4 +1,6 @@
-﻿namespace LoginRegister.Models {
+﻿using Shop.Models.DBModel;
+
+namespace Shop.Models.Interfaces {
 
     public interface IReviewProduct {
         Product Product { get; set; }

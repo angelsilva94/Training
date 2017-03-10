@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Shop.Models.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LoginRegister.Models {
+namespace Shop.Models.DBModel {
 
     public class Order : IOrder {
 

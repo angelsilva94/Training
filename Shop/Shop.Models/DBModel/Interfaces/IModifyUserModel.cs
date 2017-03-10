@@ -1,4 +1,4 @@
-﻿namespace LoginRegister.Models {
+﻿namespace Shop.Models.Interfaces {
 
     public interface IModifyUserModel {
         string curPassword { get; set; }

@@ -1,4 +1,4 @@
-﻿namespace LoginRegister.Models {
+﻿namespace Shop.Models.Interfaces {
 
     public interface IAddUserInfo {
         string adress { get; set; }

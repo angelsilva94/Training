@@ -1,4 +1,6 @@
-﻿namespace LoginRegister.Models {
+﻿using Shop.Models.Interfaces;
+
+namespace Shop.Models.DBModel {
 
     public class AddUserInfo : IAddUserInfo {
         public string username { set; get; }

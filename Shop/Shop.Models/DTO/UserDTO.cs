@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace LoginRegister.Models.DTO {
+namespace Shop.Models.DBModel.DTO {
 
     public class UserDTO {
         public int UserId { set; get; }

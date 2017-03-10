@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using Shop.Models.DBModel;
+using System.Data.Entity;
 
 namespace LoginRegister.Models {
 

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Shop.Models.DBModel;
+using System;
 using System.Collections.Generic;
 
-namespace LoginRegister.Models {
+namespace Shop.Models.Interfaces {
 
     public interface IProduct {
         Brand Brand { get; set; }

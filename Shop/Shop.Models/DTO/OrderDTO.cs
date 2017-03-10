@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LoginRegister.Models.DTO {
+namespace Shop.Models.DBModel.DTO {
 
     public class OrderDTO {
         public int OrderId { set; get; }

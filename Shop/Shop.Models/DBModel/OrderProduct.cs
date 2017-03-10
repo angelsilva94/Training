@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Shop.Models.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
-namespace LoginRegister.Models {
+namespace Shop.Models.DBModel {
 
     public class OrderProduct : IOrderProduct {
 

@@ -1,7 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Shop.Models.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace LoginRegister.Models {
+namespace Shop.Models.DBModel {
 
     public class ProductCategory : IProductCategory {
 

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Shop.Models.DBModel;
+using System;
 using System.Collections.Generic;
 
-namespace LoginRegister.Models {
+namespace Shop.Models.Interfaces {
 
     public interface IOrder {
         int OrderId { get; set; }

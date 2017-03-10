@@ -1,4 +1,4 @@
-﻿namespace LoginRegister.Models.DTO {
+﻿namespace Shop.Models.DBModel.DTO {
 
     public class ProductDTO {
         public int ProductId { set; get; }

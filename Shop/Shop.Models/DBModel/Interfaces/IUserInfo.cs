@@ -1,6 +1,6 @@
-﻿using LoginRegister.Models;
+﻿using Shop.Models.DBModel;
 
-namespace Shop.Models.DBModel.Interfaces {
+namespace Shop.Models.Interfaces {
 
     public interface IUserInfo {
         int UserId { set; get; }

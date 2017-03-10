@@ -1,4 +1,6 @@
-﻿namespace LoginRegister.Models {
+﻿using Shop.Models.DBModel;
+
+namespace Shop.Models.Interfaces {
 
     public interface IProductCategory {
         Category Category { get; set; }

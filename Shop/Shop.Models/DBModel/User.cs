@@ -1,9 +1,10 @@
 ﻿using Shop.Models.DBModel;
+using Shop.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace LoginRegister.Models {
+namespace Shop.Models.DBModel {
 
     public class User : IUser {
         public int UserId { set; get; }
