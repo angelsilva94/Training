@@ -6,7 +6,7 @@ namespace Shop.Models.Interfaces {
 
     public interface IOrder {
         int OrderId { get; set; }
-        ICollection<OrderProduct> OrderProducts { get; set; }
+        ICollection<OrderDetail> OrderDetails { get; set; }
         OrderStatus OrderStatus { get; set; }
         int orderStatusCode { get; set; }
         DateTime purchaseDate { get; set; }

@@ -1,10 +1,9 @@
-﻿using Shop.Models.DBModel;
-
-namespace Shop.Models.Interfaces {
+﻿namespace Shop.Models.DBModel.Interfaces {
     public interface IUserType {
         string type { get; set; }
         string typeDesc { get; set; }
         User User { get; set; }
-        int UserTypeId { get; set; }
+        int UserId { get; set; }
+        
     }
 }

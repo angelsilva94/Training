@@ -1,4 +1,5 @@
-﻿using Shop.Models.Interfaces;
+﻿using Shop.Models.DBModel.Interfaces;
+using Shop.Models.DBModel.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -24,7 +25,7 @@ namespace Shop.Models.DBModel {
         public int UserId { set; get; }
 
         public virtual User User { set; get; }
-
+        
         public virtual ICollection<Order> Orders { set; get; }
     }
 }

@@ -45,5 +45,8 @@ namespace Shop.Models.DBModel {
 
         //1-N UserModel-OrderModel
         public virtual ICollection<Order> Orders { get; set; }
+
+        public virtual ICollection<Address> Address { set; get; }
+        public virtual ICollection<UserType> UserType { set; get; }
     }
 }

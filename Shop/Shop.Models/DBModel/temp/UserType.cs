@@ -1,4 +1,4 @@
-﻿using Shop.Models.Interfaces;
+﻿using Shop.Models.DBModel.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,14 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Shop.Models.DBModel {
-    public class UserType : IUserType {
-        
-        public int UserTypeId { set; get; }
+     public class UserType : IUserType {
+        [Key, ForeignKey("User")]
+        public int UserId { set; get; }
         [Required]
         public string type { set; get; }
         [Required]
         public string typeDesc { set; get; }
-        public int UserId { set; get; }
+        
 
         public virtual User User { set; get; }
 

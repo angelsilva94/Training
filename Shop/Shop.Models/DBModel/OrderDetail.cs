@@ -3,11 +3,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Shop.Models.DBModel {
 
-    public class OrderProduct : IOrderProduct {
+    public class OrderDetail : IOrderDetail {
 
         //[Required]
         //[Key]
-        public int OrderProductId { set; get; }
+        public int OrderDetailId { set; get; }
 
         //fk key
         [Required]

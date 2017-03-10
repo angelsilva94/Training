@@ -31,7 +31,7 @@ namespace Shop.Models.DBModel {
         //[Required]
         //public string orderUsername{ set; get; }
         //N-1 OrderModel-OrderProductModel
-        public virtual ICollection<OrderProduct> OrderProducts { set; get; }
+        public virtual ICollection<OrderDetail> OrderDetails { set; get; }
 
         //1-N UserModel-OrderModel
         //[ForeignKey("orderUsername")]

@@ -18,5 +18,7 @@ namespace Shop.Models.Interfaces {
         UserInfo UserInfo { set; get; }
         ICollection<ReviewProduct> ReviewProducts { get; set; }
         ICollection<Order> Orders { get; set; }
+        ICollection<Address> Address { set; get; }
+        ICollection<UserType> UserType { set; get; }
     }
 }
