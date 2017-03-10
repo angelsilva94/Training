@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace LoginRegister.Models {
+
     public interface IOrder {
         int OrderId { get; set; }
         ICollection<OrderProduct> OrderProducts { get; set; }

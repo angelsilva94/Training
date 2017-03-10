@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace LoginRegister.Models {
+
     public interface IProduct {
         Brand Brand { get; set; }
         int BrandId { get; set; }

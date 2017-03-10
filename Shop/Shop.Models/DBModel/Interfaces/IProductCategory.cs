@@ -1,4 +1,5 @@
 ﻿namespace LoginRegister.Models {
+
     public interface IProductCategory {
         Category Category { get; set; }
         int CategoryId { get; set; }

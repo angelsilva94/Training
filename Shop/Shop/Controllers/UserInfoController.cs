@@ -1,6 +1,5 @@
 ﻿using LoginRegister.Models;
 using LoginRegister.Models.DTO;
-using Shop.DAL;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;

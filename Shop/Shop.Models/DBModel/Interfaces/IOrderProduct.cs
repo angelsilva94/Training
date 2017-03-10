@@ -1,4 +1,5 @@
 ﻿namespace LoginRegister.Models {
+
     public interface IOrderProduct {
         Order Order { get; set; }
         int OrderId { get; set; }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace LoginRegister.Models {
+
     public interface ICategory {
         string categoryDesc { get; set; }
         int CategoryId { get; set; }

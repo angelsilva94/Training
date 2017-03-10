@@ -1,4 +1,5 @@
 ﻿namespace LoginRegister.Models {
+
     public interface IAddUserInfo {
         string adress { get; set; }
         string city { get; set; }

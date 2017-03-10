@@ -50,13 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Migrations\201703091729321_InitialCreate.cs" />
-    <Compile Include="Migrations\201703091729321_InitialCreate.Designer.cs">
-      <DependentUpon>201703091729321_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703091751256_Initial.cs" />
-    <Compile Include="Migrations\201703091751256_Initial.Designer.cs">
-      <DependentUpon>201703091751256_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201703092144460_1.cs" />
+    <Compile Include="Migrations\201703092144460_1.Designer.cs">
+      <DependentUpon>201703092144460_1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,14 +69,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703091729321_InitialCreate.resx">
-      <DependentUpon>201703091729321_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703091751256_Initial.resx">
-      <DependentUpon>201703091751256_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="DBMockData\00sql.sql" />
     <Content Include="DBMockData\01Brands.sql" />
     <Content Include="DBMockData\02Products.sql" />
@@ -89,6 +77,11 @@
     <Content Include="DBMockData\05OrderStatus.sql" />
     <Content Include="DBMockData\06Orders.sql" />
     <Content Include="DBMockData\07OrderProducts.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703092144460_1.resx">
+      <DependentUpon>201703092144460_1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,5 +1,4 @@
 ﻿using Shop.Authentication;
-using Shop.DAL;
 using System.Linq;
 
 namespace LoginRegister.Models {

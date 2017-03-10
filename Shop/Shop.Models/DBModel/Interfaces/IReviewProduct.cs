@@ -1,4 +1,5 @@
 ﻿namespace LoginRegister.Models {
+
     public interface IReviewProduct {
         Product Product { get; set; }
         int ProductId { get; set; }

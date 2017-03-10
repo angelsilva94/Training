@@ -1,6 +1,5 @@
 ﻿using LoginRegister.Models;
 using LoginRegister.Models.DTO;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -61,7 +60,7 @@ namespace LoginRegister.Controllers {
                             OrderProducts = x.OrderProducts.Select(op => new OrderProductDTO {
                                 OrderId = op.OrderId,
                                 OrderProductId = op.OrderProductId,
-                                Product =  new ProductDTO {
+                                Product = new ProductDTO {
                                     productDesc = op.Product.productDesc,
                                     ProductId = op.Product.ProductId,
                                     productName = op.Product.productName,
@@ -79,7 +78,8 @@ namespace LoginRegister.Controllers {
                                     adress = x.User.UserInfo.adress,
                                     city = x.User.UserInfo.city,
                                     country = x.User.UserInfo.country,
-                                    zip = x.User.UserInfo.zip
+                                    zip = x.User.UserInfo.zip,
+                                    phone = x.User.UserInfo.phone
                                 }
                             }
                         };
@@ -112,10 +112,11 @@ namespace LoginRegister.Controllers {
                       UserId = x.UserId,
                       username = x.User.username,
                       userInfo = new UserInfoDTO {
+                          phone = 23.ToString(),
                           adress = x.User.UserInfo.adress,
                           city = x.User.UserInfo.city,
                           country = x.User.UserInfo.country,
-                          zip = x.User.UserInfo.zip
+                          zip = x.User.UserInfo.zip,
                       }
                   }
               }).SingleOrDefaultAsync(x => x.OrderId == id);
@@ -125,8 +126,6 @@ namespace LoginRegister.Controllers {
             } else {
                 return Ok(order);
             }
-
-            
         }
 
         // PUT: api/Orders/5

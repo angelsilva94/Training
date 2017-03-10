@@ -1,5 +1,4 @@
-﻿
-using Shop.Models.DBModel;
+﻿using Shop.Models.DBModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

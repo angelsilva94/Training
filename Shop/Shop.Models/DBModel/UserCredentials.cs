@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace LoginRegister.Models.DBModel {
+
     public class UserCredentials {
-        public int UserCredentialsId { set; get; } 
+        public int UserCredentialsId { set; get; }
+
         [Required]
         public string username { set; get; }
+
         [Required]
         public string password { set; get; }
 
