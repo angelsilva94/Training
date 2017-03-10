@@ -73,7 +73,9 @@ namespace LoginRegister.Controllers {
                             totalOrderPrice = x.totalOrderPrice,
                             User = new UserDTO {
                                 UserId = x.UserId,
+                                age = x.User.age,
                                 username = x.User.username,
+                                regDate = x.User.regDate,
                                 userInfo = new UserInfoDTO {
                                     adress = x.User.UserInfo.adress,
                                     city = x.User.UserInfo.city,

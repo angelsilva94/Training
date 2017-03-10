@@ -998,4 +998,4 @@ insert into Orders (purchaseDate, orderStatusCode, quantityOrder, totalOrderPric
 insert into Orders (purchaseDate, orderStatusCode, quantityOrder, totalOrderPrice, UserId) values ('2016-03-09 05:21:59', 8, 4, '2790.16', 998);
 insert into Orders (purchaseDate, orderStatusCode, quantityOrder, totalOrderPrice, UserId) values ('2017-10-31 11:22:30', 8, 1, '3174.12', 999);
 insert into Orders (purchaseDate, orderStatusCode, quantityOrder, totalOrderPrice, UserId) values ('2018-08-01 09:49:47', 4, 4, '1649.74', 1000);
-insert into Orders (purchaseDate, orderStatusCode, quantityOrder, totalOrderPrice, UserId) values ('2018-08-01 09:43:51', 4, 3, '1649.74', 1001);
+--insert into Orders (purchaseDate, orderStatusCode, quantityOrder, totalOrderPrice, UserId) values ('2018-08-01 09:43:51', 4, 3, '1649.74', 1001); 

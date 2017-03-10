@@ -14,7 +14,7 @@ namespace Shop {
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();
             app.UseWebApi(config);
-            //config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
         }
     }
 }

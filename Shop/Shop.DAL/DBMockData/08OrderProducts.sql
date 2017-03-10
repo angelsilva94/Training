@@ -998,3 +998,11 @@ insert into OrderProducts (ProductId, OrderId) values (313, 997);
 insert into OrderProducts (ProductId, OrderId) values (523, 998);
 insert into OrderProducts (ProductId, OrderId) values (975, 999);
 insert into OrderProducts (ProductId, OrderId) values (598, 1000);
+
+
+--INSERTAMOS MAS DE UN PRODUCTO EN UNA ORDEN
+insert into OrderProducts (OrderId,ProductId) values (1,44);
+insert into OrderProducts (OrderId,ProductId) values (1,23);
+insert into OrderProducts (OrderId,ProductId) values (1,90);
+
+--select * from Products,Orders,OrderProducts where Products.ProductId = OrderProducts.ProductId and OrderProducts.OrderId = Orders.OrderId order by UserId;

@@ -76,7 +76,9 @@
     <Content Include="DBMockData\04UserInfoes.sql" />
     <Content Include="DBMockData\05OrderStatus.sql" />
     <Content Include="DBMockData\06Orders.sql" />
-    <Content Include="DBMockData\07OrderProducts.sql" />
+    <Content Include="DBMockData\08OrderProducts.sql" />
+    <Content Include="DBMockData\07Orders.sql" />
+    <Content Include="DBMockData\09OrderProducts.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703092144460_1.resx">
