@@ -9,17 +9,18 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
-
+    [RoutePrefix("reviewProducts")]
     public class ReviewProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/ReviewProducts
+        [Route("api/getReviewProducts")]
         public IQueryable<ReviewProduct> GetReviewProduct() {
             return db.ReviewProduct;
         }
 
         // GET: api/ReviewProducts/5
-        [ResponseType(typeof(ReviewProduct))]
+        [ResponseType(typeof(ReviewProduct)), Route("api/getReviewProducts/search")]
         public async Task<IHttpActionResult> GetReviewProduct(int id) {
             ReviewProduct reviewProduct = await db.ReviewProduct.FindAsync(id);
             if (reviewProduct == null) {
@@ -30,7 +31,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/ReviewProducts/5
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(void)),Route("api/putReviewProducts"),Authentication]
         public async Task<IHttpActionResult> PutReviewProduct(int id, ReviewProduct reviewProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -56,7 +57,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/ReviewProducts
-        [ResponseType(typeof(ReviewProduct))]
+        [ResponseType(typeof(ReviewProduct)), Route("api/postReviewProducts",Name = "postReviewProducts"),Authentication]
         public async Task<IHttpActionResult> PostReviewProduct(ReviewProduct reviewProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -77,19 +78,19 @@ namespace LoginRegister.Controllers {
             return CreatedAtRoute("DefaultApi", new { id = reviewProduct.ProductId }, reviewProduct);
         }
 
-        // DELETE: api/ReviewProducts/5
-        [ResponseType(typeof(ReviewProduct))]
-        public async Task<IHttpActionResult> DeleteReviewProduct(int id) {
-            ReviewProduct reviewProduct = await db.ReviewProduct.FindAsync(id);
-            if (reviewProduct == null) {
-                return NotFound();
-            }
+        //// DELETE: api/ReviewProducts/5
+        //[ResponseType(typeof(ReviewProduct))]
+        //public async Task<IHttpActionResult> DeleteReviewProduct(int id) {
+        //    ReviewProduct reviewProduct = await db.ReviewProduct.FindAsync(id);
+        //    if (reviewProduct == null) {
+        //        return NotFound();
+        //    }
 
-            db.ReviewProduct.Remove(reviewProduct);
-            await db.SaveChangesAsync();
+        //    db.ReviewProduct.Remove(reviewProduct);
+        //    await db.SaveChangesAsync();
 
-            return Ok(reviewProduct);
-        }
+        //    return Ok(reviewProduct);
+        //}
 
         protected override void Dispose(bool disposing) {
             if (disposing) {

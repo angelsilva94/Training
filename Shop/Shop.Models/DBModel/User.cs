@@ -34,7 +34,7 @@ namespace Shop.Models.DBModel {
         public DateTime regDate { set; get; }
 
         [Required]
-        public bool userType { set; get; }
+        public bool userMode { set; get; }
 
         //we define our relationships
         //1-1 UserModel-UserInfo

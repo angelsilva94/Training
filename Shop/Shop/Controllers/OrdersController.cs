@@ -11,7 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
-    [RoutePrefix("Orders")]
+    [RoutePrefix("orders"),Authentication]
     public class OrdersController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
@@ -23,8 +23,8 @@ namespace LoginRegister.Controllers {
 
         // GET: api/Orders/5
         //[ResponseType(typeof(Order))]
-        [Authentication]
-        [Route("api/getOrder")]
+        //[Authentication]
+        //[Route("api/getOrder"), Authentication]
         //public async Task<IHttpActionResult> GetOrder(int id)
         //{
         //    Order order = await db.Order.FindAsync(id);
@@ -35,7 +35,8 @@ namespace LoginRegister.Controllers {
 
         //    return Ok(order);
         //
-        [ResponseType(typeof(OrderDTO))]
+        [ResponseType(typeof(OrderDTO)),Route("api/getOrders"), Authentication]
+        //public  IQueryable<OrderDto> GetOrder() { check which is better
         public async Task<IHttpActionResult> GetOrder() {
             var order = from x in db.Order
                         select new OrderDTO {
@@ -90,9 +91,9 @@ namespace LoginRegister.Controllers {
             return Ok(order);
         }
 
-        [Authentication]
-        [Route("api/getOrder/search")]
-        [ResponseType(typeof(OrderDTO))]
+        //[Authentication]
+        //[Route("api/getOrder/search")]
+        [ResponseType(typeof(OrderDTO)),Route("api/getOrder/search"),Authentication]
         public async Task<IHttpActionResult> GetOrder(int id) {
             var order = await db.Order.Include(x => x.OrderId).Select(x =>
               new OrderDTO {
@@ -133,7 +134,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/Orders/5
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(void)),Route("api/putOrder"),Authentication]
         public async Task<IHttpActionResult> PutOrder(int id, Order order) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -159,9 +160,9 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Orders
-        [ResponseType(typeof(Order))]
+        [ResponseType(typeof(Order)),Authentication,Route("api/postOrders")]
         //[Authentication]
-        [Route("api/submit")]
+        [Route("api/submit",Name = "orderPost")]
         public async Task<IHttpActionResult> PostOrder(Order order) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -170,22 +171,22 @@ namespace LoginRegister.Controllers {
             db.Order.Add(order);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = order.OrderId }, order);
+            return CreatedAtRoute("orderPost", new { id = order.OrderId }, order);
         }
 
-        // DELETE: api/Orders/5
-        [ResponseType(typeof(Order))]
-        public async Task<IHttpActionResult> DeleteOrder(int id) {
-            Order order = await db.Order.FindAsync(id);
-            if (order == null) {
-                return NotFound();
-            }
+        //// DELETE: api/Orders/5
+        //[ResponseType(typeof(Order))]
+        //public async Task<IHttpActionResult> DeleteOrder(int id) {
+        //    Order order = await db.Order.FindAsync(id);
+        //    if (order == null) {
+        //        return NotFound();
+        //    }
 
-            db.Order.Remove(order);
-            await db.SaveChangesAsync();
+        //    db.Order.Remove(order);
+        //    await db.SaveChangesAsync();
 
-            return Ok(order);
-        }
+        //    return Ok(order);
+        //}
 
         protected override void Dispose(bool disposing) {
             if (disposing) {

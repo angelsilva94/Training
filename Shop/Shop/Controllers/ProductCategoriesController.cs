@@ -9,17 +9,18 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
-
+    [RoutePrefix("productCategories")]    
     public class ProductCategoriesController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/ProductCategories
+        [ResponseType(typeof(ProductCategory)), Route("api/getProductCategories")]
         public IQueryable<ProductCategory> GetProductCategory() {
             return db.ProductCategory;
         }
 
         // GET: api/ProductCategories/5
-        [ResponseType(typeof(ProductCategory))]
+        [ResponseType(typeof(ProductCategory)),Route("api/getProductCategories/search")]
         public async Task<IHttpActionResult> GetProductCategory(int id) {
             ProductCategory productCategory = await db.ProductCategory.FindAsync(id);
             if (productCategory == null) {
@@ -30,7 +31,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/ProductCategories/5
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(void)),Authentication, Route("api/putProductCategories")]
         public async Task<IHttpActionResult> PutProductCategory(int id, ProductCategory productCategory) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -56,7 +57,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/ProductCategories
-        [ResponseType(typeof(ProductCategory))]
+        [ResponseType(typeof(ProductCategory)), Authentication, Route("api/postProductCategories", Name = "postProductCategories")]
         public async Task<IHttpActionResult> PostProductCategory(ProductCategory productCategory) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -74,22 +75,22 @@ namespace LoginRegister.Controllers {
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = productCategory.CategoryId }, productCategory);
+            return CreatedAtRoute("postProductCategories", new { id = productCategory.CategoryId }, productCategory);
         }
 
-        // DELETE: api/ProductCategories/5
-        [ResponseType(typeof(ProductCategory))]
-        public async Task<IHttpActionResult> DeleteProductCategory(int id) {
-            ProductCategory productCategory = await db.ProductCategory.FindAsync(id);
-            if (productCategory == null) {
-                return NotFound();
-            }
+        //// DELETE: api/ProductCategories/5
+        //[ResponseType(typeof(ProductCategory))]
+        //public async Task<IHttpActionResult> DeleteProductCategory(int id) {
+        //    ProductCategory productCategory = await db.ProductCategory.FindAsync(id);
+        //    if (productCategory == null) {
+        //        return NotFound();
+        //    }
 
-            db.ProductCategory.Remove(productCategory);
-            await db.SaveChangesAsync();
+        //    db.ProductCategory.Remove(productCategory);
+        //    await db.SaveChangesAsync();
 
-            return Ok(productCategory);
-        }
+        //    return Ok(productCategory);
+        //}
 
         protected override void Dispose(bool disposing) {
             if (disposing) {

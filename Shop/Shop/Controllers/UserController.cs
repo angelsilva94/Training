@@ -1,6 +1,7 @@
 ﻿using LoginRegister.Models;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
+using Shop.Models.DTO;
 using System.Data;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -13,20 +14,20 @@ using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
 
-    [RoutePrefix("User")]
+    [RoutePrefix("users")]
     public class UserController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/User
-        [Authentication]
-        [Route("normal")]
+        //[Authentication]
+        [Route("normal"), Authentication]
         public IQueryable<User> GetUserModels() {
             return db.User;
         }
 
         // GET: api/User
-        [Authentication]
-        [Route("new")]
+        //[Authentication]
+        [Route("api/getUser"), Authentication]
         public IQueryable<UserDTO> GetUser() {
             var user = from x in db.User
                        select new UserDTO() {
@@ -39,7 +40,7 @@ namespace LoginRegister.Controllers {
                            age = x.age,
                            email = x.email,
                            regDate = x.regDate,
-                           userType = x.userType,
+                           userType = x.userMode,
                            userInfo =
                                new UserInfoDTO {
                                    adress = x.UserInfo.adress,
@@ -54,13 +55,15 @@ namespace LoginRegister.Controllers {
                                //x.UserInfo.country,
                                //x.UserInfo.phone,
                        };
+            //string hola = "adsfdfa";
+            //bool xyz= hola.Check();
 
             return user;
         }
 
         // GET: api/User/5
-        [ResponseType(typeof(User))]
-        [Authentication]
+        [ResponseType(typeof(User)),Authentication,Route("api/getUser")]
+        //[Authentication]
         public async Task<IHttpActionResult> GetUserModel(int id) {
             User userModel = await db.User.FindAsync(id);
             if (userModel == null) {
@@ -70,14 +73,14 @@ namespace LoginRegister.Controllers {
             return Ok(userModel);
         }
 
-        [Authentication]
-        public HttpResponseMessage Get(string usr) {
-            return Request.CreateResponse(HttpStatusCode.OK, Thread.CurrentPrincipal.Identity.Name);
-        }
+        //[Authentication]
+        //public HttpResponseMessage Get(string usr) {
+        //    return Request.CreateResponse(HttpStatusCode.OK, Thread.CurrentPrincipal.Identity.Name);
+        //}
 
         // PUT: api/User/5
         [Authentication]
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(void)),Route("api/putUser"),Authentication]
         public async Task<IHttpActionResult> PutUserModel([FromBody]ModifyUserModel modifyUserModel, [FromUri]int id) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -110,8 +113,8 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/User
-        [Route("submit")]
-        [ResponseType(typeof(User))]
+        //[Route("api/postUser")]
+        [ResponseType(typeof(User)), Route("api/postUser",Name = "postUser")]
         public async Task<IHttpActionResult> PostUserModel(User userModel) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -129,7 +132,7 @@ namespace LoginRegister.Controllers {
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = userModel.username }, userModel);
+            return CreatedAtRoute("postUser", new { id = userModel.username }, userModel);
         }
 
         //// DELETE: api/User/5

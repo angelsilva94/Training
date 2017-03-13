@@ -153,7 +153,7 @@
     <Compile Include="Authentication\ICheckUser.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\HealthController.cs" />
-    <Compile Include="Controllers\OrderProductsController.cs" />
+    <Compile Include="Controllers\OrderDetailsController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />

@@ -9,17 +9,18 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
-
+    [RoutePrefix("products")]
     public class ProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/Products
+        [ResponseType(typeof(Product)), Authentication, Route("api/getProducts")]
         public IQueryable<Product> GetProduct() {
             return db.Product;
         }
 
         // GET: api/Products/5
-        [ResponseType(typeof(Product))]
+        [ResponseType(typeof(Product)),Authentication,Route("api/getProducts/search")]
         public async Task<IHttpActionResult> GetProduct(int id) {
             Product product = await db.Product.FindAsync(id);
             if (product == null) {
@@ -30,7 +31,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/Products/5
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(void)),Authentication,Route("api/putProducts")]
         public async Task<IHttpActionResult> PutProduct(int id, Product product) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -56,7 +57,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Products
-        [ResponseType(typeof(Product))]
+        [ResponseType(typeof(Product)),Authentication,Route("postProduct", Name = "postProduct")]
         public async Task<IHttpActionResult> PostProduct(Product product) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -68,19 +69,19 @@ namespace LoginRegister.Controllers {
             return CreatedAtRoute("DefaultApi", new { id = product.ProductId }, product);
         }
 
-        // DELETE: api/Products/5
-        [ResponseType(typeof(Product))]
-        public async Task<IHttpActionResult> DeleteProduct(int id) {
-            Product product = await db.Product.FindAsync(id);
-            if (product == null) {
-                return NotFound();
-            }
+        //// DELETE: api/Products/5
+        //[ResponseType(typeof(Product))]
+        //public async Task<IHttpActionResult> DeleteProduct(int id) {
+        //    Product product = await db.Product.FindAsync(id);
+        //    if (product == null) {
+        //        return NotFound();
+        //    }
 
-            db.Product.Remove(product);
-            await db.SaveChangesAsync();
+        //    db.Product.Remove(product);
+        //    await db.SaveChangesAsync();
 
-            return Ok(product);
-        }
+        //    return Ok(product);
+        //}
 
         protected override void Dispose(bool disposing) {
             if (disposing) {

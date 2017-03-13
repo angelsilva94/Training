@@ -14,7 +14,7 @@ namespace Shop.Models.Interfaces {
         string lastName { set; get; }
         int age { set; get; }
         DateTime regDate { set; get; }
-        bool userType { set; get; }
+        bool userMode { set; get; }
         UserInfo UserInfo { set; get; }
         ICollection<ReviewProduct> ReviewProducts { get; set; }
         ICollection<Order> Orders { get; set; }

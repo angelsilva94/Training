@@ -54,6 +54,10 @@
     <Compile Include="Migrations\201703101807157_1.0.Designer.cs">
       <DependentUpon>201703101807157_1.0.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703131433541_1.1.cs" />
+    <Compile Include="Migrations\201703131433541_1.1.Designer.cs">
+      <DependentUpon>201703131433541_1.1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopDBContext.cs" />
@@ -83,6 +87,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703101807157_1.0.resx">
       <DependentUpon>201703101807157_1.0.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131433541_1.1.resx">
+      <DependentUpon>201703131433541_1.1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
