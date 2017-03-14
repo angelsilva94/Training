@@ -1,6 +1,7 @@
 ﻿using LoginRegister.Models;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -95,17 +96,34 @@ namespace LoginRegister.Controllers {
         //[Route("api/getOrder/search")]
         [ResponseType(typeof(OrderDTO)),Route("api/getOrder/search"),Authentication]
         public async Task<IHttpActionResult> GetOrder(int id) {
+            var temp = db.Order.Where(a => a.OrderId == id).Select(x=>new OrderDTO {
+                    OrderId= x.OrderId,
+                    orderStatusCode = x.orderStatusCode,
+                    User = new UserDTO {
+                        age= x.User.age,
+                        UserId=x.UserId
+                    },
+                    OrderDetails = x.OrderDetails.Select(y=>new OrderDetailDTO {
+                        OrderDetailId= y.OrderDetailId,
+                        Product = new ProductDTO {
+                            ProductId= y.Product.ProductId,
+                            productDesc = y.Product.productDesc
+                        }
+                    }).ToList()
+            });
+
+
             var order = await db.Order.Include(x => x.OrderId).Select(x =>
               new OrderDTO {
                   OrderId = x.OrderId,
-                  OrderDetails = x.OrderDetails.Select(op => new OrderDetailDTO {
-                      OrderId = op.OrderId,
-                      OrderDetailId = op.OrderDetailId,
+                  OrderDetails = x.OrderDetails.Select(y => new OrderDetailDTO {
+                      OrderId = y.OrderId,
+                      OrderDetailId = y.OrderDetailId,
                       Product = new ProductDTO {
-                          productDesc = op.Product.productDesc,
-                          ProductId = op.Product.ProductId,
-                          productName = op.Product.productName,
-                          productPrice = op.Product.productPrice
+                          productDesc = y.Product.productDesc,
+                          ProductId = y.Product.ProductId,
+                          productName = y.Product.productName,
+                          productPrice = y.Product.productPrice
                       }
                       //etc
                   }).ToList(),
@@ -126,11 +144,36 @@ namespace LoginRegister.Controllers {
                   }
               }).SingleOrDefaultAsync(x => x.OrderId == id);
 
-            if (order == null) {
+            if (temp == null) {
                 return NotFound();
             } else {
-                return Ok(order);
-            }
+                return Ok(temp);
+            }   
+            //IQueryable<Order> temp = db.Order.Where(x => x.OrderId == id).ToList<Order>().AsQueryable();
+            //var order = new OrderDTO {
+            //    OrderId = temp.Select(x=>x.OrderId).First(),
+            //    orderStatusCode= temp.Select(x => x.orderStatusCode).First(),
+            //    purchaseDate = temp.Select(x => x.purchaseDate).First(),
+            //    quantityOrder = temp.Select(x => x.quantityOrder).First(),
+            //    totalOrderPrice = temp.Select(x => x.totalOrderPrice).First(),
+            //    User = new UserDTO {
+            //        UserId = temp.Select(x => x.User.UserId).First(),
+            //        username = temp.Select(x => x.User.username).First(),
+            //        email = temp.Select(x => x.User.email).First()
+            //    },
+            //    //x.OrderDetails.Select(y => new OrderDetailDTO
+            //    OrderDetails = temp.Select(x => new OrderDetailDTO {
+            //        OrderDetailId= x.OrderDetails.Select(y=>y.OrderDetailId).First(),
+            //        //ProductId= x.OrderDetails.Select(y => y.ProductId).Single(),
+            //        Product = new ProductDTO {
+            //            ProductId = x.OrderDetails.Select(y => y.Product.ProductId).First(),
+            //            productDesc= x.OrderDetails.Select(y => y.Product.productDesc).First(),
+            //            productName= x.OrderDetails.Select(y => y.Product.productName).First(),
+            //            productPrice= x.OrderDetails.Select(y => y.Product.productPrice).First(),
+            //        }
+            //    } ).ToList()
+            //};
+            //return Ok(order);
         }
 
         // PUT: api/Orders/5

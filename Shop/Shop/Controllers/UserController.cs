@@ -29,6 +29,7 @@ namespace LoginRegister.Controllers {
         //[Authentication]
         [Route("api/getUser"), Authentication]
         public IQueryable<UserDTO> GetUser() {
+            
             var user = from x in db.User
                        select new UserDTO() {
                            UserId = x.UserId,
@@ -40,7 +41,7 @@ namespace LoginRegister.Controllers {
                            age = x.age,
                            email = x.email,
                            regDate = x.regDate,
-                           userType = x.userMode,
+                           userMode = x.userMode,
                            userInfo =
                                new UserInfoDTO {
                                    adress = x.UserInfo.adress,
@@ -65,12 +66,94 @@ namespace LoginRegister.Controllers {
         [ResponseType(typeof(User)),Authentication,Route("api/getUser")]
         //[Authentication]
         public async Task<IHttpActionResult> GetUserModel(int id) {
-            User userModel = await db.User.FindAsync(id);
-            if (userModel == null) {
-                return NotFound();
-            }
+            //IQueryable<User> temp = db.User.Where(x => x.UserId == id).ToList<User>().AsQueryable();
 
-            return Ok(userModel);
+            //var dto = new UserDTO {
+            //    UserId= temp.Select(x=>x.UserId).Single(),
+            //    age = temp.Select(x => x.age).Single(),
+            //    username = temp.Select(x => x.username).Single(),
+            //    name = temp.Select(x => x.name).Single(),
+            //    password = temp.Select(x => x.password).Single(),
+            //    email = temp.Select(x => x.email).Single(),
+            //    lastName = temp.Select(x => x.lastName).Single(),
+            //    regDate = temp.Select(x => x.regDate).Single(),
+            //    surname= temp.Select(x => x.surname).Single(),
+            //    userMode= temp.Select(x => x.userMode).Single(),
+            //    userInfo = new UserInfoDTO {
+            //        adress = temp.Select(x => x.UserInfo.adress).Single(),
+            //        city = temp.Select(x => x.UserInfo.city).Single(),
+            //        country = temp.Select(x => x.UserInfo.country).Single(),
+            //        phone = temp.Select(x => x.UserInfo.phone).Single(),
+            //        zip= temp.Select(x => x.UserInfo.zip).Single()
+            //    }
+
+            //};
+
+            //IQueryable<User> aux =  db.User.Where(x => x.UserId == id);
+
+            //var user = new UserDTO {
+            //    UserId = aux.Select(x => x.UserId).FirstOrDefault(),
+
+            //};
+
+            var test = db.User.Where(a => a.UserId == id).Select(x => new UserDTO {
+                UserId = x.UserId,
+                username = x.username,
+                password = x.password,
+                name = x.name,
+                lastName = x.lastName,
+                surname = x.surname,
+                age = x.age,
+                email = x.email,
+                regDate = x.regDate,
+                userMode = x.userMode,
+                userInfo = new UserInfoDTO {
+                    adress = x.UserInfo.adress,
+                    city = x.UserInfo.city,
+                    zip = x.UserInfo.zip,
+                    country = x.UserInfo.country,
+                    phone = x.UserInfo.phone
+                }
+            });
+            
+
+            //var aux = new UserDTO {
+            //    UserId = test.Select(x=>x.UserId).FirstOrDefault()
+            //};
+
+            var user = from x in db.User
+                       where x.UserId == id
+                       select new UserDTO() {
+                           UserId = x.UserId,
+                           username = x.username,
+                           password = x.password,
+                           name = x.name,
+                           lastName = x.lastName,
+                           surname = x.surname,
+                           age = x.age,
+                           email = x.email,
+                           regDate = x.regDate,
+                           userMode = x.userMode,
+                           userInfo =
+                               new UserInfoDTO {
+                                   adress = x.UserInfo.adress,
+                                   city = x.UserInfo.city,
+                                   zip = x.UserInfo.zip,
+                                   country = x.UserInfo.country,
+                                   phone = x.UserInfo.phone,
+                               }
+                               //x.UserInfo.adress,
+                               //x.UserInfo.city,
+                               //x.UserInfo.zip,
+                               //x.UserInfo.country,
+                               //x.UserInfo.phone,
+                       };
+            //User userModel = await db.User.FindAsync(id);
+            //if (userModel == null) {
+            //    return NotFound();
+            //}
+
+            return Ok(user);
         }
 
         //[Authentication]

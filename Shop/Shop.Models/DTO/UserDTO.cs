@@ -21,7 +21,7 @@ namespace Shop.Models.DBModel.DTO {
 
         public DateTime regDate { set; get; }
 
-        public bool userType { set; get; }
+        public bool userMode { set; get; }
         public UserInfoDTO userInfo { set; get; }
     }
 }
