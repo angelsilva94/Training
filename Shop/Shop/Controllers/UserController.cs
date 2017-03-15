@@ -3,6 +3,7 @@ using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
 using Shop.Models.DTO;
 using System.Data;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -29,33 +30,53 @@ namespace LoginRegister.Controllers {
         //[Authentication]
         [Route("api/getUser"), Authentication]
         public IQueryable<UserDTO> GetUser() {
-            
-            var user = from x in db.User
-                       select new UserDTO() {
-                           UserId = x.UserId,
-                           username = x.username,
-                           password = x.password,
-                           name = x.name,
-                           lastName = x.lastName,
-                           surname = x.surname,
-                           age = x.age,
-                           email = x.email,
-                           regDate = x.regDate,
-                           userMode = x.userMode,
-                           userInfo =
-                               new UserInfoDTO {
-                                   adress = x.UserInfo.adress,
-                                   city = x.UserInfo.city,
-                                   zip = x.UserInfo.zip,
-                                   country = x.UserInfo.country,
-                                   phone = x.UserInfo.phone,
-                               }
-                               //x.UserInfo.adress,
-                               //x.UserInfo.city,
-                               //x.UserInfo.zip,
-                               //x.UserInfo.country,
-                               //x.UserInfo.phone,
-                       };
+
+            //var user = from x in db.User
+            //           select new UserDTO() {
+            //               UserId = x.UserId,
+            //               username = x.username,
+            //               password = x.password,
+            //               name = x.name,
+            //               lastName = x.lastName,
+            //               surname = x.surname,
+            //               age = x.age,
+            //               email = x.email,
+            //               regDate = x.regDate,
+            //               userMode = x.userMode,
+            //               userInfo =
+            //                   new UserInfoDTO {
+            //                       adress = x.UserInfo.adress,
+            //                       city = x.UserInfo.city,
+            //                       zip = x.UserInfo.zip,
+            //                       country = x.UserInfo.country,
+            //                       phone = x.UserInfo.phone,
+            //                   }
+            //                   //x.UserInfo.adress,
+            //                   //x.UserInfo.city,
+            //                   //x.UserInfo.zip,
+            //                   //x.UserInfo.country,
+            //                   //x.UserInfo.phone,
+            //           };
+            var user = db.User.Select(x => new UserDTO {
+                UserId = x.UserId,
+                username = x.username,
+                password = x.password,
+                name = x.name,
+                lastName = x.lastName,
+                surname = x.surname,
+                age = x.age,
+                email = x.email,
+                regDate = x.regDate,
+                userMode = x.userMode,
+                userInfo =new UserInfoDTO {
+                    adress = x.UserInfo.adress,
+                    city = x.UserInfo.city,
+                    zip = x.UserInfo.zip,
+                    country = x.UserInfo.country,
+                    phone = x.UserInfo.phone,
+                }
+
+            });
             //string hola = "adsfdfa";
             //bool xyz= hola.Check();
 
@@ -63,7 +84,7 @@ namespace LoginRegister.Controllers {
         }
 
         // GET: api/User/5
-        [ResponseType(typeof(User)),Authentication,Route("api/getUser")]
+        [ResponseType(typeof(UserDTO)),Authentication,Route("api/getUser")]
         //[Authentication]
         public async Task<IHttpActionResult> GetUserModel(int id) {
             //IQueryable<User> temp = db.User.Where(x => x.UserId == id).ToList<User>().AsQueryable();
@@ -96,7 +117,30 @@ namespace LoginRegister.Controllers {
 
             //};
 
-            var test = db.User.Where(a => a.UserId == id).Select(x => new UserDTO {
+            //MORE EXPLICIT WAY OF INCLUIDING RELATIONSHIPS
+            //var user = db.User.Include("UserInfo").Where(a => a.UserId == id).Select(x =>
+            //  new UserDTO {
+            //      UserId = x.UserId,
+            //      username = x.username,
+            //      password = x.password,
+            //      name = x.name,
+            //      lastName = x.lastName,
+            //      surname = x.surname,
+            //      age = x.age,
+            //      email = x.email,
+            //      regDate = x.regDate,
+            //      userMode = x.userMode,
+            //      userInfo = new UserInfoDTO {
+            //          adress = x.UserInfo.adress,
+            //          city = x.UserInfo.city,
+            //          zip = x.UserInfo.zip,
+            //          country = x.UserInfo.country,
+            //          phone = x.UserInfo.phone
+            //      }
+            //  });
+
+            //EAGER LOADING WITH LINQ METHOD SYNTAX "The right way"
+            var user = await db.User.Select(x => new UserDTO {
                 UserId = x.UserId,
                 username = x.username,
                 password = x.password,
@@ -114,44 +158,43 @@ namespace LoginRegister.Controllers {
                     country = x.UserInfo.country,
                     phone = x.UserInfo.phone
                 }
-            });
-            
+            }).SingleOrDefaultAsync(x=>x.UserId == id);
+
+
 
             //var aux = new UserDTO {
             //    UserId = test.Select(x=>x.UserId).FirstOrDefault()
             //};
 
-            var user = from x in db.User
-                       where x.UserId == id
-                       select new UserDTO() {
-                           UserId = x.UserId,
-                           username = x.username,
-                           password = x.password,
-                           name = x.name,
-                           lastName = x.lastName,
-                           surname = x.surname,
-                           age = x.age,
-                           email = x.email,
-                           regDate = x.regDate,
-                           userMode = x.userMode,
-                           userInfo =
-                               new UserInfoDTO {
-                                   adress = x.UserInfo.adress,
-                                   city = x.UserInfo.city,
-                                   zip = x.UserInfo.zip,
-                                   country = x.UserInfo.country,
-                                   phone = x.UserInfo.phone,
-                               }
-                               //x.UserInfo.adress,
-                               //x.UserInfo.city,
-                               //x.UserInfo.zip,
-                               //x.UserInfo.country,
-                               //x.UserInfo.phone,
-                       };
-            //User userModel = await db.User.FindAsync(id);
-            //if (userModel == null) {
-            //    return NotFound();
-            //}
+            //EAGER LOADING WITH QUERY SYNTAX
+            //var user = from x in db.User
+            //           where x.UserId == id
+            //           select new UserDTO() {
+            //               UserId = x.UserId,
+            //               username = x.username,
+            //               password = x.password,
+            //               name = x.name,
+            //               lastName = x.lastName,
+            //               surname = x.surname,
+            //               age = x.age,
+            //               email = x.email,
+            //               regDate = x.regDate,
+            //               userMode = x.userMode,
+            //               userInfo =
+            //                   new UserInfoDTO {
+            //                       adress = x.UserInfo.adress,
+            //                       city = x.UserInfo.city,
+            //                       zip = x.UserInfo.zip,
+            //                       country = x.UserInfo.country,
+            //                       phone = x.UserInfo.phone,
+            //                   }
+            //                   //x.UserInfo.adress,
+            //                   //x.UserInfo.city,
+            //                   //x.UserInfo.zip,
+            //                   //x.UserInfo.country,
+            //                   //x.UserInfo.phone,
+            //           };
+
 
             return Ok(user);
         }

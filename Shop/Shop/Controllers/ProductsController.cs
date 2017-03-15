@@ -1,5 +1,6 @@
 ﻿using LoginRegister.Models;
 using Shop.Models.DBModel;
+using Shop.Models.DBModel.DTO;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -15,14 +16,26 @@ namespace LoginRegister.Controllers {
 
         // GET: api/Products
         [ResponseType(typeof(Product)), Authentication, Route("api/getProducts")]
-        public IQueryable<Product> GetProduct() {
-            return db.Product;
+        public async Task<IHttpActionResult> GetProduct() {
+            var product = await  db.Product.AsNoTracking().Select(x => new ProductDTO {
+                productDesc = x.productDesc,
+                ProductId = x.ProductId,
+                productName = x.productName,
+                productPrice = x.productPrice
+            }).ToListAsync();
+
+            return Ok(product);
         }
 
         // GET: api/Products/5
-        [ResponseType(typeof(Product)),Authentication,Route("api/getProducts/search")]
+        [ResponseType(typeof(ProductDTO)),Authentication,Route("api/getProducts/search")]
         public async Task<IHttpActionResult> GetProduct(int id) {
-            Product product = await db.Product.FindAsync(id);
+            var product = await db.Product.Select(x => new ProductDTO {
+                productDesc = x.productDesc,
+                ProductId = x.ProductId,
+                productName = x.productName,
+                productPrice = x.productPrice
+            }).SingleOrDefaultAsync(x=>x.ProductId==id);
             if (product == null) {
                 return NotFound();
             }

@@ -1,5 +1,7 @@
 ﻿using LoginRegister.Models;
 using Shop.Models.DBModel;
+using Shop.Models.DBModel.DTO;
+using Shop.Models.DTO;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -15,18 +17,40 @@ namespace LoginRegister.Controllers {
 
         // GET: api/Brands
         [Authentication,Route("api/getBrands")]
-        public IQueryable<Brand> GetBrand() {
-            return db.Brand;
+        public async Task<IHttpActionResult> GetBrand() {
+            var brand = await db.Brand.Select(x => new BrandDTO {
+                brandDesc = x.brandDesc,
+                BrandId = x.BrandId,
+                brandLogoUrl = x.brandLogoUrl,
+                brandName = x.brandName,
+                Products = x.Products.Select(y=>new ProductDTO {
+                   productDesc = y.productDesc,
+                   ProductId = y.ProductId,
+                   productName = y.productName,
+                   productPrice = y.productPrice 
+                }).ToList()
+            }).ToListAsync();
+            return Ok(brand);
         }
 
         // GET: api/Brands/5
         [ResponseType(typeof(Brand)),Authentication,Route("api/getBrands/search")]
         public async Task<IHttpActionResult> GetBrand(int id) {
-            Brand brand = await db.Brand.FindAsync(id);
+            var brand = await db.Brand.Select(x => new BrandDTO {
+                brandDesc = x.brandDesc,
+                BrandId = x.BrandId,
+                brandLogoUrl = x.brandLogoUrl,
+                brandName = x.brandName,
+                Products = x.Products.Select(y => new ProductDTO {
+                    productDesc = y.productDesc,
+                    ProductId = y.ProductId,
+                    productName = y.productName,
+                    productPrice = y.productPrice
+                }).ToList()
+            }).FirstOrDefaultAsync(x=> x.BrandId == id);
             if (brand == null) {
                 return NotFound();
             }
-
             return Ok(brand);
         }
 

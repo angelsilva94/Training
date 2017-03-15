@@ -69,9 +69,12 @@
     <Compile Include="DBModel\User.cs" />
     <Compile Include="DBModel\UserInfo.cs" />
     <Compile Include="DBModel\UserType.cs" />
+    <Compile Include="DTO\BrandDTO.cs" />
+    <Compile Include="DTO\CategoryDTO.cs" />
     <Compile Include="DTO\Extension.cs" />
     <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="DTO\OrderDetailDTO.cs" />
+    <Compile Include="DTO\ProductCategoryDTO.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\UserInfoDTO.cs" />

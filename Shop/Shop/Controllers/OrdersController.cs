@@ -39,56 +39,96 @@ namespace LoginRegister.Controllers {
         [ResponseType(typeof(OrderDTO)),Route("api/getOrders"), Authentication]
         //public  IQueryable<OrderDto> GetOrder() { check which is better
         public async Task<IHttpActionResult> GetOrder() {
-            var order = from x in db.Order
-                        select new OrderDTO {
-                            OrderId = x.OrderId,
-                            UserId = x.UserId,
-                            orderStatusCode = x.orderStatusCode,
-                            //OrderDetails = x.OrderDetails.Select(x=>
-                            //new OrderProductDTO { }
-                            //)
-                            //OrderDetails = new List<OrderProductDTO> {
-                            //    new OrderProductDTO {
-                            //        OrderId = x.OrderDetails.Select(y =>y.OrderId).FirstOrDefault(),
-                            //        OrderDetailId = x.OrderDetails.Select(y =>y.OrderDetailId).FirstOrDefault(),
-                            //        ProductId = x.OrderDetails.Select(y =>y.ProductId).FirstOrDefault(),
-                            //        Product = new ProductDTO() {
-                            //            productDesc = x.OrderDetails.Select(y =>y.Product.productDesc).FirstOrDefault(),
-                            //            ProductId = x.OrderDetails.Select(y =>y.Product.ProductId).FirstOrDefault(),
-                            //            productName = x.OrderDetails.Select(y =>y.Product.productName).FirstOrDefault(),
-                            //            productPrice = x.OrderDetails.Select(y =>y.Product.productPrice).FirstOrDefault(),
-                            //        }
-                            //    }
-                            //}
-                            OrderDetails = x.OrderDetails.Select(op => new OrderDetailDTO {
-                                OrderId = op.OrderId,
-                                OrderDetailId = op.OrderDetailId,
-                                ProductId = op.ProductId,
-                                Product = new ProductDTO {
-                                    productDesc = op.Product.productDesc,
-                                    ProductId = op.Product.ProductId,
-                                    productName = op.Product.productName,
-                                    productPrice = op.Product.productPrice
-                                }
-                                //etc
-                            }).ToList(),
-                            purchaseDate = x.purchaseDate,
-                            quantityOrder = x.quantityOrder,
-                            totalOrderPrice = x.totalOrderPrice,
-                            User = new UserDTO {
-                                UserId = x.UserId,
-                                age = x.User.age,
-                                username = x.User.username,
-                                regDate = x.User.regDate,
-                                userInfo = new UserInfoDTO {
-                                    adress = x.User.UserInfo.adress,
-                                    city = x.User.UserInfo.city,
-                                    country = x.User.UserInfo.country,
-                                    zip = x.User.UserInfo.zip,
-                                    phone = x.User.UserInfo.phone
-                                }
-                            }
-                        };
+
+            //linq method way
+            var order = await db.Order.Select(x => new  {
+                OrderId = x.OrderId,
+                UserId = x.UserId,
+                orderStatusCode = x.orderStatusCode,
+                OrderDetails = x.OrderDetails.Select(y => new /*  ANONYMOUS TYPE OrderDetailDTO*/ {
+                    OrderId = y.OrderId,
+                    OrderDetailId = y.OrderDetailId,
+
+                    ProductId = y.ProductId,
+                    Product = new  {
+                        productDesc = y.Product.productDesc,
+                        ProductId = y.Product.ProductId,
+                        productName = y.Product.productName,
+                        productPrice = y.Product.productPrice
+                    }
+                }).ToList(),
+                purchaseDate = x.purchaseDate,
+                quantityOrder = x.quantityOrder,
+                totalOrderPrice = x.totalOrderPrice,
+                User = new  {
+                    UserId = x.UserId,
+                    age = x.User.age,
+                    username = x.User.username,
+                    regDate = x.User.regDate,
+                    //x.User.username igual se puede usar 
+                    userInfo = new  {
+                        adress = x.User.UserInfo.adress,
+                        city = x.User.UserInfo.city,
+                        country = x.User.UserInfo.country,
+                        zip = x.User.UserInfo.zip,
+                        phone = x.User.UserInfo.phone
+                    }
+                }
+
+            }).ToListAsync();
+
+
+            //query syntax way
+            //var order = from x in db.Order
+            //            select new OrderDTO {
+            //                OrderId = x.OrderId,
+            //                UserId = x.UserId,
+            //                orderStatusCode = x.orderStatusCode,
+            //                //OrderDetails = x.OrderDetails.Select(x=>
+            //                //new OrderProductDTO { }
+            //                //)
+            //                //OrderDetails = new List<OrderProductDTO> {
+            //                //    new OrderProductDTO {
+            //                //        OrderId = x.OrderDetails.Select(y =>y.OrderId).FirstOrDefault(),
+            //                //        OrderDetailId = x.OrderDetails.Select(y =>y.OrderDetailId).FirstOrDefault(),
+            //                //        ProductId = x.OrderDetails.Select(y =>y.ProductId).FirstOrDefault(),
+            //                //        Product = new ProductDTO() {
+            //                //            productDesc = x.OrderDetails.Select(y =>y.Product.productDesc).FirstOrDefault(),
+            //                //            ProductId = x.OrderDetails.Select(y =>y.Product.ProductId).FirstOrDefault(),
+            //                //            productName = x.OrderDetails.Select(y =>y.Product.productName).FirstOrDefault(),
+            //                //            productPrice = x.OrderDetails.Select(y =>y.Product.productPrice).FirstOrDefault(),
+            //                //        }
+            //                //    }
+            //                //}
+            //                OrderDetails = x.OrderDetails.Select(op => new OrderDetailDTO {
+            //                    OrderId = op.OrderId,
+            //                    OrderDetailId = op.OrderDetailId,
+            //                    ProductId = op.ProductId,
+            //                    Product = new ProductDTO {
+            //                        productDesc = op.Product.productDesc,
+            //                        ProductId = op.Product.ProductId,
+            //                        productName = op.Product.productName,
+            //                        productPrice = op.Product.productPrice
+            //                    }
+            //                    //etc
+            //                }).ToList(),
+            //                purchaseDate = x.purchaseDate,
+            //                quantityOrder = x.quantityOrder,
+            //                totalOrderPrice = x.totalOrderPrice,
+            //                User = new UserDTO {
+            //                    UserId = x.UserId,
+            //                    age = x.User.age,
+            //                    username = x.User.username,
+            //                    regDate = x.User.regDate,
+            //                    userInfo = new UserInfoDTO {
+            //                        adress = x.User.UserInfo.adress,
+            //                        city = x.User.UserInfo.city,
+            //                        country = x.User.UserInfo.country,
+            //                        zip = x.User.UserInfo.zip,
+            //                        phone = x.User.UserInfo.phone
+            //                    }
+            //                }
+            //            };
             return Ok(order);
         }
 
@@ -96,58 +136,84 @@ namespace LoginRegister.Controllers {
         //[Route("api/getOrder/search")]
         [ResponseType(typeof(OrderDTO)),Route("api/getOrder/search"),Authentication]
         public async Task<IHttpActionResult> GetOrder(int id) {
-            var temp = db.Order.Where(a => a.OrderId == id).Select(x=>new OrderDTO {
+
+
+            
+            var order = await db.Order.Select(x=>new OrderDTO {
                     OrderId= x.OrderId,
                     orderStatusCode = x.orderStatusCode,
+                    purchaseDate = x.purchaseDate,
+                    quantityOrder = x.quantityOrder,
+                    totalOrderPrice = x.totalOrderPrice,
+                    UserId = x.UserId,
                     User = new UserDTO {
-                        age= x.User.age,
-                        UserId=x.UserId
-                    },
-                    OrderDetails = x.OrderDetails.Select(y=>new OrderDetailDTO {
-                        OrderDetailId= y.OrderDetailId,
-                        Product = new ProductDTO {
-                            ProductId= y.Product.ProductId,
-                            productDesc = y.Product.productDesc
+                        UserId = x.User.UserId,
+                        username = x.User.username,
+                        password = x.User.password,
+                        name = x.User.name,
+                        lastName = x.User.lastName,
+                        surname = x.User.surname,
+                        age = x.User.age,
+                        email = x.User.email,
+                        regDate = x.User.regDate,
+                        userMode = x.User.userMode,
+                        userInfo = new UserInfoDTO {
+                            adress = x.User.UserInfo.adress,
+                            city = x.User.UserInfo.city,
+                            zip = x.User.UserInfo.zip,
+                            country = x.User.UserInfo.country,
+                            phone = x.User.UserInfo.phone,
                         }
-                    }).ToList()
-            });
+                    },
+                   OrderDetails = x.OrderDetails.Select(y => new OrderDetailDTO {
+                       OrderDetailId = y.OrderDetailId,
+                       OrderId = y.OrderId,
+                       ProductId = y.ProductId,
+                       Product = new ProductDTO {
+                           productDesc = y.Product.productDesc,
+                           ProductId = y.Product.ProductId,
+                           productName = y.Product.productName,
+                           productPrice = y.Product.productPrice
+                       }
+                   }).ToList()  
+            }). SingleOrDefaultAsync(x => x.OrderId == id);
+            //
 
+            //var order = await db.Order.Include(x => x.OrderId).Select(x =>
+            //  new OrderDTO {
+            //      OrderId = x.OrderId,
+            //      OrderDetails = x.OrderDetails.Select(y => new OrderDetailDTO {
+            //          OrderId = y.OrderId,
+            //          OrderDetailId = y.OrderDetailId,
+            //          Product = new ProductDTO {
+            //              productDesc = y.Product.productDesc,
+            //              ProductId = y.Product.ProductId,
+            //              productName = y.Product.productName,
+            //              productPrice = y.Product.productPrice
+            //          }
+            //          //etc
+            //      }).ToList(),
+            //      orderStatusCode = x.orderStatusCode,
+            //      purchaseDate = x.purchaseDate,
+            //      quantityOrder = x.quantityOrder,
+            //      totalOrderPrice = x.totalOrderPrice,
+            //      User = new UserDTO {
+            //          UserId = x.UserId,
+            //          username = x.User.username,
+            //          userInfo = new UserInfoDTO {
+            //              phone = 23.ToString(),
+            //              adress = x.User.UserInfo.adress,
+            //              city = x.User.UserInfo.city,
+            //              country = x.User.UserInfo.country,
+            //              zip = x.User.UserInfo.zip,
+            //          }
+            //      }
+            //  }).SingleOrDefaultAsync(x => x.OrderId == id);
 
-            var order = await db.Order.Include(x => x.OrderId).Select(x =>
-              new OrderDTO {
-                  OrderId = x.OrderId,
-                  OrderDetails = x.OrderDetails.Select(y => new OrderDetailDTO {
-                      OrderId = y.OrderId,
-                      OrderDetailId = y.OrderDetailId,
-                      Product = new ProductDTO {
-                          productDesc = y.Product.productDesc,
-                          ProductId = y.Product.ProductId,
-                          productName = y.Product.productName,
-                          productPrice = y.Product.productPrice
-                      }
-                      //etc
-                  }).ToList(),
-                  orderStatusCode = x.orderStatusCode,
-                  purchaseDate = x.purchaseDate,
-                  quantityOrder = x.quantityOrder,
-                  totalOrderPrice = x.totalOrderPrice,
-                  User = new UserDTO {
-                      UserId = x.UserId,
-                      username = x.User.username,
-                      userInfo = new UserInfoDTO {
-                          phone = 23.ToString(),
-                          adress = x.User.UserInfo.adress,
-                          city = x.User.UserInfo.city,
-                          country = x.User.UserInfo.country,
-                          zip = x.User.UserInfo.zip,
-                      }
-                  }
-              }).SingleOrDefaultAsync(x => x.OrderId == id);
-
-            if (temp == null) {
+            if (order == null) {
                 return NotFound();
             } else {
-                return Ok(temp);
+                return Ok(order);
             }   
             //IQueryable<Order> temp = db.Order.Where(x => x.OrderId == id).ToList<Order>().AsQueryable();
             //var order = new OrderDTO {
