@@ -1,4 +1,5 @@
 ﻿using LoginRegister.Models;
+using Shop.Extensions;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
 using Shop.Models.DTO;
@@ -16,47 +17,65 @@ namespace LoginRegister.Controllers {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/Brands
-        [Authentication,Route("api/getBrands")]
+        [Authentication, Route("api/getBrands")]
         public async Task<IHttpActionResult> GetBrand() {
-            var brand = await db.Brand.Select(x => new BrandDTO {
+            var brand = await db.Brand.Select(x => new {
                 brandDesc = x.brandDesc,
                 BrandId = x.BrandId,
                 brandLogoUrl = x.brandLogoUrl,
                 brandName = x.brandName,
-                Products = x.Products.Select(y=>new ProductDTO {
-                   productDesc = y.productDesc,
-                   ProductId = y.ProductId,
-                   productName = y.productName,
-                   productPrice = y.productPrice 
+                Products = x.Products.Select(y => new {
+                    productDesc = y.productDesc,
+                    ProductId = y.ProductId,
+                    productName = y.productName,
+                    productPrice = y.productPrice,
+                    y.productStock,
+                    y.productStatus,
+                    y.productModifyDate
+
                 }).ToList()
             }).ToListAsync();
             return Ok(brand);
         }
 
         // GET: api/Brands/5
-        [ResponseType(typeof(Brand)),Authentication,Route("api/getBrands/search")]
+        [ResponseType(typeof(Brand)), Authentication, Route("api/getBrands/search")]
         public async Task<IHttpActionResult> GetBrand(int id) {
-            var brand = await db.Brand.Select(x => new BrandDTO {
+            var brand = await db.Brand.Select(x => new {
                 brandDesc = x.brandDesc,
                 BrandId = x.BrandId,
                 brandLogoUrl = x.brandLogoUrl,
                 brandName = x.brandName,
-                Products = x.Products.Select(y => new ProductDTO {
-                    productDesc = y.productDesc,
-                    ProductId = y.ProductId,
-                    productName = y.productName,
-                    productPrice = y.productPrice
+                Products = x.Products.Select(y => new {
+                    //productDesc = y.productDesc,
+                    //ProductId = y.ProductId,
+                    //productName = y.productName,
+                    //productPrice = y.productPrice,
+                    y.productStock,
+                    y.productStatus,
+                    y.productModifyDate,
+                    y.BrandId
                 }).ToList()
-            }).FirstOrDefaultAsync(x=> x.BrandId == id);
+            }).FirstOrDefaultAsync(x => x.BrandId == id);
+            //var brand = await db.Brand.Select(x=> new {
+            //    x.brandDesc,
+            //    x.BrandId,
+            //    x.brandLogoUrl,
+            //    x.brandName,
+            //    Product = x.Products.Select(y=>new {
+            //        y.productDesc
+            //    })
+            //}).FirstOrDefaultAsync(x=>x.BrandId == id);
             if (brand == null) {
                 return NotFound();
             }
+           
             return Ok(brand);
         }
 
         // PUT: api/Brands/5
         [ResponseType(typeof(void)), Authentication, Route("api/putBrands")]
-        public async Task<IHttpActionResult> PutBrand(int id, Brand brand) {
+        public async Task<IHttpActionResult> PutBrand(int id, BrandDTO brand) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -65,7 +84,11 @@ namespace LoginRegister.Controllers {
                 return BadRequest();
             }
 
-            db.Entry(brand).State = EntityState.Modified;
+
+            var brandDB = await db.Brand.FindAsync(id);
+            brand.CopyProperties(brandDB);
+
+            db.Entry(brandDB).State = EntityState.Modified;
 
             try {
                 await db.SaveChangesAsync();
@@ -81,7 +104,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Brands
-        [ResponseType(typeof(Brand)), Authentication, Route("api/postBrands",Name = "postBrands")]
+        [ResponseType(typeof(Brand)), Authentication, Route("api/postBrands", Name = "postBrands")]
         public async Task<IHttpActionResult> PostBrand(Brand brand) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

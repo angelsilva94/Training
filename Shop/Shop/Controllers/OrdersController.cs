@@ -75,7 +75,7 @@ namespace LoginRegister.Controllers {
                     }
                 }
 
-            }).ToListAsync();
+            }).AsNoTracking().ToListAsync();
 
 
             //query syntax way

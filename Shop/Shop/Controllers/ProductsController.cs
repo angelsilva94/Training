@@ -1,10 +1,12 @@
 ﻿using LoginRegister.Models;
+using Shop.Extensions;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -21,7 +23,10 @@ namespace LoginRegister.Controllers {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
                 productName = x.productName,
-                productPrice = x.productPrice
+                productPrice = x.productPrice,
+                productStatus = x.productStatus,
+                productStock = x.productStock,
+                productModifyDate = x.productModifyDate
             }).ToListAsync();
 
             return Ok(product);
@@ -34,8 +39,16 @@ namespace LoginRegister.Controllers {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
                 productName = x.productName,
-                productPrice = x.productPrice
-            }).SingleOrDefaultAsync(x=>x.ProductId==id);
+                productPrice = x.productPrice,
+                productModifyDate = x.productModifyDate,
+                productStatus = x.productStatus,
+                productStock = x.productStock
+            }).SingleOrDefaultAsync(x => x.ProductId == id);
+            //var temp = await db.Product.FindAsync(id);
+            //ProductDTO product = new ProductDTO();
+            //temp.CopyProperties(product);
+            //var product = db.Product.Project().To<ProductDTO>().SingleOrDefault(x=> x.ProductId == id );
+
             if (product == null) {
                 return NotFound();
             }
@@ -45,7 +58,7 @@ namespace LoginRegister.Controllers {
 
         // PUT: api/Products/5
         [ResponseType(typeof(void)),Authentication,Route("api/putProducts")]
-        public async Task<IHttpActionResult> PutProduct(int id, Product product) {
+        public async Task<IHttpActionResult> PutProduct(int id, ProductDTO product) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -54,7 +67,17 @@ namespace LoginRegister.Controllers {
                 return BadRequest();
             }
 
-            db.Entry(product).State = EntityState.Modified;
+            var productDb = db.Product.Find(id);
+            product.CopyProperties(productDb);
+            //productDb.productName = product.productName;
+            //productDb.productDesc = product.productDesc;
+            //productDb.productPrice = product.productPrice;
+            //productDb.productModifyDate = product.productModifyDate;
+            //productDb.productStatus = product.productStatus;
+            //productDb.productStock = productDb.productStock;
+            //productDb.BrandId = productDb.BrandId;
+
+            db.Entry(productDb).State = EntityState.Modified;
 
             try {
                 await db.SaveChangesAsync();
@@ -70,16 +93,18 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Products
-        [ResponseType(typeof(Product)),Authentication,Route("postProduct", Name = "postProduct")]
-        public async Task<IHttpActionResult> PostProduct(Product product) {
+        [ResponseType(typeof(ProductDTO)),Authentication,Route("postProduct", Name = "postProduct")]
+        public async Task<IHttpActionResult> PostProduct(ProductDTO product) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
+            Product productDb = new Product();
+            product.CopyProperties(productDb);
 
-            db.Product.Add(product);
+            db.Product.Add(productDb);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = product.ProductId }, product);
+            return CreatedAtRoute("postProduct", new { id = product.ProductId }, product);
         }
 
         //// DELETE: api/Products/5
