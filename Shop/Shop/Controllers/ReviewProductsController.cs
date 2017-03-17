@@ -1,5 +1,7 @@
 ﻿using LoginRegister.Models;
+using Shop.Extensions;
 using Shop.Models.DBModel;
+using Shop.Models.DTO;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -58,12 +60,13 @@ namespace LoginRegister.Controllers {
 
         // POST: api/ReviewProducts
         [ResponseType(typeof(ReviewProduct)), Route("api/postReviewProducts",Name = "postReviewProducts"),Authentication]
-        public async Task<IHttpActionResult> PostReviewProduct(ReviewProduct reviewProduct) {
+        public async Task<IHttpActionResult> PostReviewProduct(ReviewProductDTO reviewProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-
-            db.ReviewProduct.Add(reviewProduct);
+            var reviewDB = new ReviewProduct();
+            reviewProduct.CopyProperties(reviewDB);
+            db.ReviewProduct.Add(reviewDB);
 
             try {
                 await db.SaveChangesAsync();
@@ -75,7 +78,7 @@ namespace LoginRegister.Controllers {
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = reviewProduct.ProductId }, reviewProduct);
+            return CreatedAtRoute("postReviewProducts", new { id = reviewProduct.ProductId }, reviewProduct);
         }
 
         //// DELETE: api/ReviewProducts/5

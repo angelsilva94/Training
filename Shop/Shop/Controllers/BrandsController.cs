@@ -69,7 +69,7 @@ namespace LoginRegister.Controllers {
             if (brand == null) {
                 return NotFound();
             }
-           
+
             return Ok(brand);
         }
 

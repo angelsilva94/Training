@@ -42,7 +42,8 @@ namespace LoginRegister.Controllers {
                 productPrice = x.productPrice,
                 productModifyDate = x.productModifyDate,
                 productStatus = x.productStatus,
-                productStock = x.productStock
+                productStock = x.productStock,
+                
             }).SingleOrDefaultAsync(x => x.ProductId == id);
             //var temp = await db.Product.FindAsync(id);
             //ProductDTO product = new ProductDTO();
@@ -93,12 +94,12 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Products
-        [ResponseType(typeof(ProductDTO)),Authentication,Route("postProduct", Name = "postProduct")]
+        [ResponseType(typeof(ProductDTO)),Authentication,Route("api/postProduct", Name = "postProduct")]
         public async Task<IHttpActionResult> PostProduct(ProductDTO product) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            Product productDb = new Product();
+            var productDb = new Product();
             product.CopyProperties(productDb);
 
             db.Product.Add(productDb);

@@ -71,16 +71,25 @@
     <Compile Include="DBModel\UserType.cs" />
     <Compile Include="DTO\BrandDTO.cs" />
     <Compile Include="DTO\CategoryDTO.cs" />
+    <Compile Include="DTO\CategoryParentDTO.cs" />
     <Compile Include="DTO\Extension.cs" />
     <Compile Include="DTO\OrderDTO.cs" />
     <Compile Include="DTO\OrderDetailDTO.cs" />
     <Compile Include="DTO\ProductCategoryDTO.cs" />
     <Compile Include="DTO\ProductDTO.cs" />
+    <Compile Include="DTO\ReviewProductDTO.cs" />
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\UserInfoDTO.cs" />
+    <Compile Include="DTO\UserTypeDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.Common.dll" />
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

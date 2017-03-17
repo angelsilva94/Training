@@ -1,4 +1,5 @@
 ﻿using LoginRegister.Models;
+using Shop.Extensions;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
 using Shop.Models.DTO;
@@ -18,58 +19,61 @@ namespace LoginRegister.Controllers {
         // GET: api/ProductCategories
         [ResponseType(typeof(ProductCategory)), Route("api/getProductCategories")]
         public async Task<IHttpActionResult> GetProductCategory() {
-            var productCategory = await db.ProductCategory.Select(x => new  {
-                CategoryId = x.CategoryId,
-                Product = new  {
-                    productDesc = x.Product.productDesc,
-                    ProductId = x.Product.ProductId,
-                    productName = x.Product.productName,
-                    productPrice = x.Product.productPrice
-                },
-                Category = new  {
-                    categoryDesc = x.Category.categoryDesc,
-                    CategoryId = x.Category.CategoryId,
-                    categoryImage = x.Category.categoryImage,
-                    categoryName = x.Category.categoryName,
-                    //categoryParent = new CategoryDTO {
-                    //    categoryDesc = x.Category.categoryParent.categoryDesc,
-                    //    CategoryId = x.Category.categoryParent.CategoryId,
-                    //    categoryImage = x.Category.categoryParent.categoryImage,
-                    //    categoryName = x.Category.categoryParent.categoryName,
-                    //    ProductCategories = x.Category.ProductCategories.Select(y => new ProductCategoryDTO {
-                    //        CategoryId = y.CategoryId,
-                    //        ProductId = y.ProductId,
-                    
-
-                    //    }).ToList()
-                    //},
-
-                    ProductCategories = x.Category.ProductCategories.Select(y => new ProductCategoryDTO {
-                        CategoryId = y.CategoryId,
-                        ProductId = y.ProductId,
-                        Product = new ProductDTO {
-                            productDesc = y.Product.productDesc,
-                            ProductId = y.Product.ProductId,
-                            productName = y.Product.productName,
-                            productPrice = y.Product.productPrice
-                        },
-                        Category = new CategoryDTO {
-                            categoryDesc = x.Category.categoryDesc,
-                            CategoryId = x.Category.CategoryId,
-                            categoryImage = x.Category.categoryImage,
-                            categoryName = x.Category.categoryName
-                        }
-                    }).ToList(),
-                    categoryParent = new CategoryDTO {
-                        categoryDesc = x.Category.categoryDesc,
-                        CategoryId = x.Category.CategoryId,
-                        categoryImage = x.Category.categoryImage,
-                        categoryName = x.Category.categoryName,
+            //var productCategory = await db.ProductCategory.Select(x => new  {
+            //    CategoryId = x.CategoryId,
+            //    Product = new  {
+            //        productDesc = x.Product.productDesc,
+            //        ProductId = x.Product.ProductId,
+            //        productName = x.Product.productName,
+            //        productPrice = x.Product.productPrice
+            //    },
+            //    Category = new  {
+            //        categoryDesc = x.Category.categoryDesc,
+            //        CategoryId = x.Category.CategoryId,
+            //        categoryImage = x.Category.categoryImage,
+            //        categoryName = x.Category.categoryName,
+            //        //categoryParent = new CategoryDTO {
+            //        //    categoryDesc = x.Category.categoryParent.categoryDesc,
+            //        //    CategoryId = x.Category.categoryParent.CategoryId,
+            //        //    categoryImage = x.Category.categoryParent.categoryImage,
+            //        //    categoryName = x.Category.categoryParent.categoryName,
+            //        //    ProductCategories = x.Category.ProductCategories.Select(y => new ProductCategoryDTO {
+            //        //        CategoryId = y.CategoryId,
+            //        //        ProductId = y.ProductId,
 
 
-                    }
-                }
-            }).ToListAsync() ;
+            //        //    }).ToList()
+            //        //},
+            //        ProductCategories = x.Category.ProductCategories.Select(y => new ProductCategoryDTO {
+            //            CategoryId = y.CategoryId,
+            //            ProductId = y.ProductId,
+            //            Product = new ProductDTO {
+            //                productDesc = y.Product.productDesc,
+            //                ProductId = y.Product.ProductId,
+            //                productName = y.Product.productName,
+            //                productPrice = y.Product.productPrice
+            //            },
+            //            Category = new CategoryDTO {
+            //                categoryDesc = x.Category.categoryDesc,
+            //                CategoryId = x.Category.CategoryId,
+            //                categoryImage = x.Category.categoryImage,
+            //                categoryName = x.Category.categoryName
+            //            }
+            //        }).ToList(),
+            //        categoryParent = new CategoryDTO {
+            //            categoryDesc = x.Category.categoryDesc,
+            //            CategoryId = x.Category.CategoryId,
+            //            categoryImage = x.Category.categoryImage,
+            //            categoryName = x.Category.categoryName,
+            //        }
+            //    }
+            //}).ToListAsync() ;
+
+            var productCategory = db.ProductCategory.Select(x=>new {
+                x.Category,
+                x.CategoryId,
+                x.Product
+            });
             return Ok(productCategory);
         }
 
@@ -112,12 +116,13 @@ namespace LoginRegister.Controllers {
 
         // POST: api/ProductCategories
         [ResponseType(typeof(ProductCategory)), Authentication, Route("api/postProductCategories", Name = "postProductCategories")]
-        public async Task<IHttpActionResult> PostProductCategory(ProductCategory productCategory) {
+        public async Task<IHttpActionResult> PostProductCategory(ProductCategoryDTO productCategory) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-
-            db.ProductCategory.Add(productCategory);
+            var productCategoryDb = new ProductCategory();
+            productCategory.CopyProperties(productCategoryDb);
+            db.ProductCategory.Add(productCategoryDb);
 
             try {
                 await db.SaveChangesAsync();

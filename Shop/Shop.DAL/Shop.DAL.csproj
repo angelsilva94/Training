@@ -58,6 +58,14 @@
     <Compile Include="Migrations\201703131433541_1.1.Designer.cs">
       <DependentUpon>201703131433541_1.1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703171710163_1.2.cs" />
+    <Compile Include="Migrations\201703171710163_1.2.Designer.cs">
+      <DependentUpon>201703171710163_1.2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703171809431_1.3.cs" />
+    <Compile Include="Migrations\201703171809431_1.3.Designer.cs">
+      <DependentUpon>201703171809431_1.3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShopDBContext.cs" />
@@ -91,6 +99,16 @@
     <EmbeddedResource Include="Migrations\201703131433541_1.1.resx">
       <DependentUpon>201703131433541_1.1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703171710163_1.2.resx">
+      <DependentUpon>201703171710163_1.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703171809431_1.3.resx">
+      <DependentUpon>201703171809431_1.3.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.Common.dll" />
+    <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

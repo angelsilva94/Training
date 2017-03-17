@@ -9,7 +9,8 @@ namespace Shop.Models.Interfaces {
         string categoryImage { get; set; }
         string categoryName { get; set; }
         Category categoryParent { get; set; }
-        int categoryParentId { get; set; }
+        int? categoryParentId { get; set; }
         ICollection<ProductCategory> ProductCategories { get; set; }
+        ICollection<Category> childrenCategory { get; set; }
     }
 }

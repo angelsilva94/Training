@@ -1,4 +1,5 @@
 ﻿using Shop.Models.DBModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 
 namespace LoginRegister.Models {
@@ -19,5 +20,14 @@ namespace LoginRegister.Models {
         public DbSet<ProductCategory> ProductCategory { set; get; }
         public DbSet<ReviewProduct> ReviewProduct { set; get; }
         public DbSet<UserInfo> UserInfo { set; get; }
+
+        public System.Data.Entity.DbSet<Shop.Models.DBModel.UserType> UserTypes { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+            modelBuilder.Entity<Category>().HasKey(x => x.CategoryId).
+                Property(x => x.CategoryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<Category>().HasOptional(x => x.categoryParent).WithMany(x => x.childrenCategory).HasForeignKey(x => x.categoryParentId).WillCascadeOnDelete(false);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
