@@ -28,7 +28,7 @@ namespace Shop.Models.DBModel {
 
         //1-1 Category-Category
         public virtual Category categoryParent { set; get; }
-        public virtual ICollection<Category> childrenCategory { get; set; }
+      
 
     }
 }

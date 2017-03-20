@@ -70,9 +70,36 @@ namespace LoginRegister.Controllers {
             //}).ToListAsync() ;
 
             var productCategory = db.ProductCategory.Select(x=>new {
-                x.Category,
+                
                 x.CategoryId,
-                x.Product
+                x.ProductId,
+                Product = new {
+                    x.Product.ProductId,
+                    x.Product.productName,
+                    x.Product.productPrice,
+                    x.Product.productPublishDate,
+                    x.Product.productUrl,
+                    x.Product.BrandId,
+                    Brand = new {
+                        x.Product.Brand.BrandId,
+                        x.Product.Brand.brandDesc,
+                        x.Product.Brand.brandLogoUrl,
+                        x.Product.Brand.brandName,
+                        
+                    }
+                },
+                Category = new {
+                    x.Category.CategoryId,
+                    x.Category.categoryDesc,
+                    x.Category.categoryName,
+                    x.Category.categoryParent,
+                    x.Category.categoryParentId,
+                    x.Category.categoryImage
+                }
+                
+                //x.Product
+                
+                
             });
             return Ok(productCategory);
         }
@@ -80,7 +107,10 @@ namespace LoginRegister.Controllers {
         // GET: api/ProductCategories/5
         [ResponseType(typeof(ProductCategory)),Route("api/getProductCategories/search")]
         public async Task<IHttpActionResult> GetProductCategory(int id) {
-            ProductCategory productCategory = await db.ProductCategory.FindAsync(id);
+            var productCategory = db.ProductCategory.Select(x=>new {
+                x.CategoryId,
+                x.ProductId
+            });
             if (productCategory == null) {
                 return NotFound();
             }

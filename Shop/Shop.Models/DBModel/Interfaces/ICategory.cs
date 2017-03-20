@@ -10,7 +10,6 @@ namespace Shop.Models.Interfaces {
         string categoryName { get; set; }
         Category categoryParent { get; set; }
         int? categoryParentId { get; set; }
-        ICollection<ProductCategory> ProductCategories { get; set; }
-        ICollection<Category> childrenCategory { get; set; }
+        //ICollection<Category> subCategories { set; get; }
     }
 }

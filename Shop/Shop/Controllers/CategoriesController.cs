@@ -31,16 +31,18 @@ namespace Shop.Controllers
                 x.CategoryId,
                 x.categoryImage,
                 x.categoryName,
-                x.categoryParent,
-                x.categoryParentId,
-                x.ProductCategories
-
+                categoryParent = new {
+                    categoryDesc = x.categoryParent.categoryDesc ?? "",
+                    ///CategoryId = x.categoryParent.CategoryId ,
+                    categoryImage = x.categoryParent.categoryImage ?? "",
+                    categoryName = x.categoryParent.categoryName ?? "",
+                }
             }).ToListAsync();
             return Ok(category);
         }
 
         // GET: api/Categories/5
-        [ResponseType(typeof(Category))]
+        [ResponseType(typeof(Category)),Route("api/searchCategory")]
         public async Task<IHttpActionResult> GetCategory(int id)
         {
             var category = await db.Category.Where(x => x.CategoryId == id).Select(x=>new {
@@ -48,13 +50,17 @@ namespace Shop.Controllers
                 x.CategoryId,
                 x.categoryImage,
                 x.categoryName,
-                x.categoryParentId,
-                x.ProductCategories,
+                //x.categoryParentId,
+                //x.ProductCategories,
                 //categoryParent= new {
                 //    x.categoryParent.CategoryId
                 //},
-                x.categoryParent,
-                x.childrenCategory
+                //categoryParent = new {
+                //    x.categoryParent.categoryParentId,  
+                //    x.categoryParent.ProductCategories
+                //}
+                //x.childrenCategory
+                x.categoryParent
             }).SingleOrDefaultAsync();
             if (category == null)
             {
@@ -116,6 +122,8 @@ namespace Shop.Controllers
             categoryDb.categoryName = category.categoryName;
             categoryDb.categoryDesc = category.categoryDesc;
             categoryDb.categoryImage = category.categoryImage;
+            categoryDb.categoryParentId = category.categoryParentId.HasValue ? category.categoryParentId : null;
+            
             //category.CopyProperties(categoryDb);
             db.Category.Add(categoryDb);
             await db.SaveChangesAsync();

@@ -24,9 +24,11 @@ namespace LoginRegister.Models {
         public System.Data.Entity.DbSet<Shop.Models.DBModel.UserType> UserTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
+
+
             modelBuilder.Entity<Category>().HasKey(x => x.CategoryId).
                 Property(x => x.CategoryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            modelBuilder.Entity<Category>().HasOptional(x => x.categoryParent).WithMany(x => x.childrenCategory).HasForeignKey(x => x.categoryParentId).WillCascadeOnDelete(false);
+            modelBuilder.Entity<Category>().HasOptional(x => x.categoryParent).WithMany().HasForeignKey(x => x.categoryParentId).WillCascadeOnDelete(false);
             base.OnModelCreating(modelBuilder);
         }
     }
