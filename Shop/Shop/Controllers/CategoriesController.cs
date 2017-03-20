@@ -32,10 +32,10 @@ namespace Shop.Controllers
                 x.categoryImage,
                 x.categoryName,
                 categoryParent = new {
-                    categoryDesc = x.categoryParent.categoryDesc ?? "",
-                    ///CategoryId = x.categoryParent.CategoryId ,
-                    categoryImage = x.categoryParent.categoryImage ?? "",
-                    categoryName = x.categoryParent.categoryName ?? "",
+                    categoryDesc = x.categoryParent.categoryDesc ,
+                    CategoryId = (int?) x.categoryParent.CategoryId ,
+                    categoryImage = x.categoryParent.categoryImage ,
+                    categoryName = x.categoryParent.categoryName ,
                 }
             }).ToListAsync();
             return Ok(category);
