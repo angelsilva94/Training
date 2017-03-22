@@ -28,8 +28,16 @@ namespace LoginRegister.Models {
 
             modelBuilder.Entity<Category>().HasKey(x => x.CategoryId).
                 Property(x => x.CategoryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
             modelBuilder.Entity<Category>().HasOptional(x => x.categoryParent).WithMany().HasForeignKey(x => x.categoryParentId).WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Category>().HasMany(x => x.ProductCategories).WithRequired(x => x.Category).HasForeignKey(x=>x.CategoryId);
+            modelBuilder.Entity<Product>().HasMany(x => x.ProductCategories).WithRequired(x => x.Product).HasForeignKey(x => x.ProductId);
+
+
             base.OnModelCreating(modelBuilder);
+
+
         }
     }
 }

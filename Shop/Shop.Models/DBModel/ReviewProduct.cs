@@ -6,7 +6,7 @@ namespace Shop.Models.DBModel {
 
     public class ReviewProduct : IReviewProduct {
 
-        [Required]
+        
         public int ReviewProductId { set; get; }
 
         [Required]
@@ -16,7 +16,7 @@ namespace Shop.Models.DBModel {
         public int ProductId { set; get; }
 
         [Required]
-        public int ratingReview { set; get; }
+        public double ratingReview { set; get; }
 
         [Required]
         [Key]

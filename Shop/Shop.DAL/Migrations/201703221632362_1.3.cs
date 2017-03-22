@@ -7,10 +7,12 @@ namespace Shop.DAL.Migrations
     {
         public override void Up()
         {
+            AlterColumn("dbo.ReviewProducts", "ratingReview", c => c.Double(nullable: false));
         }
         
         public override void Down()
         {
+            AlterColumn("dbo.ReviewProducts", "ratingReview", c => c.Int(nullable: false));
         }
     }
 }

@@ -17,14 +17,38 @@ namespace LoginRegister.Controllers {
 
         // GET: api/ReviewProducts
         [Route("api/getReviewProducts")]
-        public IQueryable<ReviewProduct> GetReviewProduct() {
-            return db.ReviewProduct;
+        public async Task<IHttpActionResult> GetReviewProduct() {
+            var review =await db.ReviewProduct.Select(x => new {
+                x.ratingReview,
+                x.reviewDesc,
+                x.ReviewProductId,
+                x.UserId,
+                User = new {
+                    x.User.UserId,
+                    x.User.username
+                },
+                Product = new {
+                    x.Product.ProductId,
+                    x.Product.productName
+                },
+               
+            }).ToListAsync();
+
+            return Ok(review);
         }
 
         // GET: api/ReviewProducts/5
         [ResponseType(typeof(ReviewProduct)), Route("api/getReviewProducts/search")]
         public async Task<IHttpActionResult> GetReviewProduct(int id) {
-            ReviewProduct reviewProduct = await db.ReviewProduct.FindAsync(id);
+            var reviewProduct = await db.ReviewProduct.Select(x => new {
+                x.ratingReview,
+                x.reviewDesc,
+                x.ReviewProductId,
+                x.UserId,
+                x.User,
+                x.Product
+
+            }).SingleOrDefaultAsync(x=>x.ReviewProductId==id);
             if (reviewProduct == null) {
                 return NotFound();
             }
@@ -34,7 +58,7 @@ namespace LoginRegister.Controllers {
 
         // PUT: api/ReviewProducts/5
         [ResponseType(typeof(void)),Route("api/putReviewProducts"),Authentication]
-        public async Task<IHttpActionResult> PutReviewProduct(int id, ReviewProduct reviewProduct) {
+        public async Task<IHttpActionResult> PutReviewProduct(int id, ReviewProductDTO reviewProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -42,8 +66,9 @@ namespace LoginRegister.Controllers {
             if (id != reviewProduct.ProductId) {
                 return BadRequest();
             }
-
-            db.Entry(reviewProduct).State = EntityState.Modified;
+            var reviewProductDb = db.ReviewProduct.Find(id);
+            reviewProduct.CopyProperties(reviewProductDb);
+            db.Entry(reviewProductDb).State = EntityState.Modified;
 
             try {
                 await db.SaveChangesAsync();

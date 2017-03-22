@@ -14,6 +14,6 @@ namespace Shop.Models.DTO {
         public int? categoryParentId { set; get; }
         public  ICollection<ProductCategoryDTO> ProductCategories { set; get; }
         public  CategoryDTO categoryParent { set; get; }
-        public  ICollection<CategoryDTO> childrenCategory { get; set; }
+        
     }
 }

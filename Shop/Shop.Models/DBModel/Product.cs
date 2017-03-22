@@ -51,5 +51,6 @@ namespace Shop.Models.DBModel {
 
         //1-N ProductModel-OrderProductModel
         public virtual ICollection<OrderDetail> OrderDetails { set; get; }
+        //public virtual ICollection<Category> Categories { set; get; }
     }
 }

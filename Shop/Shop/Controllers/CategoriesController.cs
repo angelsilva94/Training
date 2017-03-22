@@ -15,37 +15,29 @@ using Shop.Models.DTO;
 using Shop.Extensions;
 using LoginRegister;
 
-namespace Shop.Controllers
-{
+namespace Shop.Controllers {
     [RoutePrefix("category")]
-    public class CategoriesController : ApiController
-    {
+    public class CategoriesController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/Categories
-        [Route("api/getCategory"),Authentication]
-        public async Task<IHttpActionResult> GetCategory()
-        {
-            var category = await db.Category.Select(x=>new {
+        [Route("api/getCategory"), Authentication]
+        public async Task<IHttpActionResult> GetCategory() {
+            var category = await db.Category.Select(x => new {
                 x.categoryDesc,
                 x.CategoryId,
                 x.categoryImage,
                 x.categoryName,
-                categoryParent = new {
-                    categoryDesc = x.categoryParent.categoryDesc ,
-                    CategoryId = (int?) x.categoryParent.CategoryId ,
-                    categoryImage = x.categoryParent.categoryImage ,
-                    categoryName = x.categoryParent.categoryName ,
-                }
+                x.categoryParent
             }).ToListAsync();
             return Ok(category);
         }
 
         // GET: api/Categories/5
-        [ResponseType(typeof(Category)),Route("api/searchCategory")]
-        public async Task<IHttpActionResult> GetCategory(int id)
-        {
-            var category = await db.Category.Where(x => x.CategoryId == id).Select(x=>new {
+        [ResponseType(typeof(Category)), Route("api/searchCategory")]
+        public async Task<IHttpActionResult> GetCategory(int id) {
+
+            var category = await db.Category.Where(x => x.CategoryId == id).Select(x => new {
                 x.categoryDesc,
                 x.CategoryId,
                 x.categoryImage,
@@ -62,8 +54,7 @@ namespace Shop.Controllers
                 //x.childrenCategory
                 x.categoryParent
             }).SingleOrDefaultAsync();
-            if (category == null)
-            {
+            if (category == null) {
                 return NotFound();
             }
 
@@ -71,19 +62,16 @@ namespace Shop.Controllers
         }
 
         // PUT: api/Categories/5
-        [ResponseType(typeof(void)),Route("api/putCategory")]
-        public async Task<IHttpActionResult> PutCategory(int id, CategoryDTO category)
-        {
-            if (!ModelState.IsValid)
-            {
+        [ResponseType(typeof(void)), Route("api/putCategory")]
+        public async Task<IHttpActionResult> PutCategory(int id, CategoryDTO category) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            if (id != category.CategoryId)
-            {
+            if (id != category.CategoryId) {
                 return BadRequest();
             }
-           
+
 
             var categoryDb = db.Category.Find(id);
             categoryDb.categoryParentId = category.categoryParentId;
@@ -91,18 +79,12 @@ namespace Shop.Controllers
 
             db.Entry(categoryDb).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await db.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CategoryExists(id))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!CategoryExists(id)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -111,19 +93,18 @@ namespace Shop.Controllers
         }
 
         // POST: api/Categories
-        [ResponseType(typeof(Category)),Authentication,Route("api/postCategory",Name ="postCategory")]
-        public async Task<IHttpActionResult> PostCategory(CategoryDTO category)
-        {
-            if (!ModelState.IsValid)
-            {
+        [ResponseType(typeof(Category)), Authentication, Route("api/postCategory", Name = "postCategory")]
+        public async Task<IHttpActionResult> PostCategory(CategoryDTO category) {
+            if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            var categoryDb = new Category();
-            categoryDb.categoryName = category.categoryName;
-            categoryDb.categoryDesc = category.categoryDesc;
-            categoryDb.categoryImage = category.categoryImage;
-            categoryDb.categoryParentId = category.categoryParentId.HasValue ? category.categoryParentId : null;
-            
+            var categoryDb = new Category {
+                categoryName = category.categoryName,
+                categoryDesc = category.categoryDesc,
+                categoryImage = category.categoryImage,
+                categoryParentId = category.categoryParentId.HasValue ? category.categoryParentId : null
+            };
+
             //category.CopyProperties(categoryDb);
             db.Category.Add(categoryDb);
             await db.SaveChangesAsync();
@@ -133,11 +114,9 @@ namespace Shop.Controllers
 
         // DELETE: api/Categories/5
         [ResponseType(typeof(Category))]
-        public async Task<IHttpActionResult> DeleteCategory(int id)
-        {
-            Category category = await db.Category.FindAsync(id);
-            if (category == null)
-            {
+        public async Task<IHttpActionResult> DeleteCategory(int id) {
+            var category = await db.Category.FindAsync(id);
+            if (category == null) {
                 return NotFound();
             }
 
@@ -147,17 +126,14 @@ namespace Shop.Controllers
             return Ok(category);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing) {
                 db.Dispose();
             }
             base.Dispose(disposing);
         }
 
-        private bool CategoryExists(int id)
-        {
+        private bool CategoryExists(int id) {
             return db.Category.Count(e => e.CategoryId == id) > 0;
         }
     }

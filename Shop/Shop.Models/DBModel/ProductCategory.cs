@@ -6,14 +6,17 @@ namespace Shop.Models.DBModel {
 
     public class ProductCategory : IProductCategory {
 
+
+        public int ProductCategoryId { set; get; }
+
         [Required]
-        [Key]
+        //[Key]
         [ForeignKey("Category")]
         [Column(Order = 1)]
         public int CategoryId { set; get; }
 
         [Required]
-        [Key]
+        //[Key]
         [ForeignKey("Product")]
         [Column(Order = 2)]
         public int ProductId { set; get; }

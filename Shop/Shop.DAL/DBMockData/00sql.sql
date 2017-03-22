@@ -9,6 +9,7 @@ delete from ReviewProducts where 1=1
 delete from UserInfoes where 1=1
 delete from Users where 1=1
 
+
 DBCC CHECKIDENT (OrderDetails, RESEED, 0)
 DBCC CHECKIDENT (Brands, RESEED, 0)
 DBCC CHECKIDENT (Categories, RESEED, 0)

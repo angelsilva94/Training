@@ -6,7 +6,7 @@ namespace Shop.Models.DBModel {
 
     public class Category : ICategory {
 
-        
+
         //[Key]
         public int CategoryId { set; get; }
 
@@ -19,7 +19,7 @@ namespace Shop.Models.DBModel {
         [Required]
         public string categoryImage { set; get; }
 
-        
+
         //[ForeignKey("categoryParent")]
         public int? categoryParentId { set; get; }
 
@@ -28,7 +28,7 @@ namespace Shop.Models.DBModel {
 
         //1-1 Category-Category
         public virtual Category categoryParent { set; get; }
-      
+       // public virtual ICollection<Product> Products { set; get; }
 
     }
 }

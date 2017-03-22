@@ -70,7 +70,7 @@ namespace LoginRegister.Controllers {
             //}).ToListAsync() ;
 
             var productCategory = db.ProductCategory.Select(x=>new {
-                
+                x.ProductCategoryId,
                 x.CategoryId,
                 x.ProductId,
                 Product = new {
@@ -79,7 +79,7 @@ namespace LoginRegister.Controllers {
                     x.Product.productPrice,
                     x.Product.productPublishDate,
                     x.Product.productUrl,
-                    x.Product.BrandId,
+                    //x.Product.BrandId,
                     Brand = new {
                         x.Product.Brand.BrandId,
                         x.Product.Brand.brandDesc,
@@ -107,10 +107,12 @@ namespace LoginRegister.Controllers {
         // GET: api/ProductCategories/5
         [ResponseType(typeof(ProductCategory)),Route("api/getProductCategories/search")]
         public async Task<IHttpActionResult> GetProductCategory(int id) {
-            var productCategory = db.ProductCategory.Select(x=>new {
-                x.CategoryId,
-                x.ProductId
-            });
+            var productCategory = await db.ProductCategory.Select(x => new {
+                x.ProductCategoryId,
+                x.Product,
+                x.Category,
+               
+            }).SingleOrDefaultAsync(x=>x.ProductCategoryId==id);
             if (productCategory == null) {
                 return NotFound();
             }
@@ -120,16 +122,17 @@ namespace LoginRegister.Controllers {
 
         // PUT: api/ProductCategories/5
         [ResponseType(typeof(void)),Authentication, Route("api/putProductCategories")]
-        public async Task<IHttpActionResult> PutProductCategory(int id, ProductCategory productCategory) {
+        public async Task<IHttpActionResult> PutProductCategory(int id, ProductCategoryDTO productCategory) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
 
-            if (id != productCategory.CategoryId) {
+            if (id != productCategory.ProductCategoryId) {
                 return BadRequest();
             }
-
-            db.Entry(productCategory).State = EntityState.Modified;
+            var productCategoryDb = db.ProductCategory.Find(productCategory.ProductCategoryId);
+            productCategory.CopyProperties(productCategoryDb);
+            db.Entry(productCategoryDb).State = EntityState.Modified;
 
             try {
                 await db.SaveChangesAsync();

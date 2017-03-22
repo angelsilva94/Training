@@ -50,25 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Migrations\201703101807157_1.0.cs" />
-    <Compile Include="Migrations\201703101807157_1.0.Designer.cs">
-      <DependentUpon>201703101807157_1.0.cs</DependentUpon>
+    <Compile Include="Migrations\201703221632362_1.3.cs" />
+    <Compile Include="Migrations\201703221632362_1.3.Designer.cs">
+      <DependentUpon>201703221632362_1.3.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703131433541_1.1.cs" />
-    <Compile Include="Migrations\201703131433541_1.1.Designer.cs">
-      <DependentUpon>201703131433541_1.1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703171710163_1.2.cs" />
-    <Compile Include="Migrations\201703171710163_1.2.Designer.cs">
-      <DependentUpon>201703171710163_1.2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703171809431_1.3.cs" />
-    <Compile Include="Migrations\201703171809431_1.3.Designer.cs">
-      <DependentUpon>201703171809431_1.3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703201558148_1.4.cs" />
-    <Compile Include="Migrations\201703201558148_1.4.Designer.cs">
-      <DependentUpon>201703201558148_1.4.cs</DependentUpon>
+    <Compile Include="Migrations\201703221635055_1.4.cs" />
+    <Compile Include="Migrations\201703221635055_1.4.Designer.cs">
+      <DependentUpon>201703221635055_1.4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,27 +83,19 @@
     <Content Include="DBMockData\08OrderProducts.sql" />
     <Content Include="DBMockData\07Orders.sql" />
     <Content Include="DBMockData\09OrderProducts.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703101807157_1.0.resx">
-      <DependentUpon>201703101807157_1.0.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703131433541_1.1.resx">
-      <DependentUpon>201703131433541_1.1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703171710163_1.2.resx">
-      <DependentUpon>201703171710163_1.2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703171809431_1.3.resx">
-      <DependentUpon>201703171809431_1.3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703201558148_1.4.resx">
-      <DependentUpon>201703201558148_1.4.cs</DependentUpon>
-    </EmbeddedResource>
+    <Content Include="DBMockData\10Categories.sql" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.Common.dll" />
     <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703221632362_1.3.resx">
+      <DependentUpon>201703221632362_1.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703221635055_1.4.resx">
+      <DependentUpon>201703221635055_1.4.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
