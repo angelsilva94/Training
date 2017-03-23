@@ -37,26 +37,34 @@ namespace Shop.Controllers {
         [ResponseType(typeof(Category)), Route("api/searchCategory")]
         public async Task<IHttpActionResult> GetCategory(int id) {
 
-            var category = await db.Category.Where(x => x.CategoryId == id).Select(x => new {
+            //var category = await db.Category.Where(x => x.CategoryId == id).Select(x => new {
+            //    x.categoryDesc,
+            //    x.CategoryId,
+            //    x.categoryImage,
+            //    x.categoryName,
+            //    //x.categoryParentId,
+            //    //x.ProductCategories,
+            //    //categoryParent= new {
+            //    //    x.categoryParent.CategoryId
+            //    //},
+            //    //categoryParent = new {
+            //    //    x.categoryParent.categoryParentId,  
+            //    //    x.categoryParent.ProductCategories
+            //    //}
+            //    //x.childrenCategory
+            //    x.categoryParent
+            //}).SingleOrDefaultAsync();
+            var category = await db.Category.Select(x => new {
                 x.categoryDesc,
                 x.CategoryId,
                 x.categoryImage,
                 x.categoryName,
-                //x.categoryParentId,
-                //x.ProductCategories,
-                //categoryParent= new {
-                //    x.categoryParent.CategoryId
-                //},
-                //categoryParent = new {
-                //    x.categoryParent.categoryParentId,  
-                //    x.categoryParent.ProductCategories
-                //}
-                //x.childrenCategory
                 x.categoryParent
-            }).SingleOrDefaultAsync();
+            }).SingleOrDefaultAsync(x => x.CategoryId == id);
             if (category == null) {
                 return NotFound();
             }
+
 
             return Ok(category);
         }
@@ -112,19 +120,19 @@ namespace Shop.Controllers {
             return CreatedAtRoute("postCategory", new { id = category.CategoryId }, category);
         }
 
-        // DELETE: api/Categories/5
-        [ResponseType(typeof(Category))]
-        public async Task<IHttpActionResult> DeleteCategory(int id) {
-            var category = await db.Category.FindAsync(id);
-            if (category == null) {
-                return NotFound();
-            }
+        //// DELETE: api/Categories/5
+        //[ResponseType(typeof(Category))]
+        //public async Task<IHttpActionResult> DeleteCategory(int id) {
+        //    var category = await db.Category.FindAsync(id);
+        //    if (category == null) {
+        //        return NotFound();
+        //    }
 
-            db.Category.Remove(category);
-            await db.SaveChangesAsync();
+        //    db.Category.Remove(category);
+        //    await db.SaveChangesAsync();
 
-            return Ok(category);
-        }
+        //    return Ok(category);
+        //}
 
         protected override void Dispose(bool disposing) {
             if (disposing) {

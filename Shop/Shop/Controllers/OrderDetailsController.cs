@@ -12,6 +12,8 @@ using System.Web.Http.Description;
 using LoginRegister.Models;
 using Shop.Models.DBModel;
 using LoginRegister;
+using Shop.Models.DBModel.DTO;
+using Shop.Extensions;
 
 namespace Shop.Controllers
 {
@@ -21,17 +23,57 @@ namespace Shop.Controllers
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/OrderDetails
-        [ResponseType(typeof(OrderDetail)), Authentication, Route("getOrderDetails")]
-        public IQueryable<OrderDetail> GetOrderDetails()
+        [ResponseType(typeof(OrderDetail)), Authentication, Route("api/getOrderDetails")]
+        public async Task <IHttpActionResult> GetOrderDetails()
         {
-            return db.OrderDetails;
+            var orderDetail = await db.OrderDetails.Select(x=>new {
+                x.OrderDetailId,
+                Product = new {
+                    x.Product.ProductId,
+                    x.Product.productName,
+                    x.Product.productPrice,
+                    x.Product.productUrl,
+                    x.Product.productDesc,
+                    x.Product.Brand.brandName,
+                    x.Product.Brand.brandDesc
+                },
+                Order = new {
+                    x.Order.OrderId,
+                    x.Order.OrderStatus.orderStatusCod,
+                    x.Order.OrderStatus.orderStatusDesc,
+                    x.Order.purchaseDate,
+                    x.Order.quantityOrder,
+                    x.Order.totalOrderPrice,
+                }
+            }).ToListAsync();
+            return Ok(orderDetail);
         }
 
         // GET: api/OrderDetails/5
-        [ResponseType(typeof(OrderDetail)), Authentication,Route("getOrderDetails/search")]
+        [ResponseType(typeof(OrderDetail)), Authentication,Route("api/getOrderDetails/search")]
         public async Task<IHttpActionResult> GetOrderDetail(int id)
         {
-            OrderDetail orderDetail = await db.OrderDetails.FindAsync(id);
+            var orderDetail = await db.OrderDetails.Select(x=>new {
+                x.OrderDetailId,
+                Product = new {
+                    x.Product.ProductId,
+                    x.Product.productName,
+                    x.Product.productPrice,
+                    x.Product.productUrl,
+                    x.Product.productDesc,
+                    x.Product.Brand.brandName,
+                    x.Product.Brand.brandDesc
+                },
+                Order = new {
+                    x.Order.OrderId,
+                    x.Order.OrderStatus.orderStatusCod,
+                    x.Order.OrderStatus.orderStatusDesc,
+                    x.Order.purchaseDate,
+                    x.Order.quantityOrder,
+                    x.Order.totalOrderPrice,
+                }
+            }).SingleOrDefaultAsync();
+
             if (orderDetail == null)
             {
                 return NotFound();
@@ -41,8 +83,8 @@ namespace Shop.Controllers
         }
 
         // PUT: api/OrderDetails/5
-        [ResponseType(typeof(void)),Route("api/Put"),Authentication]
-        public async Task<IHttpActionResult> PutOrderDetail(int id, OrderDetail orderDetail)
+        [ResponseType(typeof(void)),Route("api/putOrderDetails"),Authentication]
+        public async Task<IHttpActionResult> PutOrderDetail(int id, OrderDetailDTO orderDetail)
         {
             if (!ModelState.IsValid)
             {
@@ -53,8 +95,9 @@ namespace Shop.Controllers
             {
                 return BadRequest();
             }
-
-            db.Entry(orderDetail).State = EntityState.Modified;
+            var orderDetailDb = db.OrderDetails.Find(id);
+            orderDetail.CopyProperties(orderDetailDb);
+            db.Entry(orderDetailDb).State = EntityState.Modified;
 
             try
             {
@@ -77,7 +120,7 @@ namespace Shop.Controllers
 
         // POST: api/OrderDetails
         
-        [Route("api/Post",Name = "OrderDetail"), Authentication, ResponseType(typeof(OrderDetail))]
+        [Route("api/postOrderDetails", Name = "OrderDetail"), Authentication, ResponseType(typeof(OrderDetail))]
         public async Task<IHttpActionResult> PostOrderDetail(OrderDetail orderDetail)
         {
             if (!ModelState.IsValid)

@@ -24,28 +24,32 @@ namespace Shop.Controllers
 
         // GET: api/UserTypes
         [Authentication,Route("api/getUserTypes")]
-        public IQueryable<UserType> GetUserTypes()
+        public async Task<IHttpActionResult> GetUserTypes()
         {
-            var userType = db.UserTypes.Select(x=> new {
+            var userType = await db.UserTypes.Select(x=> new {
                 x.type,
                 x.typeDesc,
-                x.User,
                 x.UserTypeId
 
-            });
-            return db.UserTypes;
+            }).ToListAsync();
+            return Ok(userType);
         }
 
         // GET: api/UserTypes/5
         [ResponseType(typeof(UserType)),Route("api/getUserTypes")]
         public async Task<IHttpActionResult> GetUserType(int id)
         {
-            var userType =  await db.UserTypes.Where(x=>x.UserTypeId == id).Select(x=>new {
-                x.UserTypeId,
-                x.type,
+            //var userType =  await db.UserTypes.Where(x=>x.UserTypeId == id).Select(x=>new {
+            //    x.UserTypeId,
+            //    x.type,
+            //    x.typeDesc,
+            //    //x.User
+            //}).SingleOrDefaultAsync();
+            var userType = await db.UserTypes.Select(x=>new {
                 x.typeDesc,
-                x.User
-            }).SingleOrDefaultAsync();
+                x.UserTypeId,
+                x.UserId
+            }).SingleOrDefaultAsync(x=>x.UserTypeId == id );
             if (userType == null)
             {
                 return NotFound();
@@ -56,7 +60,7 @@ namespace Shop.Controllers
 
         // PUT: api/UserTypes/5
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutUserType(int id, UserType userType)
+        public async Task<IHttpActionResult> PutUserType(int id, UserTypeDTO userType)
         {
             if (!ModelState.IsValid)
             {
@@ -67,8 +71,10 @@ namespace Shop.Controllers
             {
                 return BadRequest();
             }
+            var userTypeDb = db.UserTypes.Find(id);
+            userType.CopyProperties(userTypeDb);
 
-            db.Entry(userType).State = EntityState.Modified;
+            db.Entry(userTypeDb).State = EntityState.Modified;
 
             try
             {
@@ -102,7 +108,7 @@ namespace Shop.Controllers
             db.UserTypes.Add(userTypeDb);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("ostUserType", new { id = userType.UserTypeId }, userType);
+            return CreatedAtRoute("postUserType", new { id = userType.UserTypeId }, userType);
         }
 
         // DELETE: api/UserTypes/5

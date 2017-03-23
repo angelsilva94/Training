@@ -1,4 +1,5 @@
 ﻿using LoginRegister.Models;
+using Shop.Extensions;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
 using System.Collections.Generic;
@@ -244,7 +245,7 @@ namespace LoginRegister.Controllers {
 
         // PUT: api/Orders/5
         [ResponseType(typeof(void)),Route("api/putOrder"),Authentication]
-        public async Task<IHttpActionResult> PutOrder(int id, Order order) {
+        public async Task<IHttpActionResult> PutOrder(int id, OrderDTO order) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -252,8 +253,11 @@ namespace LoginRegister.Controllers {
             if (id != order.OrderId) {
                 return BadRequest();
             }
-
-            db.Entry(order).State = EntityState.Modified;
+            var orderDb = db.Order.Find(id);
+            order.CopyProperties(orderDb);
+            var aux = 10;
+            db.Entry(orderDb).State = EntityState.Modified;
+            
 
             try {
                 await db.SaveChangesAsync();

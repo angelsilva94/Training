@@ -6,7 +6,7 @@ namespace Shop.Models.DBModel {
 
     public class Brand : IBrand {
 
-        [Required]
+        //[Required]
         //[Key]
         public int BrandId { set; get; }
 

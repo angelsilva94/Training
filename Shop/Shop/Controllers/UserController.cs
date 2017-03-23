@@ -29,7 +29,7 @@ namespace LoginRegister.Controllers {
         // GET: api/User
         //[Authentication]
         [Route("api/getUser"), Authentication]
-        public IQueryable<UserDTO> GetUser() {
+        public async Task<IHttpActionResult> GetUser() {
 
             //var user = from x in db.User
             //           select new UserDTO() {
@@ -57,7 +57,7 @@ namespace LoginRegister.Controllers {
             //                   //x.UserInfo.country,
             //                   //x.UserInfo.phone,
             //           };
-            var user = db.User.Select(x => new UserDTO {
+            var user = await db.User.Select(x => new UserDTO {
                 UserId = x.UserId,
                 username = x.username,
                 password = x.password,
@@ -76,15 +76,15 @@ namespace LoginRegister.Controllers {
                     phone = x.UserInfo.phone,
                 }
 
-            });
+            }).ToListAsync();
             //string hola = "adsfdfa";
             //bool xyz= hola.Check();
 
-            return user;
+            return Ok(user);
         }
 
         // GET: api/User/5
-        [ResponseType(typeof(UserDTO)),Authentication,Route("api/getUser")]
+        [ResponseType(typeof(User)),Authentication,Route("api/getUser")]
         //[Authentication]
         public async Task<IHttpActionResult> GetUserModel(int id) {
             //IQueryable<User> temp = db.User.Where(x => x.UserId == id).ToList<User>().AsQueryable();
@@ -140,7 +140,7 @@ namespace LoginRegister.Controllers {
             //  });
 
             //EAGER LOADING WITH LINQ METHOD SYNTAX "The right way"
-            var user = await db.User.Select(x => new UserDTO {
+            var user = await db.User.AsNoTracking().Select(x => new {
                 UserId = x.UserId,
                 username = x.username,
                 password = x.password,
@@ -151,15 +151,37 @@ namespace LoginRegister.Controllers {
                 email = x.email,
                 regDate = x.regDate,
                 userMode = x.userMode,
-                userInfo = new UserInfoDTO {
+                userInfo = new {
                     adress = x.UserInfo.adress,
                     city = x.UserInfo.city,
                     zip = x.UserInfo.zip,
                     country = x.UserInfo.country,
                     phone = x.UserInfo.phone
                 }
-            }).SingleOrDefaultAsync(x=>x.UserId == id);
+            }).SingleOrDefaultAsync(x => x.UserId == id);
+            //var user = await db.User.Where(x => x.UserId == id).Select(x=> new {
+            //    UserId = x.UserId,
+            //    username = x.username,
+            //    password = x.password,
+            //    name = x.name,
+            //    lastName = x.lastName,
+            //    surname = x.surname,
+            //    age = x.age,
+            //    email = x.email,
+            //    regDate = x.regDate,
+            //    userMode = x.userMode,
+            //    userInfo = new {
+            //        adress = x.UserInfo.adress,
+            //        city = x.UserInfo.city,
+            //        zip = x.UserInfo.zip,
+            //        country = x.UserInfo.country,
+            //        phone = x.UserInfo.phone
+            //    }
 
+            //}).SingleOrDefaultAsync();
+            if (user == null) {
+                return NotFound();
+            }
 
 
             //var aux = new UserDTO {
