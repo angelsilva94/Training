@@ -2,6 +2,7 @@
 using Shop.Extensions;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -254,7 +255,11 @@ namespace LoginRegister.Controllers {
                 return BadRequest();
             }
             var orderDb = db.Order.Find(id);
-            order.CopyProperties(orderDb);
+            orderDb.purchaseDate = order.purchaseDate.Equals(DateTime.MinValue) ? orderDb.purchaseDate : order.purchaseDate;
+            orderDb.quantityOrder = order.quantityOrder.Equals(null) ? orderDb.quantityOrder : order.quantityOrder;
+            orderDb.totalOrderPrice = order.totalOrderPrice.Equals(null) ? orderDb.totalOrderPrice : order.totalOrderPrice;
+            
+
             var aux = 10;
             db.Entry(orderDb).State = EntityState.Modified;
             
@@ -273,18 +278,20 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Orders
-        [ResponseType(typeof(Order)),Authentication,Route("api/postOrders")]
+        [ResponseType(typeof(Order)),Authentication,Route("api/postOrders",Name = "postOrders")]
         //[Authentication]
-        [Route("api/submit",Name = "orderPost")]
-        public async Task<IHttpActionResult> PostOrder(Order order) {
+        //[Route("api/submit",Name = "orderPost")]
+        public async Task<IHttpActionResult> PostOrder(OrderDTO order) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
+            var orderDb = new Order();
+            order.CopyProperties(orderDb);
 
-            db.Order.Add(order);
+            db.Order.Add(orderDb);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("orderPost", new { id = order.OrderId }, order);
+            return CreatedAtRoute("postOrders", new { id = order.OrderId }, order);
         }
 
         //// DELETE: api/Orders/5
