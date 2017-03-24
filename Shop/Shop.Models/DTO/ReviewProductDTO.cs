@@ -12,7 +12,7 @@ namespace Shop.Models.DTO {
         public int ProductId { set; get; }
         public double ratingReview { set; get; }
         public string reviewDesc { set; get; }
-        public int ReviewProductId { set; get; }
+        public int ReviewProductIdNumber { set; get; }
         public UserDTO User { set; get; }
         public int UserId { set; get; }
     }

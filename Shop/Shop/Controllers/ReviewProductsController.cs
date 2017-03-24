@@ -21,7 +21,7 @@ namespace LoginRegister.Controllers {
             var review =await db.ReviewProduct.Select(x => new {
                 x.ratingReview,
                 x.reviewDesc,
-                x.ReviewProductId,
+                x.ReviewProductIdNumber,
                 x.UserId,
                 User = new {
                     x.User.UserId,
@@ -43,12 +43,12 @@ namespace LoginRegister.Controllers {
             var reviewProduct = await db.ReviewProduct.Select(x => new {
                 x.ratingReview,
                 x.reviewDesc,
-                x.ReviewProductId,
+                x.ReviewProductIdNumber,
                 x.UserId,
                 x.User,
                 x.Product
 
-            }).SingleOrDefaultAsync(x=>x.ReviewProductId==id);
+            }).SingleOrDefaultAsync(x=>x.ReviewProductIdNumber == id);
             if (reviewProduct == null) {
                 return NotFound();
             }
@@ -85,13 +85,13 @@ namespace LoginRegister.Controllers {
 
         // POST: api/ReviewProducts
         [ResponseType(typeof(ReviewProduct)), Route("api/postReviewProducts",Name = "postReviewProducts"),Authentication]
-        public async Task<IHttpActionResult> PostReviewProduct(ReviewProductDTO reviewProduct) {
+        public async Task<IHttpActionResult> PostReviewProduct(ReviewProduct reviewProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            var reviewDB = new ReviewProduct();
-            reviewProduct.CopyProperties(reviewDB);
-            db.ReviewProduct.Add(reviewDB);
+            //var reviewDB = new ReviewProduct();
+            //reviewProduct.CopyProperties(reviewDB);
+            db.ReviewProduct.Add(reviewProduct);
 
             try {
                 await db.SaveChangesAsync();

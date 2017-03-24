@@ -7,7 +7,7 @@ namespace Shop.Models.Interfaces {
         int ProductId { get; set; }
         double ratingReview { get; set; }
         string reviewDesc { get; set; }
-        int ReviewProductId { get; set; }
+        int ReviewProductIdNumber { get; set; }
         User User { get; set; }
         int UserId { get; set; }
     }

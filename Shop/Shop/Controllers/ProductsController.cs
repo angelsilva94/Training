@@ -19,14 +19,26 @@ namespace LoginRegister.Controllers {
         // GET: api/Products
         [ResponseType(typeof(Product)), Authentication, Route("api/getProducts")]
         public async Task<IHttpActionResult> GetProduct() {
-            var product = await  db.Product.AsNoTracking().Select(x => new ProductDTO {
+            var product = await  db.Product.AsNoTracking().Select(x => new  {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
                 productName = x.productName,
                 productPrice = x.productPrice,
                 productStatus = x.productStatus,
                 productStock = x.productStock,
-                productModifyDate = x.productModifyDate
+                productModifyDate = x.productModifyDate,
+                ReviewProducts= x.ReviewProducts.Select(y=>new {
+                    y.ratingReview,
+                    y.reviewDesc,
+                    y.ReviewProductIdNumber,
+                    User = new {
+                        y.User.username,
+                        y.User.UserId,
+                        y.User.name,
+                        y.User.lastName
+                    }
+                })
+
             }).ToListAsync();
 
             return Ok(product);
@@ -35,7 +47,7 @@ namespace LoginRegister.Controllers {
         // GET: api/Products/5
         [ResponseType(typeof(ProductDTO)),Authentication,Route("api/getProducts/search")]
         public async Task<IHttpActionResult> GetProduct(int id) {
-            var product = await db.Product.Select(x => new ProductDTO {
+            var product = await db.Product.Select(x => new  {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
                 productName = x.productName,
@@ -43,6 +55,7 @@ namespace LoginRegister.Controllers {
                 productModifyDate = x.productModifyDate,
                 productStatus = x.productStatus,
                 productStock = x.productStock,
+                x.ReviewProducts
                 
             }).SingleOrDefaultAsync(x => x.ProductId == id);
             //var temp = await db.Product.FindAsync(id);

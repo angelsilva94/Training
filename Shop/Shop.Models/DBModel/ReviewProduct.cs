@@ -6,11 +6,10 @@ namespace Shop.Models.DBModel {
 
     public class ReviewProduct : IReviewProduct {
 
-        
-        public int ReviewProductId { set; get; }
+        [Key]
+        public int ReviewProductIdNumber { set; get; }
 
         [Required]
-        [Key]
         [ForeignKey("Product")]
         [Column(Order = 1)]
         public int ProductId { set; get; }
@@ -19,7 +18,6 @@ namespace Shop.Models.DBModel {
         public double ratingReview { set; get; }
 
         [Required]
-        [Key]
         [ForeignKey("User")]
         [Column(Order = 2)]
         public int UserId { set; get; }
