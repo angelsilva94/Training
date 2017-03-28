@@ -81,6 +81,7 @@
     <Compile Include="DTO\UserDTO.cs" />
     <Compile Include="DTO\UserInfoDTO.cs" />
     <Compile Include="DTO\UserTypeDTO.cs" />
+    <Compile Include="login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

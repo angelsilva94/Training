@@ -155,8 +155,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\route\loginCtrl.js" />
     <Content Include="Scripts\route\route.js" />
-    <Content Include="Scripts\scripts.js" />
     <Content Include="Scripts\signup\jquery.backstretch.js" />
     <Content Include="Scripts\signup\scripts.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
@@ -207,12 +207,15 @@
     <Content Include="template\home.html" />
     <Content Include="template\login.html" />
     <Content Include="template\signup.html" />
+    <Content Include="template\test.html" />
+    <Content Include="Tests\loginTest.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authentication\Authentication.cs" />
     <Compile Include="Authentication\CheckUser.cs" />
     <Compile Include="Authentication\ICheckUser.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BrandsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HealthController.cs" />
