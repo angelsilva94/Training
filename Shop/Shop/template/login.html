@@ -1,4 +1,4 @@
-﻿<body >
+﻿<body ng-controller="loginCtrl" >
     <!-- Top content -->
     <div class="top-content">
         <div class="inner-bg">
@@ -25,8 +25,8 @@
                                     <i class="fa fa-lock"></i>
                                 </div>
                             </div>
-                            <div class="form-bottom">
-                                <form role="form" action="" method="post" class="login-form">
+                             <div class="form-bottom" >
+                                <form ng-submit="sendServer()"  class="login-form">
                                     <div class="form-group">
                                         <label class="sr-only" for="form-username">Username</label>
                                         <input type="text" name="form-username" placeholder="Username..." class="form-username form-control" ng-model="username">
@@ -35,9 +35,11 @@
                                         <label class="sr-only" for="form-password">Password</label>
                                         <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" ng-model="password">
                                     </div>
-                                    <button type="submit" class="btn" >Sign in!</button>
+                                    <button type="submit" class="btn">Sign in!</button>
                                     <button type="submit" class="btn-block">Forgot username/password!</button>
                                 </form>
+                                {{responseServer}}
+                                 
                             </div>
                         </div>
                     </div>
@@ -48,15 +50,12 @@
     </div>
     <!-- CSS -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-    <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/signup/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="../css/signup/form-elements.css" rel="stylesheet" />
     <link href="../css/signup/style.css" rel="stylesheet" />
-
-    <!-- Javascript -->
-    <script src="../Scripts/jquery.js"></script>
-    <script src="../Scripts/bootstrap.min.js"></script>
+    <!--Background image-->
     <script src="../Scripts/signup/jquery.backstretch.js"></script>
     <script src="../Scripts/signup/scripts.js"></script>
+
     
 </body>

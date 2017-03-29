@@ -136,6 +136,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\myStyle.css" />
     <Content Include="css\shop-homepage.css" />
+    <Content Include="css\shop-item.css" />
     <Content Include="css\signup\font-awesome\css\font-awesome.css" />
     <Content Include="css\signup\font-awesome\css\font-awesome.min.css" />
     <Content Include="css\signup\font-awesome\fonts\fontawesome-webfont.svg" />
@@ -156,6 +157,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\route\loginCtrl.js" />
+    <Content Include="Scripts\route\registerCtrl.js" />
     <Content Include="Scripts\route\route.js" />
     <Content Include="Scripts\signup\jquery.backstretch.js" />
     <Content Include="Scripts\signup\scripts.js" />
@@ -206,8 +208,10 @@
   <ItemGroup>
     <Content Include="template\home.html" />
     <Content Include="template\login.html" />
+    <Content Include="template\shopItem.html" />
     <Content Include="template\signup.html" />
     <Content Include="template\test.html" />
+    <Content Include="Tests\HtmlPage1.html" />
     <Content Include="Tests\loginTest.html" />
     <Content Include="Web.config" />
   </ItemGroup>

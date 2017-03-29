@@ -1,6 +1,6 @@
 ﻿/// <reference path="../angular.min.js" />
 
-var app = angular.module("loginTest", [])
+//var app = angular.module("shopModule", [])
 app.controller("loginCtrl", function ($scope, $http) {
     $scope.sendServer = function () {
         var jsonServer = {
@@ -9,12 +9,17 @@ app.controller("loginCtrl", function ($scope, $http) {
         };
         $http.post("http://localhost:58495/authentication/login", jsonServer)
              .then(function (response) {
-                 console.log(response);
+                 //console.log(data);
+                 $scope.responseServer = response.statusText;
+             }, function (response) {
+                 //console.log(response);
+                 $scope.responseServer = response.statusText;
+                 
              });
     }
-
-
+    
 });
+
 
 
 

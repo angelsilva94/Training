@@ -1,4 +1,4 @@
-﻿<body>
+﻿<body ng-controller="registerCtrl">
     <!-- Top content -->
     <div class="top-content bg">
         <div class="inner-bg">
@@ -9,6 +9,7 @@
                         <div class="description">
                             <p>
                                 Please register to buy items in the shop.
+                                <h1>{{json}}</h1>
                             </p>
                         </div>
                     </div>
@@ -26,37 +27,46 @@
                                 </div>
                             </div>
                             <div class="form-bottom">
-                                <form role="form" action="" method="post" class="registration-form">
+                                <form ng-submit="registerUser()" class="registration-form" name="register" novalidate>
                                     <div class="form-group">
-                                        <label class="sr-only" for="form-first-name">First name</label>
-                                        <input type="text" name="form-first-name" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+                                        <label class="sr-only">First name</label>
+                                        <input type="text" required name="fName" ng-model="name" placeholder="First name..." class="form-first-name form-control" >
+                                        <span style="color:red" ng-show="register.fName.$touched && register.fName.$invalid">The name is required.</span>
+
                                     </div>
                                     <div class="form-group">
-                                        <label class="sr-only" for="form-first-name">Surname</label>
-                                        <input type="text" name="form-surname" placeholder="Surname..." class="form-first-name form-control" id="form-first-name">
+                                        <label class="sr-only"> Surname</label>
+                                        <input type="text" required name="surname" ng-model="surname" placeholder="Surname..." class="form-first-name form-control" >
+                                        <span style="color:red" ng-show="register.surname.$touched && register.surname.$invalid">The Surname is required.</span>
                                     </div>
                                     <div class="form-group">
-                                        <label class="sr-only" for="form-last-name">Last name</label>
-                                        <input type="text" name="form-last-name" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
+                                        <label class="sr-only">Last name</label>
+                                        <input type="text" required name="lastName" ng-model="lastName" placeholder="Last name..." class="form-last-name form-control" >
+                                        <span style="color:red" ng-show="register.lastName.$touched && register.lastName.$invalid">The Last name is required.</span>
                                     </div>
                                     <div class="form-group">
-                                        <label class="sr-only" for="form-email">Email</label>
-                                        <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+                                        <label class="sr-only">Email</label>
+                                        <input type="email" required name="email" ng-model="email" placeholder="Email..." class="form-email form-control" >
+                                        <span style="color:red" ng-show="register.email.$touched && register.email.$invalid">
+                                            <span ng-show="register.email.$error.required">Email is required.</span>
+                                            <span ng-show="register.email.$error.email">Invalid email address.</span>
+                                        </span>
                                     </div>
                                     <div class="form-group">
-                                        <label class="sr-only" for="form-first-name">Username</label>
-                                        <input type="text" name="form-username" placeholder="Username..." class="form-username form-control" id="form-username">
+                                        <label class="sr-only">Username</label>
+                                        <input type="text" required name="username" ng-model="username" placeholder="Username..." class="form-username form-control" >
+                                        <span style="color:red" ng-show="register.username.$touched && register.username.$invalid">The username is required.</span>
                                     </div>
                                     <div class="form-group">
-                                        <label class="sr-only" for="form-email">Password</label>
-                                        <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password">
+                                        <label class="sr-only">Password</label>
+                                        <input name ="password" type="password" required  ng-model="password" placeholder="Password..." class="form-password form-control" >
+                                        <span style="color:red" ng-show="register.password.$touched && register.password.$invalid">The password is required.</span>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="form-email">Password</label>
-                                        <input type="password" name="form-verifyPassword" placeholder="Verify Password..." class="form-verifyPassword form-control"
-                                               id="form-verify">
-                                    </div>
-                                    <button type="submit" class="btn">Sign me up!</button>
+                                    <!--<div class="form-group">
+                                        <label class="sr-only">Password</label>
+                                        <input type="password" required ng-model="verifyPassword" placeholder="Verify Password..." class="form-verifyPassword form-control" >
+                                    </div>-->
+                                    <button type="submit" class="btn" ng-disabled="register.$invalid">Sign me up!</button>
                                 </form>
                             </div>
                         </div>
