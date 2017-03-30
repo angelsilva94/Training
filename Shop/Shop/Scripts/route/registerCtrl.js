@@ -3,6 +3,7 @@ app.controller("registerCtrl", function ($scope, $http) {
 
    
     $scope.registerUser = function () {
+        var date = new Date();
         var jsonServer = {
             "username": $scope.username,
             "password": $scope.password,
@@ -13,7 +14,7 @@ app.controller("registerCtrl", function ($scope, $http) {
             "age": 99,
             "regDate": $scope.regDate,
             "userMode": 0,
-            "regDate": filter('date')(new Date(),'yyyy-MM-dd HH:mm:ss Z')
+            "regDate": date.toISOString()
         };
         $scope.json = jsonServer;
 

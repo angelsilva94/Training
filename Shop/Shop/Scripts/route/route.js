@@ -1,13 +1,13 @@
 ﻿/// <reference path="../angular.min.js" />
-var app = angular.module("shopModule", ["ngRoute", "ngResource", "ngCookies"]);
+var app = angular.module("shopModule", ["ngRoute"]);
 app.config(function ($routeProvider) {
     $routeProvider
     .when("/", {
-        templateUrl: "template/signup.html",
-        controller: "registerCtrl"
+        templateUrl: "template/home.html"
     })
     .when("/login", {
-        templateUrl: "template/login.html"
+        templateUrl: "template/login.html",
+        controller: "loginCtrl"
     })
     .when("/signup", {
         templateUrl: "template/signup.html",

@@ -211,8 +211,12 @@
     <Content Include="template\shopItem.html" />
     <Content Include="template\signup.html" />
     <Content Include="template\test.html" />
-    <Content Include="Tests\HtmlPage1.html" />
+    <Content Include="Tests\home.html" />
+    <Content Include="Tests\index.html" />
+    <Content Include="Tests\hi.html" />
+    <Content Include="Tests\bye.html" />
     <Content Include="Tests\loginTest.html" />
+    <Content Include="Tests\scripts.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
