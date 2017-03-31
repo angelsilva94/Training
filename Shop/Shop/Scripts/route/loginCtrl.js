@@ -1,7 +1,7 @@
 ﻿/// <reference path="../angular.min.js" />
 
 //var app = angular.module("shopModule", [])
-app.controller("loginCtrl", function ($scope, $http) {
+app.controller("loginCtrl", function ($scope, $http, $location) {
     $scope.sendServer = function () {
         var jsonServer = {
             "name": $scope.username,
@@ -11,6 +11,7 @@ app.controller("loginCtrl", function ($scope, $http) {
              .then(function (response) {
                  //console.log(data);
                  $scope.responseServer = response.statusText;
+                 $location.path("/");
              }, function (response) {
                  //console.log(response);
                  $scope.responseServer = response.statusText;

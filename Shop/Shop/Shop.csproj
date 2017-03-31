@@ -159,6 +159,7 @@
     <Content Include="Scripts\route\loginCtrl.js" />
     <Content Include="Scripts\route\registerCtrl.js" />
     <Content Include="Scripts\route\route.js" />
+    <Content Include="Scripts\route\shopFactor.js" />
     <Content Include="Scripts\signup\jquery.backstretch.js" />
     <Content Include="Scripts\signup\scripts.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
@@ -206,6 +207,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="template\404.html" />
     <Content Include="template\home.html" />
     <Content Include="template\login.html" />
     <Content Include="template\shopItem.html" />

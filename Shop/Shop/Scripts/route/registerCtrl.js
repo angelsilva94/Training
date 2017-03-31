@@ -1,5 +1,5 @@
 ﻿/// <reference path="../angular.min.js" />
-app.controller("registerCtrl", function ($scope, $http) {
+app.controller("registerCtrl", function ($scope, $http, $location) {
 
    
     $scope.registerUser = function () {
@@ -23,6 +23,7 @@ app.controller("registerCtrl", function ($scope, $http) {
                  //console.log(data);
                  console.log(response);
                  $scope.responseServer = response.statusText;
+                 $location.path("/");
              }, function (response) {
                  //console.log(response);
                  $scope.responseServer = response.statusText;
