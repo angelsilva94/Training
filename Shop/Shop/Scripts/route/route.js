@@ -3,7 +3,8 @@ var app = angular.module("shopModule", ["ngRoute", "ngResource"]);
 app.config(function ($routeProvider) {
     $routeProvider
     .when("/", {
-        templateUrl: "template/home.html"
+        templateUrl: "template/home.html",
+        controller : "homeCtrl"
     })
     .when("/login", {
         templateUrl: "template/login.html",
@@ -24,6 +25,14 @@ app.config(function ($routeProvider) {
     });
 });
 
+app.factory("shopFactory", function ($resource) {
+    return {
+        User: $resource("http://localhost:58495/users/api/User/?id=:id", { id: "@id" }),
+        Category: $resource("http://localhost:58495/category/api/categories")
+
+    };
+
+});
 
 
 

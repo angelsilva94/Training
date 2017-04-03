@@ -21,7 +21,7 @@ namespace Shop.Controllers {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/Categories
-        [Route("api/getCategory"), Authentication]
+        [Route("api/categories")]
         public async Task<IHttpActionResult> GetCategory() {
             var category = await db.Category.Select(x => new {
                 x.categoryDesc,
@@ -34,7 +34,7 @@ namespace Shop.Controllers {
         }
 
         // GET: api/Categories/5
-        [ResponseType(typeof(Category)), Route("api/searchCategory")]
+        [ResponseType(typeof(Category)), Route("api/categories")]
         public async Task<IHttpActionResult> GetCategory(int id) {
 
             //var category = await db.Category.Where(x => x.CategoryId == id).Select(x => new {
@@ -70,7 +70,7 @@ namespace Shop.Controllers {
         }
 
         // PUT: api/Categories/5
-        [ResponseType(typeof(void)), Route("api/putCategory")]
+        [ResponseType(typeof(void)), Route("api/categories")]
         public async Task<IHttpActionResult> PutCategory(int id, CategoryDTO category) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -101,7 +101,7 @@ namespace Shop.Controllers {
         }
 
         // POST: api/Categories
-        [ResponseType(typeof(Category)), Authentication, Route("api/postCategory", Name = "postCategory")]
+        [ResponseType(typeof(Category)), Route("api/categories", Name = "postCategory")]
         public async Task<IHttpActionResult> PostCategory(CategoryDTO category) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

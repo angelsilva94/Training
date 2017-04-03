@@ -156,10 +156,10 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\route\homeCtrl.js" />
     <Content Include="Scripts\route\loginCtrl.js" />
     <Content Include="Scripts\route\registerCtrl.js" />
     <Content Include="Scripts\route\route.js" />
-    <Content Include="Scripts\route\shopFactor.js" />
     <Content Include="Scripts\signup\jquery.backstretch.js" />
     <Content Include="Scripts\signup\scripts.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />

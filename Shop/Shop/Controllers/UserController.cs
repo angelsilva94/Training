@@ -21,14 +21,14 @@ namespace LoginRegister.Controllers {
 
         // GET: api/User
         //[Authentication]
-        [Route("normal"), Authentication]
-        public IQueryable<User> GetUserModels() {
-            return db.User;
-        }
+        //[Route("normal"), Authentication]
+        //public IQueryable<User> GetUserModels() {
+        //    return db.User;
+        //}
 
         // GET: api/User
         //[Authentication]
-        [Route("api/User"), Authentication]
+        [Route("api/User")]
         public async Task<IHttpActionResult> GetUser() {
 
             //var user = from x in db.User
@@ -84,7 +84,7 @@ namespace LoginRegister.Controllers {
         }
 
         // GET: api/User/5
-        [ResponseType(typeof(User)),Authentication,Route("api/User")]
+        [ResponseType(typeof(User)),Route("api/User")]
         //[Authentication]
         public async Task<IHttpActionResult> GetUserModel(int id) {
             //IQueryable<User> temp = db.User.Where(x => x.UserId == id).ToList<User>().AsQueryable();
@@ -228,7 +228,7 @@ namespace LoginRegister.Controllers {
 
         // PUT: api/User/5
         [Authentication]
-        [ResponseType(typeof(void)),Route("api/User"),Authentication]
+        [ResponseType(typeof(void)),Route("api/User")]
         public async Task<IHttpActionResult> PutUserModel([FromBody]ModifyUserModel modifyUserModel, [FromUri]int id) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

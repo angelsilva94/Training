@@ -1,12 +1,13 @@
-﻿<div class="row">
+﻿<div class="row" ng-controller="homeCtrl">
     <div class="col-md-3">
         <p class="lead">Shop Name</p>
         <div class="list-group">
-            <a href="#" class="list-group-item">Category 1</a>
-            <a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">Category 3</a>
+            <a href="#" class="list-group-item" ng-repeat="x in category | limitTo:30">{{x.categoryName}}</a>
+            <!--<a href="#" class="list-group-item">Category 2</a>
+            <a href="#" class="list-group-item">{{category}}</a>-->
         </div>
     </div>
+    <!--<button ng-click="setData()">Boton</button>-->
     <div class="col-md-9">
         <div class="row carousel-holder">
             <div class="col-md-12">
