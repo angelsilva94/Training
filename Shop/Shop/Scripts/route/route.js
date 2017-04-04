@@ -28,8 +28,8 @@ app.config(function ($routeProvider) {
 app.factory("shopFactory", function ($resource) {
     return {
         User: $resource("http://localhost:58495/users/api/User/?id=:id", { id: "@id" }),
-        Category: $resource("http://localhost:58495/category/api/categories")
-
+        Category: $resource("http://localhost:58495/category/api/categories"),
+        Product: $resource("http://localhost:58495/products/api/Products")
     };
 
 });

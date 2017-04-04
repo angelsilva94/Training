@@ -80,6 +80,7 @@
     <Content Include="DBMockData\07Orders.sql" />
     <Content Include="DBMockData\09OrderProducts.sql" />
     <Content Include="DBMockData\10Categories.sql" />
+    <Content Include="DBMockData\11ReviewProducts.sql" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.Common.dll" />
