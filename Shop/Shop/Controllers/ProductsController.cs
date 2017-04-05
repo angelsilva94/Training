@@ -40,10 +40,10 @@ namespace LoginRegister.Controllers {
                     }
                 })
 
-            }).Take(50);
+            }).Take(to);
             var pagedProduct =product.Skip(50*from).Take(to);
 
-            return Ok(product);
+            return Ok(pagedProduct);
         }
 
         // GET: api/Products/5
