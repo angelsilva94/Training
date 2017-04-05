@@ -18,24 +18,24 @@ app.controller("homeCtrl", function ($scope, $http, shopFactory) {
         //    console.log(key + ":" + value.ReviewProducts.reviewDesc);
 
         //});
-        var longitud = productServer.length;
+        //var longitud = productServer.length;
         
-        for (var i = 0; i < longitud; i++) {
-            var ratingSum = 0;
-            var ratingAverage = 0;
-            var reviewNumber = productServer[i].ReviewProducts.length;
-            for (var j = 0; j <productServer[i].ReviewProducts.length; j++) {
-                //console.log(productServer[i].ReviewProducts[j].reviewDesc);    
-                //console.log(productServer[i].ReviewProducts[j].ratingReview);
+        //for (var i = 0; i < longitud; i++) {
+        //    var ratingSum = 0;
+        //    var ratingAverage = 0;
+        //    var reviewNumber = productServer[i].ReviewProducts.length;
+        //    for (var j = 0; j <productServer[i].ReviewProducts.length; j++) {
+        //        //console.log(productServer[i].ReviewProducts[j].reviewDesc);    
+        //        //console.log(productServer[i].ReviewProducts[j].ratingReview)  
                 
-                ratingSum += productServer[i].ReviewProducts[j].ratingReview;
-            }
+        //        ratingSum += productServer[i].ReviewProducts[j].ratingReview;
+        //    }
            
-           ratingAverage = ratingSum / reviewNumber;
-           $scope.reviewsNumber = ratingAverage;
-           var x=0;
+           
+        //   $scope.reviewsNumber = ratingAverage;
+           
 
-        }
+        //}
 
         //for (var i = 0; i < productServer.length; i++) {
         //    for (var j = 0; j < productServer.ReviewProducts.length; j++) {
@@ -51,7 +51,14 @@ app.controller("homeCtrl", function ($scope, $http, shopFactory) {
     });
     $scope.product = productServer;
     //console.log(productServer);
-    
+    $scope.getAvg = function (ReviewProducts) {
+        var total = 0;
+        for (var i = 0; i < ReviewProducts.length; i++) {
+            total += ReviewProducts[i].ratingReview
+        }
+        var avg = total / ReviewProducts.length;
+        return avg;
+    };
     
 
 

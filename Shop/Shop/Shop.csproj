@@ -162,6 +162,7 @@
     <Content Include="Scripts\route\route.js" />
     <Content Include="Scripts\signup\jquery.backstretch.js" />
     <Content Include="Scripts\signup\scripts.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-2.5.0.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />

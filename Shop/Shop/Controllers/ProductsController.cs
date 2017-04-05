@@ -18,8 +18,8 @@ namespace LoginRegister.Controllers {
 
         // GET: api/Products
         [ResponseType(typeof(Product)),  Route("api/Products")]
-        public async Task<IHttpActionResult> GetProduct() {
-            var product = await  db.Product.AsNoTracking().Select(x => new  {
+        public async Task<IHttpActionResult> GetProduct([FromUri]int from,[FromUri]int to) {
+            var product = db.Product.AsNoTracking().Select(x => new  {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
                 productName = x.productName,
@@ -40,7 +40,8 @@ namespace LoginRegister.Controllers {
                     }
                 })
 
-            }).ToListAsync();
+            }).Take(50);
+            var pagedProduct =product.Skip(50*from).Take(to);
 
             return Ok(product);
         }

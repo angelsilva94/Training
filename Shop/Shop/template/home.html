@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="x in product | limitTo:30">
+            <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="x in product ">
                 <div class="thumbnail">
                     <img ng-src="{{x.productUrl}}" alt="">
                     <div class="caption">
@@ -48,10 +48,13 @@
                         </h4>
                         <p>{{x.productDesc}}.</p>
                     </div>
-                    <div class="ratings" ng-repeat="review in x.ReviewProducts">
-                        <p class="pull-right">{{review.ratingReview}}</p>
+                    <div class="ratings" ng-repeat="review in x.ReviewProducts | limitTo:1">
+                        <p class="pull-right">{{getAvg(x.ReviewProducts)}}</p>
                         <p>
                             <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            <span class="glyphicon glyphicon-star"></span>
+                            
                         </p>
                     </div>
                 </div>
@@ -144,6 +147,22 @@
                     </div>
                 </div>
             </div>-->
+            </div>
+        <div class="text-center">
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 </div>
