@@ -12,7 +12,7 @@ app.controller("homeCtrl", function ($scope, $http, shopFactory) {
         //console.log(categoryServer);
     });
     $scope.category = categoryServer;
-    var productServer = shopFactory.Product.query({}, function () {
+    var productServer = shopFactory.Product.query({ from :1,to:50}, function () {
         
         //angular.forEach(productServer, function (value, key) {
         //    console.log(key + ":" + value.ReviewProducts.reviewDesc);
