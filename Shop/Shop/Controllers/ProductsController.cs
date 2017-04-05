@@ -18,7 +18,7 @@ namespace LoginRegister.Controllers {
 
         // GET: api/Products
         [ResponseType(typeof(Product)),  Route("api/Products")]
-        public async Task<IHttpActionResult> GetProduct([FromUri]int from,[FromUri]int to) {
+        public async Task<IHttpActionResult> GetProduct([FromUri]int from,[FromUri]int to ) {
             var product = await db.Product.AsNoTracking().Select(x => new  {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
@@ -40,7 +40,7 @@ namespace LoginRegister.Controllers {
                     }
                 })
 
-            }).OrderBy(x=>x.ProductId).Skip(50*from).Take(to).ToListAsync();
+            }).OrderBy(x=>x.ProductId).Skip(to*from).Take(to).ToListAsync();
            
 
             return Ok(product);

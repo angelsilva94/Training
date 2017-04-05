@@ -12,7 +12,7 @@ app.controller("homeCtrl", function ($scope, $http, shopFactory) {
         //console.log(categoryServer);
     });
     $scope.category = categoryServer;
-    var productServer = shopFactory.Product.query({ from :1,to:50}, function () {
+    var productServer = shopFactory.Product.query({ from :0 ,to:10}, function () {
         
         //angular.forEach(productServer, function (value, key) {
         //    console.log(key + ":" + value.ReviewProducts.reviewDesc);
@@ -70,5 +70,14 @@ app.controller("homeCtrl", function ($scope, $http, shopFactory) {
             //console.log(value.categoryName);
             console.log(categoryServer)
         });
+    };
+
+    $scope.changePage = function () {
+        console.log("hola");
+        console.log($scope.pages);
+        var productServer = shopFactory.Product.query({ from: $scope.pages-1, to: 10 }, function () {
+        
+        });
+        $scope.product = productServer;
     };
 });

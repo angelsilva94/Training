@@ -151,17 +151,9 @@
         <div class="text-center">
 
             <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
+                <ul uib-pagination total-items="1000" ng-change="changePage()" ng-model="pages" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></ul>
+
+                  
             </nav>
         </div>
     </div>
