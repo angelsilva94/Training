@@ -1,4 +1,7 @@
-﻿<div class="row" ng-controller="homeCtrl">
+﻿<head>
+    <link href="../css/stars.css" rel="stylesheet" />
+</head>
+<div class="row" ng-controller="homeCtrl">
     <div class="col-md-3">
         <p class="lead">Shop Name</p>
         <div class="list-group">
@@ -49,12 +52,14 @@
                         <p>{{x.productDesc}}.</p>
                     </div>
                     <div class="ratings" ng-repeat="review in x.ReviewProducts | limitTo:1">
-                        <p class="pull-right">{{getAvg(x.ReviewProducts)}}</p>
+                        <label class="pull-right">{{getAvg(x.ReviewProducts)}}</label>
+                        <!--<label>{{rating}}</label>-->
                         <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            
+                            <!--<span uib-rating ng-model="rating" max="10" read-only="true" on-hover="hoveringOver(rating)" on-leave="overStar = null"></span>-->
+                            <!--<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar">{{percent}}%</span>-->
+                            <span class="stars">
+                                <span ng-style="{ 'width': getStars(x.ReviewProducts) }"></span>
+                            </span>
                         </p>
                     </div>
                 </div>

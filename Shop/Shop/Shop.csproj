@@ -142,6 +142,7 @@
     <Content Include="css\signup\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="css\signup\form-elements.css" />
     <Content Include="css\signup\style.css" />
+    <Content Include="css\stars.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\1.jpg" />
     <Content Include="index.html" />

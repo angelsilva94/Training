@@ -57,7 +57,19 @@ app.controller("homeCtrl", function ($scope, $http, shopFactory) {
             total += ReviewProducts[i].ratingReview
         }
         var avg = total / ReviewProducts.length;
+        $scope.rating = avg;
         return avg;
+        
+    };
+    $scope.getStars = function (ReviewProducts) {
+        var total = 0;
+        for (var i = 0; i < ReviewProducts.length; i++) {
+            total += ReviewProducts[i].ratingReview
+        }
+        var avg = (total / ReviewProducts.length)*20;
+        
+        return avg+"%";
+
     };
     
 
@@ -79,5 +91,9 @@ app.controller("homeCtrl", function ($scope, $http, shopFactory) {
         
         });
         $scope.product = productServer;
+    };
+    $scope.hoveringOver = function (value) {
+        $scope.overStar = value;
+        $scope.percent = 100 * (value / 10);
     };
 });
