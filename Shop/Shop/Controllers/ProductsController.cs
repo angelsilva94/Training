@@ -54,11 +54,22 @@ namespace LoginRegister.Controllers {
                 ProductId = x.ProductId,
                 productName = x.productName,
                 productPrice = x.productPrice,
-                productModifyDate = x.productModifyDate,
                 productStatus = x.productStatus,
                 productStock = x.productStock,
-                x.ReviewProducts
-                
+                productModifyDate = x.productModifyDate,
+                productUrl = x.productUrl,
+                ReviewProducts = x.ReviewProducts.Select(y => new {
+                    y.ratingReview,
+                    y.reviewDesc,
+                    y.ReviewProductIdNumber,
+                    User = new {
+                        y.User.username,
+                        y.User.UserId,
+                        y.User.name,
+                        y.User.lastName
+                    }
+                })
+
             }).SingleOrDefaultAsync(x => x.ProductId == id);
             //var temp = await db.Product.FindAsync(id);
             //ProductDTO product = new ProductDTO();

@@ -1,5 +1,6 @@
 ﻿/// <reference path="../angular.min.js" />
-app.controller("homeCtrl", function ($scope, $http, shopFactory) {
+
+app.controller("homeCtrl", function ($scope,shopFactory) {
     //$scope.testFunc = function () {
     //    $scope.test = "hola";
     //};
@@ -7,50 +8,17 @@ app.controller("homeCtrl", function ($scope, $http, shopFactory) {
     //$scope.setData() = function () {
     //    $scope.userTest = shopFactory.get({ id : 1001 });
     //};
-    var categoryServer = shopFactory.Category.query({}, function () {
-        //console.log(categoryServer[1].categoryName);
-        //console.log(categoryServer);
+    var categoryServer = shopFactory.Category.query({}).$promise.then(function (response) {
+        $scope.category = response;
+    }, function (error) {
+        console.log(error);
     });
-    $scope.category = categoryServer;
-    var productServer = shopFactory.Product.query({ from :0 ,to:10}, function () {
-        
-        //angular.forEach(productServer, function (value, key) {
-        //    console.log(key + ":" + value.ReviewProducts.reviewDesc);
-
-        //});
-        //var longitud = productServer.length;
-        
-        //for (var i = 0; i < longitud; i++) {
-        //    var ratingSum = 0;
-        //    var ratingAverage = 0;
-        //    var reviewNumber = productServer[i].ReviewProducts.length;
-        //    for (var j = 0; j <productServer[i].ReviewProducts.length; j++) {
-        //        //console.log(productServer[i].ReviewProducts[j].reviewDesc);    
-        //        //console.log(productServer[i].ReviewProducts[j].ratingReview)  
-                
-        //        ratingSum += productServer[i].ReviewProducts[j].ratingReview;
-        //    }
-           
-           
-        //   $scope.reviewsNumber = ratingAverage;
-           
-
-        //}
-
-        //for (var i = 0; i < productServer.length; i++) {
-        //    for (var j = 0; j < productServer.ReviewProducts.length; j++) {
-        //        console.log(productServer[i].ReviewProducts[j].reviewDesc);
-        //    }
-        //}
-        //var a = performance.now();
-        //for(var i=0;i<1000;i++){
-        //    console.log("hola");
-        //}
-        //var b = performance.now();
-        //console.log(b-a+" milliseconds");
+    
+    var productServer = shopFactory.Product.query({ from: 0, to: 10 }).$promise.then(function (response) {
+        $scope.product = response;
     });
-    $scope.product = productServer;
-    //console.log(productServer);
+   
+    
     $scope.getAvg = function (ReviewProducts) {
         var total = 0;
         for (var i = 0; i < ReviewProducts.length; i++) {
@@ -75,25 +43,25 @@ app.controller("homeCtrl", function ($scope, $http, shopFactory) {
 
 
 
-    $scope.setData = function () {
-        //$scope.category = categoryServer[1].categoryName;
-        angular.forEach(categoryServer, function (value,key) {
-            //console.log(key + ":" + value);
-            //console.log(value.categoryName);
-            console.log(categoryServer)
-        });
-    };
+    //$scope.setData = function () {
+    //    //$scope.category = categoryServer[1].categoryName;
+    //    angular.forEach(categoryServer, function (value,key) {
+    //        //console.log(key + ":" + value);
+    //        //console.log(value.categoryName);
+    //        console.log(categoryServer)
+    //    });
+    //};
 
     $scope.changePage = function () {
         console.log("hola");
         console.log($scope.pages);
-        var productServer = shopFactory.Product.query({ from: $scope.pages-1, to: 10 }, function () {
-        
+        var productServer = shopFactory.Product.query({ from: $scope.pages - 1, to: 10 }).$promise.then(function () {
+            $scope.product = productServer;
         });
-        $scope.product = productServer;
+        
     };
-    $scope.hoveringOver = function (value) {
-        $scope.overStar = value;
-        $scope.percent = 100 * (value / 10);
-    };
+    //$scope.hoveringOver = function (value) {
+    //    $scope.overStar = value;
+    //    $scope.percent = 100 * (value / 10);
+    //};
 });

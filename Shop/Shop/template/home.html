@@ -1,165 +1,169 @@
 ﻿<head>
     <link href="../css/stars.css" rel="stylesheet" />
+    
 </head>
-<div class="row" ng-controller="homeCtrl">
-    <div class="col-md-3">
-        <p class="lead">Shop Name</p>
-        <div class="list-group">
-            <a href="#" class="list-group-item" ng-repeat="x in category | limitTo:30">{{x.categoryName}}</a>
-            <!--<a href="#" class="list-group-item">Category 2</a>
-            <a href="#" class="list-group-item">{{category}}</a>-->
+<body>
+    <div class="row" ng-controller="homeCtrl">
+        <div class="col-md-3">
+            <p class="lead">Shop Name</p>
+            <div class="list-group">
+                <a href="#" class="list-group-item" ng-repeat="x in category | limitTo:30">{{x.categoryName}}</a>
+                <!--<a href="#" class="list-group-item">Category 2</a>
+                <a href="#" class="list-group-item">{{category}}</a>-->
+            </div>
+        </div>
+        <!--<button ng-click="setData()">Boton</button>-->
+        <div class="col-md-9">
+            <div class="row carousel-holder">
+                <div class="col-md-12">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            </div>
+                            <div class="item">
+                                <img class="slide-image" src="http://placehold.it/800x300" alt="">
+                            </div>
+                        </div>
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="x in product ">
+                    <div class="thumbnail">
+                        <img class="img-responsive" ng-src="{{x.productUrl}}" alt="{{x.productName}}">
+                        <div class="caption">
+                            <h4 class="pull-right">{{x.productPrice | currency}}</h4>
+                            <h4>
+                                <a ng-href="#!product/{{x.ProductId}}">{{x.productName}}</a>
+                            </h4>
+                            <p>{{x.productDesc}}.</p>
+                        </div>
+                        <div class="ratings" ng-repeat="review in x.ReviewProducts | limitTo:1">
+                            <label class="pull-right">{{getAvg(x.ReviewProducts)}}</label>
+                            <!--<label>{{rating}}</label>-->
+                            <p>
+                                <!--<span uib-rating ng-model="rating" max="10" read-only="true" on-hover="hoveringOver(rating)" on-leave="overStar = null"></span>-->
+                                <!--<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar">{{percent}}%</span>-->
+                                <span class="stars">
+                                    <span ng-style="{ 'width': getStars(x.ReviewProducts) }"></span>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/320x150" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right">$64.99</h4>
+                            <h4>
+                                <a href="#">Second Product</a>
+                            </h4>
+                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                        <div class="ratings">
+                            <p class="pull-right">12 reviews</p>
+                            <p>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/320x150" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right">$74.99</h4>
+                            <h4>
+                                <a href="#">Third Product</a>
+                            </h4>
+                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                        <div class="ratings">
+                            <p class="pull-right">31 reviews</p>
+                            <p>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/320x150" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right">$84.99</h4>
+                            <h4>
+                                <a href="#">Fourth Product</a>
+                            </h4>
+                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                        <div class="ratings">
+                            <p class="pull-right">6 reviews</p>
+                            <p>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-lg-4 col-md-4">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/320x150" alt="">
+                        <div class="caption">
+                            <h4 class="pull-right">$94.99</h4>
+                            <h4>
+                                <a href="#">Fifth Product</a>
+                            </h4>
+                            <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </div>
+                        <div class="ratings">
+                            <p class="pull-right">18 reviews</p>
+                            <p>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star"></span>
+                                <span class="glyphicon glyphicon-star-empty"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <div class="text-center">
+
+                <nav aria-label="Page navigation example">
+                    <ul uib-pagination total-items="1000" ng-change="changePage()" ng-model="pages" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></ul>
+
+
+                </nav>
+            </div>
         </div>
     </div>
-    <!--<button ng-click="setData()">Boton</button>-->
-    <div class="col-md-9">
-        <div class="row carousel-holder">
-            <div class="col-md-12">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    </ol>
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                        </div>
-                        <div class="item">
-                            <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                        </div>
-                        <div class="item">
-                            <img class="slide-image" src="http://placehold.it/800x300" alt="">
-                        </div>
-                    </div>
-                    <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="x in product ">
-                <div class="thumbnail">
-                    <img ng-src="{{x.productUrl}}" alt="">
-                    <div class="caption">
-                        <h4 class="pull-right">{{x.productPrice | currency}}</h4>
-                        <h4>
-                            <a href="#">{{x.productName}}</a>
-                        </h4>
-                        <p>{{x.productDesc}}.</p>
-                    </div>
-                    <div class="ratings" ng-repeat="review in x.ReviewProducts | limitTo:1">
-                        <label class="pull-right">{{getAvg(x.ReviewProducts)}}</label>
-                        <!--<label>{{rating}}</label>-->
-                        <p>
-                            <!--<span uib-rating ng-model="rating" max="10" read-only="true" on-hover="hoveringOver(rating)" on-leave="overStar = null"></span>-->
-                            <!--<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar">{{percent}}%</span>-->
-                            <span class="stars">
-                                <span ng-style="{ 'width': getStars(x.ReviewProducts) }"></span>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <!--<div class="col-sm-4 col-lg-4 col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/320x150" alt="">
-                    <div class="caption">
-                        <h4 class="pull-right">$64.99</h4>
-                        <h4>
-                            <a href="#">Second Product</a>
-                        </h4>
-                        <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                    <div class="ratings">
-                        <p class="pull-right">12 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-lg-4 col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/320x150" alt="">
-                    <div class="caption">
-                        <h4 class="pull-right">$74.99</h4>
-                        <h4>
-                            <a href="#">Third Product</a>
-                        </h4>
-                        <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                    <div class="ratings">
-                        <p class="pull-right">31 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-lg-4 col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/320x150" alt="">
-                    <div class="caption">
-                        <h4 class="pull-right">$84.99</h4>
-                        <h4>
-                            <a href="#">Fourth Product</a>
-                        </h4>
-                        <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                    <div class="ratings">
-                        <p class="pull-right">6 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4 col-lg-4 col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/320x150" alt="">
-                    <div class="caption">
-                        <h4 class="pull-right">$94.99</h4>
-                        <h4>
-                            <a href="#">Fifth Product</a>
-                        </h4>
-                        <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                    <div class="ratings">
-                        <p class="pull-right">18 reviews</p>
-                        <p>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star"></span>
-                            <span class="glyphicon glyphicon-star-empty"></span>
-                        </p>
-                    </div>
-                </div>
-            </div>-->
-            </div>
-        <div class="text-center">
-
-            <nav aria-label="Page navigation example">
-                <ul uib-pagination total-items="1000" ng-change="changePage()" ng-model="pages" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></ul>
-
-                  
-            </nav>
-        </div>
-    </div>
-</div>
+    <script src="../Scripts/route/homeCtrl.js"></script>
+</body>

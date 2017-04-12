@@ -159,6 +159,7 @@
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\route\homeCtrl.js" />
     <Content Include="Scripts\route\loginCtrl.js" />
+    <Content Include="Scripts\route\productCtrl.js" />
     <Content Include="Scripts\route\registerCtrl.js" />
     <Content Include="Scripts\route\route.js" />
     <Content Include="Scripts\signup\jquery.backstretch.js" />
