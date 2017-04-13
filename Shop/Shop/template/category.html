@@ -1,20 +1,15 @@
 ﻿<head>
     <link href="../css/stars.css" rel="stylesheet" />
-    
+
 </head>
 <body>
-    <div class="row" ng-controller="homeCtrl">
+    <div class="row" ng-controller="categoryCtrl">
         <div class="col-md-3">
             <p class="lead">Shop Name</p>
             <div class="list-group">
-                <a ng-href="#!category/{{x.CategoryId}}" class="list-group-item" ng-repeat="x in category | limitTo:30">{{x.categoryName}}</a>
-                
-                
-                <!--<a href="#" class="list-group-item">Category 2</a>
-                <a href="#" class="list-group-item">{{category}}</a>-->
+                <a ng-href="#!category/{{x.CategoryId}}" class="list-group-item" ng-repeat="x in category | limitTo:30">{{x.categoryName}}</a>       
             </div>
         </div>
-        <!--<button ng-click="setData()">Boton</button>-->
         <div class="col-md-9">
             <div class="row carousel-holder">
                 <div class="col-md-12">
@@ -45,24 +40,26 @@
                 </div>
             </div>
             <div class="row">
+               
                 <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="x in product ">
                     <div class="thumbnail">
-                        <img class="img-responsive" ng-src="{{x.productUrl}}" alt="{{x.productName}}">
+                        
+                        <img class="img-responsive" ng-src="{{x.product.productUrl}}" alt="{{x.product.productName}}">
                         <div class="caption">
-                            <h4 class="pull-right">{{x.productPrice | currency}}</h4>
+                            <h4 class="pull-right">{{x.product.productPrice | currency}}</h4>
                             <h4>
-                                <a ng-href="#!product/{{x.ProductId}}">{{x.productName}}</a>
+                                <a ng-href="#!product/{{x.product.ProductId}}">{{x.product.productName}}</a>
                             </h4>
-                            <p>{{x.productDesc}}.</p>
+                            <p>{{x.product.productDesc}}.</p>
                         </div>
                         <div class="ratings">
-                            <label class="pull-right">{{getAvg(x.ReviewProducts)}}</label>
+                            <label class="pull-right">{{getAvg(x.product.ReviewProducts)}}</label>
                             <!--<label>{{rating}}</label>-->
                             <p>
                                 <!--<span uib-rating ng-model="rating" max="10" read-only="true" on-hover="hoveringOver(rating)" on-leave="overStar = null"></span>-->
                                 <!--<span class="label" ng-class="{'label-warning': percent<30, 'label-info': percent>=30 && percent<70, 'label-success': percent>=70}" ng-show="overStar">{{percent}}%</span>-->
                                 <span class="stars">
-                                    <span ng-style="{ 'width': getStars(x.ReviewProducts) }"></span>
+                                    <span ng-style="{ 'width': getStars(x.product.ReviewProducts) }"></span>
                                 </span>
                             </p>
                         </div>

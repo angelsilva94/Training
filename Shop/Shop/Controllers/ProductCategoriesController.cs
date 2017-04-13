@@ -17,7 +17,7 @@ namespace LoginRegister.Controllers {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/ProductCategories
-        [ResponseType(typeof(ProductCategory)), Route("api/getProductCategories")]
+        [ResponseType(typeof(ProductCategory)), Route("api/productCategory")]
         public async Task<IHttpActionResult> GetProductCategory() {
             //var productCategory = await db.ProductCategory.Select(x => new  {
             //    CategoryId = x.CategoryId,
@@ -105,14 +105,35 @@ namespace LoginRegister.Controllers {
         }
 
         // GET: api/ProductCategories/5
-        [ResponseType(typeof(ProductCategory)),Route("api/getProductCategories/search")]
+        [ResponseType(typeof(ProductCategory)),Route("api/productCategory")]
         public async Task<IHttpActionResult> GetProductCategory(int id) {
             var productCategory = await db.ProductCategory.Select(x => new {
                 x.ProductCategoryId,
-                x.Product,
-                x.Category,
+                x.Category.CategoryId,
+                product = new {
+                    x.Product.Brand.BrandId,
+                    x.Product.Brand.brandDesc,
+                    x.Product.Brand.brandLogoUrl,
+                    x.Product.Brand.brandName,
+                    x.Product.productUrl,
+                    x.Product.productStock,
+                    x.Product.productName,
+                    x.Product.productPrice,
+                    x.Product.productDesc,
+                    x.Product.ProductId,
+                    x.Product.productPublishDate,
+                    x.Product.productModifyDate,
+                    ReviewProducts = x.Product.ReviewProducts.Select(y=> new {
+                        y.ratingReview,
+                    })
+
+                },
+                //category = new {
+                //    x.Category.CategoryId,
+                //    x.Category.categoryDesc
+                //},
                
-            }).SingleOrDefaultAsync(x=>x.ProductCategoryId==id);
+            }).Where(x => x.CategoryId == id).ToListAsync();
             if (productCategory == null) {
                 return NotFound();
             }
@@ -121,7 +142,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/ProductCategories/5
-        [ResponseType(typeof(void)),Authentication, Route("api/putProductCategories")]
+        [ResponseType(typeof(void)),Authentication, Route("api/productCategory")]
         public async Task<IHttpActionResult> PutProductCategory(int id, ProductCategoryDTO productCategory) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -148,7 +169,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/ProductCategories
-        [ResponseType(typeof(ProductCategory)), Authentication, Route("api/postProductCategories", Name = "postProductCategories")]
+        [ResponseType(typeof(ProductCategory)), Authentication, Route("api/productCategory", Name = "productCategory")]
         public async Task<IHttpActionResult> PostProductCategory(ProductCategoryDTO productCategory) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -167,7 +188,7 @@ namespace LoginRegister.Controllers {
                 }
             }
 
-            return CreatedAtRoute("postProductCategories", new { id = productCategory.CategoryId }, productCategory);
+            return CreatedAtRoute("productCategory", new { id = productCategory.CategoryId }, productCategory);
         }
 
         //// DELETE: api/ProductCategories/5

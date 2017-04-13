@@ -39,5 +39,12 @@
     });
     //console.log(test);
     //console.log(test.email);
-   
+    var categoryServer = shopFactory.Category.query({}).$promise.then(function (response) {
+        $scope.category = response;
+        //console.log(response);
+    }, function (error) {
+        console.log(error);
+    });
+
+
 });

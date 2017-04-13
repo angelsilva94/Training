@@ -10,6 +10,7 @@ app.controller("homeCtrl", function ($scope,shopFactory) {
     //};
     var categoryServer = shopFactory.Category.query({}).$promise.then(function (response) {
         $scope.category = response;
+        //console.log(response);
     }, function (error) {
         console.log(error);
     });
@@ -55,8 +56,8 @@ app.controller("homeCtrl", function ($scope,shopFactory) {
     $scope.changePage = function () {
         console.log("hola");
         console.log($scope.pages);
-        var productServer = shopFactory.Product.query({ from: $scope.pages - 1, to: 10 }).$promise.then(function () {
-            $scope.product = productServer;
+        var productServer = shopFactory.Product.query({ from: $scope.pages - 1, to: 10 }).$promise.then(function (response) {
+            $scope.product = response;
         });
         
     };
