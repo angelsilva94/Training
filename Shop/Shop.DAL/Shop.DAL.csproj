@@ -83,10 +83,6 @@
     <Content Include="DBMockData\11ReviewProducts.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.Common.dll" />
-    <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Migrations\201703241840444_2.resx">
       <DependentUpon>201703241840444_2.cs</DependentUpon>
     </EmbeddedResource>

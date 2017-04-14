@@ -1,5 +1,5 @@
 ﻿/// <reference path="../angular.min.js" />
-var app = angular.module("shopModule", ["ngRoute", "ngResource", "ui.bootstrap"]);
+var app = angular.module("shopModule", ["ngRoute", "ngResource", "ui.bootstrap", "ngAnimate"]);
 app.config(function ($routeProvider) {
     $routeProvider
     .when("/", {
@@ -26,7 +26,7 @@ app.config(function ($routeProvider) {
     //    templateUrl: "template/test.html"
     //})
     .otherwise({
-        templateUrl: "template/404.html"
+        templateUrl: "template/cart.html"
     });
 });
 

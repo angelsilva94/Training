@@ -150,15 +150,13 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\angular.js" />
-    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\route\categoryCtrl.js" />
     <Content Include="Scripts\route\homeCtrl.js" />
+    <Content Include="Scripts\route\indexCtrl.js" />
     <Content Include="Scripts\route\loginCtrl.js" />
     <Content Include="Scripts\route\productCtrl.js" />
     <Content Include="Scripts\route\registerCtrl.js" />
@@ -167,7 +165,6 @@
     <Content Include="Scripts\signup\scripts.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-2.5.0.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
-    <Content Include="Scripts\angular.min.js.map" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -212,12 +209,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="template\404.html" />
+    <Content Include="template\cart.html" />
     <Content Include="template\category.html" />
     <Content Include="template\home.html" />
     <Content Include="template\login.html" />
     <Content Include="template\shopItem.html" />
     <Content Include="template\signup.html" />
     <Content Include="template\test.html" />
+    <Content Include="Tests\Cart\css\style.css" />
+    <Content Include="Tests\Cart\images\1.jpg" />
+    <Content Include="Tests\Cart\images\2.jpg" />
+    <Content Include="Tests\Cart\images\3.jpg" />
+    <Content Include="Tests\Cart\images\cart.png" />
+    <Content Include="Tests\Cart\images\close1.png" />
+    <Content Include="Tests\Cart\images\patran.png" />
+    <Content Include="Tests\Cart\index.html" />
+    <Content Include="Tests\Cart\js\jquery-1.11.1.min.js" />
+    <Content Include="Tests\Cart\w3layouts-License.txt" />
     <Content Include="Tests\home.html" />
     <Content Include="Tests\index.html" />
     <Content Include="Tests\hi.html" />
@@ -271,10 +279,6 @@
       <Project>{07229159-59cd-4fd8-b2e1-e2ba2f2dab2e}</Project>
       <Name>Shop.Validator</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.Common.dll" />
-    <Analyzer Include="..\packages\codecracker.CSharp.1.0.2\analyzers\dotnet\cs\CodeCracker.CSharp.dll" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
