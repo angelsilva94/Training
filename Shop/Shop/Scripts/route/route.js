@@ -26,7 +26,7 @@ app.config(function ($routeProvider) {
     //    templateUrl: "template/test.html"
     //})
     .otherwise({
-        templateUrl: "template/cart.html"
+        templateUrl: "template/404.html"
     });
 });
 

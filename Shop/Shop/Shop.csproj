@@ -150,14 +150,15 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\angular-animate.min.js" />
+    <Content Include="Scripts\angular-resource.min.js" />
     <Content Include="Scripts\angular-route.min.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\route\categoryCtrl.js" />
     <Content Include="Scripts\route\homeCtrl.js" />
     <Content Include="Scripts\route\indexCtrl.js" />
     <Content Include="Scripts\route\loginCtrl.js" />
+    <Content Include="Scripts\route\modalCtrl.js" />
     <Content Include="Scripts\route\productCtrl.js" />
     <Content Include="Scripts\route\registerCtrl.js" />
     <Content Include="Scripts\route\route.js" />
@@ -225,7 +226,6 @@
     <Content Include="Tests\Cart\images\patran.png" />
     <Content Include="Tests\Cart\index.html" />
     <Content Include="Tests\Cart\js\jquery-1.11.1.min.js" />
-    <Content Include="Tests\Cart\w3layouts-License.txt" />
     <Content Include="Tests\home.html" />
     <Content Include="Tests\index.html" />
     <Content Include="Tests\hi.html" />
