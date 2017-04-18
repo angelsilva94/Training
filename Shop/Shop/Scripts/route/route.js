@@ -1,5 +1,5 @@
 ﻿/// <reference path="../angular.min.js" />
-var app = angular.module("shopModule", ["ngRoute", "ngResource", "ui.bootstrap", "ngAnimate"]);
+var app = angular.module("shopModule", ["ngRoute", "ngResource", "ui.bootstrap", "ngAnimate", "ngCart"]);
 app.config(function ($routeProvider) {
     $routeProvider
     .when("/", {

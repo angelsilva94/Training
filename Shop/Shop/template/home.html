@@ -50,9 +50,8 @@
                         <img class="img-responsive" ng-src="{{x.productUrl}}" alt="{{x.productName}}">
                         <div class="caption">
                             <h4 class="pull-right">{{x.productPrice | currency}}</h4>
-                            <h4>
-                                <a ng-href="#!product/{{x.ProductId}}">{{x.productName}}</a>
-                            </h4>
+                            
+                            <h4><a ng-href="#!product/{{x.ProductId}}">{{x.productName}}</a></h4>
                             <p>{{x.productDesc}}.</p>
                         </div>
                         <div class="ratings">
@@ -66,6 +65,7 @@
                                 </span>
                             </p>
                         </div>
+                        <ngcart-addtocart class="pull-right" template-url="template/addtocart.html" id="{{x.ProductId}}" name="{{x.productName}}" price="{{x.productPrice}}" quantity="1" quantity-max="{{x.productStock}}">Add to Cart</ngcart-addtocart>
                     </div>
                 </div>
             </div>

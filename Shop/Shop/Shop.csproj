@@ -154,6 +154,7 @@
     <Content Include="Scripts\angular-resource.min.js" />
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\ngCart.js" />
     <Content Include="Scripts\route\categoryCtrl.js" />
     <Content Include="Scripts\route\homeCtrl.js" />
     <Content Include="Scripts\route\indexCtrl.js" />
@@ -210,12 +211,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="template\404.html" />
+    <Content Include="template\addtocart.html" />
     <Content Include="template\cart.html" />
+    <Content Include="template\cartMio.html" />
     <Content Include="template\category.html" />
     <Content Include="template\home.html" />
     <Content Include="template\login.html" />
     <Content Include="template\shopItem.html" />
     <Content Include="template\signup.html" />
+    <Content Include="template\summary.html" />
     <Content Include="template\test.html" />
     <Content Include="Tests\Cart\css\style.css" />
     <Content Include="Tests\Cart\images\1.jpg" />

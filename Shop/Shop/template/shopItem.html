@@ -31,9 +31,15 @@
                         <b><p>{{averageRating()}}</p></b>
                     </div>
                 </div>
+
                 <div class="text-right">
-                    <a class="btn btn-success">Leave a Review</a>
+                    <button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Leave a review</button>
+                    <!--<button class="btn btn-success pull-left" ng-click="addToCart(productUrl,productName,productPrice)"><span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart</button>-->
+
+                    <ngcart-addtocart class="pull-left" template-url="template/addtocart.html" id="{{productId}}" name="{{productName}}" price="{{productPrice}}" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
+
                 </div>
+                
                 <div class="well" ng-repeat="x in reviewData">
                     
                     <hr>
