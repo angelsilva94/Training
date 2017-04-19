@@ -5,7 +5,7 @@
         console.log("-------------------carrito Index--------------------");
         var modal = $uibModal.open({
             animation: true,
-            templateUrl: "template/cart.html",
+            templateUrl: "template/cartMio.html",
             //template: "<h1>hola</h1>",
             backdrop: true,
             controller: "productCtrl"

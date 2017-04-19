@@ -21,6 +21,10 @@ app.config(function ($routeProvider) {
     .when("/category/:categoryId", {
         templateUrl: "template/category.html",
         controller : "categoryCtrl"
+    }).
+    when("/checkout", {
+        templateUrl:"template/cartFinal.html"
+        
     })
     //.when("/contact", {
     //    templateUrl: "template/test.html"

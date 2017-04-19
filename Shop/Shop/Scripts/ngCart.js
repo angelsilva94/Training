@@ -326,9 +326,12 @@ angular.module('ngCart', ['ngCart.directives'])
         }
     }])
 
-    .controller('CartController',['$scope', 'ngCart', function($scope, ngCart) {
+    .controller('CartController',['$scope', 'ngCart', function($scope, ngCart,$uibModalInstance) {
         $scope.ngCart = ngCart;
-
+        $scope.checkOutDetails = function () {
+            console.log($uibModalInstance);
+            $uibModalInstance.close();
+        };
     }])
 
     .value('version', '1.0.0');

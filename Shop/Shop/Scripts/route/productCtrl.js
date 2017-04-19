@@ -57,7 +57,10 @@
         //console.log(productPrice);
     };
     
-    
+    $scope.checkOutDetails = function () {
+        console.log("PRODUCTDS");
+        $uibModalInstance.close();
+    };
     
     
 
