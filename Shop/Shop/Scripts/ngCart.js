@@ -427,13 +427,14 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
                 $scope.ngCart = ngCart;
 
                 $scope.checkout = function () {
+                    console.log("entre al checkout log");
                     fulfilmentProvider.setService($scope.service);
                     fulfilmentProvider.setSettings($scope.settings);
                     fulfilmentProvider.checkout()
-                        .success(function (data, status, headers, config) {
+                        .then(function (data, status, headers, config) {
                             $rootScope.$broadcast('ngCart:checkout_succeeded', data);
                         })
-                        .error(function (data, status, headers, config) {
+                        .catch(function (data, status, headers, config) {
                             $rootScope.$broadcast('ngCart:checkout_failed', {
                                 statusCode: status,
                                 error: data
@@ -488,6 +489,7 @@ angular.module('ngCart.fulfilment', [])
             var deferred = $q.defer();
 
             $log.info(ngCart.toObject());
+            console.log(ngCart.toObject().items[0].data);
             deferred.resolve({
                 cart:ngCart.toObject()
             });

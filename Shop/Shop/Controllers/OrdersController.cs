@@ -14,7 +14,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
-    [RoutePrefix("orders"),Authentication]
+    [RoutePrefix("orders")]
     public class OrdersController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
@@ -38,7 +38,7 @@ namespace LoginRegister.Controllers {
 
         //    return Ok(order);
         //
-        [ResponseType(typeof(OrderDTO)),Route("api/getOrders"), Authentication]
+        [ResponseType(typeof(OrderDTO)),Route("api/orders")]
         //public  IQueryable<OrderDto> GetOrder() { check which is better
         public async Task<IHttpActionResult> GetOrder() {
 
@@ -47,10 +47,11 @@ namespace LoginRegister.Controllers {
                 OrderId = x.OrderId,
                 UserId = x.UserId,
                 orderStatusCode = x.orderStatusCode,
+               
                 OrderDetails = x.OrderDetails.Select(y => new /*  ANONYMOUS TYPE OrderDetailDTO*/ {
                     OrderId = y.OrderId,
                     OrderDetailId = y.OrderDetailId,
-
+                    quantityOrder=y.quantityOrder,
                     ProductId = y.ProductId,
                     Product = new  {
                         productDesc = y.Product.productDesc,
@@ -60,7 +61,7 @@ namespace LoginRegister.Controllers {
                     }
                 }).ToList(),
                 purchaseDate = x.purchaseDate,
-                quantityOrder = x.quantityOrder,
+                //quantityOrder = x.quantityOrder,
                 totalOrderPrice = x.totalOrderPrice,
                 User = new  {
                     UserId = x.UserId,
@@ -136,7 +137,7 @@ namespace LoginRegister.Controllers {
 
         //[Authentication]
         //[Route("api/getOrder/search")]
-        [ResponseType(typeof(OrderDTO)),Route("api/getOrder/search"),Authentication]
+        [ResponseType(typeof(OrderDTO)),Route("api/orders")]
         public async Task<IHttpActionResult> GetOrder(int id) {
 
 
@@ -145,7 +146,7 @@ namespace LoginRegister.Controllers {
                     OrderId= x.OrderId,
                     orderStatusCode = x.orderStatusCode,
                     purchaseDate = x.purchaseDate,
-                    quantityOrder = x.quantityOrder,
+                    //quantityOrder = x.quantityOrder,
                     totalOrderPrice = x.totalOrderPrice,
                     UserId = x.UserId,
                     User = new UserDTO {
@@ -171,6 +172,7 @@ namespace LoginRegister.Controllers {
                        OrderDetailId = y.OrderDetailId,
                        OrderId = y.OrderId,
                        ProductId = y.ProductId,
+                       quantityOrder = y.quantityOrder,
                        Product = new ProductDTO {
                            productDesc = y.Product.productDesc,
                            ProductId = y.Product.ProductId,
@@ -245,7 +247,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/Orders/5
-        [ResponseType(typeof(void)),Route("api/putOrder"),Authentication]
+        [ResponseType(typeof(void)),Route("api/orders")]
         public async Task<IHttpActionResult> PutOrder(int id, OrderDTO order) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -256,7 +258,7 @@ namespace LoginRegister.Controllers {
             }
             var orderDb = db.Order.Find(id);
             orderDb.purchaseDate = order.purchaseDate.Equals(DateTime.MinValue) ? orderDb.purchaseDate : order.purchaseDate;
-            orderDb.quantityOrder = order.quantityOrder.Equals(null) ? orderDb.quantityOrder : order.quantityOrder;
+            //orderDb.quantityOrder = order.quantityOrder.Equals(null) ? orderDb.quantityOrder : order.quantityOrder;
             orderDb.totalOrderPrice = order.totalOrderPrice.Equals(null) ? orderDb.totalOrderPrice : order.totalOrderPrice;
             
 
@@ -278,7 +280,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Orders
-        [ResponseType(typeof(Order)),Authentication,Route("api/postOrders",Name = "postOrders")]
+        [ResponseType(typeof(Order)),Route("api/orders",Name = "postOrders")]
         //[Authentication]
         //[Route("api/submit",Name = "orderPost")]
         public async Task<IHttpActionResult> PostOrder(OrderDTO order) {

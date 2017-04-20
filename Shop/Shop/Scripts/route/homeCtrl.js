@@ -1,6 +1,6 @@
 ﻿/// <reference path="../angular.min.js" />
 
-app.controller("homeCtrl", function ($scope,shopFactory) {
+app.controller("homeCtrl", function ($scope, shopFactory, $window) {
     //$scope.testFunc = function () {
     //    $scope.test = "hola";
     //};
@@ -12,11 +12,25 @@ app.controller("homeCtrl", function ($scope,shopFactory) {
         $scope.category = response;
         //console.log(response);
     }, function (error) {
+        console.log("ENTRASTE AL ERROR DE CATEGORIA");
         console.log(error);
+       //var i = 0;
+        //while (error) {
+        //    $window.location.reload();
+        //    console.log(i);
+        //    i++;
+        //}
+        
+
     });
     
     var productServer = shopFactory.Product.query({ from: 0, to: 10 }).$promise.then(function (response) {
         $scope.product = response;
+    }, function (error) {
+        console.log("ENTRASTE AL ERROR DE PRODUCTO");
+        console.log(error);
+        //$window.location.reload();
+
     });
    
     

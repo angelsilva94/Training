@@ -19,6 +19,8 @@ namespace Shop.Models.DBModel {
         //fk
         public int OrderId { set; get; }
 
+        [Required]
+        public int quantityOrder { set; get; }
         //1-N ProductModel-OrderProductModel
         //[ForeignKey("productId")]
         public virtual Product Product { set; get; }

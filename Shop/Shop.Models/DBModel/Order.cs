@@ -18,8 +18,8 @@ namespace Shop.Models.DBModel {
         [Required, ForeignKey("OrderStatus")]
         public int orderStatusCode { set; get; }
 
-        [Required]
-        public int quantityOrder { set; get; }
+        //[Required]
+        //public int quantityOrder { set; get; }
 
         [Required]
         public double totalOrderPrice { set; get; }

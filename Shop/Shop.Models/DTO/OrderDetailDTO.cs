@@ -4,6 +4,7 @@
         public int OrderDetailId { set; get; }
         public int ProductId { set; get; }
         public int OrderId { set; get; }
+        public int quantityOrder { set; get; }
         public /*ICollection<ProductDTO>*/ ProductDTO Product { set; get; }
     }
 }

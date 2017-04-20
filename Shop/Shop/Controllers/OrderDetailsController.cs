@@ -28,6 +28,7 @@ namespace Shop.Controllers
         {
             var orderDetail = await db.OrderDetails.Select(x=>new {
                 x.OrderDetailId,
+                x.quantityOrder,
                 Product = new {
                     x.Product.ProductId,
                     x.Product.productName,
@@ -42,7 +43,7 @@ namespace Shop.Controllers
                     x.Order.OrderStatus.orderStatusCod,
                     x.Order.OrderStatus.orderStatusDesc,
                     x.Order.purchaseDate,
-                    x.Order.quantityOrder,
+                    //x.Order.quantityOrder,
                     x.Order.totalOrderPrice,
                 }
             }).ToListAsync();
@@ -55,6 +56,7 @@ namespace Shop.Controllers
         {
             var orderDetail = await db.OrderDetails.Select(x=>new {
                 x.OrderDetailId,
+                x.quantityOrder,
                 Product = new {
                     x.Product.ProductId,
                     x.Product.productName,
@@ -69,7 +71,7 @@ namespace Shop.Controllers
                     x.Order.OrderStatus.orderStatusCod,
                     x.Order.OrderStatus.orderStatusDesc,
                     x.Order.purchaseDate,
-                    x.Order.quantityOrder,
+//                    x.Order.quantityOrder,
                     x.Order.totalOrderPrice,
                 }
             }).SingleOrDefaultAsync();
