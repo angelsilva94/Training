@@ -293,7 +293,7 @@ namespace LoginRegister.Controllers {
             db.Order.Add(orderDb);
             await db.SaveChangesAsync();
 
-            return CreatedAtRoute("postOrders", new { id = order.OrderId }, order);
+            return CreatedAtRoute("postOrders", new { id = orderDb.OrderId }, orderDb);
         }
 
         //// DELETE: api/Orders/5

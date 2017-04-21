@@ -433,6 +433,9 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
                     fulfilmentProvider.checkout()
                         .then(function (data, status, headers, config) {
                             $rootScope.$broadcast('ngCart:checkout_succeeded', data);
+                            //console.log(data);
+                            //console.log(data.cart.subTotal);
+
                         })
                         .catch(function (data, status, headers, config) {
                             $rootScope.$broadcast('ngCart:checkout_failed', {
@@ -487,9 +490,22 @@ angular.module('ngCart.fulfilment', [])
         this.checkout = function(){
 
             var deferred = $q.defer();
-
-            $log.info(ngCart.toObject());
-            console.log(ngCart.toObject().items[0].data);
+            $log.info("log service");
+            //$log.info(ngCart.toObject());
+            //console.log(ngCart.toObject().items[0].data);
+            var temp = ngCart.toObject();
+            var cart = temp.items;
+            $log.warn(cart);
+            //var json = angular.toJson(temp, true);
+            angular.forEach(cart, function (value, key) {
+                $log.info("key:" + key + ":" + value.data.ProductId);
+                
+                //angular.forEach(key.items, function (valor, llave) {
+                //    $log.info(llave + ":" + valor);
+                //});
+            });
+            //$log.warn(json);
+            //$log.warn(temp);
             deferred.resolve({
                 cart:ngCart.toObject()
             });

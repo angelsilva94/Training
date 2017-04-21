@@ -23,7 +23,7 @@ namespace Shop.Controllers
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/OrderDetails
-        [ResponseType(typeof(OrderDetail)), Authentication, Route("api/getOrderDetails")]
+        [ResponseType(typeof(OrderDetail)), Authentication, Route("api/orderDetail")]
         public async Task <IHttpActionResult> GetOrderDetails()
         {
             var orderDetail = await db.OrderDetails.Select(x=>new {
@@ -51,7 +51,7 @@ namespace Shop.Controllers
         }
 
         // GET: api/OrderDetails/5
-        [ResponseType(typeof(OrderDetail)), Authentication,Route("api/getOrderDetails/search")]
+        [ResponseType(typeof(OrderDetail)), Authentication,Route("api/orderDetail")]
         public async Task<IHttpActionResult> GetOrderDetail(int id)
         {
             var orderDetail = await db.OrderDetails.Select(x=>new {
@@ -85,7 +85,7 @@ namespace Shop.Controllers
         }
 
         // PUT: api/OrderDetails/5
-        [ResponseType(typeof(void)),Route("api/putOrderDetails"),Authentication]
+        [ResponseType(typeof(void)),Route("api/orderDetail"),Authentication]
         public async Task<IHttpActionResult> PutOrderDetail(int id, OrderDetailDTO orderDetail)
         {
             if (!ModelState.IsValid)
@@ -122,7 +122,7 @@ namespace Shop.Controllers
 
         // POST: api/OrderDetails
         
-        [Route("api/postOrderDetails", Name = "OrderDetail"), Authentication, ResponseType(typeof(OrderDetail))]
+        [Route("api/orderDetail", Name = "OrderDetail"), Authentication, ResponseType(typeof(OrderDetail))]
         public async Task<IHttpActionResult> PostOrderDetail(OrderDetail orderDetail)
         {
             if (!ModelState.IsValid)
