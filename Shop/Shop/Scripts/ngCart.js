@@ -491,14 +491,25 @@ angular.module('ngCart.fulfilment', [])
 
             var deferred = $q.defer();
             $log.info("log service");
-            //$log.info(ngCart.toObject());
+            $log.info(ngCart.toObject());
             //console.log(ngCart.toObject().items[0].data);
             var temp = ngCart.toObject();
             var cart = temp.items;
-            $log.warn(cart);
+            //$log.warn(cart);
+            var json = {
+                "UserId": 99,
+                "purchaseDate": new Date().toISOString(),
+                "orderStatusCode": 1,
+                "totalOrderPrice": temp.totalCost
+            }
+            $log.warn(json);
+            var tiempo = new Date().toISOString();
+            console.log(tiempo);
+            var local = new Date("2017-04-21T16:50:07.49");
+            console.log(local.toString());
             //var json = angular.toJson(temp, true);
             angular.forEach(cart, function (value, key) {
-                $log.info("key:" + key + ":" + value.data.ProductId);
+                //$log.info("key:" + key + ":" + value.data.ProductId);
                 
                 //angular.forEach(key.items, function (valor, llave) {
                 //    $log.info(llave + ":" + valor);
