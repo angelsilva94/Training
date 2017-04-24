@@ -12,7 +12,6 @@ app.controller("registerCtrl", function ($scope, $http, $location) {
             "surname": $scope.surname,
             "lastName": $scope.lastName,
             "age": 99,
-            "regDate": $scope.regDate,
             "userMode": 0,
             "regDate": date.toISOString()
         };

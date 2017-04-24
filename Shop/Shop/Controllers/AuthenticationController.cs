@@ -18,7 +18,7 @@ namespace Shop.Controllers
             if (!check.login(loginInfo.name,loginInfo.pwd)) {
                 return NotFound();
             }
-            return Ok();
+            return Ok(check.idUser(loginInfo.name));
         }
     }
 }

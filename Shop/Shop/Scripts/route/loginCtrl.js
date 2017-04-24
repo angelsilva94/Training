@@ -9,7 +9,7 @@ app.controller("loginCtrl", function ($scope, $http, $location, $rootScope, Auth
 
         AuthenticationService.Login($scope.username, $scope.password, function (response) {
             if (response.success) {
-                AuthenticationService.SetCredentials($scope.username, $scope.password);
+                AuthenticationService.SetCredentials($scope.username, $scope.password, $rootScope.userId);
                 $rootScope.logout = true;
                 $rootScope.login = true;
                 $location.path('/');
