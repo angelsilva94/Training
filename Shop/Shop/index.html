@@ -29,7 +29,8 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#!signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#!login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li ng-hide="login" ><a href="#!login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li ng-show="logout" ><a href="#!login"><span class="glyphicon glyphicon-log-in"></span> Logout   </a></li>
                 <!--<li><button class="btn btn-info navbar-btn" ng-click="showCart()"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</button></li>-->
                 <ngcart-summary template-url="template/summary.html" ng-click="showCart()"></ngcart-summary>
                 <!--button dtype="button" class="btn btn-default btn-sm">
@@ -74,11 +75,12 @@
    
     <!--<script src="Scripts/jquery.js"></script>-->
     <!--<script src="Scripts/bootstrap.min.js"></script>-->
-
+    <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/angular-route.min.js"></script>
     <script src="Scripts/angular-resource.min.js"></script>
     <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/angular-cookies.js"></script>
     <script src="Scripts/ui-bootstrap-tpls-2.5.0.js"></script>
     <script src="Scripts/route/route.js"></script>
     <script src="../Scripts/route/loginCtrl.js"></script>
@@ -87,6 +89,7 @@
     <script src="Scripts/route/productCtrl.js"></script>
     <script src="Scripts/route/categoryCtrl.js"></script>
     <script src="Scripts/route/indexCtrl.js"></script>
+    <script src="Scripts/route/services.js"></script>
     <script src="Scripts/ngCart.js"></script>
 </body>
 </html>

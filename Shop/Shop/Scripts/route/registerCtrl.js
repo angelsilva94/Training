@@ -23,7 +23,7 @@ app.controller("registerCtrl", function ($scope, $http, $location) {
                  //console.log(data);
                  console.log(response);
                  $scope.responseServer = response.statusText;
-                 $location.path("/");
+                 $location.path("/login");
              }, function (response) {
                  //console.log(response);
                  $scope.responseServer = response.statusText;

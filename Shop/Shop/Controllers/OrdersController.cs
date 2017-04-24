@@ -14,7 +14,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
-    [RoutePrefix("orders")]
+    [RoutePrefix("orders"),Authentication]
     public class OrdersController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
