@@ -495,7 +495,8 @@ angular.module('ngCart.fulfilment', [])
             //console.log(ngCart.toObject().items[0].data);
             var temp = ngCart.toObject();
             var cart = temp.items;
-            //$log.warn(cart);
+
+            $log.warn(cart.id);
             var json = {
                 "UserId": 99,
                 "purchaseDate": new Date().toISOString(),

@@ -13,11 +13,15 @@ using Login.Models;
 
 namespace Login.Controllers
 {
+
+    
+    [RoutePrefix("api/user")]
     public class UsersController : ApiController
     {
         private UserDBContext db = new UserDBContext();
 
         // GET: api/Users
+        [Route("user")]
         public IQueryable<User> GetUsers()
         {
             return db.Users;
@@ -73,6 +77,7 @@ namespace Login.Controllers
 
         // POST: api/Users
         [ResponseType(typeof(User))]
+        [Route("post")]
         public async Task<IHttpActionResult> PostUser(User user)
         {
             if (!ModelState.IsValid)

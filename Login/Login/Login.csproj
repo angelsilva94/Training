@@ -120,6 +120,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="index.html" />
+    <Content Include="modules\authentication\controllers.js" />
+    <Content Include="modules\authentication\services.js" />
+    <Content Include="modules\authentication\views\login.html" />
+    <Content Include="modules\home\controllers.js" />
+    <Content Include="modules\home\views\home.html" />
+    <Content Include="scripts\app.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
