@@ -1,4 +1,4 @@
-﻿app.controller("indexCtrl", function ($scope, $uibModal, $cookieStore) {
+﻿app.controller("indexCtrl", function ($scope, $uibModal, $cookieStore,$http) {
     //console.log("HOLA");
     
     $scope.showCart = function () {
@@ -14,7 +14,9 @@
     };
     $scope.debug = function () {
         var cookie = $cookieStore.get('globals') || {};
-        
+        $http.get("http://localhost:58495/orders/api/orders").then(function (response) {
+            console.log(response);
+        });
         console.log(cookie);
     };
 

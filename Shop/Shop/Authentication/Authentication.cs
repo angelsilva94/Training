@@ -13,7 +13,7 @@ namespace LoginRegister {
     public class AuthenticationAttribute : AuthorizationFilterAttribute {
 
         public override void OnAuthorization(HttpActionContext actionContext) {
-            if (actionContext.Request.Headers.Authorization == null) {
+            if (actionContext.Request.Headers.Authorization.Parameter == null) {
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.Unauthorized);
             } else {
                 string authenticationToken = actionContext.Request.Headers.Authorization.Parameter;

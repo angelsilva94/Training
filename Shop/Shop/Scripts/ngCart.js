@@ -427,17 +427,18 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
                 $scope.ngCart = ngCart;
 
                 $scope.checkout = function () {
-                    console.log("entre al checkout log");
                     fulfilmentProvider.setService($scope.service);
                     fulfilmentProvider.setSettings($scope.settings);
                     fulfilmentProvider.checkout()
                         .then(function (data, status, headers, config) {
                             $rootScope.$broadcast('ngCart:checkout_succeeded', data);
+                            console.log("success");
                             //console.log(data);
                             //console.log(data.cart.subTotal);
 
                         })
                         .catch(function (data, status, headers, config) {
+                            console.log("hubo un error");
                             $rootScope.$broadcast('ngCart:checkout_failed', {
                                 statusCode: status,
                                 error: data
@@ -460,7 +461,7 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
         };
     }]);
 ;
-angular.module('ngCart.fulfilment', [])
+angular.module('ngCart.fulfilment', ["ngCookies"])
     .service('fulfilmentProvider', ['$injector', function($injector){
 
         this._obj = {
@@ -485,7 +486,7 @@ angular.module('ngCart.fulfilment', [])
     }])
 
 
-.service('ngCart.fulfilment.log', ['$q', '$log', 'ngCart', function($q, $log, ngCart){
+.service('ngCart.fulfilment.log', ['$q', '$log', 'ngCart', "$cookieStore", function ($q, $log, ngCart, $cookieStore) {
 
         this.checkout = function(){
 
@@ -495,10 +496,10 @@ angular.module('ngCart.fulfilment', [])
             //console.log(ngCart.toObject().items[0].data);
             var temp = ngCart.toObject();
             var cart = temp.items;
-
-            $log.warn(cart.id);
+            var userId = $cookieStore.get("globals");
+            $log.warn(cart[0].id);
             var json = {
-                "UserId": 99,
+                "UserId": userId.currentUser.userId,
                 "purchaseDate": new Date().toISOString(),
                 "orderStatusCode": 1,
                 "totalOrderPrice": temp.totalCost
@@ -509,13 +510,13 @@ angular.module('ngCart.fulfilment', [])
             var local = new Date("2017-04-21T16:50:07.49");
             console.log(local.toString());
             //var json = angular.toJson(temp, true);
-            angular.forEach(cart, function (value, key) {
-                //$log.info("key:" + key + ":" + value.data.ProductId);
+            //angular.forEach(cart, function (value, key) {
+            //    //$log.info("key:" + key + ":" + value.data.ProductId);
                 
-                //angular.forEach(key.items, function (valor, llave) {
-                //    $log.info(llave + ":" + valor);
-                //});
-            });
+            //    //angular.forEach(key.items, function (valor, llave) {
+            //    //    $log.info(llave + ":" + valor);
+            //    //});
+            //});
             //$log.warn(json);
             //$log.warn(temp);
             deferred.resolve({
@@ -528,11 +529,42 @@ angular.module('ngCart.fulfilment', [])
 
  }])
 
-.service('ngCart.fulfilment.http', ['$http', 'ngCart', function($http, ngCart){
+.service('ngCart.fulfilment.http', ['$http', 'ngCart', "$cookieStore", "$location", function ($http, ngCart, $cookieStore, $location) {
+    console.log(ngCart.toObject());
+    var userId = $cookieStore.get("globals");
+    var order = {
+        "UserId": userId.currentUser.userId,
+        "purchaseDate": new Date().toISOString(),
+        "orderStatusCode": 1,
+        "totalOrderPrice": ngCart.toObject().totalCost
+    }
+    console.log(order);
 
-        this.checkout = function(settings){
-            return $http.post(settings.url,
-                { data: ngCart.toObject(), options: settings.options});
+    
+    this.checkout = function (settings) {
+        console.log("CHEKOUT HTTP");
+        console.log(settings);
+        return $http.post(settings.url, order).then(function (response) {
+            console.log("respuesta del server");
+            console.log(response);
+            console.log(response.data.OrderId);
+            for (var i = 0; i < ngCart.toObject().items.length; i++) {
+                console.log("entre al ciclo");
+                var orderDetail = {
+                    "ProductId": ngCart.toObject().items[i].id,
+                    "OrderId": response.data.OrderId,
+                    "quantityOrder": ngCart.toObject().items[i].quantity
+                }
+                $http.post("http://localhost:58495/orderDetail/api/orderDetail", orderDetail).then(function (response) {
+                    console.log(response);
+                    ngCart.empty();
+                    //console.log($location.path());
+                    $location.path("/");
+
+                })
+
+            }
+        });
         }
  }])
 

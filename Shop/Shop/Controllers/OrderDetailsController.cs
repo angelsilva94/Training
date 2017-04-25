@@ -17,7 +17,7 @@ using Shop.Extensions;
 
 namespace Shop.Controllers
 {
-    [RoutePrefix("orderDetail")]
+    [RoutePrefix("orderDetail"),Authentication]
     public class OrderDetailsController : ApiController
     {
         private ShopDBContext db = new ShopDBContext();
