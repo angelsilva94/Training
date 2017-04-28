@@ -28,7 +28,7 @@ namespace LoginRegister.Controllers {
 
         // GET: api/User
         //[Authentication]
-        [Route("api/User")]
+        [Route("")]
         public async Task<IHttpActionResult> GetUser() {
 
             //var user = from x in db.User
