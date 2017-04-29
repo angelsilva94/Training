@@ -13,7 +13,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field('UserId'),
         nga.field('name'),
         nga.field('username'),
-        nga.field('email'),
+        nga.field('email')
     ]);
     // add the user entity to the admin application
     admin.addEntity(user);

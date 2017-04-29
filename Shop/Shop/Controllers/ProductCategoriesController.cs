@@ -68,7 +68,7 @@ namespace LoginRegister.Controllers {
             //    }
             //}).ToListAsync() ;
 
-            var productCategory = db.ProductCategory.Select(x => new {
+            var productCategory = await db.ProductCategory.Select(x => new {
                 x.ProductCategoryId,
                 x.CategoryId,
                 x.ProductId,
@@ -96,7 +96,7 @@ namespace LoginRegister.Controllers {
                 }
 
                 //x.Product
-            });
+            }).ToListAsync();
             return Ok(productCategory);
         }
 

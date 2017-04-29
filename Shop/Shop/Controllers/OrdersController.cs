@@ -255,7 +255,7 @@ namespace LoginRegister.Controllers {
             //orderDb.quantityOrder = order.quantityOrder.Equals(null) ? orderDb.quantityOrder : order.quantityOrder;
             orderDb.totalOrderPrice = order.totalOrderPrice.Equals(null) ? orderDb.totalOrderPrice : order.totalOrderPrice;
 
-            var aux = 10;
+            //var aux = 10;
             db.Entry(orderDb).State = EntityState.Modified;
 
             try {
