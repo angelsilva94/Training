@@ -8,8 +8,10 @@ namespace Shop.Models.Interfaces {
         Brand Brand { get; set; }
         int BrandId { get; set; }
         ICollection<OrderDetail> OrderDetails { get; set; }
+
         //ICollection<ProductCategory> ProductCategories { get; set; }
         string productDesc { get; set; }
+
         int ProductId { get; set; }
         DateTime productModifyDate { get; set; }
         string productName { get; set; }

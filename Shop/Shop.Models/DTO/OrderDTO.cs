@@ -11,7 +11,7 @@ namespace Shop.Models.DBModel.DTO {
 
         public int orderStatusCode { set; get; }
 
-//        public int quantityOrder { set; get; }
+        //        public int quantityOrder { set; get; }
 
         public double totalOrderPrice { set; get; }
 

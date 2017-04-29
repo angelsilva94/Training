@@ -6,7 +6,9 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Shop.Extensions {
+
     public static class QueryExtension {
+
         public static ProjectionExpression<TSource> Project<TSource>(this IQueryable<TSource> source) {
             return new ProjectionExpression<TSource>(source);
         }

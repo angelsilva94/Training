@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace Shop.Models.Interfaces {
+
     public interface IAddress {
         int AddressId { get; set; }
         string adress { get; set; }

@@ -31,7 +31,6 @@ img{max-width:100%;}
 body{
     background: #009bbb;
    font-family: 'Montserrat', sans-serif;
-
 }
 body a,form li,.submit input[type="submit"],.new p a,.new p.sign{
 	transition: 0.1s all;
@@ -157,12 +156,12 @@ ul.icon1{
 	-moz-border-top-left-radius: 5px;
 	-o-border-top-left-radius: 5px;
 }
-.icon1 ul li:last-child {   
+.icon1 ul li:last-child {
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
-	box-shadow: none;    
+	box-shadow: none;
 }
-.icon1 ul a {    
+.icon1 ul a {
 	_height: 10px; /*IE6 only*/
 	white-space: nowrap;
 	float: none;
@@ -184,7 +183,7 @@ ul.icon1{
 	left: -100px;
 	top: 0%;
 	margin-top: -6px;
-	border-left: 0;	
+	border-left: 0;
 	border-bottom:20px solid transparent;
 	border-top: 20px solid transparent;
 	border-right:20px solid #323757;
@@ -367,16 +366,12 @@ color: #fff;
 /*--//copy-right--*/
 /*--start-responsive-design--*/
 @media (max-width:1600px){
-	
 }
 @media (max-width:1440px){
-
 }
 @media (max-width:1366px){
-
 }
 @media (max-width:1280px){
-	
 }
 @media (max-width:1024px){
 	.mini-cart {
@@ -408,10 +403,8 @@ color: #fff;
 		.mini-cart {
 	    width: 27%;
 	}
-	
 }
 @media (max-width:667px){
-	
 }
 @media (max-width:640px){
 	.copy-right p {
@@ -424,7 +417,6 @@ color: #fff;
 	}
 }
 @media (max-width:568px){
-
 }
 @media (max-width:480px){
 	.copy-right p {

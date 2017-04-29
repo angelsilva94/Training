@@ -50,13 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Migrations\201703241840444_2.cs" />
-    <Compile Include="Migrations\201703241840444_2.Designer.cs">
-      <DependentUpon>201703241840444_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201704201644167_1.4.cs" />
-    <Compile Include="Migrations\201704201644167_1.4.Designer.cs">
-      <DependentUpon>201704201644167_1.4.cs</DependentUpon>
+    <Compile Include="Migrations\201704290241475_1.0.cs" />
+    <Compile Include="Migrations\201704290241475_1.0.Designer.cs">
+      <DependentUpon>201704290241475_1.0.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,11 +83,8 @@
     <Content Include="DBMockData\11ReviewProducts.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703241840444_2.resx">
-      <DependentUpon>201703241840444_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704201644167_1.4.resx">
-      <DependentUpon>201704201644167_1.4.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704290241475_1.0.resx">
+      <DependentUpon>201704290241475_1.0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

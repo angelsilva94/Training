@@ -1,22 +1,24 @@
 ﻿using Shop.Models.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.Models.DBModel {
+
     public class Address : IAddress {
         public int AddressId { set; get; }
+
         [Required]
         public string street { set; get; }
+
         [Required]
         public string adress { set; get; }
+
         [Required]
         public string country { set; get; }
+
         [Required]
         public string city { set; get; }
+
         [Required]
         public string zip { set; get; }
 

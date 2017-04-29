@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Web;
 
 namespace Shop.Extensions {
+
     public static class Reflection {
+
         /// <summary>
         /// Extension for 'Object' that copies the properties to a destination object.
         /// </summary>
@@ -19,8 +18,8 @@ namespace Shop.Extensions {
             Type typeDest = destination.GetType();
             Type typeSrc = source.GetType();
 
-            // Iterate the Properties of the source instance and  
-            // populate them from their desination counterparts  
+            // Iterate the Properties of the source instance and
+            // populate them from their desination counterparts
             PropertyInfo[] srcProps = typeSrc.GetProperties();
             foreach (PropertyInfo srcProp in srcProps) {
                 if (!srcProp.CanRead) {

@@ -1,7 +1,5 @@
 ﻿/// <reference path="../angular.min.js" />
 app.controller("registerCtrl", function ($scope, $http, $location) {
-
-   
     $scope.registerUser = function () {
         var date = new Date();
         var jsonServer = {
@@ -18,16 +16,14 @@ app.controller("registerCtrl", function ($scope, $http, $location) {
         $scope.json = jsonServer;
 
         $http.post("http://localhost:58495/users/api/User", jsonServer)
-             .then(function (response) {
-                 //console.log(data);
-                 console.log(response);
-                 $scope.responseServer = response.statusText;
-                 $location.path("/login");
-             }, function (response) {
-                 //console.log(response);
-                 $scope.responseServer = response.statusText;
-
-             });
+            .then(function (response) {
+                //console.log(data);
+                console.log(response);
+                $scope.responseServer = response.statusText;
+                $location.path("/login");
+            }, function (response) {
+                //console.log(response);
+                $scope.responseServer = response.statusText;
+            });
     }
-
 });

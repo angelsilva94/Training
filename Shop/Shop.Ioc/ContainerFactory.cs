@@ -1,5 +1,4 @@
 ﻿using Autofac;
-using LoginRegister.Models;
 using Shop.Models.DBModel;
 using Shop.Models.Interfaces;
 

@@ -3,7 +3,6 @@ using Shop.Extensions;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -14,7 +13,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
-    [RoutePrefix("orders"),Authentication]
+
+    [RoutePrefix("orders"), Authentication]
     public class OrdersController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
@@ -38,22 +38,21 @@ namespace LoginRegister.Controllers {
 
         //    return Ok(order);
         //
-        [ResponseType(typeof(OrderDTO)),Route("api/orders")]
+        [ResponseType(typeof(OrderDTO)), Route("api/orders")]
         //public  IQueryable<OrderDto> GetOrder() { check which is better
         public async Task<IHttpActionResult> GetOrder() {
-
             //linq method way
-            var order = await db.Order.Select(x => new  {
+            var order = await db.Order.Select(x => new {
                 OrderId = x.OrderId,
                 UserId = x.UserId,
                 orderStatusCode = x.orderStatusCode,
-               
+
                 OrderDetails = x.OrderDetails.Select(y => new /*  ANONYMOUS TYPE OrderDetailDTO*/ {
                     OrderId = y.OrderId,
                     OrderDetailId = y.OrderDetailId,
-                    quantityOrder=y.quantityOrder,
+                    quantityOrder = y.quantityOrder,
                     ProductId = y.ProductId,
-                    Product = new  {
+                    Product = new {
                         productDesc = y.Product.productDesc,
                         ProductId = y.Product.ProductId,
                         productName = y.Product.productName,
@@ -63,13 +62,13 @@ namespace LoginRegister.Controllers {
                 purchaseDate = x.purchaseDate,
                 //quantityOrder = x.quantityOrder,
                 totalOrderPrice = x.totalOrderPrice,
-                User = new  {
+                User = new {
                     UserId = x.UserId,
                     age = x.User.age,
                     username = x.User.username,
                     regDate = x.User.regDate,
-                    //x.User.username igual se puede usar 
-                    userInfo = new  {
+                    //x.User.username igual se puede usar
+                    userInfo = new {
                         adress = x.User.UserInfo.adress,
                         city = x.User.UserInfo.city,
                         country = x.User.UserInfo.country,
@@ -77,9 +76,7 @@ namespace LoginRegister.Controllers {
                         phone = x.User.UserInfo.phone
                     }
                 }
-
             }).AsNoTracking().ToListAsync();
-
 
             //query syntax way
             //var order = from x in db.Order
@@ -137,50 +134,47 @@ namespace LoginRegister.Controllers {
 
         //[Authentication]
         //[Route("api/getOrder/search")]
-        [ResponseType(typeof(OrderDTO)),Route("api/orders")]
+        [ResponseType(typeof(OrderDTO)), Route("api/orders")]
         public async Task<IHttpActionResult> GetOrder(int id) {
-
-
-            
-            var order = await db.Order.Select(x=>new OrderDTO {
-                    OrderId= x.OrderId,
-                    orderStatusCode = x.orderStatusCode,
-                    purchaseDate = x.purchaseDate,
-                    //quantityOrder = x.quantityOrder,
-                    totalOrderPrice = x.totalOrderPrice,
-                    UserId = x.UserId,
-                    User = new UserDTO {
-                        UserId = x.User.UserId,
-                        username = x.User.username,
-                        password = x.User.password,
-                        name = x.User.name,
-                        lastName = x.User.lastName,
-                        surname = x.User.surname,
-                        age = x.User.age,
-                        email = x.User.email,
-                        regDate = x.User.regDate,
-                        userMode = x.User.userMode,
-                        userInfo = new UserInfoDTO {
-                            adress = x.User.UserInfo.adress,
-                            city = x.User.UserInfo.city,
-                            zip = x.User.UserInfo.zip,
-                            country = x.User.UserInfo.country,
-                            phone = x.User.UserInfo.phone,
-                        }
-                    },
-                   OrderDetails = x.OrderDetails.Select(y => new OrderDetailDTO {
-                       OrderDetailId = y.OrderDetailId,
-                       OrderId = y.OrderId,
-                       ProductId = y.ProductId,
-                       quantityOrder = y.quantityOrder,
-                       Product = new ProductDTO {
-                           productDesc = y.Product.productDesc,
-                           ProductId = y.Product.ProductId,
-                           productName = y.Product.productName,
-                           productPrice = y.Product.productPrice
-                       }
-                   }).ToList()  
-            }). SingleOrDefaultAsync(x => x.OrderId == id);
+            var order = await db.Order.Select(x => new OrderDTO {
+                OrderId = x.OrderId,
+                orderStatusCode = x.orderStatusCode,
+                purchaseDate = x.purchaseDate,
+                //quantityOrder = x.quantityOrder,
+                totalOrderPrice = x.totalOrderPrice,
+                UserId = x.UserId,
+                User = new UserDTO {
+                    UserId = x.User.UserId,
+                    username = x.User.username,
+                    password = x.User.password,
+                    name = x.User.name,
+                    lastName = x.User.lastName,
+                    surname = x.User.surname,
+                    age = x.User.age,
+                    email = x.User.email,
+                    regDate = x.User.regDate,
+                    userMode = x.User.userMode,
+                    userInfo = new UserInfoDTO {
+                        adress = x.User.UserInfo.adress,
+                        city = x.User.UserInfo.city,
+                        zip = x.User.UserInfo.zip,
+                        country = x.User.UserInfo.country,
+                        phone = x.User.UserInfo.phone,
+                    }
+                },
+                OrderDetails = x.OrderDetails.Select(y => new OrderDetailDTO {
+                    OrderDetailId = y.OrderDetailId,
+                    OrderId = y.OrderId,
+                    ProductId = y.ProductId,
+                    quantityOrder = y.quantityOrder,
+                    Product = new ProductDTO {
+                        productDesc = y.Product.productDesc,
+                        ProductId = y.Product.ProductId,
+                        productName = y.Product.productName,
+                        productPrice = y.Product.productPrice
+                    }
+                }).ToList()
+            }).SingleOrDefaultAsync(x => x.OrderId == id);
             //
 
             //var order = await db.Order.Include(x => x.OrderId).Select(x =>
@@ -218,7 +212,7 @@ namespace LoginRegister.Controllers {
                 return NotFound();
             } else {
                 return Ok(order);
-            }   
+            }
             //IQueryable<Order> temp = db.Order.Where(x => x.OrderId == id).ToList<Order>().AsQueryable();
             //var order = new OrderDTO {
             //    OrderId = temp.Select(x=>x.OrderId).First(),
@@ -247,7 +241,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/Orders/5
-        [ResponseType(typeof(void)),Route("api/orders")]
+        [ResponseType(typeof(void)), Route("api/orders")]
         public async Task<IHttpActionResult> PutOrder(int id, OrderDTO order) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -260,11 +254,9 @@ namespace LoginRegister.Controllers {
             orderDb.purchaseDate = order.purchaseDate.Equals(DateTime.MinValue) ? orderDb.purchaseDate : order.purchaseDate;
             //orderDb.quantityOrder = order.quantityOrder.Equals(null) ? orderDb.quantityOrder : order.quantityOrder;
             orderDb.totalOrderPrice = order.totalOrderPrice.Equals(null) ? orderDb.totalOrderPrice : order.totalOrderPrice;
-            
 
             var aux = 10;
             db.Entry(orderDb).State = EntityState.Modified;
-            
 
             try {
                 await db.SaveChangesAsync();
@@ -280,7 +272,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Orders
-        [ResponseType(typeof(Order)),Route("api/orders",Name = "postOrders")]
+        [ResponseType(typeof(Order)), Route("api/orders", Name = "postOrders")]
         //[Authentication]
         //[Route("api/submit",Name = "orderPost")]
         public async Task<IHttpActionResult> PostOrder(OrderDTO order) {

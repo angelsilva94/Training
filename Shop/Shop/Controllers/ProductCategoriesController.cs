@@ -1,7 +1,6 @@
 ﻿using LoginRegister.Models;
 using Shop.Extensions;
 using Shop.Models.DBModel;
-using Shop.Models.DBModel.DTO;
 using Shop.Models.DTO;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -12,7 +11,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
-    [RoutePrefix("productCategories")]    
+
+    [RoutePrefix("productCategories")]
     public class ProductCategoriesController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
@@ -41,7 +41,6 @@ namespace LoginRegister.Controllers {
             //        //        CategoryId = y.CategoryId,
             //        //        ProductId = y.ProductId,
 
-
             //        //    }).ToList()
             //        //},
             //        ProductCategories = x.Category.ProductCategories.Select(y => new ProductCategoryDTO {
@@ -69,7 +68,7 @@ namespace LoginRegister.Controllers {
             //    }
             //}).ToListAsync() ;
 
-            var productCategory = db.ProductCategory.Select(x=>new {
+            var productCategory = db.ProductCategory.Select(x => new {
                 x.ProductCategoryId,
                 x.CategoryId,
                 x.ProductId,
@@ -85,7 +84,6 @@ namespace LoginRegister.Controllers {
                         x.Product.Brand.brandDesc,
                         x.Product.Brand.brandLogoUrl,
                         x.Product.Brand.brandName,
-                        
                     }
                 },
                 Category = new {
@@ -96,16 +94,14 @@ namespace LoginRegister.Controllers {
                     x.Category.categoryParentId,
                     x.Category.categoryImage
                 }
-                
+
                 //x.Product
-                
-                
             });
             return Ok(productCategory);
         }
 
         // GET: api/ProductCategories/5
-        [ResponseType(typeof(ProductCategory)),Route("api/productCategory")]
+        [ResponseType(typeof(ProductCategory)), Route("api/productCategory")]
         public async Task<IHttpActionResult> GetProductCategory(int id) {
             var productCategory = await db.ProductCategory.Select(x => new {
                 x.ProductCategoryId,
@@ -123,16 +119,14 @@ namespace LoginRegister.Controllers {
                     x.Product.ProductId,
                     x.Product.productPublishDate,
                     x.Product.productModifyDate,
-                    ReviewProducts = x.Product.ReviewProducts.Select(y=> new {
+                    ReviewProducts = x.Product.ReviewProducts.Select(y => new {
                         y.ratingReview,
                     })
-
                 },
                 //category = new {
                 //    x.Category.CategoryId,
                 //    x.Category.categoryDesc
                 //},
-               
             }).Where(x => x.CategoryId == id).ToListAsync();
             if (productCategory == null) {
                 return NotFound();
@@ -142,7 +136,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/ProductCategories/5
-        [ResponseType(typeof(void)),Authentication, Route("api/productCategory")]
+        [ResponseType(typeof(void)), Authentication, Route("api/productCategory")]
         public async Task<IHttpActionResult> PutProductCategory(int id, ProductCategoryDTO productCategory) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

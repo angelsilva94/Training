@@ -10,8 +10,10 @@ namespace Shop.Models.Interfaces {
         OrderStatus OrderStatus { get; set; }
         int orderStatusCode { get; set; }
         DateTime purchaseDate { get; set; }
+
         //int quantityOrder { get; set; }
         double totalOrderPrice { get; set; }
+
         User User { get; set; }
         int UserId { get; set; }
     }

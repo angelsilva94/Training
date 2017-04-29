@@ -1,12 +1,7 @@
-﻿using Shop.Models.DBModel;
-using Shop.Models.DBModel.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Shop.Models.DBModel.DTO;
 
 namespace Shop.Models.DTO {
+
     public class ReviewProductDTO {
         public ProductDTO Product { set; get; }
         public int ProductId { set; get; }

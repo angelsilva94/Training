@@ -1,6 +1,5 @@
 ﻿<head>
     <link href="../css/stars.css" rel="stylesheet" />
-    
 </head>
 <body>
     <div class="row" ng-controller="homeCtrl">
@@ -8,8 +7,7 @@
             <p class="lead">Shop Name</p>
             <div class="list-group">
                 <a ng-href="#!category/{{x.CategoryId}}" class="list-group-item" ng-repeat="x in category | limitTo:30">{{x.categoryName}}</a>
-                
-                
+
                 <!--<a href="#" class="list-group-item">Category 2</a>
                 <a href="#" class="list-group-item">{{category}}</a>-->
             </div>
@@ -50,7 +48,7 @@
                         <img class="img-responsive" ng-src="{{x.productUrl}}" alt="{{x.productName}}">
                         <div class="caption">
                             <h4 class="pull-right">{{x.productPrice | currency}}</h4>
-                            
+
                             <h4><a ng-href="#!product/{{x.ProductId}}">{{x.productName}}</a></h4>
                             <p>{{x.productDesc}}.</p>
                         </div>
@@ -76,5 +74,4 @@
             </div>
         </div>
     </div>
-    
 </body>

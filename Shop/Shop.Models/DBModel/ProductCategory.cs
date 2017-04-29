@@ -5,8 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Shop.Models.DBModel {
 
     public class ProductCategory : IProductCategory {
-
-
         public int ProductCategoryId { set; get; }
 
         [Required]

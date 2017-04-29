@@ -1,5 +1,4 @@
 ﻿app.controller("productCtrl", function ($scope, shopFactory, $routeParams, ngCart) {
-
     //var productDetailServer = shopFactory.ProductDetail.get({ id: 1 }, function () {
     //});
 
@@ -21,8 +20,7 @@
         $scope.averageRating = function () {
             var total = 0;
             var length = response.ReviewProducts.length;
-            for (var i = 0; i< length; i++) {
-                
+            for (var i = 0; i < length; i++) {
                 total += response.ReviewProducts[i].ratingReview;
             }
             var avg = total / length;
@@ -37,7 +35,6 @@
             return avg + "%";
         };
         $scope.reviewData = response.ReviewProducts;
-        
     });
     //console.log(test);
     //console.log(test.email);
@@ -47,7 +44,7 @@
     }, function (error) {
         console.log(error);
     });
-    
+
     $scope.addToCart = function (productUrl, productName, productPrice) {
         console.log("boton añadir a carrito");
         ngCart.setTaxRate(7.5);
@@ -56,12 +53,9 @@
         //console.log(productName);
         //console.log(productPrice);
     };
-    
+
     $scope.checkOutDetails = function () {
         console.log("PRODUCTDS");
         $uibModalInstance.close();
     };
-    
-    
-
 });

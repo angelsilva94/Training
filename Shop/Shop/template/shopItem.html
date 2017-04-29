@@ -13,8 +13,8 @@
                 <div class="thumbnail">
                     <!--{{ejemplo}}
                     {{ejemplo.productUrl}}-->
-                    <img  ng-src="{{productUrl}}" alt="{{productName}}" class="img-responsive" >
-                    
+                    <img  ng-src="{{productUrl}}" alt="{{productName}}" class="img-responsive">
+
                     <div class="caption-full">
                         <h4 class="pull-right" ng-bind="productPrice | currency"></h4>
                         <h4>
@@ -24,7 +24,7 @@
                         <p ng-bind="productDesc"></p>
                     </div>
                     <div class="ratings">
-                        <b><p class="pull-right" >{{totalReviews}} Reviews</p></b>  
+                        <b><p class="pull-right" >{{totalReviews}} Reviews</p></b>
                         <span class="stars">
                             <span ng-style="{ 'width': getStars(ReviewProducts) }"></span>
                         </span>
@@ -37,19 +37,18 @@
                     <!--<button class="btn btn-success pull-left" ng-click="addToCart(productUrl,productName,productPrice)"><span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart</button>-->
 
                     <ngcart-addtocart class="pull-left" template-url="template/addtocart.html" id="{{productId}}" name="{{productName}}" price="{{productPrice}}" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
-
                 </div>
-                
+
                 <div class="well" ng-repeat="x in reviewData">
-                    
+
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
                             <span class="stars">
                                 <span ng-style="{ 'width': getStars(ReviewProducts) }"></span>
                             </span>
-                            <b>Username: {{x.User.username}}</b> 
-                            <b class="pull-right">Real Name: {{x.User.name +" "+ x.User.lastName}}</b><br/>
+                            <b>Username: {{x.User.username}}</b>
+                            <b class="pull-right">Real Name: {{x.User.name +" "+ x.User.lastName}}</b><br />
                             <p>{{x.reviewDesc}}</p>
                         </div>
                     </div>
@@ -58,12 +57,9 @@
         </div>
     </div>
 
-
-
     <!--<link href="../css/bootstrap.min.css" rel="stylesheet" />-->
     <!-- Custom CSS -->
 
     <link href="../css/shop-item.css" rel="stylesheet" />
     <!--<script src="../Scripts/route/productCtrl.js"></script>-->
-
 </body>

@@ -14,26 +14,22 @@ app.controller("homeCtrl", function ($scope, shopFactory, $window) {
     }, function (error) {
         console.log("ENTRASTE AL ERROR DE CATEGORIA");
         console.log(error);
-       //var i = 0;
+        //var i = 0;
         //while (error) {
         //    $window.location.reload();
         //    console.log(i);
         //    i++;
         //}
-        
-
     });
-    
+
     var productServer = shopFactory.Product.query({ from: 0, to: 10 }).$promise.then(function (response) {
         $scope.product = response;
     }, function (error) {
         console.log("ENTRASTE AL ERROR DE PRODUCTO");
         console.log(error);
         //$window.location.reload();
-
     });
-   
-    
+
     $scope.getAvg = function (ReviewProducts) {
         var total = 0;
         for (var i = 0; i < ReviewProducts.length; i++) {
@@ -42,21 +38,16 @@ app.controller("homeCtrl", function ($scope, shopFactory, $window) {
         var avg = total / ReviewProducts.length;
         $scope.rating = avg;
         return avg;
-        
     };
     $scope.getStars = function (ReviewProducts) {
         var total = 0;
         for (var i = 0; i < ReviewProducts.length; i++) {
             total += ReviewProducts[i].ratingReview
         }
-        var avg = (total / ReviewProducts.length)*20;
-        
-        return avg+"%";
+        var avg = (total / ReviewProducts.length) * 20;
 
+        return avg + "%";
     };
-    
-
-
 
     //$scope.setData = function () {
     //    //$scope.category = categoryServer[1].categoryName;
@@ -73,7 +64,6 @@ app.controller("homeCtrl", function ($scope, shopFactory, $window) {
         var productServer = shopFactory.Product.query({ from: $scope.pages - 1, to: 10 }).$promise.then(function (response) {
             $scope.product = response;
         });
-        
     };
     //$scope.hoveringOver = function (value) {
     //    $scope.overStar = value;

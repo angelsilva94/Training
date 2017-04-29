@@ -11,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
+
     [RoutePrefix("reviewProducts")]
     public class ReviewProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
@@ -18,7 +19,7 @@ namespace LoginRegister.Controllers {
         // GET: api/ReviewProducts
         [Route("api/getReviewProducts")]
         public async Task<IHttpActionResult> GetReviewProduct() {
-            var review =await db.ReviewProduct.Select(x => new {
+            var review = await db.ReviewProduct.Select(x => new {
                 x.ratingReview,
                 x.reviewDesc,
                 x.ReviewProductIdNumber,
@@ -31,7 +32,6 @@ namespace LoginRegister.Controllers {
                     x.Product.ProductId,
                     x.Product.productName
                 },
-               
             }).ToListAsync();
 
             return Ok(review);
@@ -47,8 +47,7 @@ namespace LoginRegister.Controllers {
                 x.UserId,
                 x.User,
                 x.Product
-
-            }).SingleOrDefaultAsync(x=>x.ReviewProductIdNumber == id);
+            }).SingleOrDefaultAsync(x => x.ReviewProductIdNumber == id);
             if (reviewProduct == null) {
                 return NotFound();
             }
@@ -57,7 +56,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/ReviewProducts/5
-        [ResponseType(typeof(void)),Route("api/putReviewProducts"),Authentication]
+        [ResponseType(typeof(void)), Route("api/putReviewProducts"), Authentication]
         public async Task<IHttpActionResult> PutReviewProduct(int id, ReviewProductDTO reviewProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -84,7 +83,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/ReviewProducts
-        [ResponseType(typeof(ReviewProduct)), Route("api/postReviewProducts",Name = "postReviewProducts"),Authentication]
+        [ResponseType(typeof(ReviewProduct)), Route("api/postReviewProducts", Name = "postReviewProducts"), Authentication]
         public async Task<IHttpActionResult> PostReviewProduct(ReviewProduct reviewProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

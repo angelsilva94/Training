@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LoginRegister.Models;
+using Shop.Models.DBModel;
+using Shop.Models.DTO;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
-using LoginRegister.Models;
-using Shop.Models.DBModel;
-using Shop.Models.DTO;
-using Shop.Extensions;
-using LoginRegister;
 
 namespace Shop.Controllers {
+
     [RoutePrefix("category")]
     public class CategoriesController : ApiController {
         private ShopDBContext db = new ShopDBContext();
@@ -36,7 +32,6 @@ namespace Shop.Controllers {
         // GET: api/Categories/5
         [ResponseType(typeof(Category)), Route("api/categories")]
         public async Task<IHttpActionResult> GetCategory(int id) {
-
             //var category = await db.Category.Where(x => x.CategoryId == id).Select(x => new {
             //    x.categoryDesc,
             //    x.CategoryId,
@@ -48,7 +43,7 @@ namespace Shop.Controllers {
             //    //    x.categoryParent.CategoryId
             //    //},
             //    //categoryParent = new {
-            //    //    x.categoryParent.categoryParentId,  
+            //    //    x.categoryParent.categoryParentId,
             //    //    x.categoryParent.ProductCategories
             //    //}
             //    //x.childrenCategory
@@ -65,7 +60,6 @@ namespace Shop.Controllers {
                 return NotFound();
             }
 
-
             return Ok(category);
         }
 
@@ -80,10 +74,8 @@ namespace Shop.Controllers {
                 return BadRequest();
             }
 
-
             var categoryDb = db.Category.Find(id);
             categoryDb.categoryParentId = category.categoryParentId;
-
 
             db.Entry(categoryDb).State = EntityState.Modified;
 

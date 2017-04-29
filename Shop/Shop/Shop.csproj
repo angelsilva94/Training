@@ -448,6 +448,7 @@
     <Content Include="Tests\admin\node_modules\constants-browserify\constants.json" />
     <Content Include="Tests\admin\node_modules\constants-browserify\package.json" />
     <Content Include="Tests\admin\node_modules\constants-browserify\README.md" />
+    <Content Include="Tests\admin\node_modules\core-js\.gitattributes" />
     <Content Include="Tests\admin\node_modules\core-js\.npmignore" />
     <Content Include="Tests\admin\node_modules\core-js\bower.json" />
     <Content Include="Tests\admin\node_modules\core-js\build\build.ls" />
@@ -1202,6 +1203,7 @@
     <Content Include="Tests\admin\node_modules\tty-browserify\package.json" />
     <Content Include="Tests\admin\node_modules\tty-browserify\readme.markdown" />
     <Content Include="Tests\admin\node_modules\ui-select\.editorconfig" />
+    <Content Include="Tests\admin\node_modules\ui-select\.gitattributes" />
     <Content Include="Tests\admin\node_modules\ui-select\.github\ISSUE_TEMPLATE.md" />
     <Content Include="Tests\admin\node_modules\ui-select\.npmignore" />
     <Content Include="Tests\admin\node_modules\ui-select\.travis.yml" />
@@ -1922,7 +1924,6 @@
     <Content Include="Tests\admin\node_modules\console-browserify\test\index.js" />
     <Content Include="Tests\admin\node_modules\console-browserify\test\static\index.html" />
     <Content Include="Tests\admin\node_modules\console-browserify\test\static\test-adapter.js" />
-    <Content Include="Tests\admin\node_modules\core-js\.gitattributes" />
     <Content Include="Tests\admin\node_modules\core-js\build\core-stable.js" />
     <Content Include="Tests\admin\node_modules\core-js\client\core.js" />
     <Content Include="Tests\admin\node_modules\core-js\client\core.min.js" />
@@ -3853,7 +3854,6 @@
     <Content Include="Tests\admin\node_modules\timers-browserify\example\enroll\server.js" />
     <Content Include="Tests\admin\node_modules\timers-browserify\main.js" />
     <Content Include="Tests\admin\node_modules\tty-browserify\index.js" />
-    <Content Include="Tests\admin\node_modules\ui-select\.gitattributes" />
     <Content Include="Tests\admin\node_modules\ui-select\dist\select.css" />
     <Content Include="Tests\admin\node_modules\ui-select\dist\select.js" />
     <Content Include="Tests\admin\node_modules\ui-select\dist\select.min.css" />

@@ -1,6 +1,7 @@
 ﻿using Shop.Models.DBModel;
 
 namespace Shop.Models.Interfaces {
+
     public interface IUserType {
         string type { get; set; }
         string typeDesc { get; set; }

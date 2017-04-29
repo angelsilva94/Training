@@ -2,7 +2,6 @@
 
 //var app = angular.module("shopModule", [])
 app.controller("loginCtrl", function ($scope, $http, $location, $rootScope, AuthenticationService) {
-
     AuthenticationService.ClearCredentials();
     $scope.sendServer = function () {
         $scope.dataLoading = true;
@@ -19,9 +18,6 @@ app.controller("loginCtrl", function ($scope, $http, $location, $rootScope, Auth
                 console.log(response);
             }
         });
-        
-
-
 
         //var jsonServer = {
         //    "name": $scope.username,
@@ -35,18 +31,10 @@ app.controller("loginCtrl", function ($scope, $http, $location, $rootScope, Auth
         //     }, function (response) {
         //         //console.log(response);
         //         $scope.responseServer = response.statusText;
-                 
+
         //     });
     }
-    
 });
-
-
-
-
-
-
-
 
 //var loginCtrl = function ($scope, $http) {
 //    var jsonServer = {

@@ -1,7 +1,6 @@
 ﻿using LoginRegister.Models;
 using Shop.Extensions;
 using Shop.Models.DBModel;
-using Shop.Models.DBModel.DTO;
 using Shop.Models.DTO;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -12,6 +11,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
+
     [RoutePrefix("brands")]
     public class BrandsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
@@ -32,7 +32,6 @@ namespace LoginRegister.Controllers {
                     y.productStock,
                     y.productStatus,
                     y.productModifyDate
-
                 }).ToList()
             }).ToListAsync();
             return Ok(brand);
@@ -83,7 +82,6 @@ namespace LoginRegister.Controllers {
             if (id != brand.BrandId) {
                 return BadRequest();
             }
-
 
             var brandDB = await db.Brand.FindAsync(id);
             brand.CopyProperties(brandDB);

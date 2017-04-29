@@ -1,14 +1,12 @@
 ﻿using LoginRegister.Models;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
-using Shop.Models.DTO;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -29,8 +27,34 @@ namespace LoginRegister.Controllers {
         // GET: api/User
         //[Authentication]
         [Route("")]
-        public async Task<IHttpActionResult> GetUser() {
+        public async Task<HttpResponseMessage> GetUser(int _page, int _perPage) {
+            var total = db.User.Count();
+            var user = await db.User.Select(x => new {
+                UserId = x.UserId,
+                username = x.username,
+                password = x.password,
+                name = x.name,
+                lastName = x.lastName,
+                surname = x.surname,
+                age = x.age,
+                email = x.email,
+                regDate = x.regDate,
+                userMode = x.userMode,
+                userInfo = new {
+                    adress = x.UserInfo.adress,
+                    city = x.UserInfo.city,
+                    zip = x.UserInfo.zip,
+                    country = x.UserInfo.country,
+                    phone = x.UserInfo.phone
+                }
+            }).OrderBy(x=>x.UserId).Skip((_page-1) * _perPage).Take(_perPage).ToListAsync();
+            var response = Request.CreateResponse(HttpStatusCode.OK, user);
+            response.Headers.Add("X-Total-Count", db.User.Count().ToString());
+            return response;
+        }
 
+        [Route("")]
+        public async Task<IHttpActionResult> GetUser() {
             //var user = from x in db.User
             //           select new UserDTO() {
             //               UserId = x.UserId,
@@ -68,14 +92,13 @@ namespace LoginRegister.Controllers {
                 email = x.email,
                 regDate = x.regDate,
                 userMode = x.userMode,
-                userInfo =new UserInfoDTO {
+                userInfo = new UserInfoDTO {
                     adress = x.UserInfo.adress,
                     city = x.UserInfo.city,
                     zip = x.UserInfo.zip,
                     country = x.UserInfo.country,
                     phone = x.UserInfo.phone,
                 }
-
             }).ToListAsync();
             //string hola = "adsfdfa";
             //bool xyz= hola.Check();
@@ -84,7 +107,7 @@ namespace LoginRegister.Controllers {
         }
 
         // GET: api/User/5
-        [ResponseType(typeof(User)),Route("api/User")]
+        [ResponseType(typeof(User)), Route("api/User")]
         //[Authentication]
         public async Task<IHttpActionResult> GetUserModel(int id) {
             //IQueryable<User> temp = db.User.Where(x => x.UserId == id).ToList<User>().AsQueryable();
@@ -183,7 +206,6 @@ namespace LoginRegister.Controllers {
                 return NotFound();
             }
 
-
             //var aux = new UserDTO {
             //    UserId = test.Select(x=>x.UserId).FirstOrDefault()
             //};
@@ -217,7 +239,6 @@ namespace LoginRegister.Controllers {
             //                   //x.UserInfo.phone,
             //           };
 
-
             return Ok(user);
         }
 
@@ -228,7 +249,7 @@ namespace LoginRegister.Controllers {
 
         // PUT: api/User/5
         [Authentication]
-        [ResponseType(typeof(void)),Route("api/User")]
+        [ResponseType(typeof(void)), Route("api/User")]
         public async Task<IHttpActionResult> PutUserModel([FromBody]ModifyUserModel modifyUserModel, [FromUri]int id) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

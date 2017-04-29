@@ -1,6 +1,6 @@
-﻿app.controller("indexCtrl", function ($scope, $uibModal, $cookieStore,$http) {
+﻿app.controller("indexCtrl", function ($scope, $uibModal, $cookieStore, $http) {
     //console.log("HOLA");
-    
+
     $scope.showCart = function () {
         console.log("-------------------carrito Index--------------------");
         var modal = $uibModal.open({
@@ -9,7 +9,6 @@
             //template: "<h1>hola</h1>",
             backdrop: true,
             controller: "productCtrl"
-
         });
     };
     $scope.debug = function () {
@@ -19,9 +18,7 @@
         });
         console.log(cookie);
     };
-
 });
-
 
 //app.controller("modalCtrl", function ($scope) {
 //    console.log("dentro del controller");

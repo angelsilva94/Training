@@ -17,7 +17,8 @@ namespace Shop.DAL.Migrations
         {
             var route = System.Environment.GetEnvironmentVariable("USERPROFILE") + @"\Source\Repos\SterlingMomentum\Shop\Shop.DAL\DBMockData";
             var sql = Directory.GetFiles(route).OrderBy(x => x);
-            foreach (var item in sql) {
+            foreach (var item in sql)
+            {
                 context.Database.ExecuteSqlCommand(File.ReadAllText(item));
             }
         }

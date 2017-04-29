@@ -1,5 +1,4 @@
 ﻿using Shop.Models.DBModel;
-using System.Collections.Generic;
 
 namespace Shop.Models.Interfaces {
 

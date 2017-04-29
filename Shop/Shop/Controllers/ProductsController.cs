@@ -6,50 +6,20 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
+
     [RoutePrefix("products")]
     public class ProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
         // GET: api/Products
-        [ResponseType(typeof(Product)),  Route("api/Products")]
-        public async Task<IHttpActionResult> GetProduct([FromUri]int from,[FromUri]int to ) {
-            var product = await db.Product.AsNoTracking().Select(x => new  {
-                productDesc = x.productDesc,
-                ProductId = x.ProductId,
-                productName = x.productName,
-                productPrice = x.productPrice,
-                productStatus = x.productStatus,
-                productStock = x.productStock,
-                productModifyDate = x.productModifyDate,
-                productUrl = x.productUrl,
-                ReviewProducts = x.ReviewProducts.Select(y=>new {
-                    y.ratingReview,
-                    y.reviewDesc,
-                    y.ReviewProductIdNumber,
-                    User = new {
-                        y.User.username,
-                        y.User.UserId,
-                        y.User.name,
-                        y.User.lastName
-                    }
-                })
-
-            }).OrderBy(x=>x.ProductId).Skip(to*from).Take(to).ToListAsync();
-           
-
-            return Ok(product);
-        }
-
-        // GET: api/Products/5
-        [ResponseType(typeof(ProductDTO)),Route("api/Products")]
-        public async Task<IHttpActionResult> GetProduct(int id) {
-            var product = await db.Product.Select(x => new  {
+        [ResponseType(typeof(Product)), Route("api/Products")]
+        public async Task<IHttpActionResult> GetProduct([FromUri]int from, [FromUri]int to) {
+            var product = await db.Product.AsNoTracking().Select(x => new {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
                 productName = x.productName,
@@ -69,7 +39,34 @@ namespace LoginRegister.Controllers {
                         y.User.lastName
                     }
                 })
+            }).OrderBy(x => x.ProductId).Skip(to * from).Take(to).ToListAsync();
 
+            return Ok(product);
+        }
+
+        // GET: api/Products/5
+        [ResponseType(typeof(ProductDTO)), Route("api/Products")]
+        public async Task<IHttpActionResult> GetProduct(int id) {
+            var product = await db.Product.Select(x => new {
+                productDesc = x.productDesc,
+                ProductId = x.ProductId,
+                productName = x.productName,
+                productPrice = x.productPrice,
+                productStatus = x.productStatus,
+                productStock = x.productStock,
+                productModifyDate = x.productModifyDate,
+                productUrl = x.productUrl,
+                ReviewProducts = x.ReviewProducts.Select(y => new {
+                    y.ratingReview,
+                    y.reviewDesc,
+                    y.ReviewProductIdNumber,
+                    User = new {
+                        y.User.username,
+                        y.User.UserId,
+                        y.User.name,
+                        y.User.lastName
+                    }
+                })
             }).SingleOrDefaultAsync(x => x.ProductId == id);
             //var temp = await db.Product.FindAsync(id);
             //ProductDTO product = new ProductDTO();
@@ -84,7 +81,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/Products/5
-        [ResponseType(typeof(void)),Route("api/Products")]
+        [ResponseType(typeof(void)), Route("api/Products")]
         public async Task<IHttpActionResult> PutProduct(int id, ProductDTO product) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -120,7 +117,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Products
-        [ResponseType(typeof(ProductDTO)),Route("api/Products", Name = "postProduct")]
+        [ResponseType(typeof(ProductDTO)), Route("api/Products", Name = "postProduct")]
         public async Task<IHttpActionResult> PostProduct(ProductDTO product) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

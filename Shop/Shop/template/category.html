@@ -1,13 +1,12 @@
 ﻿<head>
     <link href="../css/stars.css" rel="stylesheet" />
-
 </head>
 <body>
     <div class="row" ng-controller="categoryCtrl">
         <div class="col-md-3">
             <p class="lead">Shop Name</p>
             <div class="list-group">
-                <a ng-href="#!category/{{x.CategoryId}}" class="list-group-item" ng-repeat="x in category | limitTo:30">{{x.categoryName}}</a>       
+                <a ng-href="#!category/{{x.CategoryId}}" class="list-group-item" ng-repeat="x in category | limitTo:30">{{x.categoryName}}</a>
             </div>
         </div>
         <div class="col-md-9">
@@ -40,10 +39,10 @@
                 </div>
             </div>
             <div class="row">
-               
+
                 <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="x in product ">
                     <div class="thumbnail">
-                        
+
                         <img class="img-responsive" ng-src="{{x.product.productUrl}}" alt="{{x.product.productName}}">
                         <div class="caption">
                             <h4 class="pull-right">{{x.product.productPrice | currency}}</h4>
@@ -73,5 +72,4 @@
             </div>
         </div>
     </div>
-    
 </body>

@@ -24,8 +24,6 @@ namespace LoginRegister.Models {
         public System.Data.Entity.DbSet<Shop.Models.DBModel.UserType> UserTypes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
-
-
             modelBuilder.Entity<Category>().HasKey(x => x.CategoryId).
                 Property(x => x.CategoryId).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
@@ -34,10 +32,7 @@ namespace LoginRegister.Models {
             modelBuilder.Entity<Category>().HasMany(x => x.ProductCategories).WithRequired(x => x.Category).HasForeignKey(x=>x.CategoryId);
             modelBuilder.Entity<Product>().HasMany(x => x.ProductCategories).WithRequired(x => x.Product).HasForeignKey(x => x.ProductId);
 
-
             base.OnModelCreating(modelBuilder);
-
-
         }
     }
 }
