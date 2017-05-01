@@ -8,6 +8,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -17,28 +18,80 @@ namespace LoginRegister.Controllers {
     [RoutePrefix("orders"), Authentication]
     public class OrdersController : ApiController {
         private ShopDBContext db = new ShopDBContext();
+        [ResponseType(typeof(OrderDTO)), Route("")]
+        public async Task<HttpResponseMessage> GetOrder(int _page, int _perPage/*,string _sortDir,string _sortField*/) {
+            
+            var order = await db.Order.Select(x => new {
+                OrderId = x.OrderId,
+                UserId = x.UserId,
+                orderStatusCode = x.orderStatusCode,
 
+                OrderDetails = x.OrderDetails.Select(y => new{
+                    OrderId = y.OrderId,
+                    OrderDetailId = y.OrderDetailId,
+                    quantityOrder = y.quantityOrder,
+                    ProductId = y.ProductId,
+                    Product = new {
+                        productDesc = y.Product.productDesc,
+                        ProductId = y.Product.ProductId,
+                        productName = y.Product.productName,
+                        productPrice = y.Product.productPrice
+                    }
+                }).ToList(),
+                purchaseDate = x.purchaseDate,
+                totalOrderPrice = x.totalOrderPrice,
+                User = new {
+                    UserId = x.UserId,
+                    age = x.User.age,
+                    username = x.User.username,
+                    regDate = x.User.regDate,
+                    userInfo = new {
+                        adress = x.User.UserInfo.adress,
+                        city = x.User.UserInfo.city,
+                        country = x.User.UserInfo.country,
+                        zip = x.User.UserInfo.zip,
+                        phone = x.User.UserInfo.phone
+                    }
+                }
+            }).OrderBy(x => x.OrderId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
+            
+            //switch (_sortDir) {
+            //    case "ASC":
+            //       order = order.OrderBy(x=>_sortField).ToList();
+            //        break;
+            //    case "DESC":
+            //        order= order.OrderByDescending(x => _sortField).ToList();
+            //        break;
+            //    default:
+            //        order = order.OrderBy(x=>x.OrderId).ToList();
+            //        break;
+            //}
+            var response = Request.CreateResponse(HttpStatusCode.OK, order);
+            response.Headers.Add("X-Total-Count", db.User.Count().ToString());
+            return response;
+
+        }
         //// GET: api/Orders
         //public IQueryable<Order> GetOrder()
         //{
         //    return db.Order;
         //}
 
-        // GET: api/Orders/5
-        //[ResponseType(typeof(Order))]
-        //[Authentication]
-        //[Route("api/getOrder"), Authentication]
-        //public async Task<IHttpActionResult> GetOrder(int id)
-        //{
-        //    Order order = await db.Order.FindAsync(id);
-        //    if (order == null)
-        //    {
-        //        return NotFound();
-        //    }
+            // GET: api/Orders/5
+            //[ResponseType(typeof(Order))]
+            //[Authentication]
+            //[Route("api/getOrder"), Authentication]
+            //public async Task<IHttpActionResult> GetOrder(int id)
+            //{
+            //    Order order = await db.Order.FindAsync(id);
+            //    if (order == null)
+            //    {
+            //        return NotFound();
+            //    }
 
-        //    return Ok(order);
-        //
-        [ResponseType(typeof(OrderDTO)), Route("api/orders")]
+            //    return Ok(order);
+            //
+        [ResponseType(typeof(OrderDTO)), Route("")]
         //public  IQueryable<OrderDto> GetOrder() { check which is better
         public async Task<IHttpActionResult> GetOrder() {
             //linq method way
@@ -134,7 +187,7 @@ namespace LoginRegister.Controllers {
 
         //[Authentication]
         //[Route("api/getOrder/search")]
-        [ResponseType(typeof(OrderDTO)), Route("api/orders")]
+        [ResponseType(typeof(OrderDTO)), Route("{id}")]
         public async Task<IHttpActionResult> GetOrder(int id) {
             var order = await db.Order.Select(x => new OrderDTO {
                 OrderId = x.OrderId,
@@ -241,7 +294,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/Orders/5
-        [ResponseType(typeof(void)), Route("api/orders")]
+        [ResponseType(typeof(void)), Route("{id}")]
         public async Task<IHttpActionResult> PutOrder(int id, OrderDTO order) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -254,7 +307,8 @@ namespace LoginRegister.Controllers {
             orderDb.purchaseDate = order.purchaseDate.Equals(DateTime.MinValue) ? orderDb.purchaseDate : order.purchaseDate;
             //orderDb.quantityOrder = order.quantityOrder.Equals(null) ? orderDb.quantityOrder : order.quantityOrder;
             orderDb.totalOrderPrice = order.totalOrderPrice.Equals(null) ? orderDb.totalOrderPrice : order.totalOrderPrice;
-
+            
+            orderDb.totalOrderPrice = order.totalOrderPrice.Equals(null) ? orderDb.totalOrderPrice : order.totalOrderPrice;
             //var aux = 10;
             db.Entry(orderDb).State = EntityState.Modified;
 

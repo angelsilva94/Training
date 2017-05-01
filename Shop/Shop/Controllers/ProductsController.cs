@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -15,7 +16,34 @@ namespace LoginRegister.Controllers {
     [RoutePrefix("products")]
     public class ProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
-
+        [ResponseType(typeof(Product)), Route("")]
+        public async Task<HttpResponseMessage> GetProduct(int _page, int _perPage,string _sortDir,string _sortField) {
+            var product = await db.Product.AsNoTracking().Select(x => new {
+                productDesc = x.productDesc,
+                ProductId = x.ProductId,
+                productName = x.productName,
+                productPrice = x.productPrice,
+                productStatus = x.productStatus,
+                productStock = x.productStock,
+                productModifyDate = x.productModifyDate,
+                productUrl = x.productUrl,
+                ReviewProducts = x.ReviewProducts.Select(y => new {
+                    y.ratingReview,
+                    y.reviewDesc,
+                    y.ReviewProductIdNumber,
+                    User = new {
+                        y.User.username,
+                        y.User.UserId,
+                        y.User.name,
+                        y.User.lastName
+                    }
+                })
+            }).OrderBy(x => x.ProductId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
+            var response = Request.CreateResponse(HttpStatusCode.OK, product);
+            response.Headers.Add("X-Total-Count", db.User.Count().ToString());
+            return response;
+            
+        }
         // GET: api/Products
         [ResponseType(typeof(Product)), Route("api/Products")]
         public async Task<IHttpActionResult> GetProduct([FromUri]int from, [FromUri]int to) {
@@ -45,7 +73,7 @@ namespace LoginRegister.Controllers {
         }
 
         // GET: api/Products/5
-        [ResponseType(typeof(ProductDTO)), Route("api/Products")]
+        [ResponseType(typeof(ProductDTO)), Route("{id}")]
         public async Task<IHttpActionResult> GetProduct(int id) {
             var product = await db.Product.Select(x => new {
                 productDesc = x.productDesc,

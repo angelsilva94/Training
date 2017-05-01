@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -16,6 +17,28 @@ namespace LoginRegister.Controllers {
     public class ReviewProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
+
+        [Route("")]
+        public async Task<HttpResponseMessage> GetReviewProduct(int _page, int _perPage) {
+            var review = await db.ReviewProduct.Select(x => new {
+                x.ratingReview,
+                x.reviewDesc,
+                x.ReviewProductIdNumber,
+                x.UserId,
+                User = new {
+                    x.User.UserId,
+                    x.User.username
+                },
+                Product = new {
+                    x.Product.ProductId,
+                    x.Product.productName
+                },
+            }).OrderBy(x => x.ReviewProductIdNumber).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
+
+            var response = Request.CreateResponse(HttpStatusCode.OK, review);
+            response.Headers.Add("X-Total-Count", db.User.Count().ToString());
+            return response;
+        }
         // GET: api/ReviewProducts
         [Route("api/getReviewProducts")]
         public async Task<IHttpActionResult> GetReviewProduct() {
