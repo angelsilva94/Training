@@ -61,15 +61,21 @@ namespace LoginRegister.Controllers {
         }
 
         // GET: api/ReviewProducts/5
-        [ResponseType(typeof(ReviewProduct)), Route("api/getReviewProducts/search")]
+        [ResponseType(typeof(ReviewProduct)), Route("{id}")]
         public async Task<IHttpActionResult> GetReviewProduct(int id) {
             var reviewProduct = await db.ReviewProduct.Select(x => new {
                 x.ratingReview,
                 x.reviewDesc,
                 x.ReviewProductIdNumber,
                 x.UserId,
-                x.User,
-                x.Product
+                User = new {
+                    x.User.UserId,
+                    x.User.username
+                },
+                Product = new {
+                    x.Product.ProductId,
+                    x.Product.productName
+                }
             }).SingleOrDefaultAsync(x => x.ReviewProductIdNumber == id);
             if (reviewProduct == null) {
                 return NotFound();
@@ -79,7 +85,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/ReviewProducts/5
-        [ResponseType(typeof(void)), Route("api/putReviewProducts"), Authentication]
+        [ResponseType(typeof(void)), Route("{id}"), Authentication]
         public async Task<IHttpActionResult> PutReviewProduct(int id, ReviewProductDTO reviewProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -106,7 +112,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/ReviewProducts
-        [ResponseType(typeof(ReviewProduct)), Route("api/postReviewProducts", Name = "postReviewProducts"), Authentication]
+        [ResponseType(typeof(ReviewProduct)), Route("", Name = "postReviewProducts"), Authentication]
         public async Task<IHttpActionResult> PostReviewProduct(ReviewProduct reviewProduct) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

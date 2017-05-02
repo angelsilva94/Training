@@ -13,7 +13,7 @@ namespace Shop.DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201705011314574_1.0"; }
+            get { return "201705021501090_1.0"; }
         }
         
         string IMigrationMetadata.Source

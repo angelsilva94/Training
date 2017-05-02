@@ -1,6 +1,7 @@
 ﻿using LoginRegister.Models;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
+using System;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -288,7 +289,7 @@ namespace LoginRegister.Controllers {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-
+            userModel.regDate = DateTime.Now;
             db.User.Add(userModel);
 
             try {

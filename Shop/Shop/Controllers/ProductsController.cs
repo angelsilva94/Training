@@ -2,6 +2,7 @@
 using Shop.Extensions;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -40,13 +41,13 @@ namespace LoginRegister.Controllers {
                 })
             }).OrderBy(x => x.ProductId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
             var response = Request.CreateResponse(HttpStatusCode.OK, product);
-            response.Headers.Add("X-Total-Count", db.User.Count().ToString());
+            response.Headers.Add("X-Total-Count", db.Product.Count().ToString());
             return response;
             
         }
         // GET: api/Products
-        [ResponseType(typeof(Product)), Route("api/Products")]
-        public async Task<IHttpActionResult> GetProduct([FromUri]int from, [FromUri]int to) {
+        [ResponseType(typeof(Product)), Route("")]
+        public async Task<HttpResponseMessage> GetProduct([FromUri]int from, [FromUri]int to) {
             var product = await db.Product.AsNoTracking().Select(x => new {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
@@ -68,8 +69,9 @@ namespace LoginRegister.Controllers {
                     }
                 })
             }).OrderBy(x => x.ProductId).Skip(to * from).Take(to).ToListAsync();
-
-            return Ok(product);
+            var response = Request.CreateResponse(HttpStatusCode.OK, product);
+            response.Headers.Add("X-Total-Count", db.Product.Count().ToString());
+            return response;
         }
 
         // GET: api/Products/5
@@ -109,7 +111,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/Products/5
-        [ResponseType(typeof(void)), Route("api/Products")]
+        [ResponseType(typeof(void)), Route("{id}")]
         public async Task<IHttpActionResult> PutProduct(int id, ProductDTO product) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -118,7 +120,7 @@ namespace LoginRegister.Controllers {
             if (id != product.ProductId) {
                 return BadRequest();
             }
-
+            product.productModifyDate = DateTime.Now;
             var productDb = db.Product.Find(id);
             product.CopyProperties(productDb);
             //productDb.productName = product.productName;
@@ -145,18 +147,31 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/Products
-        [ResponseType(typeof(ProductDTO)), Route("api/Products", Name = "postProduct")]
-        public async Task<IHttpActionResult> PostProduct(ProductDTO product) {
+        [ResponseType(typeof(ProductDTO)), Route("", Name = "postProduct")]
+        public async Task<IHttpActionResult> PostProduct(Product product) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            var productDb = new Product();
-            product.CopyProperties(productDb);
+            //var productDb = new Product();
+            product.productModifyDate=DateTime.Now;
+            product.BrandId = 1;
+            //product.CopyProperties(productDb);
+            //productDb.productName = product.productName;
+            //productDb.productPrice = product.productPrice;
+            //productDb.productModifyDate = product.productModifyDate;
+            //productDb.productStatus = product.productStatus;
 
-            db.Product.Add(productDb);
-            await db.SaveChangesAsync();
+            db.Product.Add(product);
 
-            return CreatedAtRoute("postProduct", new { id = product.ProductId }, product);
+            try {
+                await db.SaveChangesAsync();
+            } catch (Exception e) {
+                Console.WriteLine("error:" + e);
+            }
+
+            
+
+            return CreatedAtRoute("postProduct", new { id = product.ProductId }, product.ProductId);
         }
 
         //// DELETE: api/Products/5

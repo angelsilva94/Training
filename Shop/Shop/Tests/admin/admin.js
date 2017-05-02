@@ -17,7 +17,9 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     var order = nga.entity("orders").identifier(nga.field("OrderId"));
     var review = nga.entity("reviewProducts").identifier(nga.field("ReviewProductIdNumber"));
     var product = nga.entity("products").identifier(nga.field("ProductId"));
-    // set the fields of the user entity list view
+    var category = nga.entity("category").identifier(nga.field("CategoryId"));
+    var productCategory = nga.entity("productCategory").identifier(nga.field("ProductCategoryId"));
+    //list view
     user.listView().fields([
         nga.field("UserId"),
         nga.field("name"),
@@ -50,19 +52,73 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     product.listView().fields([
         nga.field("productName").isDetailLink(true),
         nga.field("productDesc"),
-        nga.field("productPrice","number").format("$0.00"),
+        nga.field("productPrice","number").format("$0,0.00"),
         nga.field("productStock"),
         nga.field("productStatus"),
+        nga.field("productModifyDate", "date").format("yyyy-MM-dd HH:mm:ss ")
 
+    ]);
+
+    category.listView().fields([
+        nga.field("categoryName").isDetailLink(true),
+        nga.field("categoryDesc"),
+        nga.field("categoryImage")
+    ]);
+
+    productCategory.listView().fields([
+       nga.field("ProductCategoryId").isDetailLink(true),
+       nga.field("Product", "reference").targetEntity(product),
+       nga.field("Category", "reference").targetEntity(category),
+    ]);
+
+    //createView
+    review.creationView().fields([
+        nga.field("UserId"),
+        nga.field('UserId', 'reference')
+        .targetEntity(user)
+        .targetField(nga.field('username'))
+        .label('UserName'),
+
+        nga.field("reviewDesc"),
+        nga.field("ratingReview"),
     ]);
     order.creationView().fields([
         nga.field('OrderId'),
         nga.field("totalOrderPrice"),
-
-        
-
     ]);
+    product.creationView().fields([
+        nga.field("productName"),
+        nga.field("productDesc"),
+        nga.field("productPrice", "float"),
+        nga.field("productUrl"),
+        nga.field("productStock","number"),
+        nga.field("productPublishDate", "datetime"),
+        nga.field("productModifyDate","datetime"),
+        nga.field("productStatus", "choice").choices([
+            { value: true, label: "enable" },
+            { value: false, label: "disable" }
+        ]),
+        //nga.field("category","reference")
+    ]);
+    category.creationView().fields([
+        nga.field("categoryName"),
+        nga.field("categoryDesc"),
+        nga.field("categoryImage")
+    ]);
+
+    productCategory.creationView().fields([
+       nga.field("Product", "reference").targetEntity(product),
+       nga.field("Category", "reference").targetEntity(category),
+    ]);
+
+
+    //edition view
+
     order.editionView().fields(order.creationView().fields());
+    product.editionView().fields(product.creationView().fields());
+    category.editionView().fields(category.creationView().fields());
+    productCategory.editionView().fields(productCategory.creationView().fields());
+    review.editionView().fields(review.creationView().fields());
     //user.creationView().fields([
     //    nga.field('name'),
     //    nga.field('username'),
@@ -74,11 +130,12 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     admin.addEntity(order);
     admin.addEntity(review);
     admin.addEntity(product);
+    admin.addEntity(category);
     admin.menu(nga.menu()
     .addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>'))
     .addChild(nga.menu(review).icon('<span class="glyphicon glyphicon-pencil"></span>'))
     .addChild(nga.menu(order).icon('<span class="glyphicon glyphicon-shopping-cart"></span>'))
-    .addChild(nga.menu().title('Catalog').icon('<span class="fa fa-th-list fa-fw"></span>').addChild(nga.menu(product)))
+    .addChild(nga.menu().title('Catalog').icon('<span class="fa fa-th-list fa-fw"></span>').addChild(nga.menu(product)).addChild(nga.menu(category)).addChild(nga.menu(productCategory)))
     );
     // attach the admin application to the DOM and execute it
     nga.configure(admin);

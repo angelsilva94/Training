@@ -6,18 +6,58 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 
 namespace LoginRegister.Controllers {
 
-    [RoutePrefix("productCategories")]
+    [RoutePrefix("productCategory")]
     public class ProductCategoriesController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
+        [Route("")]
+        public async Task<HttpResponseMessage> GetProductCategory(int _page, int _perPage, string _sortDir, string _sortField) {
+            var productCategory = await db.ProductCategory.Select(x => new {
+                x.ProductCategoryId,
+                x.CategoryId,
+                x.ProductId,
+                Product = new {
+                    x.Product.ProductId,
+                    x.Product.productName,
+                    x.Product.productPrice,
+                    x.Product.productPublishDate,
+                    x.Product.productUrl,
+                    //x.Product.BrandId,
+                    Brand = new {
+                        x.Product.Brand.BrandId,
+                        x.Product.Brand.brandDesc,
+                        x.Product.Brand.brandLogoUrl,
+                        x.Product.Brand.brandName,
+                    }
+                },
+                Category = new {
+                    x.Category.CategoryId,
+                    x.Category.categoryDesc,
+                    x.Category.categoryName,
+                    x.Category.categoryParent,
+                    x.Category.categoryParentId,
+                    x.Category.categoryImage
+                }
+
+                //x.Product
+            }).OrderBy(x => x.CategoryId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
+            var response = Request.CreateResponse(HttpStatusCode.OK, productCategory);
+            response.Headers.Add("X-Total-Count", db.ProductCategory.Count().ToString());
+            return response;
+
+
+        }
+
+
         // GET: api/ProductCategories
-        [ResponseType(typeof(ProductCategory)), Route("api/productCategory")]
+        [ResponseType(typeof(ProductCategory)), Route("")]
         public async Task<IHttpActionResult> GetProductCategory() {
             //var productCategory = await db.ProductCategory.Select(x => new  {
             //    CategoryId = x.CategoryId,
@@ -101,7 +141,7 @@ namespace LoginRegister.Controllers {
         }
 
         // GET: api/ProductCategories/5
-        [ResponseType(typeof(ProductCategory)), Route("api/productCategory")]
+        [ResponseType(typeof(ProductCategory)), Route("{id}")]
         public async Task<IHttpActionResult> GetProductCategory(int id) {
             var productCategory = await db.ProductCategory.Select(x => new {
                 x.ProductCategoryId,
@@ -136,7 +176,7 @@ namespace LoginRegister.Controllers {
         }
 
         // PUT: api/ProductCategories/5
-        [ResponseType(typeof(void)), Authentication, Route("api/productCategory")]
+        [ResponseType(typeof(void)), Authentication, Route("{id}")]
         public async Task<IHttpActionResult> PutProductCategory(int id, ProductCategoryDTO productCategory) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
@@ -163,7 +203,7 @@ namespace LoginRegister.Controllers {
         }
 
         // POST: api/ProductCategories
-        [ResponseType(typeof(ProductCategory)), Authentication, Route("api/productCategory", Name = "productCategory")]
+        [ResponseType(typeof(ProductCategory)), Authentication, Route("", Name = "productCategory")]
         public async Task<IHttpActionResult> PostProductCategory(ProductCategoryDTO productCategory) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);

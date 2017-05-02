@@ -7,7 +7,7 @@ namespace Shop.Models.DBModel {
 
     public class Product : IProduct {
 
-        [Required]
+        //[Required]
         //[Key]
         public int ProductId { set; get; }
 
@@ -35,7 +35,7 @@ namespace Shop.Models.DBModel {
         [Required]
         public int productStock { set; get; }
 
-        [Required]
+        //[Required]
         //[ForeignKey("Brand")]
         public int BrandId { set; get; }
 

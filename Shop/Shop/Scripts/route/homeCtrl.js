@@ -22,8 +22,10 @@ app.controller("homeCtrl", function ($scope, shopFactory, $window) {
         //}
     });
 
-    var productServer = shopFactory.Product.query({ from: 0, to: 10 }).$promise.then(function (response) {
+    var productServer = shopFactory.Product.query({ from: 0, to: 10 }).$promise.then(function (response, getResponseHeaders) {
         $scope.product = response;
+        
+        console.log(getResponseHeaders);
     }, function (error) {
         console.log("ENTRASTE AL ERROR DE PRODUCTO");
         console.log(error);

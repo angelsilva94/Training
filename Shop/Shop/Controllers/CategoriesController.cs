@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
@@ -16,8 +17,23 @@ namespace Shop.Controllers {
     public class CategoriesController : ApiController {
         private ShopDBContext db = new ShopDBContext();
 
-        // GET: api/Categories
-        [Route("api/categories")]
+        [Route("")]
+        public async Task<HttpResponseMessage> GetCategory(int _page, int _perPage, string _sortDir, string _sortField) {
+            var category = await db.Category.Select(x => new {
+                x.categoryDesc,
+                x.CategoryId,
+                x.categoryImage,
+                x.categoryName,
+                x.categoryParent
+            }).OrderBy(x => x.CategoryId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
+            var response = Request.CreateResponse(HttpStatusCode.OK, category);
+            response.Headers.Add("X-Total-Count", db.Category.Count().ToString());
+            return response;
+        }
+
+
+
+        [Route("")]
         public async Task<IHttpActionResult> GetCategory() {
             var category = await db.Category.Select(x => new {
                 x.categoryDesc,
@@ -30,7 +46,7 @@ namespace Shop.Controllers {
         }
 
         // GET: api/Categories/5
-        [ResponseType(typeof(Category)), Route("api/categories")]
+        [ResponseType(typeof(Category)), Route("{id}")]
         public async Task<IHttpActionResult> GetCategory(int id) {
             //var category = await db.Category.Where(x => x.CategoryId == id).Select(x => new {
             //    x.categoryDesc,
@@ -64,8 +80,8 @@ namespace Shop.Controllers {
         }
 
         // PUT: api/Categories/5
-        [ResponseType(typeof(void)), Route("api/categories")]
-        public async Task<IHttpActionResult> PutCategory(int id, CategoryDTO category) {
+        [ResponseType(typeof(void)), Route("{id}")]
+        public async Task<IHttpActionResult> PutCategory(int id, Category category) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
@@ -75,8 +91,10 @@ namespace Shop.Controllers {
             }
 
             var categoryDb = db.Category.Find(id);
-            categoryDb.categoryParentId = category.categoryParentId;
-
+            //categoryDb.categoryParentId = category.categoryParentId;
+            categoryDb.categoryDesc = category.categoryDesc;
+            categoryDb.categoryName = category.categoryName;
+            categoryDb.categoryImage = category.categoryImage;
             db.Entry(categoryDb).State = EntityState.Modified;
 
             try {
@@ -93,7 +111,7 @@ namespace Shop.Controllers {
         }
 
         // POST: api/Categories
-        [ResponseType(typeof(Category)), Route("api/categories", Name = "postCategory")]
+        [ResponseType(typeof(Category)), Route("", Name = "postCategory")]
         public async Task<IHttpActionResult> PostCategory(CategoryDTO category) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
