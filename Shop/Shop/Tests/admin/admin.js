@@ -43,10 +43,10 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field('UserId', 'reference')
         .targetEntity(user)
         .targetField(nga.field('username'))
-        .label('UserName'),
-        
+        .label('UserName').isDetailLink(true),
         nga.field("reviewDesc"),
         nga.field("ratingReview"),
+
 
     ]);
     product.listView().fields([
@@ -55,7 +55,11 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field("productPrice","number").format("$0,0.00"),
         nga.field("productStock"),
         nga.field("productStatus"),
-        nga.field("productModifyDate", "date").format("yyyy-MM-dd HH:mm:ss ")
+        nga.field("productModifyDate", "datetime"),
+        nga.field('ReviewProducts', 'embedded_list') 
+          .targetFields([ 
+              nga.field('ratingReview').label('rating'),
+          ]),
 
     ]);
 
@@ -67,20 +71,32 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
     productCategory.listView().fields([
        nga.field("ProductCategoryId").isDetailLink(true),
-       nga.field("Product", "reference").targetEntity(product),
-       nga.field("Category", "reference").targetEntity(category),
+       nga.field("Product.productName"),
+       nga.field("Category.categoryName"),
     ]);
 
     //createView
-    review.creationView().fields([
-        nga.field("UserId"),
-        nga.field('UserId', 'reference')
-        .targetEntity(user)
-        .targetField(nga.field('username'))
-        .label('UserName'),
 
+
+
+    user.creationView().fields([
+        nga.field("UserId").editable(false),
+        nga.field("name"),
+        nga.field("username").isDetailLink(true),
+        nga.field("email"),
+        nga.field("password"),
+        nga.field("regDate", "datetime").editable(false).label("Registration Date") ,
+
+    ]);
+
+
+    review.editionView().fields([
+        nga.field("Product.productName").editable(false).label("Product Name"),
+        nga.field("User.UserId").editable(false).label("User Id"),
+        nga.field("User.username").editable(false).label("UserName"),
         nga.field("reviewDesc"),
         nga.field("ratingReview"),
+          
     ]);
     order.creationView().fields([
         nga.field('OrderId'),
@@ -107,17 +123,20 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
 
     productCategory.creationView().fields([
-       nga.field("Product", "reference").targetEntity(product),
-       nga.field("Category", "reference").targetEntity(category),
+        nga.field("ProductCategoryId"),
+        nga.field("CategoryId"),
+        nga.field("ProductId"),
+        
     ]);
 
 
     //edition view
-
+    productCategory.editionView().fields(productCategory.creationView().fields());
+    user.editionView().fields(user.creationView().fields());
     order.editionView().fields(order.creationView().fields());
     product.editionView().fields(product.creationView().fields());
     category.editionView().fields(category.creationView().fields());
-    productCategory.editionView().fields(productCategory.creationView().fields());
+    //productCategory.editionView().fields(productCategory.creationView().fields());
     review.editionView().fields(review.creationView().fields());
     //user.creationView().fields([
     //    nga.field('name'),
@@ -131,6 +150,8 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     admin.addEntity(review);
     admin.addEntity(product);
     admin.addEntity(category);
+    admin.addEntity(productCategory);
+    
     admin.menu(nga.menu()
     .addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>'))
     .addChild(nga.menu(review).icon('<span class="glyphicon glyphicon-pencil"></span>'))

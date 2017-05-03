@@ -94,6 +94,8 @@ namespace LoginRegister.Controllers {
             if (id != reviewProduct.ProductId) {
                 return BadRequest();
             }
+            reviewProduct.ProductId = reviewProduct.Product.ProductId;
+            reviewProduct.UserId = reviewProduct.User.UserId;
             var reviewProductDb = db.ReviewProduct.Find(id);
             reviewProduct.CopyProperties(reviewProductDb);
             db.Entry(reviewProductDb).State = EntityState.Modified;
@@ -123,6 +125,7 @@ namespace LoginRegister.Controllers {
 
             try {
                 await db.SaveChangesAsync();
+                
             } catch (DbUpdateException) {
                 if (ReviewProductExists(reviewProduct.ProductId)) {
                     return Conflict();

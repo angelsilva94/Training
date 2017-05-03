@@ -47,7 +47,7 @@ namespace LoginRegister.Controllers {
         }
         // GET: api/Products
         [ResponseType(typeof(Product)), Route("")]
-        public async Task<HttpResponseMessage> GetProduct([FromUri]int from, [FromUri]int to) {
+        public async Task<HttpResponseMessage> GetProduct([FromUri]int _page, [FromUri]int _perPage) {
             var product = await db.Product.AsNoTracking().Select(x => new {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
@@ -68,7 +68,7 @@ namespace LoginRegister.Controllers {
                         y.User.lastName
                     }
                 })
-            }).OrderBy(x => x.ProductId).Skip(to * from).Take(to).ToListAsync();
+            }).OrderBy(x => x.ProductId).Skip(_perPage * _page).Take(_perPage).ToListAsync();
             var response = Request.CreateResponse(HttpStatusCode.OK, product);
             response.Headers.Add("X-Total-Count", db.Product.Count().ToString());
             return response;

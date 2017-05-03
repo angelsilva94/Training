@@ -47,7 +47,7 @@ namespace LoginRegister.Controllers {
                 }
 
                 //x.Product
-            }).OrderBy(x => x.CategoryId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
+            }).OrderBy(x => x.ProductCategoryId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
             var response = Request.CreateResponse(HttpStatusCode.OK, productCategory);
             response.Headers.Add("X-Total-Count", db.ProductCategory.Count().ToString());
             return response;
@@ -146,28 +146,29 @@ namespace LoginRegister.Controllers {
             var productCategory = await db.ProductCategory.Select(x => new {
                 x.ProductCategoryId,
                 x.Category.CategoryId,
-                product = new {
-                    x.Product.Brand.BrandId,
-                    x.Product.Brand.brandDesc,
-                    x.Product.Brand.brandLogoUrl,
-                    x.Product.Brand.brandName,
-                    x.Product.productUrl,
-                    x.Product.productStock,
-                    x.Product.productName,
-                    x.Product.productPrice,
-                    x.Product.productDesc,
-                    x.Product.ProductId,
-                    x.Product.productPublishDate,
-                    x.Product.productModifyDate,
-                    ReviewProducts = x.Product.ReviewProducts.Select(y => new {
-                        y.ratingReview,
-                    })
-                },
+                x.ProductId,
+                //product = new {
+                //    x.Product.Brand.BrandId,
+                //    x.Product.Brand.brandDesc,
+                //    x.Product.Brand.brandLogoUrl,
+                //    x.Product.Brand.brandName,
+                //    x.Product.productUrl,
+                //    x.Product.productStock,
+                //    x.Product.productName,
+                //    x.Product.productPrice,
+                //    x.Product.productDesc,
+                //    x.Product.ProductId,
+                //    x.Product.productPublishDate,
+                //    x.Product.productModifyDate,
+                //    ReviewProducts = x.Product.ReviewProducts.Select(y => new {
+                //        y.ratingReview,
+                //    })
+                //},
                 //category = new {
                 //    x.Category.CategoryId,
                 //    x.Category.categoryDesc
                 //},
-            }).Where(x => x.CategoryId == id).ToListAsync();
+            }).Where(x => x.ProductCategoryId == id).ToListAsync();
             if (productCategory == null) {
                 return NotFound();
             }
