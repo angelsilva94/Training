@@ -10,5 +10,6 @@ namespace Shop.Models.DBModel.DTO {
         public DateTime productModifyDate { set; get; }
         public bool productStatus { set; get; }
         public int productStock { set; get; }
+        public string productUrl { set; get; }
     }
 }

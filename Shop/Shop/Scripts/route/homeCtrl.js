@@ -22,15 +22,32 @@ app.controller("homeCtrl", function ($scope, shopFactory, $window) {
         //}
     });
 
-    var productServer = shopFactory.Product.query({ from: 0, to: 10 }).$promise.then(function (response, getResponseHeaders) {
-        $scope.product = response;
+    //var productServer = shopFactory.Product.query({ from: 0, to: 10 }).$promise.then(function (response) {
+    //    $scope.product = response;
         
-        console.log(headersGetter);
-    }, function (error) {
-        console.log("ENTRASTE AL ERROR DE PRODUCTO");
-        console.log(error);
-        //$window.location.reload();
-    });
+    //    console.log(headersGetter);
+    //}, function (error) {
+    //    console.log("ENTRASTE AL ERROR DE PRODUCTO");
+    //    console.log(error);
+    //    //$window.location.reload();
+    //});
+
+
+    var productServer = shopFactory.Product.query({ from: 1, to: 10 },
+        function success(value, headers) {
+            $scope.product = value;
+            
+            $scope.bigTotalItems = headers("x-total-count");
+            //$scope.bigTotalItems = 1000;
+            console.log(value);
+            console.log(headers());
+            console.log(headers("x-total-count"));
+        },
+        function error(error) {
+            console.log("ERROR");
+            console.log(error);
+        }
+    );
 
     $scope.getAvg = function (ReviewProducts) {
         var total = 0;

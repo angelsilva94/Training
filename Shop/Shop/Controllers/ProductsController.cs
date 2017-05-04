@@ -68,7 +68,7 @@ namespace LoginRegister.Controllers {
                         y.User.lastName
                     }
                 })
-            }).OrderBy(x => x.ProductId).Skip(_perPage * _page).Take(_perPage).ToListAsync();
+            }).OrderBy(x => x.ProductId).Skip(_perPage * (_page-1)).Take(_perPage).ToListAsync();
             var response = Request.CreateResponse(HttpStatusCode.OK, product);
             response.Headers.Add("X-Total-Count", db.Product.Count().ToString());
             return response;

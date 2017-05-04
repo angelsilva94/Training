@@ -28,13 +28,20 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
     order.listView().fields([
         nga.field("OrderId").isDetailLink(true), 
-        nga.field("OrderId","reference")
+        nga.field("UserId", "reference")
         .targetEntity(user)
         .targetField(nga.field("username"))
         .label("UserName"),
         nga.field("orderStatusCode"),
-        nga.field("purchaseDate"),
-        nga.field("totalOrderPrice"),
+        nga.field("purchaseDate", "datetime"),
+        nga.field("OrderDetails", "embedded_list")
+        .targetFields([
+            nga.field("Product.productName").label("Product Name"),
+            nga.field("quantityOrder").label("Quantity"),
+            nga.field("Product.productPrice","number").format("$0,0.00").label("Product Price"),
+            
+        ]),
+        nga.field("totalOrderPrice","number").format("$0,0.00"),
 
     ]);
     review.listView().fields([
@@ -50,6 +57,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
     ]);
     product.listView().fields([
+        nga.field("ProductId"),
         nga.field("productName").isDetailLink(true),
         nga.field("productDesc"),
         nga.field("productPrice","number").format("$0,0.00"),
@@ -60,6 +68,13 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
           .targetFields([ 
               nga.field('ratingReview').label('rating'),
           ]),
+        //nga.field("Category", "referenced_list")
+        //    .targetEntity(productCategory)
+        //    .targetReferenceField(CategoryId)
+        //    .targetFields([ 
+        //    nga.field('CategoryId').label('ID'),
+            
+        //    ])
 
     ]);
 
@@ -71,8 +86,14 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
     productCategory.listView().fields([
        nga.field("ProductCategoryId").isDetailLink(true),
-       nga.field("Product.productName"),
-       nga.field("Category.categoryName"),
+       nga.field("ProductId", "reference")
+           .targetEntity(product)
+           .targetField(nga.field("productName"))
+           .label("Product Name"),
+       nga.field("CategoryId", "reference")
+           .targetEntity(category)
+           .targetField(nga.field("categoryName"))
+           .label("Category Name"),
     ]);
 
     //createView
@@ -117,27 +138,48 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         //nga.field("category","reference")
     ]);
     category.creationView().fields([
+        //nga.field("CategoryId").editable(false),
         nga.field("categoryName"),
         nga.field("categoryDesc"),
-        nga.field("categoryImage")
+        nga.field("categoryImage"),
     ]);
 
     productCategory.creationView().fields([
-        nga.field("ProductCategoryId"),
-        nga.field("CategoryId"),
-        nga.field("ProductId"),
+        nga.field('ProductCategoryId'),
+        nga.field("CategoryId", "reference")
+            .targetEntity(category)
+            .targetField(nga.field("categoryName"))
+            .label("Category:"),
+         nga.field("ProductId", "reference")
+            .targetEntity(product)
+            .targetField(nga.field("productName"))
+            .label("Product:"),
         
     ]);
+    
+
+
+    //nga.field("UserId", "reference")
+    //    .targetEntity(user)
+    //    .targetField(nga.field("username"))
+    //    .label("UserName")
 
 
     //edition view
-    productCategory.editionView().fields(productCategory.creationView().fields());
+    
     user.editionView().fields(user.creationView().fields());
     order.editionView().fields(order.creationView().fields());
     product.editionView().fields(product.creationView().fields());
-    category.editionView().fields(category.creationView().fields());
-    //productCategory.editionView().fields(productCategory.creationView().fields());
+    
     review.editionView().fields(review.creationView().fields());
+    productCategory.editionView().fields(productCategory.creationView().fields());
+
+    category.editionView().fields([
+        nga.field("CategoryId").editable(false),
+        nga.field("categoryName"),
+        nga.field("categoryDesc"),
+        nga.field("categoryImage"),
+    ]);
     //user.creationView().fields([
     //    nga.field('name'),
     //    nga.field('username'),

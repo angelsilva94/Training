@@ -82,6 +82,7 @@
     <Content Include="DBMockData\10Categories.sql" />
     <Content Include="DBMockData\11ReviewProducts.sql" />
     <Content Include="DBMockData\12ProductCategories.sql" />
+    <Content Include="DBMockData\full.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705021501090_1.0.resx">

@@ -23,28 +23,28 @@ namespace LoginRegister.Controllers {
                 x.ProductCategoryId,
                 x.CategoryId,
                 x.ProductId,
-                Product = new {
-                    x.Product.ProductId,
-                    x.Product.productName,
-                    x.Product.productPrice,
-                    x.Product.productPublishDate,
-                    x.Product.productUrl,
-                    //x.Product.BrandId,
-                    Brand = new {
-                        x.Product.Brand.BrandId,
-                        x.Product.Brand.brandDesc,
-                        x.Product.Brand.brandLogoUrl,
-                        x.Product.Brand.brandName,
-                    }
-                },
-                Category = new {
-                    x.Category.CategoryId,
-                    x.Category.categoryDesc,
-                    x.Category.categoryName,
-                    x.Category.categoryParent,
-                    x.Category.categoryParentId,
-                    x.Category.categoryImage
-                }
+                //Product = new {
+                //    x.Product.ProductId,
+                //    x.Product.productName,
+                //    x.Product.productPrice,
+                //    x.Product.productPublishDate,
+                //    x.Product.productUrl,
+                //    //x.Product.BrandId,
+                //    Brand = new {
+                //        x.Product.Brand.BrandId,
+                //        x.Product.Brand.brandDesc,
+                //        x.Product.Brand.brandLogoUrl,
+                //        x.Product.Brand.brandName,
+                //    }
+                //},
+                //Category = new {
+                //    x.Category.CategoryId,
+                //    x.Category.categoryDesc,
+                //    x.Category.categoryName,
+                //    x.Category.categoryParent,
+                //    x.Category.categoryParentId,
+                //    x.Category.categoryImage
+                //}
 
                 //x.Product
             }).OrderBy(x => x.ProductCategoryId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
@@ -147,28 +147,28 @@ namespace LoginRegister.Controllers {
                 x.ProductCategoryId,
                 x.Category.CategoryId,
                 x.ProductId,
-                //product = new {
-                //    x.Product.Brand.BrandId,
-                //    x.Product.Brand.brandDesc,
-                //    x.Product.Brand.brandLogoUrl,
-                //    x.Product.Brand.brandName,
-                //    x.Product.productUrl,
-                //    x.Product.productStock,
-                //    x.Product.productName,
-                //    x.Product.productPrice,
-                //    x.Product.productDesc,
-                //    x.Product.ProductId,
-                //    x.Product.productPublishDate,
-                //    x.Product.productModifyDate,
-                //    ReviewProducts = x.Product.ReviewProducts.Select(y => new {
-                //        y.ratingReview,
-                //    })
-                //},
-                //category = new {
-                //    x.Category.CategoryId,
-                //    x.Category.categoryDesc
-                //},
-            }).Where(x => x.ProductCategoryId == id).ToListAsync();
+                product = new {
+                    x.Product.Brand.BrandId,
+                    x.Product.Brand.brandDesc,
+                    x.Product.Brand.brandLogoUrl,
+                    x.Product.Brand.brandName,
+                    x.Product.productUrl,
+                    x.Product.productStock,
+                    x.Product.productName,
+                    x.Product.productPrice,
+                    x.Product.productDesc,
+                    x.Product.ProductId,
+                    x.Product.productPublishDate,
+                    x.Product.productModifyDate,
+                    ReviewProducts = x.Product.ReviewProducts.Select(y => new {
+                        y.ratingReview,
+                    })
+                },
+                category = new {
+                    x.Category.CategoryId,
+                    x.Category.categoryDesc
+                },
+            }).Where(x => x.CategoryId == id).ToListAsync();
             if (productCategory == null) {
                 return NotFound();
             }
