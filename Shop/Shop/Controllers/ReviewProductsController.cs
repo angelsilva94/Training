@@ -90,11 +90,11 @@ namespace LoginRegister.Controllers {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-
+            reviewProduct.ProductId = reviewProduct.Product.ProductId;
             if (id != reviewProduct.ProductId) {
                 return BadRequest();
             }
-            reviewProduct.ProductId = reviewProduct.Product.ProductId;
+            
             reviewProduct.UserId = reviewProduct.User.UserId;
             var reviewProductDb = db.ReviewProduct.Find(id);
             reviewProduct.CopyProperties(reviewProductDb);

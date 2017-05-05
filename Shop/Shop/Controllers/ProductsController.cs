@@ -68,9 +68,10 @@ namespace LoginRegister.Controllers {
                         y.User.lastName
                     }
                 })
-            }).OrderBy(x => x.ProductId).Skip(_perPage * (_page-1)).Take(_perPage).ToListAsync();
-            var response = Request.CreateResponse(HttpStatusCode.OK, product);
-            response.Headers.Add("X-Total-Count", db.Product.Count().ToString());
+            }).OrderBy(x => x.ProductId).Where(x => x.productStatus == true).ToListAsync();
+
+            var response = Request.CreateResponse(HttpStatusCode.OK, product.Skip(_perPage * (_page - 1)).Take(_perPage));
+            response.Headers.Add("X-Total-Count", product.Count().ToString());
             return response;
         }
 
@@ -174,19 +175,19 @@ namespace LoginRegister.Controllers {
             return CreatedAtRoute("postProduct", new { id = product.ProductId }, product.ProductId);
         }
 
-        //// DELETE: api/Products/5
-        //[ResponseType(typeof(Product))]
-        //public async Task<IHttpActionResult> DeleteProduct(int id) {
-        //    Product product = await db.Product.FindAsync(id);
-        //    if (product == null) {
-        //        return NotFound();
-        //    }
+        // DELETE: api/Products/5
+        [ResponseType(typeof(Product)), Route("{id}")]
+        public async Task<IHttpActionResult> DeleteProduct(int id) {
+            Product product = await db.Product.FindAsync(id);
+            if (product == null) {
+                return NotFound();
+            }
 
-        //    db.Product.Remove(product);
-        //    await db.SaveChangesAsync();
+            db.Product.Remove(product);
+            await db.SaveChangesAsync();
 
-        //    return Ok(product);
-        //}
+            return Ok(product);
+        }
 
         protected override void Dispose(bool disposing) {
             if (disposing) {

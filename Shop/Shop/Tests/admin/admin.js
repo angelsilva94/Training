@@ -25,7 +25,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field("name"),
         nga.field("username").isDetailLink(true) ,
         nga.field("email")
-    ]);
+    ]).listActions(["edit"]);
     order.listView().fields([
         nga.field("OrderId").isDetailLink(true), 
         nga.field("UserId", "reference")
@@ -43,7 +43,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         ]),
         nga.field("totalOrderPrice","number").format("$0,0.00"),
 
-    ]);
+    ]).listActions(["edit"]);
     review.listView().fields([
         nga.field("ReviewProductIdNumber").isDetailLink(true),
         nga.field("UserId"),
@@ -55,14 +55,17 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field("ratingReview"),
 
 
-    ]);
+    ]).listActions(["edit"]);
     product.listView().fields([
-        nga.field("ProductId"),
+        //nga.field("ProductId"),
+        nga.field("productUrl", "template")
+           .label("")
+           .template('<img src="{{entry.values.productUrl}}" width="50" style="vertical-align: text-bottom"/> '),
         nga.field("productName").isDetailLink(true),
         nga.field("productDesc"),
         nga.field("productPrice","number").format("$0,0.00"),
         nga.field("productStock"),
-        nga.field("productStatus"),
+        nga.field("productStatus","boolean"),
         nga.field("productModifyDate", "datetime"),
         nga.field('ReviewProducts', 'embedded_list') 
           .targetFields([ 
@@ -76,16 +79,16 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
             
         //    ])
 
-    ]);
+    ]).listActions(["edit", "delete"]);
 
     category.listView().fields([
         nga.field("categoryName").isDetailLink(true),
         nga.field("categoryDesc"),
         nga.field("categoryImage")
-    ]);
+    ]).listActions(["edit"]);
 
     productCategory.listView().fields([
-       nga.field("ProductCategoryId").isDetailLink(true),
+       //nga.field("ProductCategoryId").isDetailLink(true),
        nga.field("ProductId", "reference")
            .targetEntity(product)
            .targetField(nga.field("productName"))
@@ -94,7 +97,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
            .targetEntity(category)
            .targetField(nga.field("categoryName"))
            .label("Category Name"),
-    ]);
+    ]).listActions(["edit"]);
 
     //createView
 
@@ -145,7 +148,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     ]);
 
     productCategory.creationView().fields([
-        nga.field('ProductCategoryId'),
+        //nga.field('ProductCategoryId'),
         nga.field("CategoryId", "reference")
             .targetEntity(category)
             .targetField(nga.field("categoryName"))
@@ -169,8 +172,6 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     
     user.editionView().fields(user.creationView().fields());
     order.editionView().fields(order.creationView().fields());
-    product.editionView().fields(product.creationView().fields());
-    
     review.editionView().fields(review.creationView().fields());
     productCategory.editionView().fields(productCategory.creationView().fields());
 
@@ -179,6 +180,26 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field("categoryName"),
         nga.field("categoryDesc"),
         nga.field("categoryImage"),
+    ]);
+
+    product.editionView().fields([
+        nga.field("productName"),
+        nga.field("productDesc"),
+        nga.field("productPrice", "float"),
+        nga.field("productUrl"),
+        nga.field("productStock", "number"),
+        nga.field("productStatus", "choice").choices([
+            { value: true, label: "enable" },
+            { value: false, label: "disable" }
+        ]),
+        //nga.field("Categorias", "referenced_list")
+        //    .targetEntity(productCategory)
+        //    .targetReferenceField("ProductId")
+        //    .targetFields([ 
+        //        nga.field('Category.categoryName').label("Categoria"),
+                
+        //    ])
+    
     ]);
     //user.creationView().fields([
     //    nga.field('name'),
@@ -198,7 +219,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     .addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>'))
     .addChild(nga.menu(review).icon('<span class="glyphicon glyphicon-pencil"></span>'))
     .addChild(nga.menu(order).icon('<span class="glyphicon glyphicon-shopping-cart"></span>'))
-    .addChild(nga.menu().title('Catalog').icon('<span class="fa fa-th-list fa-fw"></span>').addChild(nga.menu(product)).addChild(nga.menu(category)).addChild(nga.menu(productCategory)))
+    .addChild(nga.menu().title('Catalog').icon('<span class="fa fa-th-list fa-fw"></span>').addChild(nga.menu(product).icon('<span class="fa fa-picture-o fa-fw"></span>')).addChild(nga.menu(category).icon('<span class="fa fa-tag fa-fw"></span>')).addChild(nga.menu(productCategory).title("Add Product to Category").icon('<span class="fa fa-tags fa-fw"></span>')))
     );
     // attach the admin application to the DOM and execute it
     nga.configure(admin);

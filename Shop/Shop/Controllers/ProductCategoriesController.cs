@@ -154,6 +154,7 @@ namespace LoginRegister.Controllers {
                     x.Product.Brand.brandName,
                     x.Product.productUrl,
                     x.Product.productStock,
+                    x.Product.productStatus,
                     x.Product.productName,
                     x.Product.productPrice,
                     x.Product.productDesc,
@@ -168,7 +169,7 @@ namespace LoginRegister.Controllers {
                     x.Category.CategoryId,
                     x.Category.categoryDesc
                 },
-            }).Where(x => x.CategoryId == id).ToListAsync();
+            }).Where(x => x.CategoryId == id && x.product.productStatus == true).ToListAsync();
             if (productCategory == null) {
                 return NotFound();
             }
