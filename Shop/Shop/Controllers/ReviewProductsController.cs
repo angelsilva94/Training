@@ -137,19 +137,19 @@ namespace LoginRegister.Controllers {
             return CreatedAtRoute("postReviewProducts", new { id = reviewProduct.ProductId }, reviewProduct);
         }
 
-        //// DELETE: api/ReviewProducts/5
-        //[ResponseType(typeof(ReviewProduct))]
-        //public async Task<IHttpActionResult> DeleteReviewProduct(int id) {
-        //    ReviewProduct reviewProduct = await db.ReviewProduct.FindAsync(id);
-        //    if (reviewProduct == null) {
-        //        return NotFound();
-        //    }
+        // DELETE: api/ReviewProducts/5
+        [ResponseType(typeof(ReviewProduct))]
+        public async Task<IHttpActionResult> DeleteReviewProduct(int id) {
+            ReviewProduct reviewProduct = await db.ReviewProduct.FindAsync(id);
+            if (reviewProduct == null) {
+                return NotFound();
+            }
 
-        //    db.ReviewProduct.Remove(reviewProduct);
-        //    await db.SaveChangesAsync();
+            db.ReviewProduct.Remove(reviewProduct);
+            await db.SaveChangesAsync();
 
-        //    return Ok(reviewProduct);
-        //}
+            return Ok(reviewProduct);
+        }
 
         protected override void Dispose(bool disposing) {
             if (disposing) {
