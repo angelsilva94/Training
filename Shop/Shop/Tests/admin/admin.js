@@ -20,71 +20,89 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     var category = nga.entity("category").identifier(nga.field("CategoryId"));
     var productCategory = nga.entity("productCategory").identifier(nga.field("ProductCategoryId"));
     //list view
-    user.listView().fields([
+    user.listView()
+        .fields([
         //nga.field("UserId"),
-        nga.field("name"),
-        nga.field("username").isDetailLink(true) ,
-        nga.field("email")
-    ]).listActions(["edit"]);
-    order.listView().fields([
-        nga.field("OrderId").isDetailLink(true), 
-        nga.field("UserId", "reference")
-        .targetEntity(user)
-        .targetField(nga.field("username"))
-        .label("UserName"),
-        nga.field("orderStatusCode"),
-        nga.field("purchaseDate", "datetime"),
-        nga.field("OrderDetails", "embedded_list")
-        .targetFields([
-            nga.field("Product.productName").label("Product Name"),
-            nga.field("quantityOrder").label("Quantity"),
-            nga.field("Product.productPrice","number").format("$0,0.00").label("Product Price"),
+            nga.field("name").sortable(false),
+            nga.field("username").isDetailLink(true).sortable(false),
+            nga.field("email").sortable(false)
+        ]).listActions(["edit"]);
+    order.listView()
+        .fields([
+            nga.field("OrderId")
+                .isDetailLink(true),
+            nga.field("UserId", "reference")
+                .targetEntity(user)
+                .targetField(nga.field("username"))
+                .label("UserName"),
+            nga.field("orderStatusCode"),
+            nga.field("purchaseDate", "datetime"),
+            nga.field("OrderDetails", "embedded_list")
+                .targetFields([
+            nga.field("Product.productName")
+                .label("Product Name"),
+            nga.field("quantityOrder")
+                .label("Quantity"),
+            nga.field("Product.productPrice", "number")
+                .format("$0,0.00")
+                .label("Product Price"),
             
-        ]),
-        nga.field("totalOrderPrice","number").format("$0,0.00"),
+            ]),
+            nga.field("totalOrderPrice", "number")
+                .format("$0,0.00"),
 
-    ]).listActions(["edit"]);
-    review.listView().fields([
-        //nga.field("ReviewProductIdNumber").isDetailLink(true),
-        //nga.field("UserId"),
-        nga.field('UserId', 'reference')
-        .targetEntity(user)
-        .targetField(nga.field('username'))
-        .label('UserName').isDetailLink(true),
-        nga.field("reviewDesc"),
-        nga.field("ratingReview")
-            .cssClasses(function (entry) { // add custom CSS classes to inputs and columns
-                if (!entry) return;
-                if (entry.values.ratingReview >=7.5) {
-                    return 'text-center bg-success';
-                }
-                if (entry.values.ratingReview >=6  && entry.values.ratingReview < 7.5) {
-                    return 'text-center bg-warning';
-                }
+        ]).listActions(["edit"]);
+    review.listView()
+        .fields([
+            //nga.field("ReviewProductIdNumber").isDetailLink(true),
+            //nga.field("UserId"),
+            nga.field("Product.productName")
+                .label("Product Name"),
+            nga.field("productUrl", "template")
+                .label("")
+                .template('<img src="{{entry.values.productUrl}}" width="50" style="vertical-align: text-bottom"/> '),
+            nga.field('UserId', 'reference')
+                .targetEntity(user)
+                .targetField(nga.field('username'))
+                .label('UserName').isDetailLink(true),
+        
+            nga.field("reviewDesc"),
+            nga.field("ratingReview")
+                .cssClasses(function (entry) { // add custom CSS classes to inputs and columns
+                    if (!entry) return;
+                    if (entry.values.ratingReview >=7.5) {
+                        return 'text-center bg-success';
+                    }
+                    if (entry.values.ratingReview >=6  && entry.values.ratingReview < 7.5) {
+                        return 'text-center bg-warning';
+                    }
 
-                if (entry.values.ratingReview <6 ) {
-                    return 'text-center bg-danger';
-                }
+                    if (entry.values.ratingReview <6 ) {
+                        return 'text-center bg-danger';
+                    }
                
-            }),
+                }),
+        //AQUI ME QUEDE FALTA LIGAR LAS ORDENES !!!!!!!!!
 
-
-    ]).listActions(["edit"]);
-    product.listView().fields([
+        ]).listActions(["edit"]);
+    product.listView()
+        .fields([
         //nga.field("ProductId"),
-        nga.field("productUrl", "template")
-           .label("")
-           .template('<img src="{{entry.values.productUrl}}" width="50" style="vertical-align: text-bottom"/> '),
-        nga.field("productName").isDetailLink(true),
-        nga.field("productDesc"),
-        nga.field("productPrice","number").format("$0,0.00"),
-        nga.field("productStock"),
-        nga.field("productStatus","boolean"),
-        nga.field("productModifyDate", "datetime"),
-        nga.field('ReviewProducts', 'embedded_list') 
-          .targetFields([ 
-              nga.field('ratingReview').label('rating'),
-          ]),
+            nga.field("productUrl", "template")
+                .label("")
+                .template('<img src="{{entry.values.productUrl}}" width="50" style="vertical-align: text-bottom"/> '),
+            nga.field("productName")
+                .isDetailLink(true),
+            nga.field("productDesc"),
+            nga.field("productPrice", "number")
+                .format("$0,0.00"),
+            nga.field("productStock"),
+            nga.field("productStatus","boolean"),
+            nga.field("productModifyDate", "datetime"),
+            nga.field('ReviewProducts', 'embedded_list') 
+                .targetFields([ 
+                    nga.field('ratingReview').label('rating'),
+                ]),
         //nga.field("Category", "referenced_list")
         //    .targetEntity(productCategory)
         //    .targetReferenceField(CategoryId)
@@ -93,39 +111,58 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
             
         //    ])
 
-    ]).listActions(["edit", "delete"]);
+        ]).listActions(["edit", "delete"]);
 
-    category.listView().fields([
-        nga.field("categoryName").isDetailLink(true),
-        nga.field("categoryDesc"),
-        nga.field("categoryImage")
-    ]).listActions(["edit"]);
+    category.listView()
+            .fields([
+                nga.field("categoryName")
+                    .isDetailLink(true),
+                nga.field("categoryDesc"),
+                nga.field("categoryImage")
+            ]).listActions(["edit"]);
 
-    productCategory.listView().fields([
-       //nga.field("ProductCategoryId").isDetailLink(true),
-       nga.field("ProductId", "reference")
-           .targetEntity(product)
-           .targetField(nga.field("productName"))
-           .label("Product Name"),
-       nga.field("CategoryId", "reference")
-           .targetEntity(category)
-           .targetField(nga.field("categoryName"))
-           .label("Category Name"),
-    ]).listActions(["edit"]);
+    productCategory.listView()
+                    .fields([
+                        //nga.field("ProductCategoryId").isDetailLink(true),
+                        nga.field("ProductId", "reference")
+                           .targetEntity(product)
+                           .targetField(nga.field("productName"))
+                           .label("Product Name"),
+                       nga.field("CategoryId", "reference")
+                           .targetEntity(category)
+                           .targetField(nga.field("categoryName"))
+                           .label("Category Name"),
+                    ]).listActions(["edit"]);
 
     //createView
 
 
 
-    user.creationView().fields([
-        nga.field("UserId").editable(false),
-        nga.field("name"),
-        nga.field("username").isDetailLink(true),
-        nga.field("email"),
-        nga.field("password"),
-        nga.field("regDate", "datetime").editable(false).label("Registration Date") ,
+    user.editionView()
+        .title("{{ entry.values.name }} {{ entry.values.lastName }}\'s details")
+        .fields([
+            nga.field("UserId")
+                .editable(false),
+            nga.field("name"),
+            nga.field("username")
+                .isDetailLink(true),
+            nga.field("email"),
+            nga.field("password"),
+            nga.field("regDate", "datetime")
+                .editable(false)
+                .label("Registration Date") ,
+            nga.field('comments', 'referenced_list')
+              .targetEntity(review)
+              .targetReferenceField('UserId')
+              .targetFields([ // choose another set of fields
+                  nga.field('ratingReview').label("Rating"),
+                  nga.field('Product.productName').label("Product Name"),
+                  nga.field('reviewDesc').label("Review Details"),
+                  
 
-    ]);
+              ])
+
+        ]);
 
 
     review.editionView().fields([
@@ -142,7 +179,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
             .targetField(nga.field("username"))
             .editable(false)
             .label("UserName")
-            .singleApiCall(ids => ({ 'id': ids })),
+            .singleApiCall(id => ({ 'id': id })),
         nga.field("UserId", "reference")
             .targetEntity(user)
             .targetField(nga.field('name').map((v, e) => e.name + " " + e.surname + " " + e.lastName))
@@ -179,31 +216,34 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field("productStock","number"),
         nga.field("productPublishDate", "datetime"),
         nga.field("productModifyDate","datetime"),
-        nga.field("productStatus", "choice").choices([
-            { value: true, label: "enable" },
-            { value: false, label: "disable" }
-        ]),
+        nga.field("productStatus", "choice")
+            .choices([
+                { value: true, label: "enable" },
+                { value: false, label: "disable" }
+            ]),
         //nga.field("category","reference")
     ]);
-    category.creationView().fields([
-        //nga.field("CategoryId").editable(false),
-        nga.field("categoryName"),
-        nga.field("categoryDesc"),
-        nga.field("categoryImage"),
-    ]);
+    category.creationView()
+            .fields([
+                //nga.field("CategoryId").editable(false),
+                nga.field("categoryName"),
+                nga.field("categoryDesc"),
+                nga.field("categoryImage"),
+            ]);
 
-    productCategory.creationView().fields([
-        //nga.field('ProductCategoryId'),
-        nga.field("CategoryId", "reference")
-            .targetEntity(category)
-            .targetField(nga.field("categoryName"))
-            .label("Category:"),
-         nga.field("ProductId", "reference")
-            .targetEntity(product)
-            .targetField(nga.field("productName"))
-            .label("Product:"),
+    productCategory.creationView()
+                    .fields([
+                        //nga.field('ProductCategoryId'),
+                        nga.field("CategoryId", "reference")
+                            .targetEntity(category)
+                            .targetField(nga.field("categoryName"))
+                            .label("Category:"),
+                         nga.field("ProductId", "reference")
+                            .targetEntity(product)
+                            .targetField(nga.field("productName"))
+                            .label("Product:"),
         
-    ]);
+                    ]);
     
 
 
@@ -216,28 +256,36 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     //edition view
 
     
-    user.editionView().fields(user.creationView().fields());
-    order.editionView().fields(order.creationView().fields());
+    //user.editionView().fields(user.creationView().fields());
+    //order.editionView().fields(order.creationView().fields());
     review.editionView().fields(review.creationView().fields());
     productCategory.editionView().fields(productCategory.creationView().fields());
+    order.editionView()
+         .fields([
+             nga.field("OrderId"),
+             nga.field("totalOrderPrice"),
 
-    category.editionView().fields([
-        nga.field("CategoryId").editable(false),
-        nga.field("categoryName"),
-        nga.field("categoryDesc"),
-        nga.field("categoryImage"),
-    ]);
 
-    product.editionView().fields([
-        nga.field("productName"),
-        nga.field("productDesc"),
-        nga.field("productPrice", "float"),
-        nga.field("productUrl"),
-        nga.field("productStock", "number"),
-        nga.field("productStatus", "choice").choices([
-            { value: true, label: "enable" },
-            { value: false, label: "disable" }
-        ]),
+         ]);
+    category.editionView()
+            .fields([
+                nga.field("CategoryId").editable(false),
+                nga.field("categoryName"),
+                nga.field("categoryDesc"),
+                nga.field("categoryImage"),
+            ]);
+
+    product.editionView()
+            .fields([
+                nga.field("productName"),
+                nga.field("productDesc"),
+                nga.field("productPrice", "float"),
+                nga.field("productUrl"),
+                nga.field("productStock", "number"),
+                nga.field("productStatus", "choice").choices([
+                    { value: true, label: "enable" },
+                    { value: false, label: "disable" }
+            ]),
         //nga.field("Categorias", "referenced_list")
         //    .targetEntity(productCategory)
         //    .targetReferenceField("ProductId")

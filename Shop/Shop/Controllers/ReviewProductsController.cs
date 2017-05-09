@@ -1,4 +1,6 @@
 ﻿using LoginRegister.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Shop.Extensions;
 using Shop.Models.DBModel;
 using Shop.Models.DTO;
@@ -16,7 +18,30 @@ namespace LoginRegister.Controllers {
     [RoutePrefix("reviewProducts")]
     public class ReviewProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
+        [Route("")]
+        public async Task<HttpResponseMessage> GetReviewProduct(int _page, int _perPage, string _filters) {
+            JObject obj = JObject.Parse(_filters);
+            int aux= int.Parse(obj.GetValue("UserId").ToString());
+            var review = await db.ReviewProduct.Select(x => new {
+                x.ratingReview,
+                x.reviewDesc,
+                x.ReviewProductIdNumber,
+                x.UserId,
+                User = new {
+                    x.User.UserId,
+                    x.User.username
+                },
+                Product = new {
+                    x.Product.ProductId,
+                    x.Product.productName,
+                },
+                x.Product.productUrl
+            }).Where(x=>x.UserId==aux).OrderBy(x => x.ReviewProductIdNumber).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
 
+            var response = Request.CreateResponse(HttpStatusCode.OK, review);
+            response.Headers.Add("X-Total-Count", db.User.Count().ToString());
+            return response;
+        }
 
         [Route("")]
         public async Task<HttpResponseMessage> GetReviewProduct(int _page, int _perPage) {
@@ -31,8 +56,9 @@ namespace LoginRegister.Controllers {
                 },
                 Product = new {
                     x.Product.ProductId,
-                    x.Product.productName
+                    x.Product.productName,
                 },
+                x.Product.productUrl
             }).OrderBy(x => x.ReviewProductIdNumber).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
 
             var response = Request.CreateResponse(HttpStatusCode.OK, review);
