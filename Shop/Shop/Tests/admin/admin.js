@@ -22,6 +22,8 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     //list view
     //TEST
 
+
+
     user.listView()
         .fields([
         //nga.field("UserId"),
