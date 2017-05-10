@@ -285,6 +285,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
              nga.field("totalOrderPrice"),
 
 
+
          ]);
     category.editionView()
             .fields([
