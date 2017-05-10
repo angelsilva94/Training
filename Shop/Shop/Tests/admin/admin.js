@@ -20,6 +20,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     var category = nga.entity("category").identifier(nga.field("CategoryId"));
     var productCategory = nga.entity("productCategory").identifier(nga.field("ProductCategoryId"));
     //list view
+    //TEST
     user.listView()
         .fields([
         //nga.field("UserId"),
