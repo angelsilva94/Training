@@ -1,9 +1,9 @@
 ﻿var myApp = angular.module('myApp', ['ng-admin']);
-myApp.config(['RestangularProvider', function(RestangularProvider) {
+myApp.config(['RestangularProvider', function (RestangularProvider) {
     var login = 'angelsilva94',
         password = 'pwd1234',
         token = window.btoa(login + ':' + password);
-    RestangularProvider.setDefaultHeaders({'Authorization': 'Basic ' + token});
+    RestangularProvider.setDefaultHeaders({ 'Authorization': 'Basic ' + token });
 }]);
 
 myApp.config(['NgAdminConfigurationProvider', function (nga) {
@@ -20,9 +20,6 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     var category = nga.entity("category").identifier(nga.field("CategoryId"));
     var productCategory = nga.entity("productCategory").identifier(nga.field("ProductCategoryId"));
     //list view
-    //TEST
-
-
     user.listView()
         .fields([
         //nga.field("UserId"),
@@ -49,8 +46,8 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
             nga.field("Product.productPrice", "number")
                 .format("$0,0.00")
                 .label("Product Price"),
-            
-            ]),
+
+                ]),
             nga.field("totalOrderPrice", "number")
                 .format("$0,0.00"),
 
@@ -68,23 +65,25 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
                 .targetEntity(user)
                 .targetField(nga.field('username'))
                 .label('UserName').isDetailLink(true),
-        
+
             nga.field("reviewDesc"),
             nga.field("ratingReview")
                 .cssClasses(function (entry) { // add custom CSS classes to inputs and columns
                     if (!entry) return;
-                    if (entry.values.ratingReview >=7.5) {
+                    if (entry.values.ratingReview >= 7.5) {
                         return 'text-center bg-success';
                     }
-                    if (entry.values.ratingReview >=6  && entry.values.ratingReview < 7.5) {
+                    if (entry.values.ratingReview >= 6 && entry.values.ratingReview < 7.5) {
                         return 'text-center bg-warning';
                     }
 
-                    if (entry.values.ratingReview <6 ) {
+                    if (entry.values.ratingReview < 6) {
                         return 'text-center bg-danger';
                     }
-               
+
                 }),
+
+
         //AQUI ME QUEDE FALTA LIGAR LAS ORDENES !!!!!!!!!
 
         ]).listActions(["edit"]);
@@ -100,10 +99,10 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
             nga.field("productPrice", "number")
                 .format("$0,0.00"),
             nga.field("productStock"),
-            nga.field("productStatus","boolean"),
+            nga.field("productStatus", "boolean"),
             nga.field("productModifyDate", "datetime"),
-            nga.field('ReviewProducts', 'embedded_list') 
-                .targetFields([ 
+            nga.field('ReviewProducts', 'embedded_list')
+                .targetFields([
                     nga.field('ratingReview').label('rating'),
                 ]),
         //nga.field("Category", "referenced_list")
@@ -111,7 +110,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         //    .targetReferenceField(CategoryId)
         //    .targetFields([ 
         //    nga.field('CategoryId').label('ID'),
-            
+
         //    ])
 
         ]).listActions(["edit", "delete"]);
@@ -153,15 +152,32 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
             nga.field("password"),
             nga.field("regDate", "datetime")
                 .editable(false)
-                .label("Registration Date") ,
+                .label("Registration Date"),
             nga.field('comments', 'referenced_list')
               .targetEntity(review)
               .targetReferenceField('UserId')
               .targetFields([ // choose another set of fields
-                  nga.field('ratingReview').label("Rating"),
-                  nga.field('Product.productName').label("Product Name"),
-                  nga.field('reviewDesc').label("Review Details"),
-                  
+                  nga.field('ratingReview')
+                      .label("Rating")
+                      .cssClasses(function (entry) { // add custom CSS classes to inputs and columns
+                          if (!entry) return;
+                          if (entry.values.ratingReview >= 7.5) {
+                              return 'text-center bg-success';
+                          }
+                          if (entry.values.ratingReview >= 6 && entry.values.ratingReview < 7.5) {
+                              return 'text-center bg-warning';
+                          }
+
+                          if (entry.values.ratingReview < 6) {
+                              return 'text-center bg-danger';
+                          }
+
+                      }),
+                  nga.field('Product.productName')
+                      .label("Product Name"),
+                  nga.field('reviewDesc')
+                      .label("Review Details"),
+
 
               ])
 
@@ -189,7 +205,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
             .label("Customer")
             .editable(false),
             //.singleApiCall(ids => ({ 'id': ids }))
-        nga.field("reviewDesc","text"),
+        nga.field("reviewDesc", "text"),
         nga.field("ratingReview", "choice")
             .choices([
                 { value: 1, label: 1 },
@@ -203,9 +219,9 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
                 { value: 9, label: 9 },
                 { value: 10, label: 10 },
             ]),
-        
-            
-          
+
+
+
     ]);
     order.creationView().fields([
         nga.field('OrderId'),
@@ -216,9 +232,9 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
         nga.field("productDesc"),
         nga.field("productPrice", "float"),
         nga.field("productUrl"),
-        nga.field("productStock","number"),
+        nga.field("productStock", "number"),
         nga.field("productPublishDate", "datetime"),
-        nga.field("productModifyDate","datetime"),
+        nga.field("productModifyDate", "datetime"),
         nga.field("productStatus", "choice")
             .choices([
                 { value: true, label: "enable" },
@@ -245,9 +261,9 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
                             .targetEntity(product)
                             .targetField(nga.field("productName"))
                             .label("Product:"),
-        
+
                     ]);
-    
+
 
 
     //nga.field("UserId", "reference")
@@ -258,7 +274,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
     //edition view
 
-    
+
     //user.editionView().fields(user.creationView().fields());
     //order.editionView().fields(order.creationView().fields());
     review.editionView().fields(review.creationView().fields());
@@ -288,20 +304,20 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
                 nga.field("productStatus", "choice").choices([
                     { value: true, label: "enable" },
                     { value: false, label: "disable" }
-            ]),
+                ]),
         //nga.field("Categorias", "referenced_list")
         //    .targetEntity(productCategory)
         //    .targetReferenceField("ProductId")
         //    .targetFields([ 
         //        nga.field('Category.categoryName').label("Categoria"),
-                
+
         //    ])
-    
-    ]);
+
+            ]);
     //user.creationView().fields([
     //    nga.field('name'),
     //    nga.field('username'),
-    
+
     //]);
     //user.editionView().fields(user.creationView().fields());
     // add the user entity to the admin application
@@ -311,7 +327,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     admin.addEntity(product);
     admin.addEntity(category);
     admin.addEntity(productCategory);
-    
+
     admin.menu(nga.menu()
     .addChild(nga.menu(user).icon('<span class="glyphicon glyphicon-user"></span>'))
     .addChild(nga.menu(review).icon('<span class="glyphicon glyphicon-pencil"></span>'))
