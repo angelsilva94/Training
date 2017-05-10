@@ -286,6 +286,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
 
 
+
          ]);
     category.editionView()
             .fields([
