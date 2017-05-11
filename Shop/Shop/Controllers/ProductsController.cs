@@ -70,7 +70,9 @@ namespace LoginRegister.Controllers {
                 })
             }).OrderBy(x => x.ProductId).Where(x => x.productStatus == true).ToListAsync();
 
-            var response = Request.CreateResponse(HttpStatusCode.OK, product.Skip(_perPage * (_page - 1)).Take(_perPage));
+            var response = Request.CreateResponse(HttpStatusCode.OK, product.Skip(_perPage * (_page )).Take(_perPage));
+
+            //AQUI ME QUEDE
             response.Headers.Add("X-Total-Count", product.Count().ToString());
             return response;
         }

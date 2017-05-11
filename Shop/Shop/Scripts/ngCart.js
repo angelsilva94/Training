@@ -488,17 +488,19 @@ angular.module('ngCart.fulfilment', ["ngCookies"])
     }])
 
     .service('ngCart.fulfilment.http', ['$http', 'ngCart', "$cookieStore", "$location", function ($http, ngCart, $cookieStore, $location) {
-        console.log(ngCart.toObject());
-        var userId = $cookieStore.get("globals");
-        var order = {
-            "UserId": userId.currentUser.userId,
-            "purchaseDate": new Date().toISOString(),
-            "orderStatusCode": 1,
-            "totalOrderPrice": ngCart.toObject().totalCost
-        }
-        console.log(order);
+       
 
         this.checkout = function (settings) {
+            console.log(ngCart.toObject());
+            var userId = $cookieStore.get("globals");
+            var order = {
+                "UserId": userId.currentUser.userId,
+                "purchaseDate": new Date().toISOString(),
+                "orderStatusCode": 1,
+                "totalOrderPrice": ngCart.toObject().totalCost
+            }
+            console.log(order);
+
             console.log("CHEKOUT HTTP");
             console.log(settings);
             return $http.post(settings.url, order).then(function (response) {

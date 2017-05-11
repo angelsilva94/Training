@@ -80,7 +80,7 @@ app.controller("homeCtrl", function ($scope, shopFactory, $window) {
     $scope.changePage = function () {
         console.log("hola");
         console.log($scope.pages);
-        var productServer = shopFactory.Product.query({ from: $scope.pages - 1, to: 10 }).$promise.then(function (response) {
+        var productServer = shopFactory.Product.query({ from: $scope.pages , to: 10 }).$promise.then(function (response) {
             $scope.product = response;
         });
     };

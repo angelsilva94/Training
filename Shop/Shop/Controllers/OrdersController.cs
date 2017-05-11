@@ -67,7 +67,7 @@ namespace LoginRegister.Controllers {
             //        break;
             //}
             var response = Request.CreateResponse(HttpStatusCode.OK, order);
-            response.Headers.Add("X-Total-Count", db.User.Count().ToString());
+            response.Headers.Add("X-Total-Count", db.Order.Count().ToString());
             return response;
 
         }
