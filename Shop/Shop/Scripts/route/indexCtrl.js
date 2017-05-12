@@ -27,6 +27,7 @@
 
                 return avg + "%";
             };
+            $scope.criteria = "";
         },
         function error(error) {
             console.log("ERROR SEARCH");
