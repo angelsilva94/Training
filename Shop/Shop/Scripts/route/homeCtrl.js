@@ -8,8 +8,14 @@ app.controller("homeCtrl", function ($scope, shopFactory, $window) {
     //$scope.setData() = function () {
     //    $scope.userTest = shopFactory.get({ id : 1001 });
     //};
+
+    
+
+
+
     var categoryServer = shopFactory.Category.query({}).$promise.then(function (response) {
         $scope.category = response;
+        console.log("Category");
         //console.log(response);
     }, function (error) {
         console.log("ENTRASTE AL ERROR DE CATEGORIA");
@@ -32,16 +38,30 @@ app.controller("homeCtrl", function ($scope, shopFactory, $window) {
     //    //$window.location.reload();
     //});
 
-
+    var slides = $scope.slides = [];
+    var currIndex = 0;
     var productServer = shopFactory.Product.query({ from: 1, to: 10 },
         function success(value, headers) {
             $scope.product = value;
-            
+            $scope.addSlide = function () {
+                console.log(value[currIndex].productUrl);
+                slides.push({
+                    text: value[currIndex].productName,
+                    image: value[currIndex].productUrl,
+                    id: currIndex++,
+                    ProductId:value[currIndex].ProductId
+                });
+            };
+            for (var i = 0; i < 4; i++) {
+                $scope.addSlide();
+            }
+
             $scope.bigTotalItems = headers("x-total-count");
             //$scope.bigTotalItems = 1000;
             console.log(value);
             console.log(headers());
             console.log(headers("x-total-count"));
+            console.log("Product");
         },
         function error(error) {
             console.log("ERROR");

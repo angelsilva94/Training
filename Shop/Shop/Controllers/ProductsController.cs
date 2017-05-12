@@ -17,6 +17,39 @@ namespace LoginRegister.Controllers {
     [RoutePrefix("products")]
     public class ProductsController : ApiController {
         private ShopDBContext db = new ShopDBContext();
+
+        [ResponseType(typeof(Product)), Route("search")]
+        public async Task<IHttpActionResult> GetProduct(string criteria) {
+            var product = await db.Product.Select(x => new {
+                productDesc = x.productDesc,
+                ProductId = x.ProductId,
+                productName = x.productName,
+                productPrice = x.productPrice,
+                productStatus = x.productStatus,
+                productStock = x.productStock,
+                productModifyDate = x.productModifyDate,
+                productUrl = x.productUrl,
+                ReviewProducts = x.ReviewProducts.Select(y => new {
+                    y.ratingReview,
+                    y.reviewDesc,
+                    y.ReviewProductIdNumber,
+                    User = new {
+                        y.User.username,
+                        y.User.UserId,
+                        y.User.name,
+                        y.User.lastName
+                    }
+                })
+            }).Where(x => x.productName.Contains(criteria)).ToListAsync();
+            
+
+            if (product == null) {
+                return NotFound();
+            }
+
+            return Ok(product);
+        }
+
         [ResponseType(typeof(Product)), Route("")]
         public async Task<HttpResponseMessage> GetProduct(int _page, int _perPage,string _sortDir,string _sortField) {
             var product = await db.Product.AsNoTracking().Select(x => new {
