@@ -158,6 +158,7 @@
     <Content Include="Scripts\angular-route.min.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\ngCart.js" />
+    <Content Include="Scripts\route\searchCtrl.js" />
     <Content Include="Scripts\route\services.js" />
     <Content Include="Scripts\route\categoryCtrl.js" />
     <Content Include="Scripts\route\homeCtrl.js" />
@@ -206,6 +207,7 @@
     <Content Include="css\signup\font-awesome\scss\_rotated-flipped.scss" />
     <Content Include="css\signup\font-awesome\scss\_stacked.scss" />
     <Content Include="css\signup\font-awesome\scss\_variables.scss" />
+    <Content Include="template\search.html" />
     <Content Include="Tests\admin\admin.js" />
     <Content Include="Tests\admin\node_modules\.bin\jsonlint" />
     <Content Include="Tests\admin\node_modules\.bin\strip-ansi" />

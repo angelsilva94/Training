@@ -19,6 +19,10 @@ app.config(function ($routeProvider) {
             templateUrl: "template/shopItem.html",
             controller: "productCtrl"
         })
+        .when("/search/:criteria", {
+            templateUrl: "template/search.html",
+            controller: "indexCtrl"
+        })
         .when("/category/:categoryId", {
             templateUrl: "template/category.html",
             controller: "categoryCtrl"

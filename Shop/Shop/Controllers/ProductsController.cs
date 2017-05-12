@@ -19,7 +19,7 @@ namespace LoginRegister.Controllers {
         private ShopDBContext db = new ShopDBContext();
 
         [ResponseType(typeof(Product)), Route("search")]
-        public async Task<IHttpActionResult> GetProduct(string criteria) {
+        public async Task<HttpResponseMessage> GetProduct(string criteria) {
             var product = await db.Product.Select(x => new {
                 productDesc = x.productDesc,
                 ProductId = x.ProductId,
@@ -40,14 +40,17 @@ namespace LoginRegister.Controllers {
                         y.User.lastName
                     }
                 })
-            }).Where(x => x.productName.Contains(criteria)).ToListAsync();
+            }).Where(x => x.productName.Contains(criteria) && x.productStatus==true).ToListAsync();
+
+            var response = Request.CreateResponse(HttpStatusCode.OK, product);
+            response.Headers.Add("X-Total-Count", db.Product.Count().ToString());
             
 
             if (product == null) {
-                return NotFound();
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
-            return Ok(product);
+            return response;
         }
 
         [ResponseType(typeof(Product)), Route("")]

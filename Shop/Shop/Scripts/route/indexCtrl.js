@@ -1,11 +1,32 @@
-﻿app.controller("indexCtrl", function ($scope, $uibModal, $cookieStore, $http, shopFactory) {
+﻿app.controller("indexCtrl", function ($scope, $uibModal, $cookieStore, $http, shopFactory, $location) {
     //console.log("HOLA");
     $scope.isNavCollapsed = true;
     $scope.search = function () {
         var searchServer = shopFactory.ProductSearch.query({ criteria: $scope.criteria },
         function success(value, headers) {
+            $scope.product = value;
             console.log(value);
             console.log("SEARCH SUCCESS");
+            $location.path("/search/" + $scope.criteria);
+            $scope.bigTotalItems = headers("x-total-count");
+            $scope.getAvg = function (ReviewProducts) {
+                var total = 0;
+                for (var i = 0; i < ReviewProducts.length; i++) {
+                    total += ReviewProducts[i].ratingReview
+                }
+                var avg = total / ReviewProducts.length;
+                $scope.rating = avg;
+                return avg;
+            };
+            $scope.getStars = function (ReviewProducts) {
+                var total = 0;
+                for (var i = 0; i < ReviewProducts.length; i++) {
+                    total += ReviewProducts[i].ratingReview
+                }
+                var avg = (total / ReviewProducts.length) * 20;
+
+                return avg + "%";
+            };
         },
         function error(error) {
             console.log("ERROR SEARCH");
