@@ -20,6 +20,7 @@ namespace LoginRegister.Controllers {
     public class UserController : ApiController {
         private readonly IUserValidator userValidator;
         private ShopDBContext ShopDBContext = new ShopDBContext();
+        public UserController() { }
         public UserController(IUserValidator userValidator)
         {
             if (userValidator == null) throw new ArgumentNullException(nameof(userValidator));
