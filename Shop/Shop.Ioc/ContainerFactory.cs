@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Shop.Models.DBModel;
 using Shop.Models.Interfaces;
+using Shop.Validator;
+using Shop.Validator.Core;
 
 namespace Shop.Ioc {
 
@@ -8,6 +10,7 @@ namespace Shop.Ioc {
 
         public ContainerBuilder CreateBuilder() {
             var builder = new ContainerBuilder();
+            builder.RegisterType<UserValidator>().As<IUserValidator>();
             builder.RegisterType<Address>().As<IAddress>();
             builder.RegisterType<Brand>().As<IBrand>();
             builder.RegisterType<Category>().As<ICategory>();

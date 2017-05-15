@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="UserValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -51,6 +51,10 @@
     <ProjectReference Include="..\Shop.Models\Shop.Models.csproj">
       <Project>{b697a738-663b-43b7-a036-daf3c0d64e28}</Project>
       <Name>Shop.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.Validator.Core\Shop.Validator.Core.csproj">
+      <Project>{399300b1-2edb-47c5-b45b-f89ce61ceb32}</Project>
+      <Name>Shop.Validator.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

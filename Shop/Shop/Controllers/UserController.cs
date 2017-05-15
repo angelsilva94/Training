@@ -1,6 +1,8 @@
 ﻿using LoginRegister.Models;
+using Shop.Models;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
+using Shop.Validator.Core;
 using System;
 using System.Data;
 using System.Data.Entity;
@@ -16,8 +18,13 @@ namespace LoginRegister.Controllers {
 
     [RoutePrefix("users")]
     public class UserController : ApiController {
-        private ShopDBContext db = new ShopDBContext();
-
+        private readonly IUserValidator userValidator;
+        private ShopDBContext ShopDBContext = new ShopDBContext();
+        public UserController(IUserValidator userValidator)
+        {
+            if (userValidator == null) throw new ArgumentNullException(nameof(userValidator));
+            this.userValidator = userValidator;
+        }
         // GET: api/User
         //[Authentication]
         //[Route("normal"), Authentication]
@@ -29,29 +36,34 @@ namespace LoginRegister.Controllers {
         //[Authentication]
         [Route("")]
         public async Task<HttpResponseMessage> GetUser(int _page, int _perPage) {
-            var total = db.User.Count();
-            var user = await db.User.Select(x => new {
-                UserId = x.UserId,
-                username = x.username,
-                password = x.password,
-                name = x.name,
-                lastName = x.lastName,
-                surname = x.surname,
-                age = x.age,
-                email = x.email,
-                regDate = x.regDate,
-                userMode = x.userMode,
-                userInfo = new {
-                    adress = x.UserInfo.adress,
-                    city = x.UserInfo.city,
-                    zip = x.UserInfo.zip,
-                    country = x.UserInfo.country,
-                    phone = x.UserInfo.phone
-                }
-            }).OrderBy(x=>x.UserId).Skip((_page-1) * _perPage).Take(_perPage).ToListAsync();
-            var response = Request.CreateResponse(HttpStatusCode.OK, user);
-            response.Headers.Add("X-Total-Count", db.User.Count().ToString());
-            return response;
+            //Validate User
+            
+                var total = ShopDBContext.User.Count();
+                var user = await ShopDBContext.User.Select(x => new {
+                    UserId = x.UserId,
+                    username = x.username,
+                    password = x.password,
+                    name = x.name,
+                    lastName = x.lastName,
+                    surname = x.surname,
+                    age = x.age,
+                    email = x.email,
+                    regDate = x.regDate,
+                    userMode = x.userMode,
+                    userInfo = new
+                    {
+                        adress = x.UserInfo.adress,
+                        city = x.UserInfo.city,
+                        zip = x.UserInfo.zip,
+                        country = x.UserInfo.country,
+                        phone = x.UserInfo.phone
+                    }
+                }).OrderBy(x => x.UserId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
+                var response = Request.CreateResponse(HttpStatusCode.OK, user);
+                response.Headers.Add("X-Total-Count", ShopDBContext.User.Count().ToString());
+                return response;
+            
+            
         }
 
         [Route("")]
@@ -82,7 +94,7 @@ namespace LoginRegister.Controllers {
             //                   //x.UserInfo.country,
             //                   //x.UserInfo.phone,
             //           };
-            var user = await db.User.Select(x => new UserDTO {
+            var user = await ShopDBContext.User.Select(x => new UserDTO {
                 UserId = x.UserId,
                 username = x.username,
                 password = x.password,
@@ -164,7 +176,7 @@ namespace LoginRegister.Controllers {
             //  });
 
             //EAGER LOADING WITH LINQ METHOD SYNTAX "The right way"
-            var user = await db.User.AsNoTracking().Select(x => new {
+            var user = await ShopDBContext.User.AsNoTracking().Select(x => new {
                 UserId = x.UserId,
                 username = x.username,
                 password = x.password,
@@ -252,15 +264,16 @@ namespace LoginRegister.Controllers {
         [Authentication]
         [ResponseType(typeof(void)), Route("{id}")]
         public async Task<IHttpActionResult> PutUserModel([FromBody]ModifyUserModel modifyUserModel, int id) {
+
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-
-            //if (id != userModel.username)
-            //{
-            //    return BadRequest();
-            //}
-            var user = db.User.Find(id);
+            
+                //if (id != userModel.username)
+                //{
+                //    return BadRequest();
+                //}
+                var user = ShopDBContext.User.Find(id);
             if (user.password == modifyUserModel.curPassword) {
                 user.password = modifyUserModel.newPassword;
             } else {
@@ -270,7 +283,7 @@ namespace LoginRegister.Controllers {
             //db.Entry(modifyUserModel).State = EntityState.Modified;
 
             try {
-                await db.SaveChangesAsync();
+                await ShopDBContext.SaveChangesAsync();
             } catch (DbUpdateConcurrencyException) {
                 if (!UserModelExists(modifyUserModel.username)) {
                     return NotFound();
@@ -289,20 +302,54 @@ namespace LoginRegister.Controllers {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
+
             userModel.regDate = DateTime.Now;
-            db.User.Add(userModel);
-
-            try {
-                await db.SaveChangesAsync();
-            } catch (DbUpdateException) {
-                if (UserModelExists(userModel.username)) {
-                    return Conflict();
-                } else {
-                    throw;
+            ShopDBContext.User.Add(userModel);
+            ErrorResponse errorResponse;
+            if (userValidator.ValidateUser(userModel, out errorResponse))
+            {
+                try
+                {
+                    await ShopDBContext.SaveChangesAsync();
                 }
-            }
+                catch (DbUpdateException)
+                {
+                    if (UserModelExists(userModel.username))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
 
-            return CreatedAtRoute("postUser", new { id = userModel.username }, userModel);
+                return CreatedAtRoute("postUser", new { id = userModel.username }, userModel);
+
+                userModel.regDate = DateTime.Now;
+                ShopDBContext.User.Add(userModel);
+
+                try
+                {
+                    await ShopDBContext.SaveChangesAsync();
+                }
+                catch (DbUpdateException)
+                {
+                    if (UserModelExists(userModel.username))
+                    {
+                        return Conflict();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
+                return CreatedAtRoute("postUser", new { id = userModel.username }, userModel);
+            }
+            return BadRequest();
+
+            
         }
 
         //// DELETE: api/User/5
@@ -323,13 +370,13 @@ namespace LoginRegister.Controllers {
 
         protected override void Dispose(bool disposing) {
             if (disposing) {
-                db.Dispose();
+                ShopDBContext.Dispose();
             }
             base.Dispose(disposing);
         }
 
         private bool UserModelExists(string usr) {
-            return db.User.Count(e => e.username == usr) > 0;
+            return ShopDBContext.User.Count(e => e.username == usr) > 0;
         }
     }
 }

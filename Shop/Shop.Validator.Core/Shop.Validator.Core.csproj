@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FAE4877C-7BFF-4A33-BDE0-4B9A10898C98}</ProjectGuid>
+    <ProjectGuid>{399300B1-2EDB-47C5-B45B-F89CE61CEB32}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Shop.Ioc</RootNamespace>
-    <AssemblyName>Shop.Ioc</AssemblyName>
+    <RootNamespace>Shop.Validator.Core</RootNamespace>
+    <AssemblyName>Shop.Validator.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Autofac, Version=4.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.4.0\lib\net45\Autofac.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,33 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContainerFactory.cs" />
+    <Compile Include="IUserValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shop.Common\Shop.Common.csproj">
-      <Project>{9490be51-7e25-418c-8c17-0654bab2de55}</Project>
-      <Name>Shop.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shop.DAL\Shop.DAL.csproj">
-      <Project>{b82fd008-0b69-4b09-afc0-66a854f458ca}</Project>
-      <Name>Shop.DAL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Shop.Models\Shop.Models.csproj">
       <Project>{b697a738-663b-43b7-a036-daf3c0d64e28}</Project>
       <Name>Shop.Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Shop.Validator.Core\Shop.Validator.Core.csproj">
-      <Project>{399300b1-2edb-47c5-b45b-f89ce61ceb32}</Project>
-      <Name>Shop.Validator.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shop.Validator\Shop.Validator.csproj">
-      <Project>{07229159-59cd-4fd8-b2e1-e2ba2f2dab2e}</Project>
-      <Name>Shop.Validator</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

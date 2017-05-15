@@ -4056,6 +4056,10 @@
       <Project>{b697a738-663b-43b7-a036-daf3c0d64e28}</Project>
       <Name>Shop.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shop.Validator.Core\Shop.Validator.Core.csproj">
+      <Project>{399300b1-2edb-47c5-b45b-f89ce61ceb32}</Project>
+      <Name>Shop.Validator.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shop.Validator\Shop.Validator.csproj">
       <Project>{07229159-59cd-4fd8-b2e1-e2ba2f2dab2e}</Project>
       <Name>Shop.Validator</Name>

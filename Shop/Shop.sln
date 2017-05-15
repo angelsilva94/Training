@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Ioc", "Shop.Ioc\Shop.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Common", "Shop.Common\Shop.Common.csproj", "{9490BE51-7E25-418C-8C17-0654BAB2DE55}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Validator", "Validator", "{E1588A3C-FB86-4ABC-A33C-B770C84C8065}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Validator.Core", "Shop.Validator.Core\Shop.Validator.Core.csproj", "{399300B1-2EDB-47C5-B45B-F89CE61CEB32}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,8 +49,16 @@ Global
 		{9490BE51-7E25-418C-8C17-0654BAB2DE55}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9490BE51-7E25-418C-8C17-0654BAB2DE55}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9490BE51-7E25-418C-8C17-0654BAB2DE55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{399300B1-2EDB-47C5-B45B-F89CE61CEB32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{399300B1-2EDB-47C5-B45B-F89CE61CEB32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{399300B1-2EDB-47C5-B45B-F89CE61CEB32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{399300B1-2EDB-47C5-B45B-F89CE61CEB32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{07229159-59CD-4FD8-B2E1-E2BA2F2DAB2E} = {E1588A3C-FB86-4ABC-A33C-B770C84C8065}
+		{399300B1-2EDB-47C5-B45B-F89CE61CEB32} = {E1588A3C-FB86-4ABC-A33C-B770C84C8065}
 	EndGlobalSection
 EndGlobal
