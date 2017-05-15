@@ -45,9 +45,22 @@
                 <ul class="nav navbar-nav navbar-right">
 
                     <li><button ng-click="debug()"><span class="glyphicon glyphicon-user"></span> DEBUG</button></li>
-                    <li><a href="#!signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li ng-hide="login" ><a href="#!login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    <li ng-show="logout" ><a href="#!login"><span class="glyphicon glyphicon-log-in"></span> Logout   </a></li>
+                    <li><a ng-hide="$root.globals.currentUser" href="#!signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                    <li ng-hide="$root.globals.currentUser" ><a href="#!login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <!--<li ng-show="$root.globals.currentUser" ><a href="#!login"><span class="glyphicon glyphicon-log-out"></span> Logout   </a></li>-->
+                    <div class="btn-group" uib-dropdown is-open="status.isopen">
+                        <button ng-show="$root.globals.currentUser" id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+                            Welcome {{$root.globals.currentUser.username}}<span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem" ng-click="userPanel()"><a href="#/">Go to User Page</a></li>
+                            <li role="menuitem"><a href="#">Another action</a></li>
+                            <li role="menuitem"><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li  ng-show="$root.globals.currentUser" role="menuitem"><a href="#!login"><span class="glyphicon glyphicon-log-out"></span>Logout  </a></li>
+                        </ul>
+                    </div>
+
                     <form class="navbar-form navbar-left" ng-submit="search()">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search" ng-model="criteria">
@@ -89,7 +102,7 @@
 
     <!--<script src="Scripts/jquery.js"></script>-->
     <!--<script src="Scripts/bootstrap.min.js"></script>-->
-    <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+    <!--<script src="//code.jquery.com/jquery-2.0.3.min.js"></script>-->
     <script src="Scripts/angular.min.js"></script>
     <script src="Scripts/angular-route.min.js"></script>
     <script src="Scripts/angular-resource.min.js"></script>

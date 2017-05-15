@@ -30,6 +30,10 @@ app.config(function ($routeProvider) {
         when("/checkout", {
             templateUrl: "template/cartFinal.html"
         })
+        //.when("/admin", {
+        //    templateUrl: "Tests/admin/index.html"
+        //})
+    
         //.when("/contact", {
         //    templateUrl: "template/test.html"
         //})

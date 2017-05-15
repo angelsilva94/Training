@@ -1,5 +1,10 @@
 ﻿app.controller("indexCtrl", function ($scope, $uibModal, $cookieStore, $http, shopFactory, $location) {
     //console.log("HOLA");
+
+    $scope.userPanel = function () {
+        console.log("entraste al panel de usuario");
+    }
+
     $scope.isNavCollapsed = true;
     $scope.search = function () {
         var searchServer = shopFactory.ProductSearch.query({ criteria: $scope.criteria },

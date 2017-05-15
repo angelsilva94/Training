@@ -224,6 +224,7 @@
     <Content Include="css\signup\font-awesome\scss\_stacked.scss" />
     <Content Include="css\signup\font-awesome\scss\_variables.scss" />
     <Content Include="template\search.html" />
+    <Content Include="Tests\admin\404.html" />
     <Content Include="Tests\admin\admin.js" />
     <Content Include="Tests\admin\node_modules\.bin\jsonlint" />
     <Content Include="Tests\admin\node_modules\.bin\strip-ansi" />

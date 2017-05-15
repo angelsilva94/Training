@@ -2,6 +2,7 @@
 using Shop.Models;
 using Shop.Models.DBModel;
 using Shop.Models.DBModel.DTO;
+using Shop.Validator;
 using Shop.Validator.Core;
 using System;
 using System.Data;
@@ -20,7 +21,9 @@ namespace LoginRegister.Controllers {
     public class UserController : ApiController {
         private readonly IUserValidator userValidator;
         private ShopDBContext ShopDBContext = new ShopDBContext();
-        public UserController() { }
+        //public UserController() {
+        //    userValidator = new UserValidator();
+        //}
         public UserController(IUserValidator userValidator)
         {
             if (userValidator == null) throw new ArgumentNullException(nameof(userValidator));
@@ -327,28 +330,10 @@ namespace LoginRegister.Controllers {
 
                 return CreatedAtRoute("postUser", new { id = userModel.username }, userModel);
 
-                userModel.regDate = DateTime.Now;
-                ShopDBContext.User.Add(userModel);
-
-                try
-                {
-                    await ShopDBContext.SaveChangesAsync();
-                }
-                catch (DbUpdateException)
-                {
-                    if (UserModelExists(userModel.username))
-                    {
-                        return Conflict();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-
-                return CreatedAtRoute("postUser", new { id = userModel.username }, userModel);
+                
             }
-            return BadRequest();
+            
+            return BadRequest(errorResponse.ToString());
 
             
         }
