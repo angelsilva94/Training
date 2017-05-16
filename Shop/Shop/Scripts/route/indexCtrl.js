@@ -53,9 +53,9 @@
     };
     $scope.debug = function () {
         var cookie = $cookieStore.get('globals') || {};
-        $http.get("http://localhost:58495/orders/").then(function (response) {
-            console.log(response);
-        });
+        //$http.get("http://localhost:58495/orders/").then(function (response) {
+        //    console.log(response);
+        //});
         console.log(cookie);
     };
 });

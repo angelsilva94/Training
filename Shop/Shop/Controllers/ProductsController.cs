@@ -135,6 +135,13 @@ namespace LoginRegister.Controllers {
                         y.User.name,
                         y.User.lastName
                     }
+                }),
+                OrderDetails=x.OrderDetails.Select(y=>new {
+                    //y.ProductId,
+                    //y.OrderId,
+                    y.Order.UserId,
+                    //y.Order.OrderId                        
+                    
                 })
             }).SingleOrDefaultAsync(x => x.ProductId == id);
             //var temp = await db.Product.FindAsync(id);

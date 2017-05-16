@@ -1,10 +1,10 @@
-﻿app.controller("productCtrl", function ($scope, shopFactory, $routeParams, ngCart) {
+﻿app.controller("productCtrl", function ($scope, shopFactory, $routeParams, ngCart, $rootScope,$route) {
     //var productDetailServer = shopFactory.ProductDetail.get({ id: 1 }, function () {
     //});
 
     //$scope.ejemplo = productDetailServer;
     //console.log(productDetailServer);
-    console.log("hola");
+    console.log("hola Product");
     var hola = $routeParams.producId;
     console.log(hola);
     var test = shopFactory.ProductDetail.get({ id: $routeParams.producId }).$promise.then(function (response) {
@@ -15,6 +15,16 @@
         $scope.productPrice = response.productPrice;
         $scope.productId = response.ProductId;
         //console.log(response.ReviewProducts[0].ratingReview);
+        $scope.OrderDetails = response.OrderDetails;
+        for (var i = 0; i < response.OrderDetails.length; i++) {
+            if (response.OrderDetails[i].UserId == $rootScope.globals.currentUser.userId) {
+                $scope.showReview = true;
+                console.log("Si se puede review");
+                break;
+            }
+            //console.log($rootScope.globals.currentUser.userId);
+            console.log(response.OrderDetails[i].UserId);
+        }
         $scope.ReviewProducts = response.ReviewProducts;
         $scope.totalReviews = response.ReviewProducts.length;
         $scope.averageRating = function () {
@@ -26,6 +36,7 @@
             var avg = total / length;
             return avg;
         };
+        $scope.reviewData = response.ReviewProducts;
         $scope.getStars = function (ReviewProducts) {
             var total = 0;
             for (var i = 0; i < ReviewProducts.length; i++) {
@@ -34,7 +45,7 @@
             var avg = (total / ReviewProducts.length) * 20;
             return avg + "%";
         };
-        $scope.reviewData = response.ReviewProducts;
+       
     });
     //console.log(test);
     //console.log(test.email);
@@ -57,5 +68,43 @@
     $scope.checkOutDetails = function () {
         console.log("PRODUCTDS");
         $uibModalInstance.close();
+    };
+    $scope.isCollapsed = true;
+    $scope.max = 10;
+    $scope.leaveReview = function () {
+        console.log("Leave review");
+        $scope.writingReview = true;
+        $scope.isCollapsed = false;
+        $scope.hoveringOver = function (value) {
+            $scope.overStar = value;
+            $scope.percent = 100 * (value / $scope.max);
+        };
+        $scope.sendReview = function () {
+            console.log("sendReview");
+            ////console.log($scope.rate);
+            ////console.log($scope.reviewDesc);
+            //var jsonReview = {
+            //    "ProductId": $scope.productId,
+            //    "ratingReview": $scope.rate,
+            //    "UserId": $rootScope.globals.currentUser.userId,
+            //    "reviewDesc": $scope.reviewDesc
+            //};
+            //console.log(jsonReview);
+            shopFactory.Review.save({
+                "ProductId": $scope.productId,
+                "ratingReview": $scope.rate,
+                "UserId": $rootScope.globals.currentUser.userId,
+                "reviewDesc": $scope.reviewDesc
+            }, function succes (value) {
+                console.log("respuesta es:")
+                console.log(value);
+                $route.reload();
+            },function error(error) {
+                console.log("ERROR");
+                console.log(error);
+            });
+            
+
+        };
     };
 });

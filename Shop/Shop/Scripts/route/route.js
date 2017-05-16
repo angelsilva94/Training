@@ -66,6 +66,7 @@ app.factory("shopFactory", function ($resource) {
         ProductDetail: $resource("http://localhost:58495/products/:id", { id: "@id" }),
         Test: $resource("https://jsonplaceholder.typicode.com/users/:id", { id: "@id" }),
         ProductCategory: $resource("http://localhost:58495/productCategory/:id", { id: "@id" }),
-        ProductSearch: $resource("http://localhost:58495/products/search/?criteria=:criteria", { criteria: "@criteria"}),
+        ProductSearch: $resource("http://localhost:58495/products/search/?criteria=:criteria", { criteria: "@criteria" }),
+        Review: $resource("http://localhost:58495/reviewProducts/", {}),
     };
 });

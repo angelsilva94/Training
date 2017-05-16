@@ -33,23 +33,48 @@
                 </div>
 
                 <div class="text-right">
-                    <button class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Leave a review</button>
-                    <!--<button class="btn btn-success pull-left" ng-click="addToCart(productUrl,productName,productPrice)"><span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart</button>-->
-
+                    <!--<div ng-repeat="x in OrderDetails" ng-if="x.UserId==$root.globals.currentUser.userId">
+                        {{x.UserId}}-->
+                        <button ng-show="showReview" ng-click="leaveReview()" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Leave a review</button>
+                    <!--{{showReview}}-->
+                        <!--<button class="btn btn-success pull-left" ng-click="addToCart(productUrl,productName,productPrice)"><span class="glyphicon glyphicon-shopping-cart"></span>Add to Cart</button>-->
+                    <!--</div>-->
                     <ngcart-addtocart class="pull-left" template-url="template/addtocart.html" id="{{productId}}" name="{{productName}}" price="{{productPrice}}" quantity="1" quantity-max="5">Add to Cart</ngcart-addtocart>
                 </div>
+                <hr>
+                <div uib-collapse="isCollapsed">
+                    <div class="row" >
+                        <div class="col-md-12">
+                            <form accept-charset="UTF-8" ng-submit="sendReview()">
+                                
+                                <textarea ng-model="reviewDesc" class="form-control animated" cols="50" placeholder="Enter your review here..." rows="5"></textarea>
 
-                <div class="well" ng-repeat="x in reviewData">
+                                <div class="text-right">
+                                    <span  uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" ></span>
+                                    <span class="label" ng-class="{'label-warning': percent<60, 'label-info': percent>=60 && percent<=70, 'label-success': percent>=70}" ng-show="overStar && !isReadonly">{{percent}}%</span>
+                                    <hr>
+                                    <button class="btn btn-danger btn-sm">
+                                        <span class="glyphicon glyphicon-remove"></span>Cancel
+                                    </button>
+                                    <button type="submit" class="btn btn-success btn-sm" >Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="well" ng-repeat="x in reviewData" ng-hide="writingReview">
 
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
                             <span class="stars">
-                                <span ng-style="{ 'width': getStars(ReviewProducts) }"></span>
+                                
+                                <span ng-style="{ 'width': '{{x.ratingReview*20}}%' }"></span>
                             </span>
+                            <br class="text-right"><b>Rating: {{x.ratingReview}}</b></br>
                             <b>Username: {{x.User.username}}</b>
                             <b class="pull-right">Real Name: {{x.User.name +" "+ x.User.lastName}}</b><br />
-                            <p>{{x.reviewDesc}}</p>
+                            <b><p>{{x.reviewDesc}}</p></b>
                         </div>
                     </div>
                 </div>
