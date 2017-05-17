@@ -13,7 +13,7 @@
             </div>
         </div>
         <!--<button ng-click="setData()">Boton</button>-->
-        <div class="col-md-9">
+        <div class="col-xs-12 col-sm-9">
             <div style="height: 305px">
                 <!--{{slides}}-->
                 <div uib-carousel active="active" interval="myInterval" >
@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4 col-lg-4 col-md-4" ng-repeat="x in product ">
+                <div class="col-xs-6 col-lg-4" ng-repeat="x in product ">
                     <div class="thumbnail">
                         <img class="img-responsive" ng-src="{{x.productUrl}}" alt="{{x.productName}}">
                         <div class="caption">
@@ -36,7 +36,7 @@
                             <p>{{x.productDesc}}.</p>
                         </div>
                         <div class="ratings">
-                            <label class="pull-right">{{getAvg(x.ReviewProducts)}}</label>
+                            <label class="pull-right">{{getAvg(x.ReviewProducts)| number : 2}}</label>
                             <!--<label>{{rating}}</label>-->
                             <p>
                                 <!--<span uib-rating ng-model="rating" max="10" read-only="true" on-hover="hoveringOver(rating)" on-leave="overStar = null"></span>-->

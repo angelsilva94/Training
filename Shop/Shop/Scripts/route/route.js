@@ -26,9 +26,12 @@ app.config(function ($routeProvider) {
         .when("/category/:categoryId", {
             templateUrl: "template/category.html",
             controller: "categoryCtrl"
-        }).
-        when("/checkout", {
+        })
+        .when("/checkout", {
             templateUrl: "template/cartFinal.html"
+        })
+        .when("/user", {
+            templateUrl: "template/userPage.html"
         })
         //.when("/admin", {
         //    templateUrl: "Tests/admin/index.html"
@@ -66,6 +69,7 @@ app.factory("shopFactory", function ($resource) {
         ProductDetail: $resource("http://localhost:58495/products/:id", { id: "@id" }),
         Test: $resource("https://jsonplaceholder.typicode.com/users/:id", { id: "@id" }),
         ProductCategory: $resource("http://localhost:58495/productCategory/:id", { id: "@id" }),
+        ProductCategoryShop: $resource("http://localhost:58495/productCategory/shop/:id", { id: "@id" }),
         ProductSearch: $resource("http://localhost:58495/products/search/?criteria=:criteria", { criteria: "@criteria" }),
         Review: $resource("http://localhost:58495/reviewProducts/", {}),
     };

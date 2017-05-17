@@ -107,4 +107,9 @@
 
         };
     };
+    $scope.show = true;
+
+    $scope.closeAlert = function (index) {
+        $scope.show = false;
+    };
 });

@@ -40,8 +40,12 @@ namespace Shop.Controllers {
                 x.CategoryId,
                 x.categoryImage,
                 x.categoryName,
-                x.categoryParent
-            }).ToListAsync();
+                x.categoryParent,
+                ProductCategories = x.ProductCategories.Select(y=>new {
+                    y.CategoryId,
+                    y.Product.ProductId
+                }) 
+            }).Where(x=>x.CategoryId == x.ProductCategories.Select(y=>y.CategoryId).FirstOrDefault()).ToListAsync();
             return Ok(category);
         }
 

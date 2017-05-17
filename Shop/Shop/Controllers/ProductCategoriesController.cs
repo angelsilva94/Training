@@ -47,7 +47,7 @@ namespace LoginRegister.Controllers {
                 //}
 
                 //x.Product
-            }).OrderBy(x => x.ProductCategoryId).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
+            }).OrderBy(x => _sortField).Skip((_page - 1) * _perPage).Take(_perPage).ToListAsync();
             var response = Request.CreateResponse(HttpStatusCode.OK, productCategory);
             response.Headers.Add("X-Total-Count", db.ProductCategory.Count().ToString());
             return response;
@@ -111,6 +111,7 @@ namespace LoginRegister.Controllers {
             var productCategory = await db.ProductCategory.Select(x => new {
                 x.ProductCategoryId,
                 x.CategoryId,
+                x.Category.categoryName,
                 x.ProductId,
                 Product = new {
                     x.Product.ProductId,
@@ -118,6 +119,7 @@ namespace LoginRegister.Controllers {
                     x.Product.productPrice,
                     x.Product.productPublishDate,
                     x.Product.productUrl,
+                    x.Product.productStatus,
                     //x.Product.BrandId,
                     Brand = new {
                         x.Product.Brand.BrandId,
@@ -136,15 +138,17 @@ namespace LoginRegister.Controllers {
                 }
 
                 //x.Product
-            }).ToListAsync();
+            }).Where(x=> x.Product.productStatus == true).OrderBy(x=>x.CategoryId).ToListAsync();
             return Ok(productCategory);
         }
 
+
         // GET: api/ProductCategories/5
-        [ResponseType(typeof(ProductCategory)), Route("{id}")]
-        public async Task<IHttpActionResult> GetProductCategory(int id) {
+        [ResponseType(typeof(ProductCategory)), Route("shop/{id}")]
+        public async Task<IHttpActionResult> GetProductCategoryShop(int id) {
             var productCategory = await db.ProductCategory.Select(x => new {
                 x.ProductCategoryId,
+                x.Category.categoryName,
                 x.Category.CategoryId,
                 x.ProductId,
                 product = new {
@@ -170,6 +174,45 @@ namespace LoginRegister.Controllers {
                     x.Category.categoryDesc
                 },
             }).Where(x => x.CategoryId == id && x.product.productStatus == true).ToListAsync();
+            if (productCategory == null) {
+                return NotFound();
+            }
+
+            return Ok(productCategory);
+        }
+
+
+        // GET: api/ProductCategories/5
+        [ResponseType(typeof(ProductCategory)), Route("{id}")]
+        public async Task<IHttpActionResult> GetProductCategory(int id) {
+            var productCategory = await db.ProductCategory.Select(x => new {
+                x.ProductCategoryId,
+                x.Category.categoryName,
+                x.Category.CategoryId,
+                x.ProductId,
+                product = new {
+                    x.Product.Brand.BrandId,
+                    x.Product.Brand.brandDesc,
+                    x.Product.Brand.brandLogoUrl,
+                    x.Product.Brand.brandName,
+                    x.Product.productUrl,
+                    x.Product.productStock,
+                    x.Product.productStatus,
+                    x.Product.productName,
+                    x.Product.productPrice,
+                    x.Product.productDesc,
+                    x.Product.ProductId,
+                    x.Product.productPublishDate,
+                    x.Product.productModifyDate,
+                    ReviewProducts = x.Product.ReviewProducts.Select(y => new {
+                        y.ratingReview,
+                    })
+                },
+                category = new {
+                    x.Category.CategoryId,
+                    x.Category.categoryDesc
+                },
+            }).FirstOrDefaultAsync(x => x.ProductCategoryId == id);
             if (productCategory == null) {
                 return NotFound();
             }

@@ -28,7 +28,7 @@
                         <span class="stars">
                             <span ng-style="{ 'width': getStars(ReviewProducts) }"></span>
                         </span>
-                        <b><p>{{averageRating()}}</p></b>
+                        <b><p>{{averageRating()| number : 2}}</p></b>
                     </div>
                 </div>
 
@@ -43,6 +43,8 @@
                 </div>
                 <hr>
                 <div uib-collapse="isCollapsed">
+                    <div uib-alert class="alert-success" dismiss-on-timeout="5000" close="closeAlert()" ng-if="show">Success Alert</div>
+
                     <div class="row" >
                         <div class="col-md-12">
                             <form accept-charset="UTF-8" ng-submit="sendReview()">

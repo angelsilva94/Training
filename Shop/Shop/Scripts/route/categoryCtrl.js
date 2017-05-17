@@ -1,7 +1,7 @@
 ﻿/// <reference path="../angular.min.js" />
 
 app.controller("categoryCtrl", function ($scope, shopFactory, $routeParams) {
-    var categoryServer = shopFactory.Category.query({}).$promise.then(function (response) {
+    var categoryServer = shopFactory.ProductCategory.query({}).$promise.then(function (response) {
         $scope.category = response;
         //console.log(response);
     }, function (error) {
@@ -9,7 +9,7 @@ app.controller("categoryCtrl", function ($scope, shopFactory, $routeParams) {
     });
 
     //console.log($routeParams);
-    var ProductCategory = shopFactory.ProductCategory.query({ id: $routeParams.categoryId }).$promise.then(function (response) {
+    var ProductCategory = shopFactory.ProductCategoryShop.query({ id: $routeParams.categoryId }).$promise.then(function (response) {
         console.log(response);
         $scope.product = response;
     }, function (error) {

@@ -125,7 +125,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
 
     productCategory.listView()
                     .fields([
-                        //nga.field("ProductCategoryId").isDetailLink(true),
+                        nga.field("ProductCategoryId").isDetailLink(true),
                         nga.field("ProductId", "reference")
                            .targetEntity(product)
                            .targetField(nga.field("productName"))
@@ -253,6 +253,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     productCategory.creationView()
                     .fields([
                         //nga.field('ProductCategoryId'),
+                        
                         nga.field("CategoryId", "reference")
                             .targetEntity(category)
                             .targetField(nga.field("categoryName"))
@@ -278,9 +279,24 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
     //user.editionView().fields(user.creationView().fields());
     //order.editionView().fields(order.creationView().fields());
     review.editionView().fields(review.creationView().fields());
-    productCategory.editionView().fields(productCategory.creationView().fields());
+    //productCategory.editionView().fields(productCategory.creationView().fields());
+    productCategory.editionView()
+                    .fields([
+                        nga.field('ProductCategoryId').editable(false),
+
+                        nga.field("CategoryId", "reference")
+                            .targetEntity(category)
+                            .targetField(nga.field("categoryName"))
+                            .label("Category:"),
+                         nga.field("ProductId", "reference")
+                            .targetEntity(product)
+                            .targetField(nga.field("productName"))
+                            .label("Product:"),
+
+                    ]);
     order.editionView()
          .fields([
+             nga.field("ProductCategoryId"),
              nga.field("OrderId"),
              nga.field("totalOrderPrice"),
 

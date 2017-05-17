@@ -13,7 +13,7 @@ app.controller("homeCtrl", function ($scope, shopFactory, $window) {
 
 
 
-    var categoryServer = shopFactory.Category.query({}).$promise.then(function (response) {
+    var categoryServer = shopFactory.ProductCategory.query({}).$promise.then(function (response) {
         $scope.category = response;
         console.log("Category");
         //console.log(response);
