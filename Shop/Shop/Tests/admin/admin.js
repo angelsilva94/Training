@@ -299,6 +299,7 @@ myApp.config(['NgAdminConfigurationProvider', function (nga) {
              nga.field("ProductCategoryId"),
              nga.field("OrderId"),
              nga.field("totalOrderPrice"),
+             //nga.field("OrderStatusCode"),
 
 
 

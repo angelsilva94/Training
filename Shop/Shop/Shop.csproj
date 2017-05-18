@@ -184,6 +184,7 @@
     <Content Include="Scripts\route\productCtrl.js" />
     <Content Include="Scripts\route\registerCtrl.js" />
     <Content Include="Scripts\route\route.js" />
+    <Content Include="Scripts\route\userCtrl.js" />
     <Content Include="Scripts\signup\jquery.backstretch.js" />
     <Content Include="Scripts\signup\scripts.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-2.5.0.js" />

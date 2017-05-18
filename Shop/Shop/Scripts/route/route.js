@@ -31,7 +31,8 @@ app.config(function ($routeProvider) {
             templateUrl: "template/cartFinal.html"
         })
         .when("/user", {
-            templateUrl: "template/userPage.html"
+            templateUrl: "template/userPage.html",
+            controller: "userCtrl"
         })
         //.when("/admin", {
         //    templateUrl: "Tests/admin/index.html"
@@ -72,5 +73,6 @@ app.factory("shopFactory", function ($resource) {
         ProductCategoryShop: $resource("http://localhost:58495/productCategory/shop/:id", { id: "@id" }),
         ProductSearch: $resource("http://localhost:58495/products/search/?criteria=:criteria", { criteria: "@criteria" }),
         Review: $resource("http://localhost:58495/reviewProducts/", {}),
+        OrderUser: $resource("http://localhost:58495/orders/users/:id", {id:"@id"}),
     };
 });

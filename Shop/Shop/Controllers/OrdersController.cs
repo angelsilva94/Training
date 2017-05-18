@@ -185,18 +185,48 @@ namespace LoginRegister.Controllers {
             return Ok(order);
         }
 
+        [ResponseType(typeof(OrderDTO)), Route("users/{id}")]
+        public async Task<IHttpActionResult> GetOrderUser(int id) {
+            var order = await db.Order.Select(x => new {
+                OrderId = x.OrderId,
+                orderStatusCode = x.orderStatusCode,
+                orderStatusDesc=x.OrderStatus.orderStatusDesc,
+                purchaseDate = x.purchaseDate,
+                totalOrderPrice = x.totalOrderPrice,
+                UserId = x.UserId,
+                OrderDetails = x.OrderDetails.Select(y => new {
+                    OrderDetailId = y.OrderDetailId,
+                    OrderId = y.OrderId,
+                    ProductId = y.ProductId,
+                    quantityOrder = y.quantityOrder,
+                    Product = new {
+                        productDesc = y.Product.productDesc,
+                        ProductId = y.Product.ProductId,
+                        productName = y.Product.productName,
+                        productPrice = y.Product.productPrice
+                    }
+                }).ToList()
+            }).Where(x => x.UserId == id).ToListAsync();
+            if (order == null) {
+                return NotFound();
+            } else {
+                return Ok(order);
+            }
+
+        }
+
         //[Authentication]
         //[Route("api/getOrder/search")]
         [ResponseType(typeof(OrderDTO)), Route("{id}")]
         public async Task<IHttpActionResult> GetOrder(int id) {
-            var order = await db.Order.Select(x => new OrderDTO {
+            var order = await db.Order.Select(x => new  {
                 OrderId = x.OrderId,
                 orderStatusCode = x.orderStatusCode,
                 purchaseDate = x.purchaseDate,
                 //quantityOrder = x.quantityOrder,
                 totalOrderPrice = x.totalOrderPrice,
                 UserId = x.UserId,
-                User = new UserDTO {
+                User = new  {
                     UserId = x.User.UserId,
                     username = x.User.username,
                     password = x.User.password,
@@ -207,7 +237,7 @@ namespace LoginRegister.Controllers {
                     email = x.User.email,
                     regDate = x.User.regDate,
                     userMode = x.User.userMode,
-                    userInfo = new UserInfoDTO {
+                    userInfo = new  {
                         adress = x.User.UserInfo.adress,
                         city = x.User.UserInfo.city,
                         zip = x.User.UserInfo.zip,
@@ -215,12 +245,12 @@ namespace LoginRegister.Controllers {
                         phone = x.User.UserInfo.phone,
                     }
                 },
-                OrderDetails = x.OrderDetails.Select(y => new OrderDetailDTO {
+                OrderDetails = x.OrderDetails.Select(y => new  {
                     OrderDetailId = y.OrderDetailId,
                     OrderId = y.OrderId,
                     ProductId = y.ProductId,
                     quantityOrder = y.quantityOrder,
-                    Product = new ProductDTO {
+                    Product = new  {
                         productDesc = y.Product.productDesc,
                         ProductId = y.Product.ProductId,
                         productName = y.Product.productName,
