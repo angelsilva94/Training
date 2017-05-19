@@ -87,6 +87,32 @@ namespace LoginRegister.Controllers {
         }
 
         // GET: api/ReviewProducts/5
+        [ResponseType(typeof(ReviewProduct)), Route("user/{id}")]
+        public async Task<IHttpActionResult> GetReviewsUser(int id) {
+            var reviewProduct = await db.ReviewProduct.Select(x => new {
+                x.ratingReview,
+                x.reviewDesc,
+                x.ReviewProductIdNumber,
+                x.UserId,
+                User = new {
+                    x.User.UserId,
+                    x.User.username
+                },
+                Product = new {
+                    x.Product.ProductId,
+                    x.Product.productName
+                }
+            }).Where(x => x.UserId == id).ToListAsync();
+            if (reviewProduct == null) {
+                return NotFound();
+            }
+
+            return Ok(reviewProduct);
+        }
+
+
+
+        // GET: api/ReviewProducts/5
         [ResponseType(typeof(ReviewProduct)), Route("{id}")]
         public async Task<IHttpActionResult> GetReviewProduct(int id) {
             var reviewProduct = await db.ReviewProduct.Select(x => new {

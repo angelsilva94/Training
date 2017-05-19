@@ -103,8 +103,6 @@
                 console.log("ERROR");
                 console.log(error);
             });
-            
-
         };
     };
     $scope.show = true;

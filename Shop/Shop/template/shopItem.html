@@ -1,5 +1,8 @@
-﻿<body ng-controller="productCtrl">
-    <head><link href="../css/stars.css" rel="stylesheet" /></head>
+﻿<head>
+    <link href="../css/stars.css" rel="stylesheet" />
+</head>
+<body ng-controller="productCtrl">
+    
     <!-- Page Content -->
     <div class="container">
         <div class="row">
@@ -24,7 +27,7 @@
                         <p ng-bind="productDesc"></p>
                     </div>
                     <div class="ratings">
-                        <b><p class="pull-right" >{{totalReviews}} Reviews</p></b>
+                        <b ng-bind="totalReviews" class="pull-right"> Reviews</b>
                         <span class="stars">
                             <span ng-style="{ 'width': getStars(ReviewProducts) }"></span>
                         </span>

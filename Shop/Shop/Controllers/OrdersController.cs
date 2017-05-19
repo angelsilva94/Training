@@ -186,7 +186,7 @@ namespace LoginRegister.Controllers {
         }
 
         [ResponseType(typeof(OrderDTO)), Route("users/{id}")]
-        public async Task<IHttpActionResult> GetOrderUser(int id) {
+        public async Task<HttpResponseMessage> GetOrderUser(int id) {
             var order = await db.Order.Select(x => new {
                 OrderId = x.OrderId,
                 orderStatusCode = x.orderStatusCode,
@@ -207,10 +207,15 @@ namespace LoginRegister.Controllers {
                     }
                 }).ToList()
             }).Where(x => x.UserId == id).ToListAsync();
+            
+            var response = Request.CreateResponse(HttpStatusCode.OK, order);
+            response.Headers.Add("X-Total-Orders", db.Order.Where(x => x.UserId == id).Count().ToString());
+            response.Headers.Add("X-Total-Reviews", db.ReviewProduct.Where(x => x.UserId == id).Count().ToString());
+            return response;
             if (order == null) {
-                return NotFound();
+                return Request.CreateResponse(HttpStatusCode.NotFound);
             } else {
-                return Ok(order);
+                return response;
             }
 
         }

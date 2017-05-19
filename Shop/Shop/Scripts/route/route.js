@@ -73,6 +73,7 @@ app.factory("shopFactory", function ($resource) {
         ProductCategoryShop: $resource("http://localhost:58495/productCategory/shop/:id", { id: "@id" }),
         ProductSearch: $resource("http://localhost:58495/products/search/?criteria=:criteria", { criteria: "@criteria" }),
         Review: $resource("http://localhost:58495/reviewProducts/", {}),
-        OrderUser: $resource("http://localhost:58495/orders/users/:id", {id:"@id"}),
+        OrderUser: $resource("http://localhost:58495/orders/users/:id", { id: "@id" }),
+        ReviewsUser: $resource("http://localhost:58495/reviewProducts/user/:id", { id : "@id" }),
     };
 });
