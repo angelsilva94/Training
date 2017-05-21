@@ -1,4 +1,23 @@
-﻿insert into Brands (brandName, brandLogoUrl, brandDesc) values ('Medicis Pharmaceutical Corp.', 'http://dummyimage.com/172x148.bmp/5fa2dd/ffffff', 'Chronic pain NEC');
+﻿delete from Brands where 1=1
+delete from Categories where 1=1
+delete from OrderDetails where 1=1
+delete from Orders where 1=1
+delete from OrderStatus where 1=1
+delete from ProductCategories where 1=1
+delete from Products where 1=1
+delete from ReviewProducts where 1=1
+delete from UserInfoes where 1=1
+delete from Users where 1=1
+DBCC CHECKIDENT (OrderDetails, RESEED, 0)
+DBCC CHECKIDENT (Brands, RESEED, 0)
+DBCC CHECKIDENT (Categories, RESEED, 0)
+DBCC CHECKIDENT (Orders, RESEED, 0)
+DBCC CHECKIDENT (OrderStatus, RESEED, 0)
+DBCC CHECKIDENT (Products, RESEED, 0)
+DBCC CHECKIDENT (Users, RESEED, 0)
+DBCC CHECKIDENT (ProductCategories, RESEED, 0)
+DBCC CHECKIDENT (ReviewProducts, RESEED, 0)
+insert into Brands (brandName, brandLogoUrl, brandDesc) values ('Medicis Pharmaceutical Corp.', 'http://dummyimage.com/172x148.bmp/5fa2dd/ffffff', 'Chronic pain NEC');
 insert into Brands (brandName, brandLogoUrl, brandDesc) values ('Procter & Gamble Manufacturing Company', 'http://dummyimage.com/144x109.jpg/ff4444/ffffff', 'TB sp crd absc-exam unkn');
 insert into Brands (brandName, brandLogoUrl, brandDesc) values ('Topco Associates LLC', 'http://dummyimage.com/191x100.jpg/cc0000/ffffff', 'Open wound hand w tendon');
 insert into Brands (brandName, brandLogoUrl, brandDesc) values ('Allergy Laboratories, Inc.', 'http://dummyimage.com/167x196.jpg/cc0000/ffffff', 'Eating disorder NOS');
@@ -2998,7 +3017,7 @@ insert into Users (username, password, name, email, surname, lastName, age, regD
 insert into Users (username, password, name, email, surname, lastName, age, regDate, userMode) values ('mmorganrp', 'kS8FcdqU2fb', 'Michael', 'mmorganrp@imdb.com', 'King', 'Morgan', 57, '2017-01-22 00:58:24', 0);
 insert into Users (username, password, name, email, surname, lastName, age, regDate, userMode) values ('clarsonrq', 'JqTYRmM8V3', 'Carol', 'clarsonrq@purevolume.com', 'Meyer', 'Larson', 51, '2016-12-21 22:02:35', 0);
 insert into Users (username, password, name, email, surname, lastName, age, regDate, userMode) values ('jowensrr', 'H4Rq7Mv', 'Jacqueline', 'jowensrr@netvibes.com', 'Harvey', 'Owens', 54, '2016-07-28 06:22:51', 0);
-insert into Users (username, password, name, email, surname, lastName, age, regDate, userMode) values ('angelsilva94', 'pwd1234', 'Angel', 'angelsilva@correo.com', 'Silva', 'Borja', 22, '2016-07-28 06:22:51', 1);
+--insert into Users (username, password, name, email, surname, lastName, age, regDate, userMode) values ('angelsilva94', 'pwd1234', 'Angel', 'angelsilva@correo.com', 'Silva', 'Borja', 22, '2016-07-28 06:22:51', 1);
 insert into UserInfoes (phone, adress, country, city, UserId, zip) values ('62-(390)103-7807', '918 Montana Drive', 'Indonesia', 'Sepulu', 1, '58930-030');
 insert into UserInfoes (phone, adress, country, city, UserId, zip) values ('30-(204)213-2657', '15 South Hill', 'Greece', 'Kalá Déndra', 2, '0185-0032');
 insert into UserInfoes (phone, adress, country, city, UserId, zip) values ('49-(178)533-1580', '7 Melvin Parkway', 'Germany', 'Kiel', 3, '25021-206');
@@ -10284,7 +10303,6 @@ insert into ProductCategories (ProductId, CategoryId) values (457, 933);
 insert into ProductCategories (ProductId, CategoryId) values (289, 84);
 insert into ProductCategories (ProductId, CategoryId) values (260, 979);
 insert into ProductCategories (ProductId, CategoryId) values (688, 241);
-insert into ProductCategories (ProductId, CategoryId) values (954, 1000);
 insert into ProductCategories (ProductId, CategoryId) values (887, 572);
 insert into ProductCategories (ProductId, CategoryId) values (564, 537);
 insert into ProductCategories (ProductId, CategoryId) values (931, 385);

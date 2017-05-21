@@ -81,6 +81,8 @@
         };
         $scope.sendReview = function () {
             console.log("sendReview");
+            console.log("SCORE---------");
+            console.log($scope.rate);
             ////console.log($scope.rate);
             ////console.log($scope.reviewDesc);
             //var jsonReview = {

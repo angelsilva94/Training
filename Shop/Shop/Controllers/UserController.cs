@@ -266,6 +266,56 @@ namespace LoginRegister.Controllers {
 
         // PUT: api/User/5
         [Authentication]
+        [ResponseType(typeof(void)), Route("info/{id}")]
+        public async Task<IHttpActionResult> PutUserInfo([FromBody]UserDTO userInfo, int id)
+        {
+
+            //name: "Angel",
+            //surname: "Silva",
+            //lastname: "Borja",
+            //email: "angel@corre.com",
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            //if (id != int.Parse(ShopDBContext.User.Find(id).ToString()))
+            //{
+            //    return NotFound();
+            //}
+
+            var user = ShopDBContext.User.Find(id);
+            user.name = userInfo.name;
+            user.surname = userInfo.surname;
+            user.lastName = userInfo.lastName;
+            user.email = userInfo.email;
+            ShopDBContext.Entry(user).State = EntityState.Modified;
+
+
+            //db.Entry(modifyUserModel).State = EntityState.Modified;
+
+            try
+            {
+                await ShopDBContext.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!UserInfoExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.OK);
+        }
+
+
+
+        [Authentication]
         [ResponseType(typeof(void)), Route("{id}")]
         public async Task<IHttpActionResult> PutUserModel([FromBody]ModifyUserModel modifyUserModel, int id) {
 
@@ -363,6 +413,10 @@ namespace LoginRegister.Controllers {
 
         private bool UserModelExists(string usr) {
             return ShopDBContext.User.Count(e => e.username == usr) > 0;
+        }
+        private bool UserInfoExists(int id)
+        {
+            return ShopDBContext.User.Count(e => e.UserId == id) > 0;
         }
     }
 }

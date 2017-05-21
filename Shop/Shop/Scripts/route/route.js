@@ -1,5 +1,5 @@
 ﻿/// <reference path="../angular.min.js" />
-var app = angular.module("shopModule", ["ngRoute", "ngResource", "ui.bootstrap", "ngAnimate", "ngCart", "Authentication", "ngCookies"]);
+var app = angular.module("shopModule", ["ngRoute", "ngResource", "ui.bootstrap", "ngAnimate", "ngCart", "Authentication", "ngCookies","xeditable"]);
 angular.module('Authentication', []);
 app.config(function ($routeProvider) {
     $routeProvider
@@ -64,7 +64,7 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http',
 
 app.factory("shopFactory", function ($resource) {
     return {
-        User: $resource("http://localhost:58495/users/api/User/?id=:id", { id: "@id" }),
+        User: $resource("http://localhost:58495/users/:id", { id: "@id" }),
         Category: $resource("http://localhost:58495/category/:id", { id: "@id" }),
         Product: $resource("http://localhost:58495/products/?_page=:from&_perPage=:to", { from: "@from", to: "@to" }),
         ProductDetail: $resource("http://localhost:58495/products/:id", { id: "@id" }),
@@ -74,6 +74,8 @@ app.factory("shopFactory", function ($resource) {
         ProductSearch: $resource("http://localhost:58495/products/search/?criteria=:criteria", { criteria: "@criteria" }),
         Review: $resource("http://localhost:58495/reviewProducts/", {}),
         OrderUser: $resource("http://localhost:58495/orders/users/:id", { id: "@id" }),
-        ReviewsUser: $resource("http://localhost:58495/reviewProducts/user/:id", { id : "@id" }),
+        ReviewsUser: $resource("http://localhost:58495/reviewProducts/user/:id", { id: "@id" }),
+        UpdateReview: $resource("http://localhost:58495/reviewProducts/:id", { id: "@id" }, { update: { method: "PUT" } }),
+        UserPersonalInfo:$resource("http://localhost:58495/users/info/:id", { id: "@id" }, { update: { method: "PUT" } })
     };
 });

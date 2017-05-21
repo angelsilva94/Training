@@ -142,12 +142,12 @@ namespace LoginRegister.Controllers {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            reviewProduct.ProductId = reviewProduct.Product.ProductId;
-            if (id != reviewProduct.ProductId) {
+            //reviewProduct.ReviewProductIdNumber = reviewProduct.ReviewProductIdNumber;
+            if (id != reviewProduct.ReviewProductIdNumber) {
                 return BadRequest();
             }
             
-            reviewProduct.UserId = reviewProduct.User.UserId;
+            //reviewProduct.UserId = reviewProduct.User.UserId;
             var reviewProductDb = db.ReviewProduct.Find(id);
             reviewProduct.CopyProperties(reviewProductDb);
             db.Entry(reviewProductDb).State = EntityState.Modified;

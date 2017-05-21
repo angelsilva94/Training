@@ -263,7 +263,6 @@ insert into ProductCategories (ProductId, CategoryId) values (457, 933);
 insert into ProductCategories (ProductId, CategoryId) values (289, 84);
 insert into ProductCategories (ProductId, CategoryId) values (260, 979);
 insert into ProductCategories (ProductId, CategoryId) values (688, 241);
-insert into ProductCategories (ProductId, CategoryId) values (954, 1000);
 insert into ProductCategories (ProductId, CategoryId) values (887, 572);
 insert into ProductCategories (ProductId, CategoryId) values (564, 537);
 insert into ProductCategories (ProductId, CategoryId) values (931, 385);

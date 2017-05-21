@@ -161,6 +161,7 @@
     <Content Include="css\signup\form-elements.css" />
     <Content Include="css\signup\style.css" />
     <Content Include="css\stars.css" />
+    <Content Include="css\xeditable.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\1.jpg" />
     <Content Include="index.html" />
@@ -188,6 +189,7 @@
     <Content Include="Scripts\signup\jquery.backstretch.js" />
     <Content Include="Scripts\signup\scripts.js" />
     <Content Include="Scripts\ui-bootstrap-tpls-2.5.0.js" />
+    <Content Include="Scripts\xeditable.js" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
