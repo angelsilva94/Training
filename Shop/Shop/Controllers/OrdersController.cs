@@ -207,16 +207,16 @@ namespace LoginRegister.Controllers {
                     }
                 }).ToList()
             }).Where(x => x.UserId == id).ToListAsync();
-            
-            var response = Request.CreateResponse(HttpStatusCode.OK, order);
-            response.Headers.Add("X-Total-Orders", db.Order.Where(x => x.UserId == id).Count().ToString());
-            response.Headers.Add("X-Total-Reviews", db.ReviewProduct.Where(x => x.UserId == id).Count().ToString());
-            return response;
             if (order == null) {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             } else {
+
+
+                var response = Request.CreateResponse(HttpStatusCode.OK, order);
+                response.Headers.Add("X-Total-Orders", db.Order.Where(x => x.UserId == id).Count().ToString());
+                response.Headers.Add("X-Total-Reviews", db.ReviewProduct.Where(x => x.UserId == id).Count().ToString());
                 return response;
-            }
+            } 
 
         }
 

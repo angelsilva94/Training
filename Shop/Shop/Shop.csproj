@@ -4030,6 +4030,10 @@
     <Content Include="Tests\login\modules\home\controllers.js" />
     <Content Include="Tests\login\modules\home\views\home.html" />
     <Content Include="Tests\login\scripts\app.js" />
+    <Content Include="Tests\pruebas\index.html" />
+    <Content Include="Tests\pruebas\multiplier.js" />
+    <Content Include="Tests\pruebas\root.js" />
+    <Content Include="Tests\pruebas\services.js" />
     <Content Include="Tests\scripts.js" />
     <Content Include="Web.config" />
   </ItemGroup>
