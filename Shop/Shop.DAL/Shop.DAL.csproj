@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Migrations\201705021501090_1.0.cs" />
-    <Compile Include="Migrations\201705021501090_1.0.Designer.cs">
-      <DependentUpon>201705021501090_1.0.cs</DependentUpon>
+    <Compile Include="Migrations\201705241347187_final.cs" />
+    <Compile Include="Migrations\201705241347187_final.Designer.cs">
+      <DependentUpon>201705241347187_final.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,8 +85,8 @@
     <Content Include="DBMockData\full.sql" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705021501090_1.0.resx">
-      <DependentUpon>201705021501090_1.0.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705241347187_final.resx">
+      <DependentUpon>201705241347187_final.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

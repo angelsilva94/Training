@@ -12,7 +12,7 @@ namespace LoginRegister.Models {
 
         public DbSet<User> User { get; set; }
         public DbSet<Product> Product { set; get; }
-        public DbSet<Brand> Brand { set; get; }
+        //public DbSet<Brand> Brand { set; get; }
         public DbSet<Category> Category { set; get; }
         public DbSet<Order> Order { set; get; }
         public DbSet<OrderDetail> OrderDetails { set; get; }

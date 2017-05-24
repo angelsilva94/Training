@@ -37,14 +37,14 @@ namespace Shop.Models.DBModel {
 
         //[Required]
         //[ForeignKey("Brand")]
-        public int BrandId { set; get; }
+        //public int BrandId { set; get; }
 
         //N-1 ReviewModel-ProductModel
         public virtual ICollection<ReviewProduct> ReviewProducts { set; get; }
 
         //N-1 ProductModel-BrandModel
         //[ForeignKey("productBrandId")]
-        public virtual Brand Brand { set; get; }
+        //public virtual Brand Brand { set; get; }
 
         //1..N ProductModel-ProductCategoryModel
         public virtual ICollection<ProductCategory> ProductCategories { set; get; }

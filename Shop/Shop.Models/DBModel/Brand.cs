@@ -20,6 +20,6 @@ namespace Shop.Models.DBModel {
         public string brandDesc { set; get; }
 
         //N-1 ProductModel-BrandModel
-        public virtual ICollection<Product> Products { set; get; }
+        //public virtual ICollection<Product> Products { set; get; }
     }
 }

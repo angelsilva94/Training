@@ -8,6 +8,6 @@ namespace Shop.Models.Interfaces {
         int BrandId { get; set; }
         string brandLogoUrl { get; set; }
         string brandName { get; set; }
-        ICollection<Product> Products { get; set; }
+        //ICollection<Product> Products { get; set; }
     }
 }

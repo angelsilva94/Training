@@ -5,8 +5,8 @@ using System.Collections.Generic;
 namespace Shop.Models.Interfaces {
 
     public interface IProduct {
-        Brand Brand { get; set; }
-        int BrandId { get; set; }
+        //Brand Brand { get; set; }
+        //int BrandId { get; set; }
         ICollection<OrderDetail> OrderDetails { get; set; }
 
         //ICollection<ProductCategory> ProductCategories { get; set; }
