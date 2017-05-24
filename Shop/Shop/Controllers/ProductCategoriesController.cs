@@ -121,12 +121,12 @@ namespace LoginRegister.Controllers {
                     x.Product.productUrl,
                     x.Product.productStatus,
                     //x.Product.BrandId,
-                    Brand = new {
-                        x.Product.Brand.BrandId,
-                        x.Product.Brand.brandDesc,
-                        x.Product.Brand.brandLogoUrl,
-                        x.Product.Brand.brandName,
-                    }
+                    //Brand = new {
+                    //    x.Product.Brand.BrandId,
+                    //    x.Product.Brand.brandDesc,
+                    //    x.Product.Brand.brandLogoUrl,
+                    //    x.Product.Brand.brandName,
+                    //}
                 },
                 Category = new {
                     x.Category.CategoryId,
@@ -152,10 +152,10 @@ namespace LoginRegister.Controllers {
                 x.Category.CategoryId,
                 x.ProductId,
                 product = new {
-                    x.Product.Brand.BrandId,
-                    x.Product.Brand.brandDesc,
-                    x.Product.Brand.brandLogoUrl,
-                    x.Product.Brand.brandName,
+                    //x.Product.Brand.BrandId,
+                    //x.Product.Brand.brandDesc,
+                    //x.Product.Brand.brandLogoUrl,
+                    //x.Product.Brand.brandName,
                     x.Product.productUrl,
                     x.Product.productStock,
                     x.Product.productStatus,
@@ -191,10 +191,10 @@ namespace LoginRegister.Controllers {
                 x.Category.CategoryId,
                 x.ProductId,
                 product = new {
-                    x.Product.Brand.BrandId,
-                    x.Product.Brand.brandDesc,
-                    x.Product.Brand.brandLogoUrl,
-                    x.Product.Brand.brandName,
+                    //x.Product.Brand.BrandId,
+                    //x.Product.Brand.brandDesc,
+                    //x.Product.Brand.brandLogoUrl,
+                    //x.Product.Brand.brandName,
                     x.Product.productUrl,
                     x.Product.productStock,
                     x.Product.productStatus,

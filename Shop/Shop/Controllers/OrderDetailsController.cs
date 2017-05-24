@@ -30,8 +30,8 @@ namespace Shop.Controllers {
                     x.Product.productPrice,
                     x.Product.productUrl,
                     x.Product.productDesc,
-                    x.Product.Brand.brandName,
-                    x.Product.Brand.brandDesc
+                    //x.Product.Brand.brandName,
+                    //x.Product.Brand.brandDesc
                 },
                 Order = new {
                     x.Order.OrderId,
@@ -57,8 +57,8 @@ namespace Shop.Controllers {
                     x.Product.productPrice,
                     x.Product.productUrl,
                     x.Product.productDesc,
-                    x.Product.Brand.brandName,
-                    x.Product.Brand.brandDesc
+                    //x.Product.Brand.brandName,
+                    //x.Product.Brand.brandDesc
                 },
                 Order = new {
                     x.Order.OrderId,

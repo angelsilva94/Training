@@ -200,7 +200,7 @@ namespace LoginRegister.Controllers {
             }
             //var productDb = new Product();
             product.productModifyDate=DateTime.Now;
-            product.BrandId = 1;
+            //product.BrandId = 1;
             //product.CopyProperties(productDb);
             //productDb.productName = product.productName;
             //productDb.productPrice = product.productPrice;
