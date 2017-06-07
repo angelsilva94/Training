@@ -1,7 +1,7 @@
 import { TweetComponent } from './tweet.component';
 import { TweetService } from './tweet.service';
 import { Input, Directive } from '@angular/core';
-import { Component } from '@angular/common';
+import { Component } from '@angular/core';
 
 
 @Component({

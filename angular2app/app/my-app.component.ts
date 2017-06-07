@@ -1,5 +1,5 @@
+import { ContactFormComponent } from './contact-form.component';
 import { ZippyComponent } from './zippy.component';
-import { TweetComponent } from './tweet.component';
 import { TweetService } from './tweet.service';
 import { VoteComponent } from './vote.component';
 import { LikeComponent } from './like.component';
@@ -49,6 +49,7 @@ import { Component } from '@angular/core';
     <zippy title="Title 2">
       Here is my second content 
     </zippy>-->
+    <contact-form></contact-form>
   `,
   directives: [
     CoursesComponent,
@@ -56,8 +57,8 @@ import { Component } from '@angular/core';
     StarComponent,
     LikeComponent,
     VoteComponent,
-    TweetComponent,
-    ZippyComponent
+    ZippyComponent,
+    ContactFormComponent
   ],
   providers:[TweetService]
 })

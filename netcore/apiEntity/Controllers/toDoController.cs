@@ -53,10 +53,10 @@ namespace apiEntity.Controllers {
             }
             catch (System.Exception)
             {
-                
+
                 throw;
             }
-            
+
             return new NoContentResult();
         }
         [HttpDeleteAttribute("{id}")]

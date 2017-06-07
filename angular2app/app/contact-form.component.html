@@ -1,0 +1,24 @@
+<form>
+    <div class="form-group" >
+        <label for="firstName">First Name</label>
+        <input 
+            id="firstName"
+            ngModel name="firstName" 
+            #firstName
+            type="text"
+            class="form-control"
+            (change)="log(firstName)"
+            required>
+        <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+            First Name is invalid
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comment">Comment</label>
+            <textarea ngModel name="comment" #comment id="comment" cols="30" rows="10" class="form-control"></textarea>
+            <div class="alert alert-danger" *ngIf="comment.touched && !comment.valid ">
+                Comment is invalid
+            </div>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>

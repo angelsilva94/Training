@@ -8,23 +8,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var tweet_component_1 = require('./tweet.component');
-var tweet_service_1 = require('./tweet.service');
 var core_1 = require('@angular/core');
-var TweetsComponent = (function () {
-    function TweetsComponent(tweetService) {
-        this.tweets = tweetService.getTweets();
+var ContactFormComponent = (function () {
+    function ContactFormComponent() {
     }
-    TweetsComponent = __decorate([
+    ContactFormComponent.prototype.log = function (x) {
+        console.log(x);
+    };
+    ContactFormComponent = __decorate([
         core_1.Component({
-            selector: 'tweets',
-            template: "\n        <div *ngFor=\" leet tweet of tweets\">\n            <tweet [data=\"tweet\"]> </tweet>\n        </div>\n    ",
-            providers: [tweet_service_1.TweetService],
-            directives: [tweet_component_1.TweetComponent]
+            selector: 'contact-form',
+            templateUrl: 'app/contact-form.component.html'
         }), 
-        __metadata('design:paramtypes', [tweet_service_1.TweetService])
-    ], TweetsComponent);
-    return TweetsComponent;
+        __metadata('design:paramtypes', [])
+    ], ContactFormComponent);
+    return ContactFormComponent;
 }());
-exports.TweetsComponent = TweetsComponent;
-//# sourceMappingURL=tweets.component.js.map
+exports.ContactFormComponent = ContactFormComponent;
+//# sourceMappingURL=contact-form.component.js.map
