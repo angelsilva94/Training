@@ -1,0 +1,30 @@
+<form #f="ngForm">
+  <div class="form-group">
+    <label>Name: </label>
+    <input name="fName" #fName="ngModel" ngModel required minlength="3">
+    <div *ngIf="fName.touched && fName.errors">
+      <div *ngIf="fName.errors.required" class="alert alert-danger">
+        First Name is Required
+      </div>
+      <div *ngIf="fName.errors.minlength" class="alert alert-danger">
+        First Name >= 3 char
+      </div>
+    </div>
+    <label>Email:</label>
+    <input ngModel #email="ngModel" name="email" required type="email">
+    <div *ngIf="email.touched && email.errors">
+      <div *ngIf="email.errors.required">
+        <div class="alert alert-danger">
+          Email is required
+        </div>
+      </div>
+      <div *ngIf="!email.errors.valid">
+        <div class="alert alert-danger">
+          Email not valid
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button [disabled]="!f.valid">Submit</button>
+</form>

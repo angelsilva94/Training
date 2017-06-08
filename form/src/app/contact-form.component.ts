@@ -3,12 +3,16 @@ import { FormsModule } from '@angular/forms';
 
 @Component({
     selector: 'contact-form',
-    templateUrl: 'contact-form.component.html'
+    templateUrl: 'contact-form.component.html',
 })
 
 
 export class ContactFormComponent{
-    log(x) {
+  minlen = 10;
+  log(x) {
         console.log(x);
-    }
+  }
+  submit(form) {
+    console.log(form);
+  }
 }

@@ -1,24 +1,47 @@
-<form>
+<!--<input ngModel name="variable" #firstName="ngModel">-->
+<!--las validaciones anidadas se pone un div para hacer una validacion que contenga los errores,
+luego se van haciendo divs individuales donde encierres el error especifico-->
+ <!--#f="ngForm" (ngSubmit)="submit(f.form)"-->
+  <!--[disabled]="!f.valid"-->
+<form #f="ngForm" (ngSubmit)="submit(f.form)">
     <div class="form-group" >
         <label for="firstName">First Name</label>
         <input
             id="firstName"
             ngModel name="firstName"
-            #firstName
+            #firstName="ngModel"
             type="text"
             class="form-control"
-            (change)="log(firstName)"
+            minlength="{{minlen}}"
             required>
-        <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+        <div *ngIf="firstName.touched && firstName.errors">
+          <div class="alert alert-danger" *ngIf="firstName.errors.required">
             First Name is invalid
+          </div>
+          <div *ngIf="firstName.errors.minlength">
+            Name should be {{minlen}} letters
+          </div>
         </div>
+
     </div>
     <div class="form-group">
         <label for="comment">Comment</label>
-            <textarea ngModel name="comment" #comment id="comment" cols="30" rows="10" class="form-control"></textarea>
-            <div class="alert alert-danger" *ngIf="comment.touched && !comment.valid ">
+            <textarea
+              ngModel name="comment"
+              #comment="ngModel"
+              name="comment"
+              id="comment"
+              cols="30"
+              rows="10"
+              class="form-control"
+              required
+            >
+            </textarea>
+            <div class="alert alert-danger" *ngIf="comment.touched && !comment.valid">
                 Comment is invalid
             </div>
     </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
+    <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Submit</button>
 </form>
+
+
