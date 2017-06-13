@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 
 
 @Injectable()
-export class ProfileService implements OnInit{
+export class ProfileService implements OnInit {
   url = 'https://api.github.com/users/';
   constructor(private _http: Http) {
   }
@@ -16,7 +16,7 @@ export class ProfileService implements OnInit{
     return this._http.get(this.url + user).map(profile => profile.json());
   }
   getFollowers(user: string): Observable<Followers> {
-    return this._http.get(this.url + user + 'followers').map(followers => followers.json());
+    return this._http.get(this.url + user + '/followers').map(followers => followers.json());
   }
   ngOnInit() {
 

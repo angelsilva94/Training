@@ -1,0 +1,18 @@
+<!--profile
+followers-->
+<i *ngIf="isLoading" class="fa fa-spinner fa-spin fa-3x"></i>
+<div *ngIf="!isLoading">
+  <h1>@{{profile.login}}</h1>
+  <img class="avatar" src="{{ profile.avatar_url }}">
+  <h2>Followers</h2>
+  <div class="media" *ngFor="let follower of followers">
+    <div class="media-left">
+      <img class="avatar" src="{{follower.avatar_url}}">
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{follower.login}}</h4>
+    </div>
+  </div>
+</div>
+
+.
