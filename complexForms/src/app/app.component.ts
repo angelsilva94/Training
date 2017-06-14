@@ -3,8 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `
-    <navbar></navbar>
-    <router-outlet></router-outlet>
+    <signup-form></signup-form>
   `
 })
 export class AppComponent {

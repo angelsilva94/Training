@@ -1,0 +1,21 @@
+<h1>Users</h1>
+<p>
+    <a routerLink="addUser" class="btn btn-primary">Add User</a>
+</p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </tr>
+    <tr *ngFor="let user of users">
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td><span class="glyphicon glyphicon-edit"></span></td>
+      <td><span class="glyphicon glyphicon-remove"></span></td>
+    </tr>
+  </thead>
+
+</table>
