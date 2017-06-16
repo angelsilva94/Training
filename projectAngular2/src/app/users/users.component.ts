@@ -10,11 +10,11 @@ import { Component, OnInit } from '@angular/core';
 
 export class UserComponent implements OnInit {
   users;
-  constructor(private _userServie: UserService) {
+  constructor(private _userService: UserService) {
 
   }
   ngOnInit() {
-    this._userServie.getUsers()
+    this._userService.getUsers()
       .subscribe(answer => {
         this.users = answer;
         console.log(answer);

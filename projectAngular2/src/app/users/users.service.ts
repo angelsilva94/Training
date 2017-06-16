@@ -9,5 +9,8 @@ export class UserService {
   getUsers() {
     return this._http.get(this._url).map(users => users.json());
   }
+  postUser(body) {
+    return this._http.post(this._url, body).map(user => user.json());
+  }
 
 }

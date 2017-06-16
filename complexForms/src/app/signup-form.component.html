@@ -1,17 +1,35 @@
-<form>
+<form [formGroup]="form" (ngSubmit)="signUp()">
     <div class="form-group">
         <label for="username">Username</label>
         <input
-            id="username"
             type="text"
-            class="form-control">
+            class="form-control" formControlName="username">
+
+        <!--{{ form.status | json }}-->
+        <div *ngIf="form.controls['username'].pending">Checking for username...</div>
+
+        <div *ngIf="form.controls['username'].errors && form.controls['username'].touched">
+            <div *ngIf="form.controls['username'].errors.invalidLogin" class="aler alert-danger">invalid pwd user</div>
+          <div *ngIf="form.controls['username'].errors.required" class="aler alert-danger">
+            Username is required
+          </div>
+          <div *ngIf="form.controls['username'].errors.cannotContainSpaces" class="aler alert-danger">
+            SPACE
+          </div>
+          <div *ngIf="form.controls['username'].errors.shouldBeUnique" class="aler alert-danger">
+            Username is taken
+          </div>
+        </div>
     </div>
     <div class="form-group">
-        <label for="password">Password</label>
-        <input
-            id="password"
-            type="text"
-            class="form-control">
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="text"
+        class="form-control" formControlName="password">
+      <div *ngIf="!form.controls.password.valid" class="aler alert-danger">
+        Password is required
+      </div>
     </div>
     <button class="btn btn-primary" type="submit">Sign Up</button>
 </form>

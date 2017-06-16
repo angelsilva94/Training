@@ -1,3 +1,5 @@
+import { PreventUnsavedChanges } from './users/PreventUnsavedChanges';
+
 import { AddUserComponent } from './users/addUser.component';
 import { UserService } from './users/users.service';
 import { PostComponent } from './posts/posts.component';
@@ -19,7 +21,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
     HomeComponent,
     UserComponent,
     PostComponent,
-    AddUserComponent
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +31,10 @@ import { HttpModule, JsonpModule } from '@angular/http';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UserService],
+  providers: [
+    UserService,
+    PreventUnsavedChanges
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

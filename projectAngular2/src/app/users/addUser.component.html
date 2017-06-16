@@ -1,31 +1,39 @@
 <h1>Add User</h1>
 <div	class="row">
   <div	class="col-md-6	well">
-	  <form>
+	  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
       <fieldset>
         <legend>User</legend>
         <div class="form-group">
           <label>Name: </label>
-          <input class="form-control ng-untouched ng-pristine ng-valid" ngcontrol="name" type="text">
+          <input class="form-control" formControlName="name" type="text">
+          <div *ngIf="!signupForm.controls['name'].valid && signupForm.controls['name'].touched" class="alert alert-danger">Name is required!</div>
           <label>Email: </label>
-          <input class="form-control ng-untouched ng-pristine ng-valid" ngcontrol="email" type="text">
+          <input class="form-control " formControlName="email" type="text">
+          <div *ngIf="signupForm.controls['email'].errors && signupForm.controls['email'].touched">
+            <div *ngIf="!signupForm.controls['email'].valid" class="alert alert-danger">Email is required</div>
+            <div *ngIf="!signupForm.controls['email'].validateEmail" class="alert alert-danger">Wrong Email Format</div>
+          </div>
           <label>Phone: </label>
-          <input class="form-control ng-untouched ng-pristine ng-valid" ngcontrol="phone" type="text">
+          <input class="form-control" formControlName="phone" type="text">
         </div>
+      </fieldset>
+      <fieldset formGroupName="address">
         <legend>Address</legend>
         <div class="form-group">
           <label>Street: </label>
-          <input class="form-control ng-untouched ng-pristine ng-valid" ngcontrol="street" type="text">
+          <input class="form-control" formControlName="street" type="text">
+          <!--<div *ngIf="!signupForm.controls['address'].controls['street'].valid" class="alert alert-danger">street is required!</div>-->
           <label>Suite: </label>
-          <input class="form-control ng-untouched ng-pristine ng-valid" ngcontrol="suite" type="text">
+          <input class="form-control" formControlName="suite" type="text">
           <label>City: </label>
-          <input class="form-control ng-untouched ng-pristine ng-valid" ngcontrol="city" type="text">
+          <input class="form-control" formControlName="city" type="text">
           <label>Zip: </label>
-          <input class="form-control ng-untouched ng-pristine ng-valid" ngcontrol="zip" type="text">
+          <input class="form-control" formControlName="zip" type="text">
         </div>
-        <button class="button btn-primary" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit" [disabled]="!signupForm.valid">Submit</button>
       </fieldset>
-
+      {{signupForm.value|json}}
     </form>
 	</div>
 </div>
