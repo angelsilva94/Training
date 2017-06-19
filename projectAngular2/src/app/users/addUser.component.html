@@ -1,4 +1,4 @@
-<h1>Add User</h1>
+<h1>{{title}}</h1>
 <div	class="row">
   <div	class="col-md-6	well">
 	  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
@@ -6,30 +6,30 @@
         <legend>User</legend>
         <div class="form-group">
           <label>Name: </label>
-          <input class="form-control" formControlName="name" type="text">
+          <input class="form-control" formControlName="name" type="text" [(ngModel)]="user.name">
           <div *ngIf="!signupForm.controls['name'].valid && signupForm.controls['name'].touched" class="alert alert-danger">Name is required!</div>
           <label>Email: </label>
-          <input class="form-control " formControlName="email" type="text">
+          <input class="form-control " formControlName="email" type="text" [(ngModel)]="user.email">
           <div *ngIf="signupForm.controls['email'].errors && signupForm.controls['email'].touched">
             <div *ngIf="!signupForm.controls['email'].valid" class="alert alert-danger">Email is required</div>
             <div *ngIf="!signupForm.controls['email'].validateEmail" class="alert alert-danger">Wrong Email Format</div>
           </div>
           <label>Phone: </label>
-          <input class="form-control" formControlName="phone" type="text">
+          <input class="form-control" formControlName="phone" type="text" [(ngModel)]="user.phone">
         </div>
       </fieldset>
       <fieldset formGroupName="address">
         <legend>Address</legend>
         <div class="form-group">
           <label>Street: </label>
-          <input class="form-control" formControlName="street" type="text">
+          <input class="form-control" formControlName="street" type="text" [(ngModel)]="user.address.street">
           <!--<div *ngIf="!signupForm.controls['address'].controls['street'].valid" class="alert alert-danger">street is required!</div>-->
           <label>Suite: </label>
-          <input class="form-control" formControlName="suite" type="text">
+          <input class="form-control" formControlName="suite" type="text" [(ngModel)]="user.address.suite">
           <label>City: </label>
-          <input class="form-control" formControlName="city" type="text">
+          <input class="form-control" formControlName="city" type="text" [(ngModel)]="user.address.city">
           <label>Zip: </label>
-          <input class="form-control" formControlName="zip" type="text">
+          <input class="form-control" formControlName="zip" type="text" [(ngModel)]="user.address.zipcode">
         </div>
         <button class="btn btn-primary" type="submit" [disabled]="!signupForm.valid">Submit</button>
       </fieldset>

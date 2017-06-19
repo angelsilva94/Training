@@ -12,5 +12,14 @@ export class UserService {
   postUser(body) {
     return this._http.post(this._url, body).map(user => user.json());
   }
+  getUser(id) {
+    return this._http.get(this._url + '/' + id).map(user => user.json());
+  }
+  updateService(user) {
+    return this._http.put(this._url + '/' + user.id, user).map(userR => userR.json());
+  }
+  deleteUser(id) {
+    return this._http.delete(this._url + '/' + id).map(user => user.json());
+  }
 
 }

@@ -1,3 +1,6 @@
+import { SpinnerComponent } from './spinner.component';
+import { PostService } from './posts/post.service';
+import { NotFoundComponent } from './notFound.component';
 import { PreventUnsavedChanges } from './users/PreventUnsavedChanges';
 
 import { AddUserComponent } from './users/addUser.component';
@@ -13,6 +16,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpModule, JsonpModule } from '@angular/http';
+import { User } from 'app/users/user';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,8 @@ import { HttpModule, JsonpModule } from '@angular/http';
     UserComponent,
     PostComponent,
     AddUserComponent,
+    NotFoundComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +39,8 @@ import { HttpModule, JsonpModule } from '@angular/http';
   ],
   providers: [
     UserService,
-    PreventUnsavedChanges
+    PreventUnsavedChanges,
+    PostService
   ],
   bootstrap: [AppComponent]
 })

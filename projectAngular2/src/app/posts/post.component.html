@@ -1,0 +1,10 @@
+<h1>Posts</h1>
+<spinner [visible]="isLoading"></spinner>
+<div class="row" *ngIf="!isLoading">
+  <div class="col-md-6">
+    <ul class="list-group" *ngFor="let post of posts">
+      <li class="list-group-item">{{post.title}}</li>
+    </ul>
+  </div>
+</div>
+
