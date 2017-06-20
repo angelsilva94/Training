@@ -1,10 +1,41 @@
 <h1>Posts</h1>
-<spinner [visible]="isLoading"></spinner>
-<div class="row" *ngIf="!isLoading">
+<spinner [visible]="postLoading"></spinner>
+<div class="row" *ngIf="!postLoading">
   <div class="col-md-6">
+    <select class="form-control" (change)="reloadPosts({userId: u.value})" #u>
+      <option value= "NULL">Select a User</option>
+      <option *ngFor="let user of users" value= "{{user.id}}">{{user.name}}</option>
+    </select>
     <ul class="list-group" *ngFor="let post of posts">
-      <li class="list-group-item">{{post.title}}</li>
+      <li class="list-group-item posts" (click)="selectedPost(post)" [class.active]="details == post">{{post.title}}</li>
     </ul>
   </div>
+
+  <div class="col-md-6">
+    <spinner [visible]="!postLoaded"></spinner>
+    <div class="panel panel-default" *ngIf="postLoaded">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{currentPost.title}}</h3>
+      </div>
+      <div class="panel-body">
+        {{currentPost.body}}
+        <spinner [visible]="commentLoading"></spinner>
+        <div class="media" *ngFor="let comment of currentPost.comments">
+          <div class="media-left">
+
+            <img class="media-object thumbnail" src="http://lorempixel.com/80/80/people?random={{ comment.id }}" alt="...">
+
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">
+              {{ comment.name }}
+            </h4>
+            {{ comment.body }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 

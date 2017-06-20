@@ -6,11 +6,18 @@ import 'rxjs/add/operator/map';
 export class PostService {
   private _url = 'https://jsonplaceholder.typicode.com/posts';
   constructor(private _http: Http) { }
-  getPosts() {
-    return this._http.get(this._url).map(posts => posts.json());
+
+  getPosts(filter?) {
+    let url = this._url;
+    if (filter && filter.userId) {
+      url += '?userId=' + filter.userId;
+      console.log('filter');
+      console.log(url);
+    }
+    return this._http.get(url).map(posts => posts.json());
   }
   getPost(id) {
-    return this._http.get(this._url + '' + id).map(post => post.json());
+    return this._http.get(this._url + '/' + id).map(post => post.json());
   }
   updatePost(post) {
     return this._http.put(this._url + '/' + post.id, post).map(postR => postR.json());
@@ -21,4 +28,8 @@ export class PostService {
   postPost(body) {
     return this._http.post(this._url, body).map(post => post.json());
   }
+  getComments(id) {
+    return this._http.get(this._url + '/' + id + '/comments').map(comment => comment.json());
+  }
+
 }
